@@ -1,0 +1,8 @@
+A. DialogmotePanel - INNKALT, no svar (tag “Du har ikke svart”)
+B. DialogmotePanel - INNKALT + svarType KOMMER (tag “Du har takket ja”)
+C. DialogmotePanel - INNKALT + svarType KOMMER_IKKE (tag “Du ønsker å avlyse”)
+D. DialogmotePanel - INNKALT + svarType NYTT_TID_STED (tag “Du ønsker å endre tid eller sted”)
+E. DialogmotePanel - NYTT_TID_STED no svar (main text “Møtet med NAV er flyttet”, tag “Se endringene og svar”)
+F. DialogmotePanel - NYTT_TID_STED with each svarType (3 variants)
+G. MotebehovPanel (no upcoming dialogmøte + motebehovUtenSvar)
+H. No render (e.g. only AVLYST or only REFERAT; or motebehov with existing svar)
