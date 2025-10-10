@@ -33,3 +33,9 @@ spec:
   env: # Add your environment variables here
     - name: EXAMPLE_API_URL
       value: "https://example.dev.nav.no/api"
+    - name: ISDIALOGMOTE_API_URL
+      value: "https://www.intern.dev.nav.no/esyfo-proxy/api/dialogmote"
+    - name: DIALOGMOTE_API_SCOPE
+      value: "https://www.ekstern.dev.nav.no/syk/dialogmoter/sykmeldt"
+    - name: SYFOMOTEBEHOV_API_URL
+      value: "https://www.intern.dev.nav.no/esyfo-proxy/api/motebehov"

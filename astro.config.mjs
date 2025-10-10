@@ -58,6 +58,21 @@ export default defineConfig({
         access: "secret",
         default: "http://localhost:3000/api/tms-astro-template",
       }),
+      ISDIALOGMOTE_API_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/api/dialogmote",
+      }),
+      SYFOMOTEBEHOV_API_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/api/motebehov",
+      }),
+      DIALOGMOTE_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/syk/dialogmoter/sykmeldt",
+      }),
     },
   },
 });
