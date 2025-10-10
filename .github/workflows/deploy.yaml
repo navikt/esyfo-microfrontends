@@ -1,53 +1,53 @@
-name: "Deploy dev&prod"
-on:
-  push:
-    branches:
-      - "main"
-      - "dev-*"
+# name: "Deploy dev&prod"
+# on:
+#   push:
+#     branches:
+#       - "main"
+#       - "dev-*"
 
-jobs:
-  build:
-    name: "build"
-    runs-on: "ubuntu-latest"
+# jobs:
+#   build:
+#     name: "build"
+#     runs-on: "ubuntu-latest"
 
-    permissions:
-      contents: "read"
-      id-token: "write"
-      packages: "write"
+#     permissions:
+#       contents: "read"
+#       id-token: "write"
+#       packages: "write"
 
-    steps:
-      - uses: "actions/checkout@v4"
-      - uses: "actions/setup-node@v4"
-        with:
-          node-version: 22
-          registry-url: "https://npm.pkg.github.com"
-          cache: "npm"
+#     steps:
+#       - uses: "actions/checkout@v4"
+#       - uses: "actions/setup-node@v4"
+#         with:
+#           node-version: 22
+#           registry-url: "https://npm.pkg.github.com"
+#           cache: "npm"
 
-      - name: "Install dependencies"
-        run: "npm ci"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+#       - name: "Install dependencies"
+#         run: "npm ci"
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
-      - name: "Build application"
-        run: "npm run build"
-        env:
-          ASTRO_KEY: ${{ secrets.ASTRO_KEY }}
+#       - name: "Build application"
+#         run: "npm run build"
+#         env:
+#           ASTRO_KEY: ${{ secrets.ASTRO_KEY }}
 
-      - name: "Upload to cdn"
-        uses: nais/deploy/actions/cdn-upload/v2@master
-        with:
-          team: min-side # Change this to your team name
-          source: ./dist/client/_astro
-          destination: 'tms-microfrontend-template-ssr' # Change this to your application name
+#       - name: "Upload to cdn"
+#         uses: nais/deploy/actions/cdn-upload/v2@master
+#         with:
+#           team: min-side # Change this to your team name
+#           source: ./dist/client/_astro
+#           destination: 'tms-microfrontend-template-ssr' # Change this to your application name
 
-      - name: "Build and push"
-        uses: nais/docker-build-push@v0
-        id: docker-build-push
-        with:
-          team: min-side # Change this to your team name
+#       - name: "Build and push"
+#         uses: nais/docker-build-push@v0
+#         id: docker-build-push
+#         with:
+#           team: min-side # Change this to your team name
 
-    outputs:
-      image: ${{ steps.docker-build-push.outputs.image }}
+#     outputs:
+#       image: ${{ steps.docker-build-push.outputs.image }}
 
   # update-manifest-dev:
   #   uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
