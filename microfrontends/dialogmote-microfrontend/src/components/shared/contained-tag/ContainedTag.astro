@@ -1,0 +1,13 @@
+---
+import { Tag } from "@navikt/ds-react";
+import styles from "./ContainedTag.module.css";
+
+export interface Props {
+    size: string;
+    variant: string;
+}
+---
+
+<Tag className={styles.containedTag} size={Astro.props.size} variant={Astro.props.variant}>
+    <slot />
+</Tag>

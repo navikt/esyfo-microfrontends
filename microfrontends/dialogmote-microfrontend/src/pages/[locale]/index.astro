@@ -1,0 +1,62 @@
+---
+import { fetchBrev } from "@src/utils/fetch";
+import { logger } from "@src/utils/logger";
+import { isLocal } from "@src/utils/environment";
+import { MotebehovStatusDTO } from "../../../schema/motebehovSchema";
+import { BrevDTO } from "../../../schema/brevSchema";
+import { fetchMotebehov } from "../../utils/fetch";
+import { getLatestBrev, getShowDialogmotePanel } from "../../utils/brev";
+import { getShowMotebehovPanel } from "../../utils/motebehov";
+import MoteBehovPanel from "../../components/motebehov/MoteBehovPanel.astro";
+import DialogmotePanel from "../../components/moteinkalling/DialogmotePanel.astro";
+import styles from "@src/styles/index.module.css";
+import "@src/styles/aksel.css";
+
+const userToken = Astro.locals.token;
+
+let brev: BrevDTO[];
+let motebehov: MotebehovStatusDTO;
+
+try {
+  brev = await fetchBrev(userToken);
+} catch (error) {
+  logger.error(`Error fetching brev: ${error}`);
+  return new Response("Internal Server Error", { status: 503 });
+}
+
+try {
+  motebehov = await fetchMotebehov(userToken);
+} catch (error) {
+  logger.error(`Error fetching motebehov: ${error}`);
+  return new Response("Internal Server Error", { status: 503 });
+}
+
+const latestBrev = getLatestBrev(brev);
+
+const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
+const showMotebehovPanel = getShowMotebehovPanel(motebehov);
+
+console.log("dialog:", showDialogmotePanel);
+console.log("motebehov:", showMotebehovPanel); // -> can both be true at the same time? No, but test anyway.
+---
+
+{isLocal && <meta charset="UTF-8" />}
+<div class={`${styles.wrapper} dialogmote-microfrontend`}>
+{showDialogmotePanel && (
+    <DialogmotePanel
+        attending={latestBrev.svar?.svarType || null}
+        date={latestBrev.tid}
+        brevType={latestBrev.brevType}
+    />
+)}
+{showMotebehovPanel && (
+    <MoteBehovPanel />
+)}
+
+</div>
+
+
+
+
+
+

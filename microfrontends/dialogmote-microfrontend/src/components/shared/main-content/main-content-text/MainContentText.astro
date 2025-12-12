@@ -1,0 +1,13 @@
+---
+import { Heading } from "@navikt/ds-react";
+import styles from "./MainContentText.module.css";
+
+export interface Props {
+    size: string;
+    level: string;
+}
+---
+
+<Heading className={styles.maintContentText} size={Astro.props.size} level={Astro.props.level}>
+    <slot />
+</Heading>

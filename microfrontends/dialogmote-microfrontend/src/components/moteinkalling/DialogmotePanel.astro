@@ -1,0 +1,77 @@
+---
+import { DIALOGMOTE_URL } from "astro:env/server";
+import BasePanel from "../shared/base-panel/BasePanel.astro";
+import { BrevTypeDTO, SvarTypeDTO } from "../../../schema/brevSchema";
+import { getLongDateFormat } from "../../utils/dateUtils";
+
+type SvarTypeAnalytics = "KOMMER" | "ONSKER_AVLYSE" | "ONSKER_ENDRING" | "IKKE_SVART";
+
+interface TagMeta {
+    text: string;
+    variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
+}
+
+export interface Props {
+    date: string;
+    attending: SvarTypeDTO | null;
+    brevType: BrevTypeDTO;
+}
+
+// TODO: Bruk denne med umami logging
+const attendingToSvartypeAnalytics = (attending: SvarTypeDTO | null): SvarTypeAnalytics => {
+    switch (attending) {
+        case "KOMMER":
+            return "KOMMER";
+        case "KOMMER_IKKE":
+            return "ONSKER_AVLYSE";
+        case "NYTT_TID_STED":
+            return "ONSKER_ENDRING";
+        default:
+            return "IKKE_SVART";
+    }
+};
+
+const mainText = Astro.props.brevType === "NYTT_TID_STED" ? "Møtet med NAV er flyttet" : getLongDateFormat(Astro.props.date);
+const mainTextFormat = Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
+
+const tag = (): TagMeta => {
+    switch (Astro.props.attending) {
+        case "KOMMER":
+            return {
+                text: "Du har takket ja",
+                variant: "success-moderate",
+            };
+        case "KOMMER_IKKE":
+            return {
+                text: "Du ønsker å avlyse",
+                variant: "neutral-moderate",
+            };
+        case "NYTT_TID_STED":
+            return {
+                text: "Du ønsker å endre tid eller sted",
+                variant: "neutral-moderate",
+            };
+        default:
+            return {
+                text: Astro.props.brevType === "NYTT_TID_STED" ? "Se endringene og svar" : "Du har ikke svart",
+                variant: "warning-moderate",
+            };
+    }
+};
+
+// TODO : onClick i html?
+// onClick={() =>
+//   logEvent("Navigerer til møteinnkalling", { svar: attendingToSvartypeAnalytics(attending), brevType: brevType })
+// }
+---
+
+<BasePanel
+  href={`${DIALOGMOTE_URL}/moteinnkalling`}
+  onClick={() => { console.info("Missing implemenation")}}
+  heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
+  mainContent={{
+    text: mainText,
+    textFormat: mainTextFormat,
+    tag: tag(),
+  }}
+/>

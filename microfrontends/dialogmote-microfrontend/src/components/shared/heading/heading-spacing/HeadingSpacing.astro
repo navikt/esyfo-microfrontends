@@ -1,0 +1,15 @@
+---
+import styles from "./HeadingSpacing.module.css";
+import { Heading } from "@navikt/ds-react";
+
+export interface Props {
+    size: string;
+    level: string;
+    className: string;
+}
+
+---
+
+<Heading class={`${styles.headingRow} ${Astro.props.className}`} size={Astro.props.size} level={Astro.props.level}>
+    <slot />
+</Heading>

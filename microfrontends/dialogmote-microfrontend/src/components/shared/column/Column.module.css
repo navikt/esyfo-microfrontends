@@ -1,0 +1,7 @@
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* should this be a prop? */
+    /* padding-left: ${(props) => props.paddingLeft}; */
+    /* padding-right: ${(props) => props.paddingRight}; */
+}

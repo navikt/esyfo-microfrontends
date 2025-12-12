@@ -1,0 +1,65 @@
+---
+import { Heading } from "@navikt/ds-react";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
+import StyledPanel from "../styled-panel/StyledPanel.astro";
+import HeadingRow from "../heading/heading-row/HeadingRow.astro";
+import HeadingSpacing from "../heading/heading-spacing/HeadingSpacing.astro";
+import ChevronSection from "../chevron-section/ChevronSection.astro";
+import AlertContainer from "../alert-container/AlertContainer.astro";
+import YellowWarningIcon from "../yellow-warning-icon/YellowWarningIcon.astro";
+import MainContentRow from "../main-content/main-content-row/MainContentRow.astro";
+import Column from "../column/Column.astro";
+import MainContentText from "../main-content/main-content-text/MainContentText.astro";
+import ContainedTag from "../contained-tag/ContainedTag.astro";
+
+interface Heading {
+    text: string;
+    icon: "warning" | "none";
+}
+
+interface MainContent {
+    text: string;
+    textFormat: "text" | "date";
+    tag: TagMeta;
+}
+
+export interface TagMeta {
+    text: string;
+    variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
+}
+
+export interface Props {
+  href: string;
+  onClick: () => void;
+  heading: Heading;
+  mainContent: MainContent;
+}
+// TODO : onClick i html?
+// <StyledPanel onClick={() => { onClick(); window.location.href = Astro.props.href }}>
+console.log("***", Astro.props.mainContent.text)
+---
+<StyledPanel onClick={() => { console.info("Missing implemenation")}}>
+    <HeadingRow>
+        <HeadingSpacing size={"small"} level={"2"} className="dialogmote__title">
+            {Astro.props.heading.text}
+        </HeadingSpacing>
+        <ChevronSection>
+            {Astro.props.heading.icon === "warning" ? (
+                    <AlertContainer>
+                        <YellowWarningIcon />
+                    </AlertContainer>
+            ) : null}
+            <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden={true} />
+        </ChevronSection>
+    </HeadingRow>
+    <MainContentRow>
+        <Column>
+            <MainContentText size={Astro.props.mainContent.textFormat === "text" ? "medium" : "large"} level={"3"}>
+                {Astro.props.mainContent.text}
+            </MainContentText>
+            <ContainedTag size={"small"} variant={Astro.props.mainContent.tag.variant}>
+                {Astro.props.mainContent.tag.text}
+            </ContainedTag>
+        </Column>
+    </MainContentRow>
+</StyledPanel>

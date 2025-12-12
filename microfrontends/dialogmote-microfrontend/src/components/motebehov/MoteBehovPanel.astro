@@ -1,0 +1,17 @@
+---
+import { DIALOGMOTE_URL } from "astro:env/server";
+import BasePanel from "../shared/base-panel/BasePanel.astro";
+---
+
+<BasePanel
+  href={`${DIALOGMOTE_URL}/motebehov/svar`}
+  heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
+  mainContent={{
+    text: "Trenger du et dialogmøte?",
+    textFormat: "text",
+    tag: {
+      text: "Du har ikke svart",
+      variant: "warning-moderate",
+    },
+  }}
+/>
