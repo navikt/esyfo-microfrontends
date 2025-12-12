@@ -17,7 +17,7 @@ export interface Props {
     brevType: BrevTypeDTO;
 }
 
-// Bruke denne?
+// TODO: Bruk denne med umami logging
 const attendingToSvartypeAnalytics = (attending: SvarTypeDTO | null): SvarTypeAnalytics => {
     switch (attending) {
         case "KOMMER":

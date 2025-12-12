@@ -9,4 +9,5 @@
 @import "../../node_modules/@navikt/ds-css/dist/component/loader.css";
 @import "../../node_modules/@navikt/ds-css/dist/component/tag.css";
 
+/* TODO: consider removing this */
 @import "@navikt/ds-css/dist/components.css";
