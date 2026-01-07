@@ -1,0 +1,47 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: tms-microfrontend-template-ssr # Change this to your application name
+  namespace: min-side # Change this to your namespace
+  labels:
+    team: min-side # Change this to your team name
+spec:
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: nodejs
+  tokenx:
+    enabled: true
+  image: {{ image }}
+  port: 3000
+  liveness:
+    path: /api/internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /api/internal/isReady
+    initialDelay: 10
+  replicas:
+    min: 2
+    max: 4
+  accessPolicy:
+    inbound:
+      rules:
+        - application: tms-min-side
+          namespace: min-side
+  resources:
+    limits:
+      memory: 768Mi
+    requests:
+      cpu: "20m"
+      memory: 128Mi
+  env: # Add your environment variables here
+    - name: ISDIALOGMOTE_API_URL
+      value: "http://isdialogmote.teamsykefravr"
+    - name: ISDIALOGMOTE_CLIENT_ID
+      value: dev-gcp:teamsykefravr:isdialogmote
+    - name: SYFOMOTEBEHOV_API_URL
+      value: http://syfomotebehov
+    - name: SYFOMOTEBEHOV_CLIENT_ID
+      value: dev-gcp:team-esyfo:syfomotebehov
+    - name: DIALOGMOTE_URL
+      value: "https://www.ekstern.dev.nav.no/syk/dialogmoter/sykmeldt"
