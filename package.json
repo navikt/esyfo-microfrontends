@@ -2,6 +2,12 @@
   "name": "esyfo-microfrontends",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "microfrontends/diologmote-microfrontend"
+  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "astro": "5.16.6"
+  }
 }
