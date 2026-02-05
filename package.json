@@ -4,9 +4,11 @@
   "version": "0.0.1",
   "private": true,
   "workspaces": [
-    "microfrontends/diologmote-microfrontend"
+    "microfrontends/dialogmote-microfrontend"
   ],
-  "scripts": {},
+  "scripts": {
+    "build:dialogmote-microfrontend": "npm run build --workspace=dialogmote-microfrontend"
+  },
   "dependencies": {
     "astro": "5.16.6"
   }

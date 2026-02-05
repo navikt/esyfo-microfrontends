@@ -28,7 +28,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: "Build application"
-        run: "npm run build"
+        run: "npm run build:dialogmote-microfrontend"
 
       - name: "Upload to cdn"
         uses: nais/deploy/actions/cdn-upload/v2@master
