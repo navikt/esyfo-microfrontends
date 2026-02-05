@@ -7,7 +7,7 @@
     "microfrontends/dialogmote-microfrontend"
   ],
   "scripts": {
-    "build:dialogmote-microfrontend": "npm run build --workspace=dialogmote-microfrontend"
+    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote-microfrontend"
   },
   "dependencies": {
     "astro": "5.16.6"
