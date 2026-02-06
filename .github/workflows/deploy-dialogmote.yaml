@@ -42,6 +42,7 @@ jobs:
         id: docker-build-push
         with:
           team: min-side # Change this to your team name
+          dockerfile: ./microfrontends/dialogmote-microfrontend/Dockerfile
 
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
