@@ -2,8 +2,8 @@
 import { fetchBrev } from "@src/utils/fetch";
 import { logger } from "@src/utils/logger";
 import { isLocal } from "@src/utils/environment";
-import { MotebehovStatusDTO } from "../../../schema/motebehovSchema";
-import { BrevDTO } from "../../../schema/brevSchema";
+import type { MotebehovStatusDTO } from "../../../schema/motebehovSchema";
+import type { BrevDTO } from "../../../schema/brevSchema";
 import { fetchMotebehov } from "../../utils/fetch";
 import { getLatestBrev, getShowDialogmotePanel } from "../../utils/brev";
 import { getShowMotebehovPanel } from "../../utils/motebehov";
