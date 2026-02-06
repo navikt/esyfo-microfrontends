@@ -28,6 +28,12 @@ spec:
       rules:
         - application: tms-min-side
           namespace: min-side
+    outbound:
+      rules:
+        - application: isdialogmote
+          namespace: teamsykefravr
+        - application: syfomotebehov
+          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
@@ -36,11 +42,11 @@ spec:
       memory: 128Mi
   env: # Add your environment variables here
     - name: ISDIALOGMOTE_API_URL
-      value: "http://isdialogmote.teamsykefravr"
+      value: "http://isdialogmote.teamsykefravr/api/v2/arbeidstaker/brev"
     - name: ISDIALOGMOTE_CLIENT_ID
       value: prod-gcp:teamsykefravr:isdialogmote
     - name: SYFOMOTEBEHOV_API_URL
-      value: http://syfomotebehov
+      value: "http://syfomotebehov.team-esyfo/syfomotebehov/api/v4/arbeidstaker/motebehov"
     - name: SYFOMOTEBEHOV_CLIENT_ID
       value: prod-gcp:team-esyfo:syfomotebehov
     - name: DIALOGMOTE_URL
