@@ -2,7 +2,7 @@ name: "Deploy dev&prod"
 on:
   push:
     branches:
-      - "deploy"
+      - "deploy-dialog"
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       - uses: "actions/checkout@v5"
       - uses: "actions/setup-node@v5"
         with:
-          node-version: 22
+          node-version: 24
           registry-url: "https://npm.pkg.github.com"
           cache: "npm"
 
@@ -28,44 +28,45 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: "Build application"
-        run: "npm run build"
+        run: "npm run build:dialogmote-microfrontend"
 
       - name: "Upload to cdn"
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
           team: min-side # Change this to your team name
-          source: ./dist/client/_astro
-          destination: 'tms-microfrontend-template-ssr' # Change this to your application name
+          source: ./microfrontends/dialogmote-microfrontend/dist/client/_astro
+          destination: 'dialogmote-microfrontend' # Change this to your application name
 
       - name: "Build and push"
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
           team: min-side # Change this to your team name
+          dockerfile: ./microfrontends/dialogmote-microfrontend/Dockerfile
 
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
-#  update-manifest-dev:
-#    uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
-#    needs: build
-#    with:
-#      id: "tms-microfrontend-template-ssr" # Change this to your microfrontend id.
-#      url: "http://tms-microfrontend-template-ssr.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
-#      appname: "tms-microfrontend-template-ssr" # Change this to your application name
-#      namespace: "min-side" # Change this to your namespace
-#      cluster: dev-gcp
-#      commitmsg: ${{ github.event.head_commit.message}}
-#      fallback: "fallback" # Should containt the path to the fallback page after src/pages/[locale]/... Only needs to be changed if you move the fallback in the pages structure
-#      ssr: true
-#    secrets: inherit
+  update-manifest-dev:
+    uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
+    needs: build
+    with:
+      id: "syfo-dialog" # Change this to your microfrontend id.
+      url: "http://dialogmote-microfrontend.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
+      appname: "dialogmote-microfrontend" # Change this to your application name
+      namespace: "min-side" # Change this to your namespace
+      cluster: dev-gcp
+      commitmsg: ${{ github.event.head_commit.message}}
+      fallback: "fallback" # Should containt the path to the fallback page after src/pages/[locale]/... Only needs to be changed if you move the fallback in the pages structure
+      ssr: true
+    secrets: inherit
 
   # update-manifest-prod:
   #   if: github.ref == 'refs/heads/main'
   #   uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
   #   needs: build
   #   with:
-  #     id: "tms-microfrontend-template-ssr-id"
+  #     id: "syfo-dialog"
   #     url: "http://tms-microfrontend-template-ssr.min-side"
   #     appname: "tms-microfrontend-template-ssr"
   #     namespace: "team-namespace"
@@ -75,20 +76,20 @@ jobs:
   #     ssr: true
   #   secrets: inherit
 
-#  deploy-dev:
-#    runs-on: "ubuntu-latest"
-#    permissions:
-#      contents: "read"
-#      id-token: "write"
-#    needs: [build, update-manifest-dev]
-#    steps:
-#      - uses: "actions/checkout@v4"
-#      - name: "Deploy to dev"
-#        uses: "nais/deploy/actions/deploy@v2"
-#        env:
-#          CLUSTER: dev-gcp
-#          RESOURCE: nais/dev-gcp/nais.yaml
-#          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+  deploy-dev:
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: "read"
+      id-token: "write"
+    needs: [build, update-manifest-dev]
+    steps:
+      - uses: "actions/checkout@v4"
+      - name: "Deploy to dev"
+        uses: "nais/deploy/actions/deploy@v2"
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: microfrontends/dialogmote-microfrontend/nais/dev-gcp/nais.yaml
+          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
 
   # deploy-prod:
   #   if: github.ref == 'refs/heads/main'
