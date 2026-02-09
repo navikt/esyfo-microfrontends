@@ -1,9 +1,9 @@
 {
-  "name": "tms-microfrontend-template-ssr",
+  "name": "dialogmote-microfrontend",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "concurrently \"astro dev\" \"tsx mock/server.ts\"",
     "start": "astro dev",
     "build": "astro check && astro build",
     "mock": "tsx mock/server.ts",

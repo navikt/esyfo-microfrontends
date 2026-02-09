@@ -7,6 +7,7 @@ import { createReferatBrev, createReferatEndretBrev } from "./fixtures/factories
 import { leggTilDagerPaDato } from "@src/utils/dateUtils.ts";
 
 const api = new Hono();
+const port = 3000;
 
 api.use("/*", cors({ origin: "http://localhost:4321", credentials: true }));
 
@@ -25,4 +26,9 @@ api.get("/api/motebehov", (c) => {
     return c.json(motebehovUtenSvar);
 });
 
-serve(api);
+console.info(`Dialogmote mock server is running on port ${port}`);
+
+serve({
+    fetch: api.fetch,
+    port: port
+});
