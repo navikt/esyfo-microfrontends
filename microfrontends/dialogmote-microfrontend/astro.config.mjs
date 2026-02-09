@@ -22,6 +22,9 @@ export default defineConfig({
         ],
       },
     },
+    ssr: {
+      noExternal: ["@astrojs/react"]
+    }
   },
   integrations: [
     react(),
