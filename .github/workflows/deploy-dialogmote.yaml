@@ -2,7 +2,11 @@ name: "Deploy dev&prod"
 on:
   push:
     branches:
+      - "main"
       - "deploy-dialog"
+    paths:
+      - "microfrontends/dialogmote-microfrontend/**"
+      - "package.json"
 
 jobs:
   build:
