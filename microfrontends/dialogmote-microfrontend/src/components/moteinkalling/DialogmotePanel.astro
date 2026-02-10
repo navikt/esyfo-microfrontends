@@ -4,8 +4,6 @@ import BasePanel from "../shared/base-panel/BasePanel.astro";
 import type { BrevTypeDTO, SvarTypeDTO } from "../../../schema/brevSchema";
 import { getLongDateFormat } from "../../utils/dateUtils";
 
-type SvarTypeAnalytics = "KOMMER" | "ONSKER_AVLYSE" | "ONSKER_ENDRING" | "IKKE_SVART";
-
 interface TagMeta {
     text: string;
     variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
@@ -17,22 +15,11 @@ export interface Props {
     brevType: BrevTypeDTO;
 }
 
-// TODO: Bruk denne med umami logging
-const attendingToSvartypeAnalytics = (attending: SvarTypeDTO | null): SvarTypeAnalytics => {
-    switch (attending) {
-        case "KOMMER":
-            return "KOMMER";
-        case "KOMMER_IKKE":
-            return "ONSKER_AVLYSE";
-        case "NYTT_TID_STED":
-            return "ONSKER_ENDRING";
-        default:
-            return "IKKE_SVART";
-    }
-};
-
 const mainText = Astro.props.brevType === "NYTT_TID_STED" ? "Møtet med NAV er flyttet" : getLongDateFormat(Astro.props.date);
 const mainTextFormat = Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
+
+const attending = Astro.props.attending;
+const brevType = Astro.props.brevType;
 
 const tag = (): TagMeta => {
     switch (Astro.props.attending) {
@@ -58,19 +45,26 @@ const tag = (): TagMeta => {
             };
     }
 };
-
-// TODO : onClick i html?
-// onClick={() =>
-//   logEvent("Navigerer til møteinnkalling", { svar: attendingToSvartypeAnalytics(attending), brevType: brevType })
-// }
 ---
 
-<BasePanel
-  href={`${DIALOGMOTE_URL}/moteinnkalling`}
-  heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
-  mainContent={{
-    text: mainText,
-    textFormat: mainTextFormat,
-    tag: tag(),
-  }}
-/>
+<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel">
+  <BasePanel
+    heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
+    mainContent={{
+      text: mainText,
+      textFormat: mainTextFormat,
+      tag: tag(),
+    }}
+  />
+</a>
+
+<script define:vars={{ attending, brevType }}>
+  import { logUmamiEvent } from "@src/utils/analytics";
+  import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
+
+  const dialogmotePanel = document.querySelector("#dialogmote-panel");
+  dialogmotePanel?.addEventListener("click", () => logUmamiEvent(
+    "Navigerer til møteinnkalling",
+    { svar: attendingToSvartypeAnalytics(attending), brevType: brevType })
+  );
+</script>

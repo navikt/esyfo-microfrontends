@@ -30,15 +30,12 @@ export interface TagMeta {
 
 export interface Props {
   href: string;
-  // onClick: () => void;
   heading: Heading;
   mainContent: MainContent;
 }
-// TODO : onClick i html?
-// <StyledPanel onClick={() => { onClick(); window.location.href = Astro.props.href }}>
-console.log("***", Astro.props.mainContent.text)
 ---
-<StyledPanel onClick={() => { console.info("Missing implemenation")}}>
+
+<StyledPanel>
     <HeadingRow>
         <HeadingSpacing size={"small"} level={"2"} className="dialogmote__title">
             {Astro.props.heading.text}

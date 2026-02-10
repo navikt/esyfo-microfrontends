@@ -26,7 +26,7 @@ api.get("/api/motebehov", (c) => {
     return c.json(motebehovUtenSvar);
 });
 
-console.info(`Dialogmote mock server is running on port ${port}`);
+console.info(`\x1b[42m mock \x1b[0m dialogmote mock server is running on port ${port}`);
 
 serve({
     fetch: api.fetch,
