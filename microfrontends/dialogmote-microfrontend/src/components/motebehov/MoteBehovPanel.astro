@@ -3,15 +3,23 @@ import { DIALOGMOTE_URL } from "astro:env/server";
 import BasePanel from "../shared/base-panel/BasePanel.astro";
 ---
 
-<BasePanel
-  href={`${DIALOGMOTE_URL}/motebehov/svar`}
-  heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
-  mainContent={{
-    text: "Trenger du et dialogmøte?",
-    textFormat: "text",
-    tag: {
-      text: "Du har ikke svart",
-      variant: "warning-moderate",
-    },
-  }}
-/>
+<a href={`${DIALOGMOTE_URL}/motebehov/svar`} id="motebehov-panel">
+    <BasePanel
+      heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
+      mainContent={{
+        text: "Trenger du et dialogmøte?",
+        textFormat: "text",
+        tag: {
+          text: "Du har ikke svart",
+          variant: "warning-moderate",
+        },
+      }}
+    />
+</a>
+
+<script>
+    import { logUmamiEvent } from "../../utils/analytics";
+
+    const motebehovPanel = document.querySelector("#motebehov-panel");
+    motebehovPanel?.addEventListener("click", () => logUmamiEvent("Navigerer til svar møtebehov"));
+</script>
