@@ -23,7 +23,7 @@ const attending = Astro.props.attending;
 const brevType = Astro.props.brevType;
 
 const tag = (): TagMeta => {
-    switch (Astro.props.attending) {
+    switch (attending) {
         case "KOMMER":
             return {
                 text: "Du har takket ja",
@@ -41,14 +41,14 @@ const tag = (): TagMeta => {
             };
         default:
             return {
-                text: Astro.props.brevType === "NYTT_TID_STED" ? "Se endringene og svar" : "Du har ikke svart",
+                text: brevType === "NYTT_TID_STED" ? "Se endringene og svar" : "Du har ikke svart",
                 variant: "warning-moderate",
             };
     }
 };
 ---
 
-<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel" class={styles.link}>
+<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel" class={styles.link} data-attending={attending} data-brevtype={brevType}>
   <Content
     heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
     mainContent={{
@@ -59,13 +59,13 @@ const tag = (): TagMeta => {
   />
 </a>
 
-<script define:vars={{ attending, brevType }}>
+<script>
   import { logUmamiEvent } from "@src/utils/analytics";
   import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
 
   const dialogmotePanel = document.querySelector("#dialogmote-panel");
-  dialogmotePanel?.addEventListener("click", () => logUmamiEvent(
-    "Navigerer til møteinnkalling",
-    { svar: attendingToSvartypeAnalytics(attending), brevType: brevType })
-  );
+  const svar = attendingToSvartypeAnalytics(dialogmotePanel?.dataset.attending);
+  const brevType = dialogmotePanel?.dataset.brevtype;
+
+  dialogmotePanel?.addEventListener("click", () => logUmamiEvent("Navigerer til møteinnkalling", { svar: svar, brevType: brevType }));
 </script>
