@@ -1,0 +1,93 @@
+.container {
+    width: 100%;
+    background-color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 0.5px 0 rgba(0, 0, 0, 0.18);
+
+    &:hover {
+        box-shadow: var(--a-shadow-small);
+
+        .navds-link-panel__chevron {
+            transform: translateX(4px);
+        }
+
+        .dialogmote__title {
+            text-decoration: underline;
+        }
+    }
+}
+
+.link {
+    color: var(--a-text-default) !important;
+    text-decoration: none !important;
+}
+
+.headingRow {
+    display: flex;
+    text-decoration: none;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #0000001a;
+    padding: var(--a-spacing-4) var(--a-spacing-4) var(--a-spacing-3);
+
+    @media (min-width: 648px) {
+        padding: var(--a-spacing-5) var(--a-spacing-5) var(--a-spacing-4);
+    }
+}
+
+.headingSpacing {
+    padding-right: 1rem;
+}
+
+.chevronSection {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.mainContentRow {
+    display: flex;
+    text-decoration: none;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-4);
+
+    @media (min-width: 648px) {
+        padding: var(--a-spacing-4) var(--a-spacing-5) var(--a-spacing-5);
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* should this be a prop? */
+    /* padding-left: ${(props) => props.paddingLeft}; */
+    /* padding-right: ${(props) => props.paddingRight}; */
+}
+
+.maintContentText {
+    font-weight: var(--a-font-weight-regular) !important;
+}
+
+.containedTag {
+    width: fit-content;
+}
+
+.alertContainer {
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}
+
+.yellowWarningIcon {
+    align-self: flex-start;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    height: 24px;
+    background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+    color: var(--ac-alert-icon-warning-color, var(--a-icon-warning))
+}
