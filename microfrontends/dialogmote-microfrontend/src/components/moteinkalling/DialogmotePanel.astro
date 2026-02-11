@@ -60,12 +60,14 @@ const tag = (): TagMeta => {
 </a>
 
 <script>
-  import { logUmamiEvent } from "@src/utils/analytics";
-  import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
+    import { logUmamiEvent } from "@src/utils/analytics";
+    import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
+    import type { SvarTypeDTO } from "../../../schema/brevSchema";
 
-  const dialogmotePanel = document.querySelector("#dialogmote-panel");
-  const svar = attendingToSvartypeAnalytics(dialogmotePanel?.dataset.attending);
-  const brevType = dialogmotePanel?.dataset.brevtype;
+    const dialogmotePanel = document.querySelector("#dialogmote-panel");
+    const attending = (dialogmotePanel as HTMLElement)?.dataset.attending as SvarTypeDTO;
+    const brevType = (dialogmotePanel as HTMLElement)?.dataset.brevtype ?? "";
+    const svar = attendingToSvartypeAnalytics(attending);
 
-  dialogmotePanel?.addEventListener("click", () => logUmamiEvent("Navigerer til møteinnkalling", { svar: svar, brevType: brevType }));
+    dialogmotePanel?.addEventListener("click", () => logUmamiEvent("Navigerer til møteinnkalling", { svar: svar, brevType: brevType }));
 </script>
