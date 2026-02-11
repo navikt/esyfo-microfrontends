@@ -42,17 +42,16 @@ console.log("motebehov:", showMotebehovPanel); // -> can both be true at the sam
 
 {isLocal && <meta charset="UTF-8" />}
 <div class={`${styles.wrapper} dialogmote-microfrontend`}>
-{showDialogmotePanel && (
+  {showDialogmotePanel && (
     <DialogmotePanel
         attending={latestBrev.svar?.svarType || null}
         date={latestBrev.tid}
         brevType={latestBrev.brevType}
     />
-)}
-{showMotebehovPanel && (
+  )}
+  {showMotebehovPanel && (
     <MoteBehovPanel />
-)}
-
+  )}
 </div>
 
 

@@ -4,19 +4,19 @@ import { ChevronRightIcon, ExclamationmarkTriangleFillIcon } from "@navikt/aksel
 import styles from "./Content.module.css";
 
 interface Heading {
-    text: string;
-    icon: "warning" | "none";
+  text: string;
+  icon: "warning" | "none";
 }
 
 interface MainContent {
-    text: string;
-    textFormat: "text" | "date";
-    tag: TagMeta;
+  text: string;
+  textFormat: "text" | "date";
+  tag: TagMeta;
 }
 
 export interface TagMeta {
-    text: string;
-    variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
+  text: string;
+  variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
 }
 
 export interface Props {
@@ -26,27 +26,27 @@ export interface Props {
 ---
 
 <div class={styles.container}>
-    <div class={styles.headingRow}>
-        <Heading className={`${styles.headingSpacing} dialogmote__title`} size="small" level="2">
-            {Astro.props.heading.text}
-        </Heading>
-        <div class={styles.chevronSection}>
-            {Astro.props.heading.icon === "warning" ? (
-                    <div class={styles.alertContainer}>
-                        <ExclamationmarkTriangleFillIcon className={styles.yellowWarningIcon} />
-                    </div>
-            ) : null}
-            <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden={true} />
+  <div class={styles.headingRow}>
+    <Heading className={`${styles.headingSpacing} dialogmote__title`} size="small" level="2">
+      {Astro.props.heading.text}
+    </Heading>
+    <div class={styles.chevronSection}>
+      {Astro.props.heading.icon === "warning" ? (
+        <div class={styles.alertContainer}>
+          <ExclamationmarkTriangleFillIcon className={styles.yellowWarningIcon} />
         </div>
+        ) : null}
+      <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden={true} />
+    </div>
     </div>
     <div class={styles.mainContentRow}>
-        <div class={styles.column}>
-            <Heading className={styles.maintContentText} size={Astro.props.mainContent.textFormat === "text" ? "medium" : "large"} level="3">
-                {Astro.props.mainContent.text}
-            </Heading>
-            <Tag className={styles.containedTag} size="small" variant={Astro.props.mainContent.tag.variant}>
-                {Astro.props.mainContent.tag.text}
-            </Tag>
-        </div>
+      <div class={styles.column}>
+        <Heading className={styles.maintContentText} size={Astro.props.mainContent.textFormat === "text" ? "medium" : "large"} level="3">
+          {Astro.props.mainContent.text}
+        </Heading>
+          <Tag className={styles.containedTag} size="small" variant={Astro.props.mainContent.tag.variant}>
+            {Astro.props.mainContent.tag.text}
+          </Tag>
+      </div>
     </div>
 </div>
