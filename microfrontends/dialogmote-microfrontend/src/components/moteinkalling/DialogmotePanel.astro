@@ -1,8 +1,9 @@
 ---
 import { DIALOGMOTE_URL } from "astro:env/server";
-import BasePanel from "../shared/base-panel/BasePanel.astro";
+import Content from "../shared/Content.astro";
 import type { BrevTypeDTO, SvarTypeDTO } from "../../../schema/brevSchema";
 import { getLongDateFormat } from "../../utils/dateUtils";
+import styles from "../shared/Content.module.css";
 
 interface TagMeta {
     text: string;
@@ -47,8 +48,8 @@ const tag = (): TagMeta => {
 };
 ---
 
-<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel">
-  <BasePanel
+<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel" class={styles.link}>
+  <Content
     heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
     mainContent={{
       text: mainText,

@@ -1,10 +1,11 @@
 ---
 import { DIALOGMOTE_URL } from "astro:env/server";
-import BasePanel from "../shared/base-panel/BasePanel.astro";
+import Content from "../shared/Content.astro";
+import styles from "../shared/Content.module.css";
 ---
 
-<a href={`${DIALOGMOTE_URL}/motebehov/svar`} id="motebehov-panel">
-    <BasePanel
+<a href={`${DIALOGMOTE_URL}/motebehov/svar`} id="motebehov-panel" class={styles.link}>
+    <Content
       heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
       mainContent={{
         text: "Trenger du et dialogmøte?",
