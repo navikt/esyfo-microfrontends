@@ -1,5 +1,5 @@
 import { leggTilDagerPaDato } from "@src/utils/dateUtils";
-import type { BrevDocumentComponentDTO, BrevDTO } from "../../../schema/brevSchema.ts";
+import type { BrevDocumentComponentDTO, BrevDTO } from "@schema/brevSchema.ts";
 
 export const createDocumentComponent = (props?: Partial<BrevDocumentComponentDTO>): BrevDocumentComponentDTO => {
     return {

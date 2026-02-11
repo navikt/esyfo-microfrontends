@@ -2,13 +2,13 @@
 import { fetchBrev } from "@src/utils/fetch";
 import { logger } from "@src/utils/logger";
 import { isLocal } from "@src/utils/environment";
-import type { MotebehovStatusDTO } from "../../../schema/motebehovSchema";
-import type { BrevDTO } from "../../../schema/brevSchema";
-import { fetchMotebehov } from "../../utils/fetch";
-import { getLatestBrev, getShowDialogmotePanel } from "../../utils/brev";
-import { getShowMotebehovPanel } from "../../utils/motebehov";
-import MoteBehovPanel from "../../components/motebehov/MoteBehovPanel.astro";
-import DialogmotePanel from "../../components/moteinkalling/DialogmotePanel.astro";
+import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
+import type { BrevDTO } from "@schema/brevSchema";
+import { fetchMotebehov } from "@src/utils/fetch";
+import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
+import { getShowMotebehovPanel } from "@src/utils/motebehov";
+import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
+import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
 import styles from "@src/styles/index.module.css";
 import "@src/styles/aksel.css";
 
