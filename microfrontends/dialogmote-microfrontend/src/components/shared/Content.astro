@@ -1,6 +1,6 @@
 ---
 import { Heading, Tag } from "@navikt/ds-react";
-import { ChevronRightIcon, ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
+import { ChevronRightIcon as Chevron, ExclamationmarkTriangleFillIcon as WarningIcon } from "@navikt/aksel-icons";
 import styles from "./Content.module.css";
 
 interface Heading {
@@ -27,16 +27,16 @@ export interface Props {
 
 <div class={styles.container}>
   <div class={styles.headingRow}>
-    <Heading className={`${styles.headingSpacing} dialogmote__title`} size="small" level="2">
+    <Heading className={`${styles.headingSpacing} ${styles.headingTitle}`} size="small" level="2">
       {Astro.props.heading.text}
     </Heading>
     <div class={styles.chevronSection}>
       {Astro.props.heading.icon === "warning" ? (
         <div class={styles.alertContainer}>
-          <ExclamationmarkTriangleFillIcon className={styles.yellowWarningIcon} />
+          <WarningIcon className={styles.yellowWarningIcon} />
         </div>
         ) : null}
-      <ChevronRightIcon className="navds-link-panel__chevron" aria-hidden={true} />
+      <Chevron className={styles.chevron} fontSize="1.25rem" aria-hidden={true} />
     </div>
     </div>
     <div class={styles.mainContentRow}>
