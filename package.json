@@ -7,8 +7,8 @@
     "microfrontends/dialogmote"
   ],
   "scripts": {
-    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote-microfrontend",
-    "dev:dialogmote-microfrontend": "npm run dev --workspace=microfrontends/dialogmote-microfrontend"
+    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote",
+    "dev:dialogmote-microfrontend": "npm run dev --workspace=microfrontends/dialogmote"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
