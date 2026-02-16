@@ -4,11 +4,17 @@
   "version": "0.0.1",
   "private": true,
   "workspaces": [
-    "microfrontends/dialogmote-microfrontend"
+    "microfrontends/dialogmote",
+    "microfrontends/aktivitetskrav",
+    "microfrontends/meroppfolging"
   ],
   "scripts": {
-    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote-microfrontend",
-    "dev:dialogmote-microfrontend": "npm run dev --workspace=microfrontends/dialogmote-microfrontend"
+    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote",
+    "build:aktivitetskrav-microfrontend": "npm run build --workspace=microfrontends/aktivitetskrav",
+    "build:meroppfolging-microfrontend": "npm run build --workspace=microfrontends/meroppfolging",
+    "dev:dialogmote-microfrontend": "npm run dev --workspace=microfrontends/dialogmote",
+    "dev:aktivitetskrav-microfrontend": "npm run dev --workspace=microfrontends/aktivitetskrav",
+    "dev:meroppfolging-microfrontend": "npm run dev --workspace=microfrontends/meroppfolging"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",

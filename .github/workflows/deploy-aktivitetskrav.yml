@@ -3,9 +3,9 @@ on:
   push:
     branches:
       - "main"
-      - "deploy-dialogmote"
+      - "deploy-aktivitetskrav"
     paths:
-      - "microfrontends/dialogmote/**"
+      - "microfrontends/aktivitetskrav/**"
       - "package-lock.json"
       - "package.json"
 
@@ -33,21 +33,21 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: "Build application"
-        run: "npm run build:dialogmote-microfrontend"
+        run: "npm run build:aktivitetskrav-microfrontend"
 
       - name: "Upload to cdn"
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
           team: min-side # Change this to your team name
-          source: ./microfrontends/dialogmote/dist/client/_astro
-          destination: 'dialogmote-microfrontend' # Change this to your application name
+          source: ./microfrontends/aktivitetskrav/dist/client/_astro
+          destination: 'aktivitetskrav-microfrontend' # Change this to your application name
 
       - name: "Build and push"
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
           team: min-side # Change this to your team name
-          dockerfile: ./microfrontends/dialogmote/Dockerfile
+          dockerfile: ./microfrontends/aktivitetskrav/Dockerfile
 
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
@@ -56,9 +56,9 @@ jobs:
     uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
     needs: build
     with:
-      id: "syfo-dialog" # Change this to your microfrontend id.
-      url: "http://dialogmote-microfrontend.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
-      appname: "dialogmote-microfrontend" # Change this to your application name
+      id: "syfo-aktivitetskrav" # Change this to your microfrontend id.
+      url: "http://aktivitetskrav-microfrontend.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
+      appname: "aktivitetskrav-microfrontend" # Change this to your application name
       namespace: "min-side" # Change this to your namespace
       cluster: dev-gcp
       commitmsg: ${{ github.event.head_commit.message}}
@@ -71,10 +71,10 @@ jobs:
   #   uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
   #   needs: build
   #   with:
-  #     id: "syfo-dialog"
-  #     url: "http://tms-microfrontend-template-ssr.min-side"
-  #     appname: "tms-microfrontend-template-ssr"
-  #     namespace: "team-namespace"
+  #     id: "syfo-aktivitetskrav"
+  #     url: "http://aktivitetskrav-microfrontend.min-side"
+  #     appname: "aktivitetskrav-microfrontend"
+  #     namespace: "min-side"
   #     cluster: prod-gcp
   #     commitmsg: ${{ github.event.head_commit.message}}
   #     fallback: "fallback" # Should containt the path to the fallback page after src/pages/[locale]/...
@@ -93,7 +93,7 @@ jobs:
         uses: "nais/deploy/actions/deploy@v2"
         env:
           CLUSTER: dev-gcp
-          RESOURCE: microfrontends/dialogmote/nais/dev-gcp/nais.yaml
+          RESOURCE: microfrontends/aktivitetskrav/nais/dev-gcp/nais.yaml
           VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
 
   # deploy-prod:
@@ -110,5 +110,5 @@ jobs:
   #       uses: "nais/deploy/actions/deploy@v2"
   #       env:
   #         CLUSTER: prod-gcp
-  #         RESOURCE: microfrontends/dialogmote/nais/prod-gcp/nais.yaml
-  #         VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}          
+  #         RESOURCE: microfrontends/aktivitetskrav/nais/prod-gcp/nais.yaml
+  #         VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
