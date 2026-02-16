@@ -35,23 +35,23 @@ const latestBrev = getLatestBrev(brev);
 
 const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
 const showMotebehovPanel = getShowMotebehovPanel(motebehov);
-
-console.log("dialog:", showDialogmotePanel);
-console.log("motebehov:", showMotebehovPanel); // -> can both be true at the same time?
 ---
 
 {isLocal && <meta charset="UTF-8" />}
 <div class={`${styles.wrapper} dialogmote-microfrontend`}>
-  {showDialogmotePanel && (
-    <DialogmotePanel
-        attending={latestBrev.svar?.svarType || null}
-        date={latestBrev.tid}
-        brevType={latestBrev.brevType}
-    />
-  )}
-  {showMotebehovPanel && (
-    <MoteBehovPanel />
-  )}
+    {() => {
+        if (showDialogmotePanel) {
+          return (
+            <DialogmotePanel attending={latestBrev.svar?.svarType || null} date={latestBrev.tid} brevType={latestBrev.brevType} />
+          );
+        }
+
+        if (showMotebehovPanel) {
+          return (
+            <MoteBehovPanel />
+          );
+        }
+    }}
 </div>
 
 
