@@ -1,0 +1,28 @@
+---
+import { getShortDateFormat } from "../../utils/dateUtils";
+import { text } from "../../language/text";
+import { UnderArbeidPanel } from "./UnderArbeidPanel";
+import { MikrofrontendLinkPanel, TagMeta } from "./MikrofrontendLinkPanel";
+
+interface Props {
+  journalpostId?: string;
+  fristDato: string;
+}
+
+const { journalpostId, fristDato } = Astro.props;
+
+const tagInfo: TagMeta | undefined = fristDato
+    ? {
+        variant: new Date() > new Date(fristDato) ? "error-moderate" : "warning-moderate",
+        text: `Svarfrist: ${getShortDateFormat(fristDato)}`,
+      }
+    : undefined;
+---
+{journalpostId ? <UnderArbeidPanel /> :
+    <MikrofrontendLinkPanel
+      headingText={text.heading.vurderer}
+      bodyText="NAV vurderer å stanse sykepengene dine"
+      alertStyle="warning"
+      tag={tagInfo}
+    />
+}
