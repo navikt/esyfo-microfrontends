@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "workspaces": [
-    "microfrontends/dialogmote-microfrontend"
+    "microfrontends/dialogmote"
   ],
   "scripts": {
     "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote-microfrontend",
