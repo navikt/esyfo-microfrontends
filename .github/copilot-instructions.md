@@ -49,7 +49,7 @@ esyfo-microfrontends/
 ├── package.json                  # Root: shared dependencies + workspace scripts
 ├── microfrontends/
 │   ├── dialogmote/               # Dialogmøte microfrontend (active)
-│   ├── aktivitetskrav-microfrontend/  # Aktivitetskrav microfrontend (template phase)
+│   ├── aktivitetskrav/               # Aktivitetskrav microfrontend (domain logic implemented)
 │   └── meroppfolging/            # Meroppfølging microfrontend (not started)
 ```
 
@@ -120,9 +120,9 @@ See `.github/instructions/migration.instructions.md` for full details.
 
 | Workspace | Status | Notes |
 |-----------|--------|-------|
-| dialogmote | ✅ Active development | Domain logic migrated, Astro components working |
-| aktivitetskrav | 🔄 Template phase | Workspace exists but contains template artifacts to clean up |
-| meroppfolging | ⏳ Not started | Referenced in scripts but directory doesn't exist yet |
+| dialogmote | ✅ Active development | Domain logic migrated, components working. assetsPrefix still points to template repo. |
+| aktivitetskrav | ✅ Active development | Domain logic, Zod schemas, components and mock server implemented. |
+| meroppfolging | ⏳ Not started | Referenced in scripts and has deploy workflow, but directory doesn't exist yet. |
 
 ## Boundaries
 

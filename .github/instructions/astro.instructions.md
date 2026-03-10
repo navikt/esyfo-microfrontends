@@ -69,6 +69,7 @@ import MyReactComponent from "@src/components/MyComponent.tsx";
 - **Minimize client islands** — server-render everything that doesn't need interactivity
 - React is NOT bundled — it's loaded via import map from NAV CDN (`importmap.json`)
 - Only pass serializable props to client components
+- **Prefer React `.tsx` for presentation components** — Astro pages handle server logic (token exchange, data fetching), React components handle all presentation. This enables Storybook, Testing Library, and leverages the team's React expertise.
 
 ## Env Schema (astro:env/server)
 

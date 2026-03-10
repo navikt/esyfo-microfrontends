@@ -10,7 +10,7 @@ Three separate Vite/React microfrontends + one Express proxy backend → one Ast
 
 | Old Repo | Type | Status | New Workspace |
 |----------|------|--------|---------------|
-| `aktivitetskrav-mikrofrontend` | Vite/React SPA | 🔄 Template phase | `microfrontends/aktivitetskrav-microfrontend` |
+| `aktivitetskrav-mikrofrontend` | Vite/React SPA | ✅ Active development | `microfrontends/aktivitetskrav` |
 | `dialogmote-mikrofrontend` | Vite/React SPA | ✅ Active development | `microfrontends/dialogmote` |
 | `meroppfolging-mikrofrontend` | Vite/React SPA | ⏳ Not started | `microfrontends/meroppfolging` |
 | `esyfo-proxy` | Express.js backend | ✅ Replaced by Astro middleware | Built into each workspace |
@@ -58,21 +58,15 @@ Reference for which backend calls each workspace needs:
 | `GET /api/meroppfolging/v2/senoppfolging/status` | `MEROPPFOLGING_BACKEND_HOST` | `/api/v2/senoppfolging/status` | `MEROPPFOLGING_BACKEND_CLIENT_ID` | meroppfolging |
 | `GET /api/mikrofrontend/v1/status` | `MEROPPFOLGING_BACKEND_HOST` | `/api/mikrofrontend/v1/status` | `MEROPPFOLGING_BACKEND_CLIENT_ID` | meroppfolging |
 
-## Known Template Artifacts to Clean Up (aktivitetskrav workspace)
+## Known Issues to Fix
 
-The aktivitetskrav workspace was scaffolded from `tms-microfrontend-template-ssr` and still contains template references:
+The following issues have been identified across workspaces:
 
-- `package.json` name: `"tms-microfrontend-template-ssr"` → should be `"aktivitetskrav-microfrontend"`
-- `astro.config.mjs` assetsPrefix: `"tms-microfrontend-template-ssr"` → update to `"aktivitetskrav-microfrontend"`
-- `astro.config.mjs` CSS prefix: `".tms-microfrontend-template-ssr"` → update to `".aktivitetskrav-microfrontend"`
-- `astro.config.mjs` env schema: `EXAMPLE_API_URL` → replace with actual backend env vars
-- Placeholder data types and fetch logic → replace with aktivitetskrav domain types
-- `nais/` manifests: verify namespace, team labels, access policies
-- `src/styles/index.module.css`: contains debug border styling → remove
+- `dialogmote/astro.config.mjs` assetsPrefix: still points to `"tms-microfrontend-template-ssr"` → should be `"dialogmote-microfrontend"`
+- `aktivitetskrav/nais/` manifests: verify namespace, team labels, access policies match production requirements
+- Node.js base image mismatch: dialogmote uses `nodejs24-debian12`, aktivitetskrav uses `nodejs22-debian12` — should be harmonized
+- Biome config duplicated in each workspace — should be consolidated to root level
 
-## Workspace Name Mismatch
-
-⚠️ Root `package.json` workspaces reference `"microfrontends/aktivitetskrav"` but the actual directory is `microfrontends/aktivitetskrav-microfrontend`. This should be harmonized — either rename the directory or update the workspace path.
 
 ## Technology Migration Map
 
@@ -102,8 +96,8 @@ When migrating a microfrontend, follow this pattern (using dialogmote as referen
 3. **Create middleware** — copy from dialogmote (identical for all workspaces)
 4. **Define Zod schemas** in `schema/` — port from old repo's schema files
 5. **Create fetch utilities** in `src/utils/fetch.ts` — server-side with OBO token
-6. **Build Astro components** — convert React components to `.astro` where possible
-7. **Add React islands** only for interactive elements (`client:only="react"`)
+6. **Build React presentation components** in `src/components/` as `.tsx` files — enables Storybook, Testing Library, and team familiarity
+7. **Wire up in Astro pages** — import React components with `client:only="react"` in `.astro` page files
 8. **Set up mock server** in `mock/` — Hono endpoints matching the real API
 9. **Create NAIS manifests** in `nais/` — dev-gcp and prod-gcp
 10. **Create deploy workflow** in `.github/workflows/`
