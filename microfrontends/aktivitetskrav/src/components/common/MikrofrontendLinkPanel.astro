@@ -2,7 +2,7 @@
 import { Heading, Tag } from "@navikt/ds-react";
 import { ChevronRightIcon as Chevron, ExclamationmarkTriangleFillIcon as WarningIcon, CheckmarkCircleFillIcon as SuccessIcon } from "@navikt/aksel-icons";
 import { InformationSquareFillIcon as InfoIcon, XMarkOctagonFillIcon as ErrorIcon } from "@navikt/aksel-icons";
-import { TagMeta } from "@src/utils/types";
+import type { TagMeta } from "@src/utils/types";
 import styles from "./MikrofrontendLinkPanel.module.css";
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
 */
 ---
 
-<div class=`${styles.chevronPanel} aktivitetskrav-microfrontend` id="mikrofrontend__linkPanel" onClick={() => console.info("Implement this")}>
+<div class=`${styles.chevronPanel} aktivitetskrav-microfrontend` id="mikrofrontend__linkPanel">
     <div class={styles.headingRow}>
         <Heading className={`${styles.headingSpacing} ${styles.headingTitle}`} size={"small"} level={"2"}>
             {Astro.props.headingText}
