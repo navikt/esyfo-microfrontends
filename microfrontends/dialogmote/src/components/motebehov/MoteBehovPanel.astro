@@ -4,7 +4,7 @@ import Content from "../shared/Content.astro";
 import styles from "../shared/Content.module.css";
 ---
 
-<a href={`${DIALOGMOTE_URL}/motebehov/svar`} id="motebehov-panel" class={styles.link}>
+<a href={`${DIALOGMOTE_URL}/motebehov/svar`} id="motebehov-panel" class={`${styles.link} dialogmote-microfrontend`}>
   <Content
     heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
     mainContent={{

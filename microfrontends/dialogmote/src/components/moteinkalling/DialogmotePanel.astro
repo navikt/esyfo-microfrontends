@@ -48,7 +48,7 @@ const tag = (): TagMeta => {
 };
 ---
 
-<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel" class={styles.link} data-attending={attending} data-brevtype={brevType}>
+<a href={`${DIALOGMOTE_URL}/moteinnkalling`} id="dialogmote-panel" class={`${styles.link} dialogmote-microfrontend`} data-attending={attending} data-brevtype={brevType}>
   <Content
     heading={{ text: "Dialogmøte med NAV", icon: "warning" }}
     mainContent={{

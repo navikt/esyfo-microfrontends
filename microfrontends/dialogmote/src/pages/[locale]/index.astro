@@ -9,7 +9,6 @@ import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
 import { getShowMotebehovPanel } from "@src/utils/motebehov";
 import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
 import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
-import styles from "@src/styles/index.module.css";
 import "@src/styles/aksel.css";
 
 const userToken = Astro.locals.token;
@@ -38,21 +37,19 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
 ---
 
 {isLocal && <meta charset="UTF-8" />}
-<div class={`${styles.wrapper} dialogmote-microfrontend`}>
-    {() => {
-        if (showDialogmotePanel) {
-          return (
-            <DialogmotePanel attending={latestBrev.svar?.svarType || null} date={latestBrev.tid} brevType={latestBrev.brevType} />
-          );
-        }
+{() => {
+  if (showDialogmotePanel) {
+    return (
+      <DialogmotePanel attending={latestBrev.svar?.svarType || null} date={latestBrev.tid} brevType={latestBrev.brevType} />
+    );
+  }
 
-        if (showMotebehovPanel) {
-          return (
-            <MoteBehovPanel />
-          );
-        }
-    }}
-</div>
+  if (showMotebehovPanel) {
+    return (
+      <MoteBehovPanel />
+    );
+  }
+}}
 
 
 
