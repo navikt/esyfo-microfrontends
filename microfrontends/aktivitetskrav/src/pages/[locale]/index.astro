@@ -1,0 +1,49 @@
+---
+import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
+import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
+import OppfyltPanel from "@src/components/panels/OppfyltPanel.astro";
+import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
+import IkkeAktuellPanel from "@src/components/panels/IkkeAktuellPanel.astro";
+import { logger } from "@src/utils/logger";
+import { isLocal } from "@src/utils/environment";
+import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
+import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchame";
+import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchame";
+import "@src/styles/aksel.css";
+
+const userToken = Astro.locals.token;
+
+let data: AktivitetskravVurdering;
+
+try {
+  data = await fetchAktivitetskravVurdering(userToken);
+} catch (error) {
+  logger.error(`Error fetching aktivitetskrav: ${error}`);
+  return new Response("Internal Server Error", { status: 503 });
+}
+
+const aktivitetskravVurdering = aktivitetskravVurderingSchema.safeParse(data);
+
+if (aktivitetskravVurdering.success === false) {
+  logger.error(`Error parsing aktivitetskrav`);
+  return new Response("Internal Server Error", { status: 503 });
+}
+---
+
+{isLocal && <meta charset="UTF-8" />}
+{() => {
+  switch (aktivitetskravVurdering.data.status) {
+    case "NY":
+    case "NY_VURDERING":
+    case "AVVENT":
+      return <UnderArbeidPanel />;
+    case "UNNTAK":
+      return <UnntakPanel arsak={aktivitetskravVurdering.data.arsaker[0]} sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+    case "OPPFYLT":
+      return <OppfyltPanel arsak={aktivitetskravVurdering.data.arsaker[0]} sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+    case "FORHANDSVARSEL":
+      return <ForhaandsvarselPanel journalpostId={aktivitetskravVurdering.data.journalpostId} fristDato={aktivitetskravVurdering.data.fristDato} />;
+    case "IKKE_AKTUELL":
+      return <IkkeAktuellPanel sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+  }
+}}

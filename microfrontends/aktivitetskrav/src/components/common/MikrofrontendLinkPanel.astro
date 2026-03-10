@@ -1,0 +1,48 @@
+---
+import { Heading, Tag } from "@navikt/ds-react";
+import { ChevronRightIcon as Chevron, ExclamationmarkTriangleFillIcon as WarningIcon, CheckmarkCircleFillIcon as SuccessIcon } from "@navikt/aksel-icons";
+import { InformationSquareFillIcon as InfoIcon, XMarkOctagonFillIcon as ErrorIcon } from "@navikt/aksel-icons";
+import { TagMeta } from "@src/utils/types";
+import styles from "./MikrofrontendLinkPanel.module.css";
+
+interface Props {
+    headingText: string;
+    alertStyle: "info" | "success" | "warning" | "error";
+    bodyText: string;
+    tag?: TagMeta;
+}
+
+/* TODO:
+ - impementer logAndNavigate("navigere", { heading: headingText, body: bodyText }
+ - bruk a-tag og legg til href?
+*/
+---
+
+<div class=`${styles.chevronPanel} aktivitetskrav-microfrontend` id="mikrofrontend__linkPanel" onClick={() => console.info("Implement this")}>
+    <div class={styles.headingRow}>
+        <Heading className={`${styles.headingSpacing} ${styles.headingTitle}`} size={"small"} level={"2"}>
+            {Astro.props.headingText}
+        </Heading>
+        <div class={styles.chevronSection}>
+            <div class={styles.alertContainer}>
+                {Astro.props.alertStyle === "info" && <InfoIcon className={styles.infoIcon} />}
+                {Astro.props.alertStyle === "warning" && <WarningIcon className={styles.warningIcon} />}
+                {Astro.props.alertStyle === "success" && <SuccessIcon className={styles.sucessIcon} />}
+                {Astro.props.alertStyle === "error" && <ErrorIcon className={styles.errorIcon} />}
+            </div>
+            <Chevron className={styles.chevron} fontSize="1.5rem" aria-hidden={true} />
+        </div>
+    </div>
+    <div class={styles.mainContentRow}>
+        <div class={styles.column}>
+            <Heading className={styles.mainContentText} size="medium" level={"3"}>
+                {Astro.props.bodyText}
+            </Heading>
+            {Astro.props.tag && (
+                <Tag className={styles.containedTag} size={"small"} variant={Astro.props.tag.variant}>
+                   {Astro.props.tag.text}
+                </Tag>
+            )}
+        </div>
+    </div>
+</div>
