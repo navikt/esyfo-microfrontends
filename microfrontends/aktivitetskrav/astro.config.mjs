@@ -8,7 +8,7 @@ import importmap from "./importmap.json";
 // https://astro.build/config
 export default defineConfig({
   build: {
-    assetsPrefix: "https://cdn.nav.no/min-side/tms-microfrontend-template-ssr",
+    assetsPrefix: "https://cdn.nav.no/min-side/aktivitetskrav-microfrontend",
     inlineStylesheets: "always",
   },
   vite: {
@@ -16,7 +16,7 @@ export default defineConfig({
       postcss: {
         plugins: [
           prefixer({
-            prefix: ".tms-microfrontend-template-ssr",
+            prefix: ".aktivitetskrav-microfrontend",
             ignoreFiles: [/module.css/],
           }),
         ],
@@ -53,10 +53,15 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      EXAMPLE_API_URL: envField.string({
+      AKTIVITETSKRAV_API_URL: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:3000/api/tms-astro-template",
+        default: "http://localhost:4000/api/aktivitetsplikt",
+      }),
+      AKTIVITETSKRAV_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+        default: "local:teamsykefravr:aktivietskrav-api",
       }),
     },
   },
