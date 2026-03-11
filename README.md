@@ -14,7 +14,7 @@ Microfrontendene aktiveres av [esyfovarsel](https://github.com/navikt/esyfovarse
 
 ```mermaid
 flowchart TD
-  U[Bruker] --> M[Min side\ntms-min-side]
+  U[Bruker] --> M[Min side]
 
   subgraph MF[Astro SSR microfrontender]
     direction TB
