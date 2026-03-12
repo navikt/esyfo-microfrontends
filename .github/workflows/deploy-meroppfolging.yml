@@ -56,7 +56,7 @@ jobs:
     uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
     needs: build
     with:
-      id: "syfo-aktivitetskrav" # Change this to your microfrontend id.
+      id: "syfo-meroppfolging" # Change this to your microfrontend id.
       url: "http://meroppfolging-microfrontend.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
       appname: "meroppfolging-microfrontend" # Change this to your application name
       namespace: "min-side" # Change this to your namespace
@@ -71,7 +71,7 @@ jobs:
   #   uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
   #   needs: build
   #   with:
-  #     id: "syfo-aktivitetskrav"
+  #     id: "syfo-meroppfolging"
   #     url: "http://meroppfolging-microfrontend.min-side"
   #     appname: "meroppfolging-microfrontend"
   #     namespace: "min-side"
