@@ -8,7 +8,7 @@ import importmap from "./importmap.json";
 // https://astro.build/config
 export default defineConfig({
   build: {
-    assetsPrefix: "https://cdn.nav.no/min-side/tms-microfrontend-template-ssr",
+    assetsPrefix: "https://cdn.nav.no/min-side/dialogmote-microfrontend",
     inlineStylesheets: "always",
   },
   vite: {
