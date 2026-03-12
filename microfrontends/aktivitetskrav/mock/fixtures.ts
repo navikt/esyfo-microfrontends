@@ -1,4 +1,4 @@
-import type { AktivitetskravVurdering } from "schema/aktivitetskravVurderingSchame";
+import type { AktivitetskravVurdering } from "schema/aktivitetskravVurderingSchema";
 import { addDaysToDate, subtractDaysFromDate } from "src/utils/dateUtils";
 
 const nyKandidatVurdering: AktivitetskravVurdering = {
