@@ -1,10 +1,10 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: tms-microfrontend-template-ssr # Change this to your application name
-  namespace: min-side # Change this to your namespace
+  name: aktivitetskrav-microfrontend
+  namespace: min-side
   labels:
-    team: min-side # Change this to your team name
+    team: min-side
 spec:
   observability:
     autoInstrumentation:
@@ -28,12 +28,18 @@ spec:
       rules:
         - application: tms-min-side
           namespace: min-side
+    outbound:
+      rules:
+        - application: aktivitetskrav-backend
+          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
     requests:
       cpu: "20m"
       memory: 128Mi
-  env: # Add your environment variables here
-    - name: EXAMPLE_API_URL
-      value: "https://example.dev.nav.no/api"
+  env:
+    - name: AKTIVITETSKRAV_API_URL
+      value: "https://aktivitetskrav-backend.intern.dev.nav.no/api/v1/aktivitetsplikt"
+    - name: AKTIVITETSKRAV_CLIENT_ID
+      value: "dev-gcp:team-esyfo:aktivitetskrav-backend"
