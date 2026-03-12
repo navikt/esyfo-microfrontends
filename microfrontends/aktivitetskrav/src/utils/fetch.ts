@@ -1,5 +1,6 @@
 import { AKTIVITETSKRAV_API_URL, AKTIVITETSKRAV_CLIENT_ID } from "astro:env/server";
 import { getAccessToken } from "@src/utils/token.ts";
+import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
 
 export const fetchAktivitetskravVurdering = async (token: string): Promise<AktivitetskravVurdering> => {
@@ -17,5 +18,6 @@ export const fetchAktivitetskravVurdering = async (token: string): Promise<Aktiv
     throw new Error(`Http error with status: ${response.status}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+  return aktivitetskravVurderingSchema.parse(data);
 };
