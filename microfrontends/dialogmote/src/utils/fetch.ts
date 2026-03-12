@@ -1,8 +1,9 @@
 import { getAccessToken } from "@src/utils/token.ts";
 import type { BrevDTO } from "@schema/brevSchema.ts";
+import { brevSchema } from "@schema/brevSchema";
 import { ISDIALOGMOTE_API_URL, ISDIALOGMOTE_CLIENT_ID } from "astro:env/server";
 import { SYFOMOTEBEHOV_API_URL, SYFOMOTEBEHOV_CLIENT_ID } from "astro:env/server";
-import type { MotebehovStatusDTO } from "@schema/motebehovSchema.ts";
+import { motebehovStatusSchema, type MotebehovStatusDTO } from "@schema/motebehovSchema.ts";
 
 export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
   const accessToken = await getAccessToken(userToken, ISDIALOGMOTE_CLIENT_ID);
@@ -19,7 +20,8 @@ export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
     throw new Error(`Http error with status: ${response.status}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+  return brevSchema.array().parse(data);
 };
 
 export const fetchMotebehov = async (userToken: string): Promise<MotebehovStatusDTO> => {
@@ -37,5 +39,6 @@ export const fetchMotebehov = async (userToken: string): Promise<MotebehovStatus
     throw new Error(`Http error with status: ${response.status}`);
   }
 
-  return await response.json();
+  const data = await response.json();
+  return motebehovStatusSchema.parse(data);
 };

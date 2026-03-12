@@ -38,7 +38,7 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
 
 {isLocal && <meta charset="UTF-8" />}
 {() => {
-  if (showDialogmotePanel) {
+  if (showDialogmotePanel && latestBrev) {
     return (
       <DialogmotePanel attending={latestBrev.svar?.svarType || null} date={latestBrev.tid} brevType={latestBrev.brevType} />
     );
