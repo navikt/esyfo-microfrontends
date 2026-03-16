@@ -9,24 +9,24 @@ Astro 5 SSR monorepo that consolidates three separate microfrontends and a share
 ## Commands
 
 ```bash
-npm install                                    # Install all dependencies
-npm run dev:dialogmote-microfrontend           # Dev server for dialogmote (Astro + Hono mock)
-npm run dev:aktivitetskrav-microfrontend       # Dev server for aktivitetskrav
-npm run dev:meroppfolging-microfrontend        # Dev server for meroppfolging
-npm run build:dialogmote-microfrontend         # Build dialogmote workspace
-npm run build:aktivitetskrav-microfrontend     # Build aktivitetskrav workspace
-npm run build:meroppfolging-microfrontend      # Build meroppfolging workspace
+pnpm install                                    # Install all dependencies
+pnpm run dev:dialogmote-microfrontend           # Dev server for dialogmote (Astro + Hono mock)
+pnpm run dev:aktivitetskrav-microfrontend       # Dev server for aktivitetskrav
+pnpm run dev:meroppfolging-microfrontend        # Dev server for meroppfolging
+pnpm run build:dialogmote-microfrontend         # Build dialogmote workspace
+pnpm run build:aktivitetskrav-microfrontend     # Build aktivitetskrav workspace
+pnpm run build:meroppfolging-microfrontend      # Build meroppfolging workspace
 ```
 
 Each workspace also has local scripts:
 ```bash
 cd microfrontends/dialogmote
-npm run dev          # Astro dev + mock server (concurrently)
-npm run build        # astro check && astro build
-npm run mock         # Hono mock server only (port 3000)
+pnpm run dev          # Astro dev + mock server (concurrently)
+pnpm run build        # astro check && astro build
+pnpm run mock         # Hono mock server only (port 3000)
 ```
 
-> **Note**: This repo uses npm workspaces today. Migration to **pnpm** is planned. Until then, use `npm` for all commands. When migrating: delete `package-lock.json`, create `.npmrc` with `shamefully-hoist=true`, run `pnpm install`, and update CI workflows.
+> **Note**: This repo uses pnpm workspaces. Workspace config is in `pnpm-workspace.yaml`. Dependencies are in root `package.json`.
 
 ## NAV Principles
 - **Team First**: Autonomous teams with circles of autonomy
@@ -42,7 +42,7 @@ npm run mock         # Hono mock server only (port 3000)
 ## Architecture
 
 ### Monorepo Structure
-npm workspaces with independent Astro apps under `microfrontends/`:
+pnpm workspaces with independent Astro apps under `microfrontends/`:
 
 ```
 esyfo-microfrontends/
@@ -84,7 +84,7 @@ Each Astro workspace handles its own token exchange server-side, eliminating the
 
 ### Deploy
 Per-workspace GitHub Actions workflow with path-based triggers:
-1. `npm ci` + `npm run build:<workspace>`
+1. `pnpm install --frozen-lockfile` + `pnpm run build:<workspace>`
 2. CDN upload: `dist/client/_astro/` → `cdn.nav.no/min-side/<app-name>`
 3. Docker build from workspace Dockerfile (distroless Node image)
 4. Register in `tms-deploy` microfrontend manifest (SSR variant)
@@ -132,11 +132,11 @@ See `.github/instructions/migration.instructions.md` for full details.
 - Use Aksel components from `@navikt/ds-react`
 - Use Zod for API response validation (schemas in `schema/` directory)
 - Keep CSS prefix unique per microfrontend
-- Run `npm run build` in the workspace to verify changes
+- Run `pnpm run build` in the workspace to verify changes
 - Use `astro:env/server` for server secrets — never expose to client
 
 ### ⚠️ Ask First
-- Adding new npm dependencies (affects all workspaces via root `package.json`)
+- Adding new dependencies (affects all workspaces via root `package.json`)
 - Changing token exchange or auth flow
 - Changing deploy workflow or NAIS manifest
 - Sharing code between workspaces (consider if patterns should be duplicated or shared)
