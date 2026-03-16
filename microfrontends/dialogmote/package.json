@@ -8,7 +8,8 @@
     "build": "astro check && astro build",
     "mock": "tsx mock/server.ts",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "astro check"
   },
   "dependencies": {},
   "devDependencies": {}

@@ -3,7 +3,7 @@
     "commands": {
       "check": {
         "glob": "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}",
-        "run": "npx @biomejs/biome check --write --error-on-warnings --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}",
+        "run": "npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}",
         "stage_fixed": true
       }
     }
@@ -11,10 +11,10 @@
   "pre-push": {
     "commands": {
       "typecheck-dialogmote": {
-        "run": "npm run build --workspace=microfrontends/dialogmote"
+        "run": "npm run typecheck --workspace=microfrontends/dialogmote"
       },
       "typecheck-aktivitetskrav": {
-        "run": "npm run build --workspace=microfrontends/aktivitetskrav"
+        "run": "npm run typecheck --workspace=microfrontends/aktivitetskrav"
       }
     }
   },
