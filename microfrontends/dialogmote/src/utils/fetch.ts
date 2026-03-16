@@ -1,9 +1,13 @@
-import { getAccessToken } from "@src/utils/token.ts";
-import type { BrevDTO } from "@schema/brevSchema.ts";
+import {
+  ISDIALOGMOTE_API_URL,
+  ISDIALOGMOTE_CLIENT_ID,
+  SYFOMOTEBEHOV_API_URL,
+  SYFOMOTEBEHOV_CLIENT_ID,
+} from "astro:env/server";
 import { brevSchema } from "@schema/brevSchema";
-import { ISDIALOGMOTE_API_URL, ISDIALOGMOTE_CLIENT_ID } from "astro:env/server";
-import { SYFOMOTEBEHOV_API_URL, SYFOMOTEBEHOV_CLIENT_ID } from "astro:env/server";
-import { motebehovStatusSchema, type MotebehovStatusDTO } from "@schema/motebehovSchema.ts";
+import type { BrevDTO } from "@schema/brevSchema.ts";
+import { type MotebehovStatusDTO, motebehovStatusSchema } from "@schema/motebehovSchema.ts";
+import { getAccessToken } from "@src/utils/token.ts";
 
 export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
   const accessToken = await getAccessToken(userToken, ISDIALOGMOTE_CLIENT_ID);

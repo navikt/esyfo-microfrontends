@@ -1,14 +1,13 @@
 ---
-import { fetchBrev } from "@src/utils/fetch";
-import { logger } from "@src/utils/logger";
-import { isLocal } from "@src/utils/environment";
-import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
 import type { BrevDTO } from "@schema/brevSchema";
-import { fetchMotebehov } from "@src/utils/fetch";
-import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
-import { getShowMotebehovPanel } from "@src/utils/motebehov";
+import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
 import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
 import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
+import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
+import { isLocal } from "@src/utils/environment";
+import { fetchBrev, fetchMotebehov } from "@src/utils/fetch";
+import { logger } from "@src/utils/logger";
+import { getShowMotebehovPanel } from "@src/utils/motebehov";
 import "@src/styles/aksel.css";
 
 const userToken = Astro.locals.token;

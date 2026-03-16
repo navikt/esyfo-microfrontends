@@ -1,15 +1,20 @@
 ---
+import {
+  ChevronRightIcon as Chevron,
+  XMarkOctagonFillIcon as ErrorIcon,
+  InformationSquareFillIcon as InfoIcon,
+  CheckmarkCircleFillIcon as SuccessIcon,
+  ExclamationmarkTriangleFillIcon as WarningIcon,
+} from "@navikt/aksel-icons";
 import { Heading, Tag } from "@navikt/ds-react";
-import { ChevronRightIcon as Chevron, ExclamationmarkTriangleFillIcon as WarningIcon, CheckmarkCircleFillIcon as SuccessIcon } from "@navikt/aksel-icons";
-import { InformationSquareFillIcon as InfoIcon, XMarkOctagonFillIcon as ErrorIcon } from "@navikt/aksel-icons";
 import type { TagMeta } from "@src/utils/types";
 import styles from "./MikrofrontendLinkPanel.module.css";
 
 interface Props {
-    headingText: string;
-    alertStyle: "info" | "success" | "warning" | "error";
-    bodyText: string;
-    tag?: TagMeta;
+  headingText: string;
+  alertStyle: "info" | "success" | "warning" | "error";
+  bodyText: string;
+  tag?: TagMeta;
 }
 
 /* TODO:

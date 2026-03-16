@@ -23,8 +23,8 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ["@astrojs/react"]
-    }
+      noExternal: ["@astrojs/react"],
+    },
   },
   integrations: [
     react(),
@@ -77,9 +77,9 @@ export default defineConfig({
         default: "dev-gcp:team-esyfo:syfomotebehov",
       }),
       DIALOGMOTE_URL: envField.string({
-          context: "server",
-          access: "secret",
-          default: "http://localhost:3000/syk/dialogmoter/sykmeldt",
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/syk/dialogmoter/sykmeldt",
       }),
     },
   },

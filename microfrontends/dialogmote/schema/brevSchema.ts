@@ -1,11 +1,11 @@
-import { union, object, literal, boolean, string, z, array, preprocess } from "zod";
+import { array, boolean, literal, object, preprocess, string, union, type z } from "zod";
 
 const documentComponentType = union([
-    literal("HEADER"),
-    literal("HEADER_H1"),
-    literal("HEADER_H2"),
-    literal("PARAGRAPH"),
-    literal("LINK"),
+  literal("HEADER"),
+  literal("HEADER_H1"),
+  literal("HEADER_H2"),
+  literal("PARAGRAPH"),
+  literal("LINK"),
 ]);
 
 const documentComponentTypeWithUnknown = union([documentComponentType, literal("UNKNOWN")]);
@@ -13,73 +13,73 @@ const documentComponentTypeWithUnknown = union([documentComponentType, literal("
 const svarType = union([literal("KOMMER"), literal("NYTT_TID_STED"), literal("KOMMER_IKKE")]);
 
 const brevType = union([
-    literal("INNKALT"),
-    literal("AVLYST"),
-    literal("NYTT_TID_STED"),
-    literal("REFERAT"),
-    literal("REFERAT_ENDRET"),
+  literal("INNKALT"),
+  literal("AVLYST"),
+  literal("NYTT_TID_STED"),
+  literal("REFERAT"),
+  literal("REFERAT_ENDRET"),
 ]);
 
 const documentComponentKey = union([
-    literal("IKKE_BEHOV"),
-    literal("FRISKMELDING_ARBEIDSFORMIDLING"),
-    literal("AVKLARING_ARBEIDSEVNE"),
-    literal("OPPFOLGINGSTILTAK"),
-    literal("ARBEIDSRETTET_REHABILITERING"),
-    literal("OPPLAERING_UTDANNING"),
-    literal("UNNTAK_ARBEIDSGIVERPERIODE"),
-    literal("REISETILSKUDD"),
-    literal("HJELPEMIDLER_TILRETTELEGGING"),
-    literal("MIDLERTIDIG_LONNSTILSKUDD"),
-    literal("OKONOMISK_STOTTE"),
-    literal("INGEN_RETTIGHETER"),
+  literal("IKKE_BEHOV"),
+  literal("FRISKMELDING_ARBEIDSFORMIDLING"),
+  literal("AVKLARING_ARBEIDSEVNE"),
+  literal("OPPFOLGINGSTILTAK"),
+  literal("ARBEIDSRETTET_REHABILITERING"),
+  literal("OPPLAERING_UTDANNING"),
+  literal("UNNTAK_ARBEIDSGIVERPERIODE"),
+  literal("REISETILSKUDD"),
+  literal("HJELPEMIDLER_TILRETTELEGGING"),
+  literal("MIDLERTIDIG_LONNSTILSKUDD"),
+  literal("OKONOMISK_STOTTE"),
+  literal("INGEN_RETTIGHETER"),
 ]);
 
 const documentComponentKeyWithUnknown = union([documentComponentKey, literal("UNKNOWN")]);
 
 const documentComponent = object({
-    type: preprocess(transformComponentType, documentComponentTypeWithUnknown),
-    key: preprocess(transformDocumentKey, documentComponentKeyWithUnknown.nullable()),
-    title: string().nullable(),
-    texts: array(string()),
+  type: preprocess(transformComponentType, documentComponentTypeWithUnknown),
+  key: preprocess(transformDocumentKey, documentComponentKeyWithUnknown.nullable()),
+  title: string().nullable(),
+  texts: array(string()),
 });
 
 const svar = object({
-    svarTidspunkt: string(),
-    svarType: svarType,
-    svarTekst: string().nullable(),
+  svarTidspunkt: string(),
+  svarType: svarType,
+  svarTekst: string().nullable(),
 });
 
 export const brevSchema = object({
-    uuid: string(),
-    deltakerUuid: string(),
-    createdAt: string(),
-    brevType: brevType,
-    digitalt: boolean().nullish(),
-    lestDato: string().nullable(),
-    fritekst: string(),
-    sted: string(),
-    tid: string(),
-    videoLink: string().nullable(),
-    document: array(documentComponent),
-    virksomhetsnummer: string(),
-    svar: svar.nullable(),
+  uuid: string(),
+  deltakerUuid: string(),
+  createdAt: string(),
+  brevType: brevType,
+  digitalt: boolean().nullish(),
+  lestDato: string().nullable(),
+  fritekst: string(),
+  sted: string(),
+  tid: string(),
+  videoLink: string().nullable(),
+  document: array(documentComponent),
+  virksomhetsnummer: string(),
+  svar: svar.nullable(),
 });
 
 function transformComponentType(type: unknown): string {
-    const parsedType = documentComponentType.safeParse(type);
+  const parsedType = documentComponentType.safeParse(type);
 
-    if (parsedType.success) return parsedType.data;
+  if (parsedType.success) return parsedType.data;
 
-    return "UNKNOWN";
+  return "UNKNOWN";
 }
 
 function transformDocumentKey(key: unknown): string | null {
-    const parsedKey = documentComponentKey.nullable().safeParse(key);
+  const parsedKey = documentComponentKey.nullable().safeParse(key);
 
-    if (parsedKey.success) return parsedKey.data;
+  if (parsedKey.success) return parsedKey.data;
 
-    return "UNKNOWN";
+  return "UNKNOWN";
 }
 
 export type BrevDTO = z.infer<typeof brevSchema>;

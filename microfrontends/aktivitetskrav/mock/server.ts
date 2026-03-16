@@ -9,12 +9,12 @@ const port = 4000;
 api.use("/*", cors({ origin: "http://localhost:4321", credentials: true }));
 
 api.get("/api/aktivitetsplikt", (c) => {
-    return c.json(fixtures.forhaandsvarselVurdering);
+  return c.json(fixtures.forhaandsvarselVurdering);
 });
 
 console.info(`\x1b[42m mock \x1b[0m dialogmote mock server is running on port ${port}`);
 
 serve({
-    fetch: api.fetch,
-    port: port
+  fetch: api.fetch,
+  port: port,
 });

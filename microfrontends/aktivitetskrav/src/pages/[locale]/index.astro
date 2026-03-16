@@ -1,14 +1,14 @@
 ---
-import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
-import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
-import OppfyltPanel from "@src/components/panels/OppfyltPanel.astro";
-import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
-import IkkeAktuellPanel from "@src/components/panels/IkkeAktuellPanel.astro";
-import { logger } from "@src/utils/logger";
-import { isLocal } from "@src/utils/environment";
-import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
+import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
+import IkkeAktuellPanel from "@src/components/panels/IkkeAktuellPanel.astro";
+import OppfyltPanel from "@src/components/panels/OppfyltPanel.astro";
+import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
+import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
+import { isLocal } from "@src/utils/environment";
+import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
+import { logger } from "@src/utils/logger";
 import "@src/styles/aksel.css";
 
 const userToken = Astro.locals.token;

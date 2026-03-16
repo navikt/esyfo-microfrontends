@@ -23,8 +23,8 @@ export default defineConfig({
       },
     },
     ssr: {
-      noExternal: ["@astrojs/react"]
-    }
+      noExternal: ["@astrojs/react"],
+    },
   },
   integrations: [
     react(),
