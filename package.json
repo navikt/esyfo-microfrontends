@@ -5,6 +5,10 @@
   "private": true,
   "packageManager": "pnpm@10.32.1",
   "scripts": {
+    "prepare": "lefthook install --reset-hooks-path",
+    "check": "biome check .",
+    "format": "biome format .",
+    "lint": "biome lint .",
     "build:dialogmote-microfrontend": "pnpm --filter dialogmote-microfrontend run build",
     "build:aktivitetskrav-microfrontend": "pnpm --filter aktivitetskrav-microfrontend run build",
     "build:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run build",
@@ -37,6 +41,7 @@
     "@types/react-dom": "18.2.21",
     "concurrently": "9.2.1",
     "hono": "4.11.9",
+    "lefthook": "2.1.1",
     "postcss": "8.5.3",
     "postcss-prefix-selector": "2.1.1",
     "tsx": "4.7.1",
