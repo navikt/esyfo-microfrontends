@@ -8,14 +8,8 @@
     "build": "astro check && astro build",
     "mock": "tsx mock/server.ts",
     "preview": "astro preview",
-    "astro": "astro",
-    "prepare": "husky"
+    "astro": "astro"
   },
   "dependencies": {},
-  "devDependencies": {},
-  "lint-staged": {
-    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,astro}": [
-      "biome check --write --no-errors-on-unmatched"
-    ]
-  }
+  "devDependencies": {}
 }
