@@ -1,18 +1,17 @@
 import { requestOboToken } from "@navikt/oasis";
 import { isLocal } from "./environment";
+import { logger } from "@src/utils/logger.ts";
 
-const audience = `${process.env.NAIS_CLUSTER_NAME}:min-side:example-api`;
-
-export const getOboToken = async (token: string): Promise<string> => {
-  const oboResult = await requestOboToken(token, audience);
-
+export const getAccessToken = async (token: string, clientId: string): Promise<string> => {
   if (isLocal) {
     return "Fake token";
   }
 
+  const oboResult = await requestOboToken(token, clientId);
+
   if (!oboResult.ok) {
-    console.error("Error getting access token: " + oboResult.error);
-    throw new Error("Request oboToken for example-api failed ");
+    logger.error("Error getting access token: " + oboResult.error);
+    throw new Error("Request oboToken for aktivitetskrav failed");
   }
 
   return oboResult.token;

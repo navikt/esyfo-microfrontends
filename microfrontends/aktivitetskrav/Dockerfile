@@ -1,8 +1,8 @@
-FROM gcr.io/distroless/nodejs22-debian12
+FROM europe-north1-docker.pkg.dev/cgr-nav/pull-through/nav.no/node:24-slim
 
 WORKDIR /usr/src/app
 
-COPY ./dist ./dist
+COPY ./microfrontends/aktivitetskrav/dist ./dist
 COPY ./node_modules ./node_modules
 
 ENV HOST=0.0.0.0

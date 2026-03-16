@@ -7,8 +7,8 @@ import IkkeAktuellPanel from "@src/components/panels/IkkeAktuellPanel.astro";
 import { logger } from "@src/utils/logger";
 import { isLocal } from "@src/utils/environment";
 import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
-import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchame";
-import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchame";
+import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
+import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import "@src/styles/aksel.css";
 
 const userToken = Astro.locals.token;

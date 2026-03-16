@@ -1,4 +1,0 @@
- - implementere onClick
- - implementere hover på chevron
- - teste ulike states og cases
- - sjekke om alle komponenter er over

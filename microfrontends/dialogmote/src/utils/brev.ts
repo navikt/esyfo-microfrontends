@@ -10,13 +10,20 @@ const sortBrevArray = (brev: BrevDTO[]): BrevDTO[] => {
     return [];
 }
 
-export const getLatestBrev = (brev: BrevDTO[]): BrevDTO => {
-    // TODO: test with empty array []
+export const getLatestBrev = (brev: BrevDTO[]): BrevDTO | null => {
     const brevArraySorted = sortBrevArray(brev);
+
+    if (brevArraySorted.length === 0) {
+        return null;
+    }
 
     return brevArraySorted[0];
 }
 
-export const getShowDialogmotePanel = (latestBrev: BrevDTO): boolean => {
+export const getShowDialogmotePanel = (latestBrev: BrevDTO | null): boolean => {
+    if (latestBrev === null) {
+        return false;
+    }
+
     return (latestBrev.brevType === "INNKALT" || latestBrev.brevType === "NYTT_TID_STED");
 }
