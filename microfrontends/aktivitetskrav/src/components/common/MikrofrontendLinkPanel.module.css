@@ -88,7 +88,12 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   height: 24px;
-  background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
   color: var(--ac-alert-icon-warning-color, var(--a-icon-warning));
 }
 
@@ -97,7 +102,12 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   height: 24px;
-  background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
   color: var(--ac-alert-icon-success-color, var(--a-icon-success));
 }
 
@@ -106,7 +116,12 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   height: 24px;
-  background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
   color: var(--ac-alert-icon-error-color, var(--a-icon-danger));
 }
 
@@ -115,6 +130,11 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   height: 24px;
-  background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
   color: var(--ac-alert-icon-info-color, var(--a-icon-info));
 }

@@ -12,7 +12,9 @@ api.get("/api/aktivitetsplikt", (c) => {
   return c.json(fixtures.forhaandsvarselVurdering);
 });
 
-console.info(`\x1b[42m mock \x1b[0m dialogmote mock server is running on port ${port}`);
+console.info(
+  `\x1b[42m mock \x1b[0m dialogmote mock server is running on port ${port}`,
+);
 
 serve({
   fetch: api.fetch,

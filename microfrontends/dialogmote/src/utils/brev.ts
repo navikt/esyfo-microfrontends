@@ -4,7 +4,10 @@ const sortBrevArray = (brev: BrevDTO[]): BrevDTO[] => {
   if (brev && brev.length > 0) {
     return brev
       .filter((brev) => brev.brevType !== "REFERAT_ENDRET")
-      .sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf());
+      .sort(
+        (a, b) =>
+          new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf(),
+      );
   }
 
   return [];
@@ -25,5 +28,7 @@ export const getShowDialogmotePanel = (latestBrev: BrevDTO | null): boolean => {
     return false;
   }
 
-  return latestBrev.brevType === "INNKALT" || latestBrev.brevType === "NYTT_TID_STED";
+  return (
+    latestBrev.brevType === "INNKALT" || latestBrev.brevType === "NYTT_TID_STED"
+  );
 };

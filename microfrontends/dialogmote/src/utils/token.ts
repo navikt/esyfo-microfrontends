@@ -2,7 +2,10 @@ import { requestOboToken } from "@navikt/oasis";
 import { logger } from "@src/utils/logger.ts";
 import { isLocal } from "./environment";
 
-export const getAccessToken = async (token: string, clientID: string): Promise<string> => {
+export const getAccessToken = async (
+  token: string,
+  clientID: string,
+): Promise<string> => {
   if (isLocal) {
     return "Fake token";
   }

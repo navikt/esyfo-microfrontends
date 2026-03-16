@@ -14,7 +14,10 @@ const { journalpostId, fristDato } = Astro.props;
 
 const tagInfo: TagMeta | undefined = fristDato
   ? {
-      variant: new Date() > new Date(fristDato) ? "error-moderate" : "warning-moderate",
+      variant:
+        new Date() > new Date(fristDato)
+          ? "error-moderate"
+          : "warning-moderate",
       text: `Svarfrist: ${getShortDateFormat(fristDato)}`,
     }
   : undefined;

@@ -1,8 +1,14 @@
 import type { SvarTypeDTO } from "../../schema/brevSchema.ts";
 
-type SvarTypeAnalytics = "KOMMER" | "ONSKER_AVLYSE" | "ONSKER_ENDRING" | "IKKE_SVART";
+type SvarTypeAnalytics =
+  | "KOMMER"
+  | "ONSKER_AVLYSE"
+  | "ONSKER_ENDRING"
+  | "IKKE_SVART";
 
-export const attendingToSvartypeAnalytics = (attending: SvarTypeDTO | null): SvarTypeAnalytics => {
+export const attendingToSvartypeAnalytics = (
+  attending: SvarTypeDTO | null,
+): SvarTypeAnalytics => {
   switch (attending) {
     case "KOMMER":
       return "KOMMER";

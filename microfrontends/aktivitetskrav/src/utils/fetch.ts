@@ -1,9 +1,14 @@
-import { AKTIVITETSKRAV_API_URL, AKTIVITETSKRAV_CLIENT_ID } from "astro:env/server";
+import {
+  AKTIVITETSKRAV_API_URL,
+  AKTIVITETSKRAV_CLIENT_ID,
+} from "astro:env/server";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
 import { getAccessToken } from "@src/utils/token.ts";
 
-export const fetchAktivitetskravVurdering = async (token: string): Promise<AktivitetskravVurdering> => {
+export const fetchAktivitetskravVurdering = async (
+  token: string,
+): Promise<AktivitetskravVurdering> => {
   const accessToken = await getAccessToken(token, AKTIVITETSKRAV_CLIENT_ID);
 
   const response = await fetch(AKTIVITETSKRAV_API_URL, {

@@ -6,7 +6,10 @@ import {
 } from "astro:env/server";
 import { brevSchema } from "@schema/brevSchema";
 import type { BrevDTO } from "@schema/brevSchema.ts";
-import { type MotebehovStatusDTO, motebehovStatusSchema } from "@schema/motebehovSchema.ts";
+import {
+  type MotebehovStatusDTO,
+  motebehovStatusSchema,
+} from "@schema/motebehovSchema.ts";
 import { getAccessToken } from "@src/utils/token.ts";
 
 export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
@@ -28,7 +31,9 @@ export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
   return brevSchema.array().parse(data);
 };
 
-export const fetchMotebehov = async (userToken: string): Promise<MotebehovStatusDTO> => {
+export const fetchMotebehov = async (
+  userToken: string,
+): Promise<MotebehovStatusDTO> => {
   const accessToken = await getAccessToken(userToken, SYFOMOTEBEHOV_CLIENT_ID);
 
   const response = await fetch(SYFOMOTEBEHOV_API_URL, {

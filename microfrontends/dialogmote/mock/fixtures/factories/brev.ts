@@ -1,7 +1,9 @@
 import type { BrevDocumentComponentDTO, BrevDTO } from "@schema/brevSchema.ts";
 import { leggTilDagerPaDato } from "@src/utils/dateUtils";
 
-export const createDocumentComponent = (props?: Partial<BrevDocumentComponentDTO>): BrevDocumentComponentDTO => {
+export const createDocumentComponent = (
+  props?: Partial<BrevDocumentComponentDTO>,
+): BrevDocumentComponentDTO => {
   return {
     type: "PARAGRAPH",
     title: "TEST_HEADER",

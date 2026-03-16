@@ -17,8 +17,11 @@ export interface Props {
 }
 
 const mainText =
-  Astro.props.brevType === "NYTT_TID_STED" ? "Møtet med NAV er flyttet" : getLongDateFormat(Astro.props.date);
-const mainTextFormat = Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
+  Astro.props.brevType === "NYTT_TID_STED"
+    ? "Møtet med NAV er flyttet"
+    : getLongDateFormat(Astro.props.date);
+const mainTextFormat =
+  Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
 
 const attending = Astro.props.attending;
 const brevType = Astro.props.brevType;
@@ -42,7 +45,10 @@ const tag = (): TagMeta => {
       };
     default:
       return {
-        text: brevType === "NYTT_TID_STED" ? "Se endringene og svar" : "Du har ikke svart",
+        text:
+          brevType === "NYTT_TID_STED"
+            ? "Se endringene og svar"
+            : "Du har ikke svart",
         variant: "warning-moderate",
       };
   }

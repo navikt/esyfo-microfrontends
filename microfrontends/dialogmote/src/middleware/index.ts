@@ -21,7 +21,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const validation = await validateTokenxToken(token);
 
   if (!validation.ok) {
-    const error = new Error(`Invalid JWT token found (cause: ${validation.errorType} ${validation.error}.`);
+    const error = new Error(
+      `Invalid JWT token found (cause: ${validation.errorType} ${validation.error}.`,
+    );
     logger.error(error);
     return new Response(null, { status: 401 });
   }
