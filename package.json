@@ -3,18 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
-  "workspaces": [
-    "microfrontends/dialogmote",
-    "microfrontends/aktivitetskrav",
-    "microfrontends/meroppfolging"
-  ],
+  "packageManager": "pnpm@10.32.1",
   "scripts": {
-    "build:dialogmote-microfrontend": "npm run build --workspace=microfrontends/dialogmote",
-    "build:aktivitetskrav-microfrontend": "npm run build --workspace=microfrontends/aktivitetskrav",
-    "build:meroppfolging-microfrontend": "npm run build --workspace=microfrontends/meroppfolging",
-    "dev:dialogmote-microfrontend": "npm run dev --workspace=microfrontends/dialogmote",
-    "dev:aktivitetskrav-microfrontend": "npm run dev --workspace=microfrontends/aktivitetskrav",
-    "dev:meroppfolging-microfrontend": "npm run dev --workspace=microfrontends/meroppfolging"
+    "build:dialogmote-microfrontend": "pnpm --filter dialogmote-microfrontend run build",
+    "build:aktivitetskrav-microfrontend": "pnpm --filter aktivitetskrav-microfrontend run build",
+    "build:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run build",
+    "dev:dialogmote-microfrontend": "pnpm --filter dialogmote-microfrontend run dev",
+    "dev:aktivitetskrav-microfrontend": "pnpm --filter aktivitetskrav-microfrontend run dev",
+    "dev:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run dev"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",

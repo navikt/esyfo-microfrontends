@@ -45,7 +45,7 @@ esyfo-microfrontends/
 │   └── meroppfolging/            # Meroppfølging-microfrontend (ikke påbegynt)
 ```
 
-Repoet bruker **npm workspaces**. Avhengigheter ligger i root `package.json`, mens hvert workspace er en selvstendig Astro SSR-app med egne scripts, build og deploy.
+Repoet bruker **pnpm workspaces**. Workspace-konfigurasjonen ligger i `pnpm-workspace.yaml`, avhengigheter ligger i root `package.json`, og hvert workspace er en selvstendig Astro SSR-app med egne scripts, build og deploy.
 
 ## Teknologioversikt
 
@@ -66,9 +66,9 @@ Repoet bruker **npm workspaces**. Avhengigheter ligger i root `package.json`, me
 ## Lokal utvikling
 
 ```bash
-npm install
-npm run dev:dialogmote-microfrontend     # Astro dev + mock server
-npm run dev:aktivitetskrav-microfrontend
+pnpm install
+pnpm run dev:dialogmote-microfrontend     # Astro dev + mock server
+pnpm run dev:aktivitetskrav-microfrontend
 ```
 
 Appen kjører på `http://localhost:4321/`. I dev brukes mock-server for å simulere backend-APIer.
@@ -76,8 +76,8 @@ Appen kjører på `http://localhost:4321/`. I dev brukes mock-server for å simu
 ## Bygging
 
 ```bash
-npm run build:dialogmote-microfrontend
-npm run build:aktivitetskrav-microfrontend
+pnpm run build:dialogmote-microfrontend
+pnpm run build:aktivitetskrav-microfrontend
 ```
 
 ## Deploy-flyt
@@ -85,7 +85,7 @@ npm run build:aktivitetskrav-microfrontend
 ```mermaid
 flowchart LR
   A[Push til main] --> B[GitHub Actions]
-  B --> C[npm ci + build]
+  B --> C[pnpm install --frozen-lockfile + build]
   C --> D[CDN-upload assets]
   D --> E[Docker build]
   E --> F[Registrer manifest]
