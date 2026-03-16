@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs24-debian12
+FROM cgr.dev/chainguard/node:24
 
 WORKDIR /usr/src/app
 
