@@ -1,0 +1,63 @@
+[tools]
+node = "24"
+pnpm = "10"
+
+[tasks.install]
+description = "Install dependencies (cached)"
+run = "pnpm install"
+sources = ["package.json", "pnpm-lock.yaml"]
+outputs = ["node_modules/.modules.yaml"]
+
+[tasks.lint]
+description = "Run linter with fixing enabled"
+depends = ["install"]
+run = "pnpm run lint:fix"
+
+[tasks.format]
+description = "Run formatter with fixing enabled"
+depends = ["install"]
+run = "pnpm run format:fix"
+
+[tasks.check]
+description = "Run lint and formatter checks"
+depends = ["install"]
+run = "pnpm run check:fix"
+
+[tasks.dev-dialogmote]
+description = "Run dev server for dialogmote"
+depends = ["install"]
+run = "pnpm run dev:dialogmote-microfrontend"
+
+[tasks.dev-aktivitetskrav]
+description = "Run dev server for aktivitetskrav"
+depends = ["install"]
+run = "pnpm run dev:aktivitetskrav-microfrontend"
+
+[tasks.dev-meroppfolging]
+description = "Run dev server for meroppfolging"
+depends = ["install"]
+run = "pnpm run dev:meroppfolging-microfrontend"
+
+[tasks.build-dialogmote]
+description = "Create production build for dialogmote"
+depends = ["install"]
+run = "pnpm run build:dialogmote-microfrontend"
+
+[tasks.build-aktivitetskrav]
+description = "Create production build for aktivitetskrav"
+depends = ["install"]
+run = "pnpm run build:aktivitetskrav-microfrontend"
+
+[tasks.build-meroppfolging]
+description = "Create production build for meroppfolging"
+depends = ["install"]
+run = "pnpm run build:meroppfolging-microfrontend"
+
+[tasks.verify]
+description = "Verify code quality, run builds"
+depends = ["install"]
+run = ["pnpm run check",
+"pnpm run build:dialogmote-microfrontend",
+"pnpm run build:aktivitetskrav-microfrontend",
+"pnpm run build:meroppfolging-microfrontend"
+]
