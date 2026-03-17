@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: aktivitetskrav-microfrontend
-  namespace: min-side
+  namespace: team-esyfo
   labels:
-    team: min-side
+    team: team-esyfo
 spec:
   observability:
     autoInstrumentation:
