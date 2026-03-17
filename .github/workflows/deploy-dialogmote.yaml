@@ -20,9 +20,9 @@ jobs:
       packages: "write"
 
     steps:
-      - uses: "actions/checkout@v5"
-      - uses: "pnpm/action-setup@v4"
-      - uses: "actions/setup-node@v5"
+      - uses: "actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd" # v5
+      - uses: "pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320" # v4
+      - uses: "actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444" # v5
         with:
           node-version: 24
           registry-url: "https://npm.pkg.github.com"
@@ -39,15 +39,15 @@ jobs:
       - name: "Upload to cdn"
         uses: nais/deploy/actions/cdn-upload/v2@master
         with:
-          team: min-side # Change this to your team name
+          team: team-esyfo # Change this to your team name
           source: ./microfrontends/dialogmote/dist/client/_astro
-          destination: 'dialogmote-microfrontend' # Change this to your application name
+          destination: "dialogmote-microfrontend" # Change this to your application name
 
       - name: "Build and push"
         uses: nais/docker-build-push@v0
         id: docker-build-push
         with:
-          team: min-side # Change this to your team name
+          team: team-esyfo # Change this to your team name
           dockerfile: ./microfrontends/dialogmote/Dockerfile
 
     outputs:
@@ -60,7 +60,7 @@ jobs:
       id: "syfo-dialog" # Change this to your microfrontend id.
       url: "http://dialogmote-microfrontend.min-side" # Change the url to contain your application name. Example: http://my-app.namespace
       appname: "dialogmote-microfrontend" # Change this to your application name
-      namespace: "min-side" # Change this to your namespace
+      namespace: "team-esyfo" # Change this to your namespace
       cluster: dev-gcp
       commitmsg: ${{ github.event.head_commit.message}}
       fallback: "fallback" # Should containt the path to the fallback page after src/pages/[locale]/... Only needs to be changed if you move the fallback in the pages structure
@@ -89,7 +89,7 @@ jobs:
       id-token: "write"
     needs: [build, update-manifest-dev]
     steps:
-      - uses: "actions/checkout@v4"
+      - uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5" # v4
       - name: "Deploy to dev"
         uses: "nais/deploy/actions/deploy@v2"
         env:
@@ -106,10 +106,10 @@ jobs:
   #   needs: [build, update-manifest-prod]
 
   #   steps:
-  #     - uses: "actions/checkout@v4"
+  #     - uses: "actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5" # v4
   #     - name: "Deploy to prod"
   #       uses: "nais/deploy/actions/deploy@v2"
   #       env:
   #         CLUSTER: prod-gcp
   #         RESOURCE: microfrontends/dialogmote/nais/prod-gcp/nais.yaml
-  #         VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}          
+  #         VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}

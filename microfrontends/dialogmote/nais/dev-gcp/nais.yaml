@@ -2,9 +2,9 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
   name: dialogmote-microfrontend # Change this to your application name
-  namespace: min-side # Change this to your namespace
+  namespace: team-esyfo # Change this to your namespace
   labels:
-    team: min-side # Change this to your team name
+    team: team-esyfo # Change this to your team name
 spec:
   observability:
     autoInstrumentation:
