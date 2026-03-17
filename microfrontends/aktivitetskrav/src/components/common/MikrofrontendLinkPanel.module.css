@@ -1,118 +1,140 @@
 .headingRow {
-    display: flex;
-    text-decoration: none;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #0000001a;
-    padding: var(--a-spacing-4) var(--a-spacing-4) var(--a-spacing-3);
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #0000001a;
+  padding: var(--a-spacing-4) var(--a-spacing-4) var(--a-spacing-3);
 
-    @media (min-width: 648px) {
-        padding: var(--a-spacing-5) var(--a-spacing-5) var(--a-spacing-4);
-    }
+  @media (min-width: 648px) {
+    padding: var(--a-spacing-5) var(--a-spacing-5) var(--a-spacing-4);
+  }
 }
 
 .headingSpacing {
-    padding-right: 1rem;
+  padding-right: 1rem;
 }
 
 .mainContentRow {
-    display: flex;
-    text-decoration: none;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-4);
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  padding: var(--a-spacing-3) var(--a-spacing-4) var(--a-spacing-4);
 
-    @media (min-width: 648px) {
-        padding: var(--a-spacing-4) var(--a-spacing-5) var(--a-spacing-5);
-    }
+  @media (min-width: 648px) {
+    padding: var(--a-spacing-4) var(--a-spacing-5) var(--a-spacing-5);
+  }
 }
 
 .mainContentText {
-    font-weight: var(--a-font-weight-regular) !important;
+  font-weight: var(--a-font-weight-regular);
 }
 
 .chevronPanel {
-    cursor: pointer;
-    width: 100%;
-    @media (min-width: 648px) {
-        max-width: 444px;
-    }
-    text-decoration: none;
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 0.5px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  width: 100%;
+  @media (min-width: 648px) {
+    max-width: 444px;
+  }
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.12),
+    0 0 0.5px 0 rgba(0, 0, 0, 0.18);
 }
 
 .chevronPanel:hover {
-    box-shadow: var(--a-shadow-small);
+  box-shadow: var(--a-shadow-small);
 }
 
 .chevronPanel:hover .headingTitle {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .chevronPanel:hover .chevron {
-    transition: 0.2s;
-    transform: translateX(4px);
+  transition: 0.2s;
+  transform: translateX(4px);
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .containedTag {
-    width: fit-content;
+  width: fit-content;
 }
 
 .chevronSection {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .alertContainer {
-    display: flex;
-    align-items: center;
-    width: 24px;
-    height: 24px;
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
 }
 
 .warningIcon {
-    align-self: flex-start;
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    height: 24px;
-    background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
-    color: var(--ac-alert-icon-warning-color, var(--a-icon-warning));
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ac-alert-icon-warning-color, var(--a-icon-warning));
 }
 
 .sucessIcon {
-    align-self: flex-start;
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    height: 24px;
-    background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
-    color: var(--ac-alert-icon-success-color, var(--a-icon-success));
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ac-alert-icon-success-color, var(--a-icon-success));
 }
 
 .errorIcon {
-    align-self: flex-start;
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    height: 24px;
-    background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
-    color: var(--ac-alert-icon-error-color, var(--a-icon-danger));
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ac-alert-icon-error-color, var(--a-icon-danger));
 }
 
 .infoIcon {
-    align-self: flex-start;
-    flex-shrink: 0;
-    font-size: 1.5rem;
-    height: 24px;
-    background: radial-gradient(circle at 50% 57%, var(--a-surface-default) 32%, 0, transparent);
-    color: var(--ac-alert-icon-info-color, var(--a-icon-info));
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--a-surface-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ac-alert-icon-info-color, var(--a-icon-info));
 }

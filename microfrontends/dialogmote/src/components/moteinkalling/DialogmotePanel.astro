@@ -1,50 +1,57 @@
 ---
 import { DIALOGMOTE_URL } from "astro:env/server";
-import Content from "../shared/Content.astro";
 import type { BrevTypeDTO, SvarTypeDTO } from "@schema/brevSchema";
 import { getLongDateFormat } from "@src/utils/dateUtils";
+import Content from "../shared/Content.astro";
 import styles from "../shared/Content.module.css";
 
 interface TagMeta {
-    text: string;
-    variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
+  text: string;
+  variant: "success-moderate" | "warning-moderate" | "neutral-moderate";
 }
 
 export interface Props {
-    date: string;
-    attending: SvarTypeDTO | null;
-    brevType: BrevTypeDTO;
+  date: string;
+  attending: SvarTypeDTO | null;
+  brevType: BrevTypeDTO;
 }
 
-const mainText = Astro.props.brevType === "NYTT_TID_STED" ? "Møtet med NAV er flyttet" : getLongDateFormat(Astro.props.date);
-const mainTextFormat = Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
+const mainText =
+  Astro.props.brevType === "NYTT_TID_STED"
+    ? "Møtet med NAV er flyttet"
+    : getLongDateFormat(Astro.props.date);
+const mainTextFormat =
+  Astro.props.brevType === "NYTT_TID_STED" ? "text" : "date";
 
 const attending = Astro.props.attending;
 const brevType = Astro.props.brevType;
 
 const tag = (): TagMeta => {
-    switch (attending) {
-        case "KOMMER":
-            return {
-                text: "Du har takket ja",
-                variant: "success-moderate",
-            };
-        case "KOMMER_IKKE":
-            return {
-                text: "Du ønsker å avlyse",
-                variant: "neutral-moderate",
-            };
-        case "NYTT_TID_STED":
-            return {
-                text: "Du ønsker å endre tid eller sted",
-                variant: "neutral-moderate",
-            };
-        default:
-            return {
-                text: brevType === "NYTT_TID_STED" ? "Se endringene og svar" : "Du har ikke svart",
-                variant: "warning-moderate",
-            };
-    }
+  switch (attending) {
+    case "KOMMER":
+      return {
+        text: "Du har takket ja",
+        variant: "success-moderate",
+      };
+    case "KOMMER_IKKE":
+      return {
+        text: "Du ønsker å avlyse",
+        variant: "neutral-moderate",
+      };
+    case "NYTT_TID_STED":
+      return {
+        text: "Du ønsker å endre tid eller sted",
+        variant: "neutral-moderate",
+      };
+    default:
+      return {
+        text:
+          brevType === "NYTT_TID_STED"
+            ? "Se endringene og svar"
+            : "Du har ikke svart",
+        variant: "warning-moderate",
+      };
+  }
 };
 ---
 

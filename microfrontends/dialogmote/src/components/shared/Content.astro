@@ -1,9 +1,12 @@
 ---
+import {
+  ChevronRightIcon as Chevron,
+  ExclamationmarkTriangleFillIcon as WarningIcon,
+} from "@navikt/aksel-icons";
 import { Heading, Tag } from "@navikt/ds-react";
-import { ChevronRightIcon as Chevron, ExclamationmarkTriangleFillIcon as WarningIcon } from "@navikt/aksel-icons";
 import styles from "./Content.module.css";
 
-interface Heading {
+interface HeadingProps {
   text: string;
   icon: "warning" | "none";
 }
@@ -20,7 +23,7 @@ export interface TagMeta {
 }
 
 export interface Props {
-  heading: Heading;
+  heading: HeadingProps;
   mainContent: MainContent;
 }
 ---

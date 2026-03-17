@@ -1,23 +1,23 @@
 ---
-import MikrofrontendLinkPanel from "@src/components/common/MikrofrontendLinkPanel.astro";
 import type { UnntakArsaker } from "@schema/aktivitetskravVurderingSchema";
-import { getShortDateFormat } from "../../utils/dateUtils";
+import MikrofrontendLinkPanel from "@src/components/common/MikrofrontendLinkPanel.astro";
 import { harVurdertHeadingText } from "../../language/text";
+import { getShortDateFormat } from "../../utils/dateUtils";
 
 interface Props {
-    arsak: UnntakArsaker;
-    sistVurdert: string;
+  arsak: UnntakArsaker;
+  sistVurdert: string;
 }
 
 const getBegrunnelseText = (arsak: UnntakArsaker) => {
-    switch (arsak) {
-        case "MEDISINSKE_GRUNNER":
-            return "Du er unntatt fra aktivitetsplikten på grunn av medisinske opplysninger";
-        case "TILRETTELEGGING_IKKE_MULIG":
-            return "Du er unntatt fra aktivitetsplikten da tilrettelegging på arbeidsplassen ikke er mulig";
-        case "SJOMENN_UTENRIKS":
-            return "NAV vurderer at du er unntatt fra aktivitetsplikten";
-    }
+  switch (arsak) {
+    case "MEDISINSKE_GRUNNER":
+      return "Du er unntatt fra aktivitetsplikten på grunn av medisinske opplysninger";
+    case "TILRETTELEGGING_IKKE_MULIG":
+      return "Du er unntatt fra aktivitetsplikten da tilrettelegging på arbeidsplassen ikke er mulig";
+    case "SJOMENN_UTENRIKS":
+      return "NAV vurderer at du er unntatt fra aktivitetsplikten";
+  }
 };
 const begrunnelseText = getBegrunnelseText(Astro.props.arsak);
 ---
