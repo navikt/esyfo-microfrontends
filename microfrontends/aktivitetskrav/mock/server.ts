@@ -13,7 +13,7 @@ api.get("/api/aktivitetsplikt", (c) => {
 });
 
 console.info(
-  `\x1b[42m mock \x1b[0m dialogmote mock server is running on port ${port}`,
+  `\x1b[42m mock \x1b[0m aktivitetskrav mock server is running on port ${port}`,
 );
 
 serve({

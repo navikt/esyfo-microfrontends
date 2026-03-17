@@ -7,7 +7,7 @@ type ExtendedAmpltitudeEvent = AmplitudeEvent<
 >;
 
 const analyticsLogger = getAnalyticsInstance<ExtendedAmpltitudeEvent>(
-  "tms-microfrontend-template-ssr",
+  "aktivitetskrav-microfrontend",
 );
 
 export const logEvent = async (lenketekst: string) => {

@@ -4,13 +4,13 @@ import { isLocal } from "./environment";
 
 export const getAccessToken = async (
   token: string,
-  clientID: string,
+  clientId: string,
 ): Promise<string> => {
   if (isLocal) {
     return "Fake token";
   }
 
-  const oboResult = await requestOboToken(token, clientID);
+  const oboResult = await requestOboToken(token, clientId);
 
   if (!oboResult.ok) {
     logger.error(`Error getting access token: ${oboResult.error}`);
