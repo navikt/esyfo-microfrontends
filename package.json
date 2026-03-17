@@ -6,9 +6,12 @@
   "packageManager": "pnpm@10.32.1",
   "scripts": {
     "prepare": "lefthook install --reset-hooks-path",
-    "check": "biome check .",
     "format": "biome format .",
+    "format:fix": "biome format . --write",
     "lint": "biome lint .",
+    "lint:fix": "biome lint . --write",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
     "build:dialogmote-microfrontend": "pnpm --filter dialogmote-microfrontend run build",
     "build:aktivitetskrav-microfrontend": "pnpm --filter aktivitetskrav-microfrontend run build",
     "build:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run build",
