@@ -1,4 +1,4 @@
-import { literal, object, string, union, z } from "zod";
+import { iso, literal, object, string, union, z } from "zod";
 
 const unntakArsaker = z.union([
   literal("MEDISINSKE_GRUNNER"),
@@ -16,12 +16,12 @@ export const aktivitetskravVurderingSchema = union([
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),
-    sistVurdert: string().datetime(),
+    sistVurdert: iso.datetime(),
   }),
   object({
     status: z.literal("OPPFYLT"),
     arsaker: z.array(oppfyltArsaker),
-    sistVurdert: string().datetime(),
+    sistVurdert: iso.datetime(),
   }),
   object({
     status: z.literal("NY"),
@@ -31,21 +31,21 @@ export const aktivitetskravVurderingSchema = union([
   }),
   object({
     status: z.literal("AVVENT"),
-    sistVurdert: string().datetime(),
+    sistVurdert: iso.datetime(),
   }),
   object({
     status: z.literal("FORHANDSVARSEL"),
     journalpostId: string().optional(),
-    sistVurdert: string().datetime(),
-    fristDato: string().datetime(),
+    sistVurdert: iso.datetime(),
+    fristDato: iso.datetime(),
   }),
   object({
     status: z.literal("IKKE_OPPFYLT"),
-    sistVurdert: string().datetime(),
+    sistVurdert: iso.datetime(),
   }),
   object({
     status: z.literal("IKKE_AKTUELL"),
-    sistVurdert: string().datetime(),
+    sistVurdert: iso.datetime(),
   }),
 ]);
 
