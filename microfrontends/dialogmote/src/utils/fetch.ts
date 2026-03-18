@@ -4,13 +4,13 @@ import {
   SYFOMOTEBEHOV_API_URL,
   SYFOMOTEBEHOV_CLIENT_ID,
 } from "astro:env/server";
+import { getAccessToken } from "@esyfo/shared/token";
 import { brevSchema } from "@schema/brevSchema";
 import type { BrevDTO } from "@schema/brevSchema.ts";
 import {
   type MotebehovStatusDTO,
   motebehovStatusSchema,
 } from "@schema/motebehovSchema.ts";
-import { getAccessToken } from "@src/utils/token.ts";
 
 export const fetchBrev = async (userToken: string): Promise<BrevDTO[]> => {
   const accessToken = await getAccessToken(userToken, ISDIALOGMOTE_CLIENT_ID);

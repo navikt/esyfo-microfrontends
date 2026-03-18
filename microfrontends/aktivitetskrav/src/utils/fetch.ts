@@ -2,9 +2,9 @@ import {
   AKTIVITETSKRAV_API_URL,
   AKTIVITETSKRAV_CLIENT_ID,
 } from "astro:env/server";
+import { getAccessToken } from "@esyfo/shared/token";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
-import { getAccessToken } from "@src/utils/token.ts";
 
 export const fetchAktivitetskravVurdering = async (
   token: string,
