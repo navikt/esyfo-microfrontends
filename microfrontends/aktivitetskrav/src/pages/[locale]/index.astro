@@ -1,5 +1,6 @@
 ---
 import { isLocal } from "@esyfo/shared/environment";
+import { logger } from "@navikt/pino-logger";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
@@ -8,7 +9,6 @@ import OppfyltPanel from "@src/components/panels/OppfyltPanel.astro";
 import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
 import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
 import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
-import { logger } from "@src/utils/logger";
 import "@src/styles/aksel.css";
 
 const userToken = Astro.locals.token;
@@ -18,14 +18,17 @@ let data: AktivitetskravVurdering;
 try {
   data = await fetchAktivitetskravVurdering(userToken);
 } catch (error) {
-  logger.error(`Error fetching aktivitetskrav: ${error}`);
+  logger.error({ error }, "Error fetching aktivitetskrav");
   return new Response("Internal Server Error", { status: 503 });
 }
 
 const aktivitetskravVurdering = aktivitetskravVurderingSchema.safeParse(data);
 
 if (aktivitetskravVurdering.success === false) {
-  logger.error(`Error parsing aktivitetskrav`);
+  logger.error(
+    { error: aktivitetskravVurdering.error },
+    "Error parsing aktivitetskrav",
+  );
   return new Response("Internal Server Error", { status: 503 });
 }
 ---
