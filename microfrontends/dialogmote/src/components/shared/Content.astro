@@ -44,7 +44,7 @@ export interface Props {
     </div>
     <div class={styles.mainContentRow}>
       <div class={styles.column}>
-        <Heading className={styles.maintContentText} size={Astro.props.mainContent.textFormat === "text" ? "medium" : "large"} level="3">
+        <Heading className={styles.mainContentText} size={Astro.props.mainContent.textFormat === "text" ? "medium" : "large"} level="3">
           {Astro.props.mainContent.text}
         </Heading>
           <Tag className={styles.containedTag} size="small" variant={Astro.props.mainContent.tag.variant}>
