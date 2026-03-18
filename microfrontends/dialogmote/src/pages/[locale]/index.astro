@@ -1,10 +1,10 @@
 ---
+import { isLocal } from "@esyfo/shared/environment";
 import type { BrevDTO } from "@schema/brevSchema";
 import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
 import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
 import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
 import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
-import { isLocal } from "@src/utils/environment";
 import { fetchBrev, fetchMotebehov } from "@src/utils/fetch";
 import { logger } from "@src/utils/logger";
 import { getShowMotebehovPanel } from "@src/utils/motebehov";
@@ -49,7 +49,6 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
     );
   }
 }}
-
 
 
 
