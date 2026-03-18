@@ -13,7 +13,7 @@ export const getAccessToken = async (
   const oboResult = await requestOboToken(token, clientId);
 
   if (!oboResult.ok) {
-    logger.error(`Error getting access token: ${oboResult.error}`);
+    logger.error({ error: oboResult.error }, "Error getting access token");
     throw new Error("Failed to get OBO token");
   }
 
