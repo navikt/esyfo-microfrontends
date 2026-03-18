@@ -2,6 +2,10 @@
      For repo-specific customizations, create your own files without this header. -->
 # Projects V2 felthåndtering
 
+## Automatisk prosjekttilknytning via templates
+
+Issue-templates i `.github/ISSUE_TEMPLATE/` har `projects: ["navikt/157"]` som automatisk legger nye issues i Team eSyfo-prosjektet når de opprettes via web UI. Ved programmatisk opprettelse (API, CLI, MCP) må prosjektet settes manuelt — se under.
+
 ## MCP (primær)
 
 Bruk MCP `projects_write` først for å legge issues i prosjekt og oppdatere felter.
