@@ -20,15 +20,15 @@
     "dev:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run dev"
   },
   "dependencies": {
-    "@astrojs/node": "9.0.0",
-    "@astrojs/react": "4.1.2",
+    "@astrojs/node": "10.0.2",
+    "@astrojs/react": "5.0.0",
     "@navikt/aksel-icons": "6.1.1",
     "@navikt/ds-css": "6.16.2",
     "@navikt/ds-react": "6.16.2",
     "@navikt/nav-dekoratoren-moduler": "3.6.3",
     "@navikt/oasis": "4.1.4",
     "@opentelemetry/sdk-node": "0.213.0",
-    "astro": "5.16.6",
+    "astro": "6.0.5",
     "pino": "10.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
