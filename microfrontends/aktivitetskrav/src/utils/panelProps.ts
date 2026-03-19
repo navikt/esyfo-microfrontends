@@ -20,9 +20,14 @@ type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
   AktivitetskravVurdering,
   { status: S }
 >;
+
 type MainPanelPropsBuilder<
   S extends AktivitetskravStatus = AktivitetskravStatus,
 > = (vurdering: VurderingForStatus<S>) => MainPanelProps;
+
+type PanelPropsMap = {
+  [S in AktivitetskravStatus]: MainPanelPropsBuilder<S>;
+};
 
 const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
   MEDISINSKE_GRUNNER:
@@ -41,19 +46,17 @@ const oppfyltBodyTextByArsak: Record<OppfyltArsaker, string> = {
 };
 
 const getUnntakBodyText = (arsak?: UnntakArsaker): string => {
-  if (!arsak) {
-    return DEFAULT_UNNTAK_BODY_TEXT;
+  if (arsak) {
+    return unntakBodyTextByArsak[arsak];
   }
-
-  return unntakBodyTextByArsak[arsak];
+  return DEFAULT_UNNTAK_BODY_TEXT;
 };
 
 const getOppfyltBodyText = (arsak?: OppfyltArsaker): string => {
-  if (!arsak) {
-    return DEFAULT_OPPFYLT_BODY_TEXT;
+  if (arsak) {
+    return oppfyltBodyTextByArsak[arsak];
   }
-
-  return oppfyltBodyTextByArsak[arsak];
+  return DEFAULT_OPPFYLT_BODY_TEXT;
 };
 
 const getUnderArbeidPanelProps = (): MainPanelProps => ({
@@ -63,7 +66,7 @@ const getUnderArbeidPanelProps = (): MainPanelProps => ({
   alertStyle: "info",
 });
 
-const getPanelPropsByStatus = {
+const getPanelPropsByStatus: PanelPropsMap = {
   NY: (): MainPanelProps => getUnderArbeidPanelProps(),
   NY_VURDERING: (): MainPanelProps => getUnderArbeidPanelProps(),
   AVVENT: (): MainPanelProps => getUnderArbeidPanelProps(),
@@ -126,8 +129,6 @@ const getPanelPropsByStatus = {
       variant: "error-moderate",
     },
   }),
-} satisfies {
-  [S in AktivitetskravStatus]: MainPanelPropsBuilder<S>;
 };
 
 export const getMainPanelProps = (
