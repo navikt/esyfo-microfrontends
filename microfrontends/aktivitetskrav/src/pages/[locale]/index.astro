@@ -10,6 +10,7 @@ import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
 import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
 import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
 import "@src/styles/aksel.css";
+import z from "zod";
 
 const userToken = Astro.locals.token;
 
@@ -26,7 +27,9 @@ const aktivitetskravVurdering = aktivitetskravVurderingSchema.safeParse(data);
 
 if (aktivitetskravVurdering.success === false) {
   logger.error(
-    { error: aktivitetskravVurdering.error },
+    {
+      validationIssues: z.prettifyError(aktivitetskravVurdering.error),
+    },
     "Error parsing aktivitetskrav",
   );
   return new Response("Internal Server Error", { status: 503 });
