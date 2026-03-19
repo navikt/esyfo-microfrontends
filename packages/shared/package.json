@@ -7,9 +7,6 @@
     "typecheck": "tsc --noEmit"
   },
   "exports": {
-    "./environment": "./src/environment.ts",
-    "./token": "./src/token.ts",
-    "./middleware": "./src/middleware.ts",
-    "./dateUtils": "./src/dateUtils.ts"
+    "./*": "./src/*.ts"
   }
 }
