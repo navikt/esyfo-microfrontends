@@ -6,17 +6,18 @@ const AKTIVITETSKRAV_URL: EnvUrl = {
   production: `https://www.nav.no/syk/aktivitetskrav`,
 };
 
-const isProduction = window.location.href.includes("www.nav.no");
-const isDevelopment = window.location.href.includes("intern.dev.nav.no");
+// TODO we have to access this client side, not server side
+// const isProduction = window.location.href.includes("www.nav.no");
+// const isDevelopment = window.location.href.includes("intern.dev.nav.no");
 
 export const getEnvironment = (): "production" | "development" | "local" => {
-  if (isProduction) {
-    return "production";
-  }
+  // if (isProduction) {
+  //   return "production";
+  // }
 
-  if (isDevelopment) {
-    return "development";
-  }
+  // if (isDevelopment) {
+  //   return "development";
+  // }
 
   return "local";
 };
