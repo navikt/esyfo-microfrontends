@@ -7,6 +7,7 @@
     "typecheck": "tsc --noEmit"
   },
   "exports": {
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./components": "./src/components/index.ts"
   }
 }

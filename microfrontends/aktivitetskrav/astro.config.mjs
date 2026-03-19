@@ -17,7 +17,7 @@ export default defineConfig({
         plugins: [
           prefixer({
             prefix: ".aktivitetskrav-microfrontend",
-            ignoreFiles: [/module.css/],
+            ignoreFiles: [/module.css/, /ds-css/],
           }),
         ],
       },

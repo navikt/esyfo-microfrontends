@@ -17,7 +17,7 @@ export default defineConfig({
         plugins: [
           prefixer({
             prefix: ".dialogmote-microfrontend",
-            ignoreFiles: [/module.css/],
+            ignoreFiles: [/module.css/, /ds-css/],
           }),
         ],
       },

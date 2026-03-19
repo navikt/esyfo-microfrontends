@@ -1,4 +1,5 @@
 ---
+import { MainPanel } from "@esyfo/shared/components";
 import { isLocal } from "@esyfo/shared/environment";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
 import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
@@ -19,6 +20,29 @@ try {
   return new Response("Internal Server Error", { status: 503 });
 }
 ---
+
+{isLocal ? (
+  <html lang="nb">
+    <head><meta charset="UTF-8" /></head>
+    <body>
+      <MainPanel
+        headingText="Aktivitetskrav"
+        bodyText="Du har fått et aktivitetskrav"
+        href="/aktivitetskrav"
+        alertStyle="warning"
+      />
+    </body>
+  </html>
+) : (
+  <MainPanel
+    headingText="Aktivitetskrav"
+    bodyText="Du har fått et aktivitetskrav"
+    href="/aktivitetskrav"
+    alertStyle="warning"
+  />
+)}
+
+
 
 {isLocal && <meta charset="UTF-8" />}
 {() => {

@@ -1,0 +1,146 @@
+.headingRow {
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #0000001a;
+  padding: var(--ax-space-16) var(--ax-space-16) var(--ax-space-12);
+
+  @media (min-width: 648px) {
+    padding: var(--ax-space-20) var(--ax-space-20) var(--ax-space-16);
+  }
+}
+
+.headingSpacing {
+  padding-right: 1rem;
+}
+
+.mainContentRow {
+  display: flex;
+  text-decoration: none;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  padding: var(--ax-space-12) var(--ax-space-16) var(--ax-space-16);
+
+  @media (min-width: 648px) {
+    padding: var(--ax-space-16) var(--ax-space-20) var(--ax-space-20);
+  }
+}
+
+.mainContentText {
+  font-weight: var(--ax-font-weight-regular);
+}
+
+.chevronPanel {
+  display: block;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.12),
+    0 0 0.5px 0 rgba(0, 0, 0, 0.18);
+  color: var(--ax-text-default);
+}
+
+@media (min-width: 648px) {
+  .chevronPanel {
+    max-width: 444px;
+  }
+}
+
+.chevronPanel:hover {
+  box-shadow: var(--ax-shadow-dialog);
+}
+
+.chevronPanel:hover .headingTitle {
+  text-decoration: underline;
+}
+
+.chevronPanel:hover .chevron {
+  transition: 0.2s;
+  transform: translateX(4px);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chevronSection {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.containedTag {
+  width: fit-content;
+}
+
+.alertContainer {
+  display: flex;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.warningIcon {
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--ax-bg-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ax-text-warning-decoration);
+}
+
+.successIcon {
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--ax-bg-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ax-text-success-decoration);
+}
+
+.errorIcon {
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--ax-bg-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ax-text-danger-decoration);
+}
+
+.infoIcon {
+  align-self: flex-start;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+  height: 24px;
+  background: radial-gradient(
+    circle at 50% 57%,
+    var(--ax-bg-default) 32%,
+    0,
+    transparent
+  );
+  color: var(--ax-text-info-decoration);
+}
