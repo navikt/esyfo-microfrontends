@@ -10,10 +10,16 @@ export const getAccessToken = async (
     return "Fake token";
   }
 
-  const oboResult = await requestOboToken(token, clientId);
+  let oboResult: Awaited<ReturnType<typeof requestOboToken>>;
+  try {
+    oboResult = await requestOboToken(token, clientId);
+  } catch (error) {
+    logger.error({ error }, "Token exchange request failed");
+    throw error;
+  }
 
   if (!oboResult.ok) {
-    logger.error({ error: oboResult.error }, "Error getting access token");
+    logger.error({ error: oboResult.error }, "Token exchange returned error");
     throw new Error("Failed to get OBO token");
   }
 
