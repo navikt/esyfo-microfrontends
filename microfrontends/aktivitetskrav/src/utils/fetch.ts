@@ -6,6 +6,7 @@ import { getAccessToken } from "@esyfo/shared/token";
 import { logger } from "@navikt/pino-logger";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
+import { z } from "zod";
 
 const parseAktivitetskravVurdering = (
   data: unknown,
@@ -20,7 +21,7 @@ const parseAktivitetskravVurdering = (
   logger.error(
     {
       api: "aktivitetskrav",
-      validationIssues: parsedAktivitetskravVurdering.error.issues,
+      validationErrors: z.flattenError(parsedAktivitetskravVurdering.error),
     },
     "Invalid aktivitetskrav vurdering response",
   );

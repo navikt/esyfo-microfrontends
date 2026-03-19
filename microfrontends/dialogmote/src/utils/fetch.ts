@@ -12,6 +12,7 @@ import {
   type MotebehovStatusDTO,
   motebehovStatusSchema,
 } from "@schema/motebehovSchema.ts";
+import { z } from "zod";
 
 const parseBrev = (data: unknown): BrevDTO[] => {
   const parsedBrev = brevSchema.array().safeParse(data);
@@ -23,7 +24,7 @@ const parseBrev = (data: unknown): BrevDTO[] => {
   logger.error(
     {
       api: "dialogmote",
-      validationIssues: parsedBrev.error.issues,
+      validationErrors: z.flattenError(parsedBrev.error),
     },
     "Invalid dialogmote brev response",
   );
@@ -41,7 +42,7 @@ const parseMotebehov = (data: unknown): MotebehovStatusDTO => {
   logger.error(
     {
       api: "motebehov",
-      validationIssues: parsedMotebehov.error.issues,
+      validationErrors: z.flattenError(parsedMotebehov.error),
     },
     "Invalid motebehov response",
   );
