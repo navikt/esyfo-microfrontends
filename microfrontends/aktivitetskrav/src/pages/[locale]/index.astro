@@ -2,7 +2,6 @@
 import { isLocal } from "@esyfo/shared/environment";
 import { logger } from "@navikt/pino-logger";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
-import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import ForhaandsvarselPanel from "@src/components/panels/ForhaandsvarselPanel.astro";
 import IkkeAktuellPanel from "@src/components/panels/IkkeAktuellPanel.astro";
 import OppfyltPanel from "@src/components/panels/OppfyltPanel.astro";
@@ -10,46 +9,33 @@ import UnderArbeidPanel from "@src/components/panels/UnderArbeidPanel.astro";
 import UnntakPanel from "@src/components/panels/UnntakPanel.astro";
 import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
 import "@src/styles/aksel.css";
-import z from "zod";
 
 const userToken = Astro.locals.token;
 
-let data: AktivitetskravVurdering;
+let aktivitetskravVurdering: AktivitetskravVurdering;
 
 try {
-  data = await fetchAktivitetskravVurdering(userToken);
+  aktivitetskravVurdering = await fetchAktivitetskravVurdering(userToken);
 } catch (error) {
   logger.error({ error }, "Error fetching aktivitetskrav");
-  return new Response("Internal Server Error", { status: 503 });
-}
-
-const aktivitetskravVurdering = aktivitetskravVurderingSchema.safeParse(data);
-
-if (aktivitetskravVurdering.success === false) {
-  logger.error(
-    {
-      validationIssues: z.prettifyError(aktivitetskravVurdering.error),
-    },
-    "Error parsing aktivitetskrav",
-  );
   return new Response("Internal Server Error", { status: 503 });
 }
 ---
 
 {isLocal && <meta charset="UTF-8" />}
 {() => {
-  switch (aktivitetskravVurdering.data.status) {
+  switch (aktivitetskravVurdering.status) {
     case "NY":
     case "NY_VURDERING":
     case "AVVENT":
       return <UnderArbeidPanel />;
     case "UNNTAK":
-      return <UnntakPanel arsak={aktivitetskravVurdering.data.arsaker[0]} sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+      return <UnntakPanel arsak={aktivitetskravVurdering.arsaker[0]} sistVurdert={aktivitetskravVurdering.sistVurdert} />;
     case "OPPFYLT":
-      return <OppfyltPanel arsak={aktivitetskravVurdering.data.arsaker[0]} sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+      return <OppfyltPanel arsak={aktivitetskravVurdering.arsaker[0]} sistVurdert={aktivitetskravVurdering.sistVurdert} />;
     case "FORHANDSVARSEL":
-      return <ForhaandsvarselPanel journalpostId={aktivitetskravVurdering.data.journalpostId} fristDato={aktivitetskravVurdering.data.fristDato} />;
+      return <ForhaandsvarselPanel journalpostId={aktivitetskravVurdering.journalpostId} fristDato={aktivitetskravVurdering.fristDato} />;
     case "IKKE_AKTUELL":
-      return <IkkeAktuellPanel sistVurdert={aktivitetskravVurdering.data.sistVurdert} />;
+      return <IkkeAktuellPanel sistVurdert={aktivitetskravVurdering.sistVurdert} />;
   }
 }}

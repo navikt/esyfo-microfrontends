@@ -3,8 +3,30 @@ import {
   AKTIVITETSKRAV_CLIENT_ID,
 } from "astro:env/server";
 import { getAccessToken } from "@esyfo/shared/token";
+import { logger } from "@navikt/pino-logger";
 import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
+
+const parseAktivitetskravVurdering = (
+  data: unknown,
+): AktivitetskravVurdering => {
+  const parsedAktivitetskravVurdering =
+    aktivitetskravVurderingSchema.safeParse(data);
+
+  if (parsedAktivitetskravVurdering.success) {
+    return parsedAktivitetskravVurdering.data;
+  }
+
+  logger.error(
+    {
+      api: "aktivitetskrav",
+      validationIssues: parsedAktivitetskravVurdering.error.issues,
+    },
+    "Invalid aktivitetskrav vurdering response",
+  );
+
+  throw new Error("Invalid aktivitetskrav vurdering response");
+};
 
 export const fetchAktivitetskravVurdering = async (
   token: string,
@@ -20,9 +42,17 @@ export const fetchAktivitetskravVurdering = async (
   });
 
   if (!response.ok) {
+    logger.error(
+      {
+        api: "aktivitetskrav",
+        status: response.status,
+        statusText: response.statusText,
+      },
+      "Failed to fetch aktivitetskrav vurdering",
+    );
     throw new Error(`Http error with status: ${response.status}`);
   }
 
   const data = await response.json();
-  return aktivitetskravVurderingSchema.parse(data);
+  return parseAktivitetskravVurdering(data);
 };
