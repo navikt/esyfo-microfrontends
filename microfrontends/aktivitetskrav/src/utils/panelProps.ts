@@ -66,69 +66,89 @@ const getUnderArbeidPanelProps = (): MainPanelProps => ({
   alertStyle: "info",
 });
 
-const getPanelPropsByStatus: PanelPropsMap = {
-  NY: (): MainPanelProps => getUnderArbeidPanelProps(),
-  NY_VURDERING: (): MainPanelProps => getUnderArbeidPanelProps(),
-  AVVENT: (): MainPanelProps => getUnderArbeidPanelProps(),
-  UNNTAK: (vurdering): MainPanelProps => ({
-    headingText: harVurdertHeadingText,
-    bodyText: getUnntakBodyText(vurdering.arsaker[0]),
-    href: AKTIVITETSKRAV_HREF,
-    alertStyle: "success",
-    tag: {
-      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
-      variant: "success-moderate",
-    },
-  }),
-  OPPFYLT: (vurdering): MainPanelProps => ({
-    headingText: harVurdertHeadingText,
-    bodyText: getOppfyltBodyText(vurdering.arsaker[0]),
-    href: AKTIVITETSKRAV_HREF,
-    alertStyle: "success",
-    tag: {
-      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
-      variant: "success-moderate",
-    },
-  }),
-  FORHANDSVARSEL: (vurdering): MainPanelProps => {
-    if (!vurdering.journalpostId) {
-      return getUnderArbeidPanelProps();
-    }
-
-    return {
-      headingText: vurdererHeadingText,
-      bodyText: "NAV vurderer å stanse sykepengene dine",
-      href: AKTIVITETSKRAV_HREF,
-      alertStyle: "warning",
-      tag: {
-        text: `Svarfrist: ${getShortDateFormat(vurdering.fristDato)}`,
-        variant:
-          new Date() > new Date(vurdering.fristDato)
-            ? "error-moderate"
-            : "warning-moderate",
-      },
-    };
+const getUnntakPanelProps = (
+  vurdering: VurderingForStatus<"UNNTAK">,
+): MainPanelProps => ({
+  headingText: harVurdertHeadingText,
+  bodyText: getUnntakBodyText(vurdering.arsaker[0]),
+  href: AKTIVITETSKRAV_HREF,
+  alertStyle: "success",
+  tag: {
+    text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+    variant: "success-moderate",
   },
-  IKKE_AKTUELL: (vurdering): MainPanelProps => ({
-    headingText: harVurdertHeadingText,
-    bodyText: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
+});
+
+const getOppfyltPanelProps = (
+  vurdering: VurderingForStatus<"OPPFYLT">,
+): MainPanelProps => ({
+  headingText: harVurdertHeadingText,
+  bodyText: getOppfyltBodyText(vurdering.arsaker[0]),
+  href: AKTIVITETSKRAV_HREF,
+  alertStyle: "success",
+  tag: {
+    text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+    variant: "success-moderate",
+  },
+});
+
+const getForhandsvarselPanelProps = (
+  vurdering: VurderingForStatus<"FORHANDSVARSEL">,
+): MainPanelProps => {
+  if (!vurdering.journalpostId) {
+    return getUnderArbeidPanelProps();
+  }
+
+  return {
+    headingText: vurdererHeadingText,
+    bodyText: "NAV vurderer å stanse sykepengene dine",
     href: AKTIVITETSKRAV_HREF,
-    alertStyle: "info",
+    alertStyle: "warning",
     tag: {
-      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
-      variant: "info-moderate",
+      text: `Svarfrist: ${getShortDateFormat(vurdering.fristDato)}`,
+      variant:
+        new Date() > new Date(vurdering.fristDato)
+          ? "error-moderate"
+          : "warning-moderate",
     },
-  }),
-  IKKE_OPPFYLT: (vurdering): MainPanelProps => ({
-    headingText: harVurdertHeadingText,
-    bodyText: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
-    href: AKTIVITETSKRAV_HREF,
-    alertStyle: "error",
-    tag: {
-      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
-      variant: "error-moderate",
-    },
-  }),
+  };
+};
+
+const getIkkeAktuellPanelProps = (
+  vurdering: VurderingForStatus<"IKKE_AKTUELL">,
+): MainPanelProps => ({
+  headingText: harVurdertHeadingText,
+  bodyText: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
+  href: AKTIVITETSKRAV_HREF,
+  alertStyle: "info",
+  tag: {
+    text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+    variant: "info-moderate",
+  },
+});
+
+const getIkkeOppfyltPanelProps = (
+  vurdering: VurderingForStatus<"IKKE_OPPFYLT">,
+): MainPanelProps => ({
+  headingText: harVurdertHeadingText,
+  bodyText: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
+  href: AKTIVITETSKRAV_HREF,
+  alertStyle: "error",
+  tag: {
+    text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+    variant: "error-moderate",
+  },
+});
+
+const getPanelPropsByStatus: PanelPropsMap = {
+  NY: getUnderArbeidPanelProps,
+  NY_VURDERING: getUnderArbeidPanelProps,
+  AVVENT: getUnderArbeidPanelProps,
+  UNNTAK: getUnntakPanelProps,
+  OPPFYLT: getOppfyltPanelProps,
+  FORHANDSVARSEL: getForhandsvarselPanelProps,
+  IKKE_AKTUELL: getIkkeAktuellPanelProps,
+  IKKE_OPPFYLT: getIkkeOppfyltPanelProps,
 };
 
 export const getMainPanelProps = (
