@@ -21,12 +21,12 @@ type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
   { status: S }
 >;
 
-type MainPanelPropsBuilder<
-  S extends AktivitetskravStatus = AktivitetskravStatus,
-> = (vurdering: VurderingForStatus<S>) => MainPanelProps;
+type PanelResolver<S extends AktivitetskravStatus = AktivitetskravStatus> = (
+  vurdering: VurderingForStatus<S>,
+) => MainPanelProps;
 
-type PanelPropsMap = {
-  [S in AktivitetskravStatus]: MainPanelPropsBuilder<S>;
+type StatusPanelMap = {
+  [S in AktivitetskravStatus]: PanelResolver<S>;
 };
 
 const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
@@ -59,14 +59,14 @@ const getOppfyltBodyText = (arsak?: OppfyltArsaker): string => {
   return DEFAULT_OPPFYLT_BODY_TEXT;
 };
 
-const getUnderArbeidPanelProps = (): MainPanelProps => ({
+const resolveUnderArbeid = (): MainPanelProps => ({
   headingText: vurdererHeadingText,
   bodyText: UNDER_ARBEID_BODY_TEXT,
   href: AKTIVITETSKRAV_HREF,
   alertStyle: "info",
 });
 
-const getUnntakPanelProps = (
+const resolveUnntak = (
   vurdering: VurderingForStatus<"UNNTAK">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
@@ -79,7 +79,7 @@ const getUnntakPanelProps = (
   },
 });
 
-const getOppfyltPanelProps = (
+const resolveOppfylt = (
   vurdering: VurderingForStatus<"OPPFYLT">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
@@ -92,11 +92,11 @@ const getOppfyltPanelProps = (
   },
 });
 
-const getForhandsvarselPanelProps = (
+const resolveForhandsvarsel = (
   vurdering: VurderingForStatus<"FORHANDSVARSEL">,
 ): MainPanelProps => {
   if (!vurdering.journalpostId) {
-    return getUnderArbeidPanelProps();
+    return resolveUnderArbeid();
   }
 
   return {
@@ -114,7 +114,7 @@ const getForhandsvarselPanelProps = (
   };
 };
 
-const getIkkeAktuellPanelProps = (
+const resolveIkkeAktuell = (
   vurdering: VurderingForStatus<"IKKE_AKTUELL">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
@@ -127,7 +127,7 @@ const getIkkeAktuellPanelProps = (
   },
 });
 
-const getIkkeOppfyltPanelProps = (
+const resolveIkkeOppfylt = (
   vurdering: VurderingForStatus<"IKKE_OPPFYLT">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
@@ -140,20 +140,20 @@ const getIkkeOppfyltPanelProps = (
   },
 });
 
-const getPanelPropsByStatus: PanelPropsMap = {
-  NY: getUnderArbeidPanelProps,
-  NY_VURDERING: getUnderArbeidPanelProps,
-  AVVENT: getUnderArbeidPanelProps,
-  UNNTAK: getUnntakPanelProps,
-  OPPFYLT: getOppfyltPanelProps,
-  FORHANDSVARSEL: getForhandsvarselPanelProps,
-  IKKE_AKTUELL: getIkkeAktuellPanelProps,
-  IKKE_OPPFYLT: getIkkeOppfyltPanelProps,
+const panelByStatus: StatusPanelMap = {
+  NY: resolveUnderArbeid,
+  NY_VURDERING: resolveUnderArbeid,
+  AVVENT: resolveUnderArbeid,
+  UNNTAK: resolveUnntak,
+  OPPFYLT: resolveOppfylt,
+  FORHANDSVARSEL: resolveForhandsvarsel,
+  IKKE_AKTUELL: resolveIkkeAktuell,
+  IKKE_OPPFYLT: resolveIkkeOppfylt,
 };
 
-export const getMainPanelProps = (
+export const resolvePanel = (
   aktivitetskravVurdering: AktivitetskravVurdering,
 ): MainPanelProps =>
-  getPanelPropsByStatus[aktivitetskravVurdering.status](
+  panelByStatus[aktivitetskravVurdering.status](
     aktivitetskravVurdering as never,
   );

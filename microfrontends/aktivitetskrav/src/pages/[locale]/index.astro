@@ -2,8 +2,8 @@
 import { MainPanel, type MainPanelProps } from "@esyfo/shared/components";
 import { isLocal } from "@esyfo/shared/environment";
 import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
+import { resolvePanel } from "@src/utils/aktivitetskravPanel";
 import { fetchAktivitetskravVurdering } from "@src/utils/fetch";
-import { getMainPanelProps } from "@src/utils/panelProps";
 
 const userToken = Astro.locals.token;
 
@@ -14,7 +14,7 @@ try {
   return new Response("Internal Server Error", { status: 503 });
 }
 
-const panelProps: MainPanelProps = getMainPanelProps(aktivitetskravVurdering);
+const panelProps = resolvePanel(aktivitetskravVurdering);
 ---
 
  {isLocal && <meta charset="UTF-8" />}
