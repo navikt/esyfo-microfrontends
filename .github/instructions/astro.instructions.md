@@ -168,7 +168,7 @@ Return `Response` objects from frontmatter for error states:
 try {
   const data = await fetchData(token);
 } catch (error) {
-  logger.error(`Error: ${error}`);
+  logger.error({ error }, "Error fetching data");
   return new Response("Internal Server Error", { status: 503 });
 }
 ---

@@ -1,12 +1,11 @@
 ---
+import { isLocal } from "@esyfo/shared/environment";
 import type { BrevDTO } from "@schema/brevSchema";
 import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
 import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
 import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
 import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
-import { isLocal } from "@src/utils/environment";
 import { fetchBrev, fetchMotebehov } from "@src/utils/fetch";
-import { logger } from "@src/utils/logger";
 import { getShowMotebehovPanel } from "@src/utils/motebehov";
 import "@src/styles/aksel.css";
 
@@ -17,15 +16,13 @@ let motebehov: MotebehovStatusDTO;
 
 try {
   brev = await fetchBrev(userToken);
-} catch (error) {
-  logger.error(`Error fetching brev: ${error}`);
+} catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 
 try {
   motebehov = await fetchMotebehov(userToken);
-} catch (error) {
-  logger.error(`Error fetching motebehov: ${error}`);
+} catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 
@@ -49,9 +46,3 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
     );
   }
 }}
-
-
-
-
-
-

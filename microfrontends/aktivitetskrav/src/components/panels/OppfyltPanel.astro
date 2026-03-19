@@ -1,8 +1,8 @@
 ---
+import { getShortDateFormat } from "@esyfo/shared/dateUtils";
 import type { OppfyltArsaker } from "@schema/aktivitetskravVurderingSchema";
 import MikrofrontendLinkPanel from "@src/components/common/MikrofrontendLinkPanel.astro";
 import { harVurdertHeadingText } from "@src/language/text";
-import { getShortDateFormat } from "@src/utils/dateUtils";
 
 interface Props {
   arsak: OppfyltArsaker;

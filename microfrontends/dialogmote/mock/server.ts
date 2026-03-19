@@ -1,5 +1,5 @@
+import { addDaysToDate } from "@esyfo/shared/dateUtils";
 import { serve } from "@hono/node-server";
-import { leggTilDagerPaDato } from "@src/utils/dateUtils.ts";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { motebehovUtenSvar } from "./fixtures/dialogmote/motebehovUtenSvar.ts";
@@ -18,22 +18,22 @@ api.use("/*", cors({ origin: "http://localhost:4321", credentials: true }));
 api.get("/api/dialogmote", (c) => {
   return c.json([
     createInnkallingsBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -10).toISOString(),
+      createdAt: addDaysToDate(new Date(), -10).toISOString(),
     }),
     createAvlysningsBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -6).toISOString(),
+      createdAt: addDaysToDate(new Date(), -6).toISOString(),
     }),
     createInnkallingsBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -5).toISOString(),
+      createdAt: addDaysToDate(new Date(), -5).toISOString(),
     }),
     createReferatBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -4).toISOString(),
+      createdAt: addDaysToDate(new Date(), -4).toISOString(),
     }),
     createInnkallingsBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -3).toISOString(),
+      createdAt: addDaysToDate(new Date(), -3).toISOString(),
     }),
     createReferatEndretBrev({
-      createdAt: leggTilDagerPaDato(new Date(), -103).toISOString(),
+      createdAt: addDaysToDate(new Date(), -103).toISOString(),
     }),
   ]);
 });

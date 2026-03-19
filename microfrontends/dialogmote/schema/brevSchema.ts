@@ -1,3 +1,4 @@
+import { logger } from "@navikt/pino-logger";
 import {
   array,
   boolean,
@@ -6,7 +7,7 @@ import {
   preprocess,
   string,
   union,
-  type z,
+  z,
 } from "zod";
 
 const documentComponentType = union([
@@ -93,6 +94,10 @@ function transformComponentType(type: unknown): string {
 
   if (parsedType.success) return parsedType.data;
 
+  logger.warn(
+    { type, validationErrors: z.flattenError(parsedType.error) },
+    "Error parsing document transformComponentType",
+  );
   return "UNKNOWN";
 }
 
@@ -100,7 +105,10 @@ function transformDocumentKey(key: unknown): string | null {
   const parsedKey = documentComponentKey.nullable().safeParse(key);
 
   if (parsedKey.success) return parsedKey.data;
-
+  logger.warn(
+    { key, validationErrors: z.flattenError(parsedKey.error) },
+    "Error parsing document transformDocumentKey",
+  );
   return "UNKNOWN";
 }
 
