@@ -1,5 +1,5 @@
+import { addDaysToDate } from "@esyfo/shared/dateUtils";
 import type { BrevDocumentComponentDTO, BrevDTO } from "@schema/brevSchema.ts";
-import { leggTilDagerPaDato } from "@src/utils/dateUtils";
 
 export const createDocumentComponent = (
   props?: Partial<BrevDocumentComponentDTO>,
@@ -14,7 +14,7 @@ export const createDocumentComponent = (
 };
 
 export const createInnkallingsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
-  const defaultDate = leggTilDagerPaDato(new Date(), -7).toISOString();
+  const defaultDate = addDaysToDate(new Date(), -7).toISOString();
 
   return {
     uuid: "brev_uuid",
@@ -49,8 +49,8 @@ export const createAvlysningsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
 };
 
 export const createReferatBrev = (props?: Partial<BrevDTO>): BrevDTO => {
-  const defaultDate = leggTilDagerPaDato(new Date(), -67).toISOString();
-  const defaultDate2 = leggTilDagerPaDato(new Date(), -77).toISOString();
+  const defaultDate = addDaysToDate(new Date(), -67).toISOString();
+  const defaultDate2 = addDaysToDate(new Date(), -77).toISOString();
 
   return {
     ...createInnkallingsBrev(),
@@ -62,8 +62,8 @@ export const createReferatBrev = (props?: Partial<BrevDTO>): BrevDTO => {
 };
 
 export const createReferatEndretBrev = (props?: Partial<BrevDTO>): BrevDTO => {
-  const defaultDate = leggTilDagerPaDato(new Date(), -87).toISOString();
-  const defaultDate2 = leggTilDagerPaDato(new Date(), -97).toISOString();
+  const defaultDate = addDaysToDate(new Date(), -87).toISOString();
+  const defaultDate2 = addDaysToDate(new Date(), -97).toISOString();
 
   return {
     ...createInnkallingsBrev(),
