@@ -70,7 +70,7 @@ const resolveUnntak = (
   vurdering: VurderingForStatus<"UNNTAK">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
-  bodyText: getUnntakBodyText(vurdering.arsaker[0]),
+  bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
   href: AKTIVITETSKRAV_HREF,
   alertStyle: "success",
   tag: {
@@ -83,7 +83,7 @@ const resolveOppfylt = (
   vurdering: VurderingForStatus<"OPPFYLT">,
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
-  bodyText: getOppfyltBodyText(vurdering.arsaker[0]),
+  bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
   href: AKTIVITETSKRAV_HREF,
   alertStyle: "success",
   tag: {
