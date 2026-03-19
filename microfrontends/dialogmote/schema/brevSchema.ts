@@ -7,7 +7,7 @@ import {
   preprocess,
   string,
   union,
-  z,
+  type z,
 } from "zod";
 
 const documentComponentType = union([
@@ -95,7 +95,7 @@ function transformComponentType(type: unknown): string {
   if (parsedType.success) return parsedType.data;
 
   logger.warn(
-    { type, validationIssues: z.prettifyError(parsedType.error) },
+    { type, validationIssues: parsedType.error.issues },
     "Error parsing document transformComponentType",
   );
   return "UNKNOWN";
@@ -106,7 +106,7 @@ function transformDocumentKey(key: unknown): string | null {
 
   if (parsedKey.success) return parsedKey.data;
   logger.warn(
-    { key, validationIssues: z.prettifyError(parsedKey.error) },
+    { key, validationIssues: parsedKey.error.issues },
     "Error parsing document transformDocumentKey",
   );
   return "UNKNOWN";
