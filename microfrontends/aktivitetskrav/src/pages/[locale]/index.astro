@@ -16,8 +16,7 @@ let aktivitetskravVurdering: AktivitetskravVurdering;
 
 try {
   aktivitetskravVurdering = await fetchAktivitetskravVurdering(userToken);
-} catch (error) {
-  logger.error({ error }, "Error fetching aktivitetskrav");
+} catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 ---

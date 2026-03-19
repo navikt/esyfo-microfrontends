@@ -17,15 +17,13 @@ let motebehov: MotebehovStatusDTO;
 
 try {
   brev = await fetchBrev(userToken);
-} catch (error) {
-  logger.error({ error }, "Error fetching brev");
+} catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 
 try {
   motebehov = await fetchMotebehov(userToken);
-} catch (error) {
-  logger.error({ error }, "Error fetching motebehov");
+} catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 
