@@ -5,15 +5,17 @@ import type {
   OppfyltArsaker,
   UnntakArsaker,
 } from "@schema/aktivitetskravVurderingSchema";
-import { harVurdertHeadingText, vurdererHeadingText } from "@src/language/text";
+import { aktivitetskravUrl } from "./urls";
 
-const AKTIVITETSKRAV_HREF = "/syk/aktivitetskrav";
 const UNDER_ARBEID_BODY_TEXT =
   "Les mer om aktivitetsplikten og hva den betyr for deg";
 const DEFAULT_UNNTAK_BODY_TEXT =
   "NAV vurderer at du er unntatt fra aktivitetsplikten";
 const DEFAULT_OPPFYLT_BODY_TEXT =
   "NAV vurderer at du oppfyller aktivitetsplikten";
+
+const harVurdertHeadingText = "NAV har vurdert aktivitetsplikten din";
+const vurdererHeadingText = "NAV vurderer aktivitetsplikten din";
 
 type AktivitetskravStatus = AktivitetskravVurdering["status"];
 type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
@@ -62,7 +64,7 @@ const getOppfyltBodyText = (arsak?: OppfyltArsaker): string => {
 const resolveUnderArbeid = (): MainPanelProps => ({
   headingText: vurdererHeadingText,
   bodyText: UNDER_ARBEID_BODY_TEXT,
-  href: AKTIVITETSKRAV_HREF,
+  href: aktivitetskravUrl,
   alertStyle: "info",
 });
 
@@ -71,7 +73,7 @@ const resolveUnntak = (
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
   bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
-  href: AKTIVITETSKRAV_HREF,
+  href: aktivitetskravUrl,
   alertStyle: "success",
   tag: {
     text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
@@ -84,7 +86,7 @@ const resolveOppfylt = (
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
   bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
-  href: AKTIVITETSKRAV_HREF,
+  href: aktivitetskravUrl,
   alertStyle: "success",
   tag: {
     text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
@@ -102,7 +104,7 @@ const resolveForhandsvarsel = (
   return {
     headingText: vurdererHeadingText,
     bodyText: "NAV vurderer å stanse sykepengene dine",
-    href: AKTIVITETSKRAV_HREF,
+    href: aktivitetskravUrl,
     alertStyle: "warning",
     tag: {
       text: `Svarfrist: ${getShortDateFormat(vurdering.fristDato)}`,
@@ -119,7 +121,7 @@ const resolveIkkeAktuell = (
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
   bodyText: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
-  href: AKTIVITETSKRAV_HREF,
+  href: aktivitetskravUrl,
   alertStyle: "info",
   tag: {
     text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
@@ -132,7 +134,7 @@ const resolveIkkeOppfylt = (
 ): MainPanelProps => ({
   headingText: harVurdertHeadingText,
   bodyText: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
-  href: AKTIVITETSKRAV_HREF,
+  href: aktivitetskravUrl,
   alertStyle: "error",
   tag: {
     text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
