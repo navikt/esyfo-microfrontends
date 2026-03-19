@@ -10,31 +10,50 @@ import { harVurdertHeadingText, vurdererHeadingText } from "@src/language/text";
 const AKTIVITETSKRAV_HREF = "/syk/aktivitetskrav";
 const UNDER_ARBEID_BODY_TEXT =
   "Les mer om aktivitetsplikten og hva den betyr for deg";
+const DEFAULT_UNNTAK_BODY_TEXT =
+  "NAV vurderer at du er unntatt fra aktivitetsplikten";
+const DEFAULT_OPPFYLT_BODY_TEXT =
+  "NAV vurderer at du oppfyller aktivitetsplikten";
+
+type AktivitetskravStatus = AktivitetskravVurdering["status"];
+type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
+  AktivitetskravVurdering,
+  { status: S }
+>;
+type MainPanelPropsBuilder<
+  S extends AktivitetskravStatus = AktivitetskravStatus,
+> = (vurdering: VurderingForStatus<S>) => MainPanelProps;
+
+const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
+  MEDISINSKE_GRUNNER:
+    "Du er unntatt fra aktivitetsplikten på grunn av medisinske opplysninger",
+  TILRETTELEGGING_IKKE_MULIG:
+    "Du er unntatt fra aktivitetsplikten da tilrettelegging på arbeidsplassen ikke er mulig",
+  SJOMENN_UTENRIKS: DEFAULT_UNNTAK_BODY_TEXT,
+};
+
+const oppfyltBodyTextByArsak: Record<OppfyltArsaker, string> = {
+  FRISKMELDT:
+    "NAV vurderer at du oppfyller aktivitetsplikten siden du er friskmeldt",
+  GRADERT:
+    "NAV vurderer at du oppfyller aktivitetsplikten siden du er i gradert arbeid",
+  TILTAK: "NAV vurderer at du oppfyller aktivitetsplikten siden du er i tiltak",
+};
 
 const getUnntakBodyText = (arsak?: UnntakArsaker): string => {
-  switch (arsak) {
-    case "MEDISINSKE_GRUNNER":
-      return "Du er unntatt fra aktivitetsplikten på grunn av medisinske opplysninger";
-    case "TILRETTELEGGING_IKKE_MULIG":
-      return "Du er unntatt fra aktivitetsplikten da tilrettelegging på arbeidsplassen ikke er mulig";
-    case "SJOMENN_UTENRIKS":
-      return "NAV vurderer at du er unntatt fra aktivitetsplikten";
-    default:
-      return "NAV vurderer at du er unntatt fra aktivitetsplikten";
+  if (!arsak) {
+    return DEFAULT_UNNTAK_BODY_TEXT;
   }
+
+  return unntakBodyTextByArsak[arsak];
 };
 
 const getOppfyltBodyText = (arsak?: OppfyltArsaker): string => {
-  switch (arsak) {
-    case "FRISKMELDT":
-      return "NAV vurderer at du oppfyller aktivitetsplikten siden du er friskmeldt";
-    case "GRADERT":
-      return "NAV vurderer at du oppfyller aktivitetsplikten siden du er i gradert arbeid";
-    case "TILTAK":
-      return "NAV vurderer at du oppfyller aktivitetsplikten siden du er i tiltak";
-    default:
-      return "NAV vurderer at du oppfyller aktivitetsplikten";
+  if (!arsak) {
+    return DEFAULT_OPPFYLT_BODY_TEXT;
   }
+
+  return oppfyltBodyTextByArsak[arsak];
 };
 
 const getUnderArbeidPanelProps = (): MainPanelProps => ({
@@ -44,75 +63,76 @@ const getUnderArbeidPanelProps = (): MainPanelProps => ({
   alertStyle: "info",
 });
 
+const getPanelPropsByStatus = {
+  NY: (): MainPanelProps => getUnderArbeidPanelProps(),
+  NY_VURDERING: (): MainPanelProps => getUnderArbeidPanelProps(),
+  AVVENT: (): MainPanelProps => getUnderArbeidPanelProps(),
+  UNNTAK: (vurdering): MainPanelProps => ({
+    headingText: harVurdertHeadingText,
+    bodyText: getUnntakBodyText(vurdering.arsaker[0]),
+    href: AKTIVITETSKRAV_HREF,
+    alertStyle: "success",
+    tag: {
+      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+      variant: "success-moderate",
+    },
+  }),
+  OPPFYLT: (vurdering): MainPanelProps => ({
+    headingText: harVurdertHeadingText,
+    bodyText: getOppfyltBodyText(vurdering.arsaker[0]),
+    href: AKTIVITETSKRAV_HREF,
+    alertStyle: "success",
+    tag: {
+      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+      variant: "success-moderate",
+    },
+  }),
+  FORHANDSVARSEL: (vurdering): MainPanelProps => {
+    if (!vurdering.journalpostId) {
+      return getUnderArbeidPanelProps();
+    }
+
+    return {
+      headingText: vurdererHeadingText,
+      bodyText: "NAV vurderer å stanse sykepengene dine",
+      href: AKTIVITETSKRAV_HREF,
+      alertStyle: "warning",
+      tag: {
+        text: `Svarfrist: ${getShortDateFormat(vurdering.fristDato)}`,
+        variant:
+          new Date() > new Date(vurdering.fristDato)
+            ? "error-moderate"
+            : "warning-moderate",
+      },
+    };
+  },
+  IKKE_AKTUELL: (vurdering): MainPanelProps => ({
+    headingText: harVurdertHeadingText,
+    bodyText: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
+    href: AKTIVITETSKRAV_HREF,
+    alertStyle: "info",
+    tag: {
+      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+      variant: "info-moderate",
+    },
+  }),
+  IKKE_OPPFYLT: (vurdering): MainPanelProps => ({
+    headingText: harVurdertHeadingText,
+    bodyText: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
+    href: AKTIVITETSKRAV_HREF,
+    alertStyle: "error",
+    tag: {
+      text: `Dato for vurdering: ${getShortDateFormat(vurdering.sistVurdert)}`,
+      variant: "error-moderate",
+    },
+  }),
+} satisfies {
+  [S in AktivitetskravStatus]: MainPanelPropsBuilder<S>;
+};
+
 export const getMainPanelProps = (
   aktivitetskravVurdering: AktivitetskravVurdering,
-): MainPanelProps => {
-  switch (aktivitetskravVurdering.status) {
-    case "NY":
-    case "NY_VURDERING":
-    case "AVVENT":
-      return getUnderArbeidPanelProps();
-    case "UNNTAK":
-      return {
-        headingText: harVurdertHeadingText,
-        bodyText: getUnntakBodyText(aktivitetskravVurdering.arsaker[0]),
-        href: AKTIVITETSKRAV_HREF,
-        alertStyle: "success",
-        tag: {
-          text: `Dato for vurdering: ${getShortDateFormat(aktivitetskravVurdering.sistVurdert)}`,
-          variant: "success-moderate",
-        },
-      };
-    case "OPPFYLT":
-      return {
-        headingText: harVurdertHeadingText,
-        bodyText: getOppfyltBodyText(aktivitetskravVurdering.arsaker[0]),
-        href: AKTIVITETSKRAV_HREF,
-        alertStyle: "success",
-        tag: {
-          text: `Dato for vurdering: ${getShortDateFormat(aktivitetskravVurdering.sistVurdert)}`,
-          variant: "success-moderate",
-        },
-      };
-    case "FORHANDSVARSEL":
-      if (!aktivitetskravVurdering.journalpostId) {
-        return getUnderArbeidPanelProps();
-      }
-
-      return {
-        headingText: vurdererHeadingText,
-        bodyText: "NAV vurderer å stanse sykepengene dine",
-        href: AKTIVITETSKRAV_HREF,
-        alertStyle: "warning",
-        tag: {
-          text: `Svarfrist: ${getShortDateFormat(aktivitetskravVurdering.fristDato)}`,
-          variant:
-            new Date() > new Date(aktivitetskravVurdering.fristDato)
-              ? "error-moderate"
-              : "warning-moderate",
-        },
-      };
-    case "IKKE_AKTUELL":
-      return {
-        headingText: harVurdertHeadingText,
-        bodyText: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
-        href: AKTIVITETSKRAV_HREF,
-        alertStyle: "info",
-        tag: {
-          text: `Dato for vurdering: ${getShortDateFormat(aktivitetskravVurdering.sistVurdert)}`,
-          variant: "info-moderate",
-        },
-      };
-    case "IKKE_OPPFYLT":
-      return {
-        headingText: harVurdertHeadingText,
-        bodyText: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
-        href: AKTIVITETSKRAV_HREF,
-        alertStyle: "error",
-        tag: {
-          text: `Dato for vurdering: ${getShortDateFormat(aktivitetskravVurdering.sistVurdert)}`,
-          variant: "error-moderate",
-        },
-      };
-  }
-};
+): MainPanelProps =>
+  getPanelPropsByStatus[aktivitetskravVurdering.status](
+    aktivitetskravVurdering as never,
+  );
