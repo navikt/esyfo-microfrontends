@@ -61,7 +61,7 @@ export default defineConfig({
       AKTIVITETSKRAV_API_URL: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:4000/api/aktivitetsplikt",
+        default: "http://aktivitetskrav-api/api/aktivitetsplikt",
       }),
       AKTIVITETSKRAV_CLIENT_ID: envField.string({
         context: "server",

@@ -2,11 +2,13 @@ import {
   AKTIVITETSKRAV_API_URL,
   AKTIVITETSKRAV_CLIENT_ID,
 } from "astro:env/server";
+import { isLocal } from "@esyfo/shared/environment";
 import { getAccessToken } from "@esyfo/shared/token";
 import { logger } from "@navikt/pino-logger";
 import { aktivitetskravVurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
 import { z } from "zod";
+import fixtures from "../../mock/fixtures";
 
 const parseAktivitetskravVurdering = (
   data: unknown,
@@ -29,7 +31,7 @@ const parseAktivitetskravVurdering = (
   throw new Error("Invalid aktivitetskrav vurdering response");
 };
 
-export const fetchAktivitetskravVurdering = async (
+const realFetchAktivitetskravVurdering = async (
   token: string,
 ): Promise<AktivitetskravVurdering> => {
   const accessToken = await getAccessToken(token, AKTIVITETSKRAV_CLIENT_ID);
@@ -57,3 +59,13 @@ export const fetchAktivitetskravVurdering = async (
   const data = await response.json();
   return parseAktivitetskravVurdering(data);
 };
+
+const fakeFetchAktivitetskravVurdering = async (
+  _token: string,
+): Promise<AktivitetskravVurdering> => {
+  return parseAktivitetskravVurdering(fixtures.forhaandsvarselVurdering);
+};
+
+export const fetchAktivitetskravVurdering = isLocal
+  ? fakeFetchAktivitetskravVurdering
+  : realFetchAktivitetskravVurdering;
