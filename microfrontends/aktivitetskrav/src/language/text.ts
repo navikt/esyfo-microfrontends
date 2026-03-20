@@ -58,7 +58,3 @@ export const formatVurderingsDato = (date: string): string =>
 
 export const formatSvarfrist = (date: string): string =>
   `Svarfrist: ${getShortDateFormat(date)}`;
-
-// Backwards-compatible named exports for existing panel components.
-export const harVurdertHeadingText = HeadingContent.harVurdert;
-export const vurdererHeadingText = HeadingContent.vurderer;
