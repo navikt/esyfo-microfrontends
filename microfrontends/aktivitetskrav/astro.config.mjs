@@ -67,6 +67,11 @@ export default defineConfig({
         access: "secret",
         default: "local:teamsykefravr:aktivietskrav-api",
       }),
+      AKTIVITETSKRAV_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/syk/aktivitetskrav",
+      }),
     },
   },
 });
