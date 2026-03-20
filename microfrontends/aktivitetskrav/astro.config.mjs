@@ -34,6 +34,7 @@ export default defineConfig({
         "astro:build:setup": ({ vite, target }) => {
           if (target === "client") {
             vite.plugins.push({
+              // Import map externalizes React to NAV CDN — only needed when using client:only islands
               ...rollupImportMapPlugin(importmap),
               enforce: "pre",
               apply: "build",
