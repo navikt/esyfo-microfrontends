@@ -1,8 +1,5 @@
 import { getShortDateFormat } from "@esyfo/shared/dateUtils";
-import type {
-  OppfyltArsaker,
-  UnntakArsaker,
-} from "@schema/aktivitetskravVurderingSchema";
+import type { OppfyltArsaker, UnntakArsaker } from "@schema/vurderingSchema";
 
 type HeadingContentKey = "vurderer" | "harVurdert";
 

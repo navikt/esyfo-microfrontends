@@ -1,6 +1,6 @@
 import { AKTIVITETSKRAV_URL } from "astro:env/server";
 import type { MainPanelProps } from "@esyfo/shared/components";
-import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema";
+import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 import {
   BodyContent,
   formatSvarfrist,

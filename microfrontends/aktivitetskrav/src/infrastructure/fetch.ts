@@ -4,8 +4,8 @@ import {
 } from "astro:env/server";
 import { getAccessToken } from "@esyfo/shared/token";
 import { logger } from "@navikt/pino-logger";
-import { aktivitetskravVurderingSchema } from "@schema/aktivitetskravVurderingSchema";
-import type { AktivitetskravVurdering } from "@schema/aktivitetskravVurderingSchema.ts";
+import { aktivitetskravVurderingSchema } from "@schema/vurderingSchema";
+import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
 import { z } from "zod";
 
 const parseAktivitetskravVurdering = (

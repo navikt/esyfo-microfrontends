@@ -1,5 +1,5 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
-import type { AktivitetskravVurdering } from "schema/aktivitetskravVurderingSchema";
+import type { AktivitetskravVurdering } from "schema/vurderingSchema";
 
 const nyKandidatVurdering: AktivitetskravVurdering = {
   status: "NY",
