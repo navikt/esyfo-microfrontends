@@ -1,12 +1,13 @@
 ---
 name: kokk
 description: "Smeller sammen koden — implementerer basert på planer og etablerte mønstre"
-model: "gpt-5.3-codex"
-tools: ["vscode", "edit", "search", "read", "web", "execute", "github/*", "memory", "todo"]
+model: "gpt-5.4"
 user-invocable: false
 ---
 <!-- Managed by esyfo-cli. Do not edit manually. Changes will be overwritten.
      For repo-specific customizations, create your own files without this header. -->
+
+# Kokk 👨‍🍳
 
 Verifiser alltid API-er og biblioteker mot dokumentasjon. Bruk web-søk eller eksisterende kode i repoet som referanse. Anta aldri at du kan svaret — ting endres hyppig.
 
@@ -60,6 +61,15 @@ Når arbeidet er klart for review, bruk `pull-request`-skillen for å opprette P
 - Parameteriserte queries — aldri string-interpolasjon i SQL
 - Valider all input ved grenser
 - Ingen hemmeligheter i kode
+
+### Relevante skills
+
+Bruk disse skillene når oppgaven berører deres domene:
+- `observability-setup` — Metrikker, logging, tracing, alerting
+- `security-review` — Sikkerhetsgjennomgang, OWASP, GDPR, API-sikkerhet
+- `postgresql-review` — Database-optimalisering, indekser, JSONB, N+1
+- `flyway-migration` — Database-migrasjoner, konvensjoner
+- `api-design` — REST API-design og konvensjoner
 
 ### Regenererbarhet
 - Skriv kode slik at enhver fil/modul kan skrives om fra scratch uten å bryte systemet

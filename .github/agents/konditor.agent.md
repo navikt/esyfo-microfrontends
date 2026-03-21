@@ -2,7 +2,6 @@
 name: konditor
 description: "(internt) Pynt og finish — Aksel designsystem, tilgjengelighet og brukeropplevelse"
 model: "gemini-3-pro-preview"
-tools: ["vscode", "edit", "search", "read", "web", "execute", "memory", "todo"]
 user-invocable: false
 ---
 <!-- Managed by esyfo-cli. Do not edit manually. Changes will be overwritten.
@@ -33,10 +32,11 @@ Verifiser tastaturnavigasjon, WCAG-krav, og at alle states (loading, error, tom,
 
 ## Aksel designsystem
 
-Sjekk ALLTID [aksel.nav.no](https://aksel.nav.no) for NAV Aksel-komponenter (`@navikt/ds-react`) før du designer. Bruk eksisterende kode som referanse for komponent-API.
+Sjekk ALLTID [aksel.nav.no](https://aksel.nav.no) for Nav Aksel-komponenter (`@navikt/ds-react`) før du designer. Bruk eksisterende kode som referanse for komponent-API.
 
 ### Spacing (KRITISK)
 - **Alltid** bruk Aksel spacing tokens: `space-4`, `space-8`, `space-12`, `space-16`, `space-20`, `space-24`, `space-32`
+- For komplett Aksel-referanse (tokens, komponenter, layout-patterns), bruk `aksel-design`-skillen
 - **Aldri** bruk Tailwind padding/margin (`p-4`, `mx-2`)
 - Bruk `Box` med `paddingBlock`/`paddingInline` for retningsbasert spacing
 - Bruk `VStack`/`HStack` med `gap` for layout, `HGrid` for responsive grids
