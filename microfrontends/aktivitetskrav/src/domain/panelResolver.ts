@@ -16,14 +16,6 @@ type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
   { status: S }
 >;
 
-type PanelResolver<S extends AktivitetskravStatus = AktivitetskravStatus> = (
-  vurdering: VurderingForStatus<S>,
-) => MainPanelProps;
-
-type StatusPanelMap = {
-  [S in AktivitetskravStatus]: PanelResolver<S>;
-};
-
 const resolveUnderArbeid = (): MainPanelProps => ({
   headingText: HeadingContent.vurderer,
   bodyText: BodyContent.underArbeid,
@@ -59,6 +51,7 @@ const resolveOppfylt = (
 
 const resolveForhandsvarsel = (
   vurdering: VurderingForStatus<"FORHANDSVARSEL">,
+  now: Date,
 ): MainPanelProps => {
   if (!vurdering.journalpostId) {
     return resolveUnderArbeid();
@@ -72,7 +65,7 @@ const resolveForhandsvarsel = (
     tag: {
       text: formatSvarfrist(vurdering.fristDato),
       variant:
-        new Date() > new Date(vurdering.fristDato)
+        now > new Date(vurdering.fristDato)
           ? "error-moderate"
           : "warning-moderate",
     },
@@ -105,20 +98,24 @@ const resolveIkkeOppfylt = (
   },
 });
 
-const panelByStatus: StatusPanelMap = {
-  NY: resolveUnderArbeid,
-  NY_VURDERING: resolveUnderArbeid,
-  AVVENT: resolveUnderArbeid,
-  UNNTAK: resolveUnntak,
-  OPPFYLT: resolveOppfylt,
-  FORHANDSVARSEL: resolveForhandsvarsel,
-  IKKE_AKTUELL: resolveIkkeAktuell,
-  IKKE_OPPFYLT: resolveIkkeOppfylt,
-};
-
 export const resolvePanel = (
-  aktivitetskravVurdering: AktivitetskravVurdering,
-): MainPanelProps =>
-  panelByStatus[aktivitetskravVurdering.status](
-    aktivitetskravVurdering as never,
-  );
+  vurdering: AktivitetskravVurdering,
+  now: Date = new Date(),
+): MainPanelProps => {
+  switch (vurdering.status) {
+    case "NY":
+    case "NY_VURDERING":
+    case "AVVENT":
+      return resolveUnderArbeid();
+    case "UNNTAK":
+      return resolveUnntak(vurdering);
+    case "OPPFYLT":
+      return resolveOppfylt(vurdering);
+    case "FORHANDSVARSEL":
+      return resolveForhandsvarsel(vurdering, now);
+    case "IKKE_AKTUELL":
+      return resolveIkkeAktuell(vurdering);
+    case "IKKE_OPPFYLT":
+      return resolveIkkeOppfylt(vurdering);
+  }
+};

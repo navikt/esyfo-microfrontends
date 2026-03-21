@@ -3,18 +3,18 @@ import { MainPanel } from "@esyfo/shared/components";
 import { isLocal } from "@esyfo/shared/environment";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 import { resolvePanel } from "@src/domain/panelResolver";
-import { fetchAktivitetskravVurdering } from "@src/infrastructure/fetch";
+import { fetchVurdering } from "@src/infrastructure/fetch";
 
 const userToken = Astro.locals.token;
 
-let aktivitetskravVurdering: AktivitetskravVurdering;
+let vurdering: AktivitetskravVurdering;
 try {
-  aktivitetskravVurdering = await fetchAktivitetskravVurdering(userToken);
+  vurdering = await fetchVurdering(userToken);
 } catch {
   return new Response("Internal Server Error", { status: 503 });
 }
 
-const panelProps = resolvePanel(aktivitetskravVurdering);
+const panelProps = resolvePanel(vurdering);
 ---
 
  {isLocal && <meta charset="UTF-8" />}

@@ -5,25 +5,22 @@ import {
 import { isLocal } from "@esyfo/shared/environment";
 import { getAccessToken } from "@esyfo/shared/token";
 import { logger } from "@navikt/pino-logger";
-import { aktivitetskravVurderingSchema } from "@schema/vurderingSchema";
+import { vurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
 import { z } from "zod";
 import fixtures from "../../mock/fixtures";
 
-const parseAktivitetskravVurdering = (
-  data: unknown,
-): AktivitetskravVurdering => {
-  const parsedAktivitetskravVurdering =
-    aktivitetskravVurderingSchema.safeParse(data);
+const parseVurdering = (data: unknown): AktivitetskravVurdering => {
+  const parsed = vurderingSchema.safeParse(data);
 
-  if (parsedAktivitetskravVurdering.success) {
-    return parsedAktivitetskravVurdering.data;
+  if (parsed.success) {
+    return parsed.data;
   }
 
   logger.error(
     {
       api: "aktivitetskrav",
-      validationErrors: z.flattenError(parsedAktivitetskravVurdering.error),
+      validationErrors: z.flattenError(parsed.error),
     },
     "Invalid aktivitetskrav vurdering response",
   );
@@ -31,19 +28,25 @@ const parseAktivitetskravVurdering = (
   throw new Error("Invalid aktivitetskrav vurdering response");
 };
 
-const realFetchAktivitetskravVurdering = async (
-  token: string,
-): Promise<AktivitetskravVurdering> => {
-  const accessToken = await getAccessToken(token, AKTIVITETSKRAV_CLIENT_ID);
+const fetchFromApi = async (accessToken: string): Promise<Response> => {
+  try {
+    return await fetch(AKTIVITETSKRAV_API_URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  } catch (error) {
+    logger.error(
+      { api: "aktivitetskrav", error },
+      "Network error fetching aktivitetskrav vurdering",
+    );
+    throw error;
+  }
+};
 
-  const response = await fetch(AKTIVITETSKRAV_API_URL, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
+const assertOk = (response: Response): void => {
   if (!response.ok) {
     logger.error(
       {
@@ -55,17 +58,22 @@ const realFetchAktivitetskravVurdering = async (
     );
     throw new Error(`Http error with status: ${response.status}`);
   }
-
-  const data = await response.json();
-  return parseAktivitetskravVurdering(data);
 };
 
-const fakeFetchAktivitetskravVurdering = async (
+const realFetchVurdering = async (
+  token: string,
+): Promise<AktivitetskravVurdering> => {
+  const accessToken = await getAccessToken(token, AKTIVITETSKRAV_CLIENT_ID);
+  const response = await fetchFromApi(accessToken);
+  assertOk(response);
+  const data = await response.json();
+  return parseVurdering(data);
+};
+
+const fakeFetchVurdering = async (
   _token: string,
 ): Promise<AktivitetskravVurdering> => {
-  return parseAktivitetskravVurdering(fixtures.forhaandsvarselVurdering);
+  return parseVurdering(fixtures.forhaandsvarselVurdering);
 };
 
-export const fetchAktivitetskravVurdering = isLocal
-  ? fakeFetchAktivitetskravVurdering
-  : realFetchAktivitetskravVurdering;
+export const fetchVurdering = isLocal ? fakeFetchVurdering : realFetchVurdering;
