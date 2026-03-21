@@ -12,7 +12,7 @@ const oppfyltArsaker = z.union([
   literal("TILTAK"),
 ]);
 
-export const aktivitetskravVurderingSchema = union([
+export const vurderingSchema = union([
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),
@@ -49,8 +49,6 @@ export const aktivitetskravVurderingSchema = union([
   }),
 ]);
 
-export type AktivitetskravVurdering = z.infer<
-  typeof aktivitetskravVurderingSchema
->;
+export type AktivitetskravVurdering = z.infer<typeof vurderingSchema>;
 export type UnntakArsaker = z.infer<typeof unntakArsaker>;
 export type OppfyltArsaker = z.infer<typeof oppfyltArsaker>;

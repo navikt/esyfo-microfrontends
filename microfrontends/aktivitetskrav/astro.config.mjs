@@ -17,7 +17,7 @@ export default defineConfig({
         plugins: [
           prefixer({
             prefix: ".aktivitetskrav-microfrontend",
-            ignoreFiles: [/module.css/],
+            ignoreFiles: [/module.css/, /ds-css/],
           }),
         ],
       },
@@ -34,6 +34,7 @@ export default defineConfig({
         "astro:build:setup": ({ vite, target }) => {
           if (target === "client") {
             vite.plugins.push({
+              // Import map externalizes React to NAV CDN — only needed when using client:only islands
               ...rollupImportMapPlugin(importmap),
               enforce: "pre",
               apply: "build",
@@ -60,12 +61,17 @@ export default defineConfig({
       AKTIVITETSKRAV_API_URL: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:4000/api/aktivitetsplikt",
+        default: "http://aktivitetskrav-api/api/aktivitetsplikt",
       }),
       AKTIVITETSKRAV_CLIENT_ID: envField.string({
         context: "server",
         access: "secret",
         default: "local:teamsykefravr:aktivietskrav-api",
+      }),
+      AKTIVITETSKRAV_URL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "http://localhost:3000/syk/aktivitetskrav",
       }),
     },
   },
