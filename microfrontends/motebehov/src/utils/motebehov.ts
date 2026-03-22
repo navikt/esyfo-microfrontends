@@ -4,7 +4,6 @@ export const getShowMotebehovPanel = (
   motebehov: MotebehovStatusDto,
 ): boolean => {
   return (
-    motebehov &&
     motebehov.visMotebehov === true &&
     motebehov.skjemaType === "SVAR_BEHOV" &&
     motebehov.motebehov === null
