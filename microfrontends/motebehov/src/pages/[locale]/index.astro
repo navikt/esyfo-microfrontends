@@ -28,6 +28,7 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
           bodyText="Trenger du et dialogmøte?"
           href={`${MOTEBEHOV_URL}/motebehov/svar`}
           alertStyle="warning"
+          panelId="motebehov-panel"
           tag={{ text: "Du har ikke svart", variant: "warning-moderate" }}
         />
       </div>
@@ -38,6 +39,6 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
 <script>
     import { logUmamiEvent } from "@src/utils/analytics";
 
-    const motebehovPanel = document.querySelector("#mikrofrontend__linkPanel");
+    const motebehovPanel = document.querySelector("#motebehov-panel");
     motebehovPanel?.addEventListener("click", () => logUmamiEvent("Navigerer til svar møtebehov"));
 </script>

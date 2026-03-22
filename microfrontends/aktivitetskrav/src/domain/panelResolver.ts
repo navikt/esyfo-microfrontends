@@ -16,38 +16,48 @@ type VurderingForStatus<S extends AktivitetskravStatus> = Extract<
   { status: S }
 >;
 
-const resolveUnderArbeid = (): MainPanelProps => ({
-  headingText: HeadingContent.vurderer,
-  bodyText: BodyContent.underArbeid,
-  href: AKTIVITETSKRAV_URL,
-  alertStyle: "info",
+const withPanelId = (
+  panel: Omit<MainPanelProps, "panelId">,
+): MainPanelProps => ({
+  ...panel,
+  panelId: "aktivitetskrav-panel",
 });
+
+const resolveUnderArbeid = (): MainPanelProps =>
+  withPanelId({
+    headingText: HeadingContent.vurderer,
+    bodyText: BodyContent.underArbeid,
+    href: AKTIVITETSKRAV_URL,
+    alertStyle: "info",
+  });
 
 const resolveUnntak = (
   vurdering: VurderingForStatus<"UNNTAK">,
-): MainPanelProps => ({
-  headingText: HeadingContent.harVurdert,
-  bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
-  href: AKTIVITETSKRAV_URL,
-  alertStyle: "success",
-  tag: {
-    text: formatVurderingsDato(vurdering.sistVurdert),
-    variant: "success-moderate",
-  },
-});
+): MainPanelProps =>
+  withPanelId({
+    headingText: HeadingContent.harVurdert,
+    bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
+    href: AKTIVITETSKRAV_URL,
+    alertStyle: "success",
+    tag: {
+      text: formatVurderingsDato(vurdering.sistVurdert),
+      variant: "success-moderate",
+    },
+  });
 
 const resolveOppfylt = (
   vurdering: VurderingForStatus<"OPPFYLT">,
-): MainPanelProps => ({
-  headingText: HeadingContent.harVurdert,
-  bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
-  href: AKTIVITETSKRAV_URL,
-  alertStyle: "success",
-  tag: {
-    text: formatVurderingsDato(vurdering.sistVurdert),
-    variant: "success-moderate",
-  },
-});
+): MainPanelProps =>
+  withPanelId({
+    headingText: HeadingContent.harVurdert,
+    bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
+    href: AKTIVITETSKRAV_URL,
+    alertStyle: "success",
+    tag: {
+      text: formatVurderingsDato(vurdering.sistVurdert),
+      variant: "success-moderate",
+    },
+  });
 
 const resolveForhandsvarsel = (
   vurdering: VurderingForStatus<"FORHANDSVARSEL">,
@@ -57,7 +67,7 @@ const resolveForhandsvarsel = (
     return resolveUnderArbeid();
   }
 
-  return {
+  return withPanelId({
     headingText: HeadingContent.vurderer,
     bodyText: BodyContent.forhandsvarsel,
     href: AKTIVITETSKRAV_URL,
@@ -69,34 +79,36 @@ const resolveForhandsvarsel = (
           ? "error-moderate"
           : "warning-moderate",
     },
-  };
+  });
 };
 
 const resolveIkkeAktuell = (
   vurdering: VurderingForStatus<"IKKE_AKTUELL">,
-): MainPanelProps => ({
-  headingText: HeadingContent.harVurdert,
-  bodyText: BodyContent.ikkeAktuell,
-  href: AKTIVITETSKRAV_URL,
-  alertStyle: "info",
-  tag: {
-    text: formatVurderingsDato(vurdering.sistVurdert),
-    variant: "info-moderate",
-  },
-});
+): MainPanelProps =>
+  withPanelId({
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyContent.ikkeAktuell,
+    href: AKTIVITETSKRAV_URL,
+    alertStyle: "info",
+    tag: {
+      text: formatVurderingsDato(vurdering.sistVurdert),
+      variant: "info-moderate",
+    },
+  });
 
 const resolveIkkeOppfylt = (
   vurdering: VurderingForStatus<"IKKE_OPPFYLT">,
-): MainPanelProps => ({
-  headingText: HeadingContent.harVurdert,
-  bodyText: BodyContent.ikkeOppfylt,
-  href: AKTIVITETSKRAV_URL,
-  alertStyle: "error",
-  tag: {
-    text: formatVurderingsDato(vurdering.sistVurdert),
-    variant: "error-moderate",
-  },
-});
+): MainPanelProps =>
+  withPanelId({
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyContent.ikkeOppfylt,
+    href: AKTIVITETSKRAV_URL,
+    alertStyle: "error",
+    tag: {
+      text: formatVurderingsDato(vurdering.sistVurdert),
+      variant: "error-moderate",
+    },
+  });
 
 export const resolvePanel = (
   vurdering: AktivitetskravVurdering,

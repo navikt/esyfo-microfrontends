@@ -45,6 +45,7 @@ export const resolvePanel = (brev: BrevDto): MainPanelProps => {
         : getLongDateFormat(brev.tid),
     href: `${DIALOGMOTE_URL}/moteinnkalling`,
     alertStyle: "warning",
+    panelId: "dialogmote-panel",
     tag: getTag(attending, brev.brevType),
   };
 };

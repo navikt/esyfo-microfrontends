@@ -30,7 +30,6 @@ const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
     return (
       <div
         class="dialogmote-microfrontend"
-        id="dialogmote-panel"
         data-attending={attending}
         data-brevtype={brevType}
       >
@@ -45,8 +44,8 @@ const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
     import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
     import type { SvarTypeDto } from "@schema/brevSchema";
 
-    const wrapper = document.querySelector("#dialogmote-panel");
-    const link = wrapper?.querySelector("#mikrofrontend__linkPanel");
+    const wrapper = document.querySelector(".dialogmote-microfrontend");
+    const link = wrapper?.querySelector("#dialogmote-panel");
     const attending = ((wrapper as HTMLElement | null)?.dataset.attending ?? null) as SvarTypeDto | null;
     const brevType = (wrapper as HTMLElement | null)?.dataset.brevtype ?? "";
     const svar = attendingToSvartypeAnalytics(attending);
