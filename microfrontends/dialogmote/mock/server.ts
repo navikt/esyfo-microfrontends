@@ -2,7 +2,6 @@ import { addDaysToDate } from "@esyfo/shared/dateUtils";
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { motebehovUtenSvar } from "./fixtures/dialogmote/motebehovUtenSvar.ts";
 import {
   createAvlysningsBrev,
   createInnkallingsBrev,
@@ -36,10 +35,6 @@ api.get("/api/dialogmote", (c) => {
       createdAt: addDaysToDate(new Date(), -103).toISOString(),
     }),
   ]);
-});
-
-api.get("/api/motebehov", (c) => {
-  return c.json(motebehovUtenSvar);
 });
 
 console.info(

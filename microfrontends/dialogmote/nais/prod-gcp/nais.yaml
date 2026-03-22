@@ -32,8 +32,6 @@ spec:
       rules:
         - application: isdialogmote
           namespace: teamsykefravr
-        - application: syfomotebehov
-          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
@@ -45,9 +43,5 @@ spec:
       value: "http://isdialogmote.teamsykefravr/api/v2/arbeidstaker/brev"
     - name: ISDIALOGMOTE_CLIENT_ID
       value: prod-gcp:teamsykefravr:isdialogmote
-    - name: SYFOMOTEBEHOV_API_URL
-      value: "http://syfomotebehov.team-esyfo/syfomotebehov/api/v4/arbeidstaker/motebehov"
-    - name: SYFOMOTEBEHOV_CLIENT_ID
-      value: prod-gcp:team-esyfo:syfomotebehov
     - name: DIALOGMOTE_URL
       value: "https://www.nav.no/syk/dialogmoter/sykmeldt"
