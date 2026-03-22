@@ -19,7 +19,8 @@ export interface TagMeta {
     | "info-moderate"
     | "success-moderate"
     | "warning-moderate"
-    | "error-moderate";
+    | "error-moderate"
+    | "neutral-moderate";
 }
 
 export interface MainPanelProps {
@@ -27,6 +28,7 @@ export interface MainPanelProps {
   bodyText: string;
   href: string;
   alertStyle: "info" | "success" | "warning" | "error";
+  panelId?: string;
   tag?: TagMeta;
 }
 
@@ -45,6 +47,7 @@ export function MainPanel({
   bodyText,
   href,
   alertStyle,
+  panelId,
   tag,
 }: MainPanelProps) {
   const { icon: AlertIcon, className: alertClassName } =
@@ -54,7 +57,7 @@ export function MainPanel({
     <a
       href={href}
       className={styles.chevronPanel}
-      id="mikrofrontend__linkPanel"
+      id={panelId ?? "mikrofrontend__linkPanel"}
     >
       <div className={styles.headingRow}>
         <Heading

@@ -54,9 +54,6 @@ importers:
       '@biomejs/biome':
         specifier: 2.4.7
         version: 2.4.7
-      '@hono/node-server':
-        specifier: 1.19.11
-        version: 1.19.11(hono@4.12.8)
       '@types/node':
         specifier: 25.5.0
         version: 25.5.0
@@ -69,9 +66,6 @@ importers:
       concurrently:
         specifier: 9.2.1
         version: 9.2.1
-      hono:
-        specifier: 4.12.8
-        version: 4.12.8
       lefthook:
         specifier: 2.1.4
         version: 2.1.4
@@ -84,9 +78,6 @@ importers:
       postcss-prefix-selector:
         specifier: 2.1.1
         version: 2.1.1(postcss@8.5.8)
-      rollup-plugin-import-map:
-        specifier: 3.0.0
-        version: 3.0.0
       tsx:
         specifier: 4.21.0
         version: 4.21.0
@@ -101,6 +92,12 @@ importers:
         version: link:../../packages/shared
 
   microfrontends/dialogmote:
+    dependencies:
+      '@esyfo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+
+  microfrontends/motebehov:
     dependencies:
       '@esyfo/shared':
         specifier: workspace:*
@@ -578,12 +575,6 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
-
-  '@hono/node-server@1.19.11':
-    resolution: {integrity: sha512-dr8/3zEaB+p0D2n/IUrlPF1HZm586qgJNXK1a9fhg/PzdtkK7Ksd5l312tJX2yBuALqDYBlG20QEbayqPyxn+g==}
-    engines: {node: '>=18.14.1'}
-    peerDependencies:
-      hono: ^4
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1487,10 +1478,6 @@ packages:
   help-me@5.0.0:
     resolution: {integrity: sha512-7xgomUX6ADmcYzFik0HzAxh/73YlKR9bmFzf51CZwR+b6YtzU2m0u49hQCqV6SvlqIqsaxovfwdvbnsw3b/zpg==}
 
-  hono@4.12.8:
-    resolution: {integrity: sha512-VJCEvtrezO1IAR+kqEYnxUOoStaQPGrCmX3j4wDTNOcD1uRPFpGlwQUIW8niPuvHXaTUxeOUl5MMDGrl+tmO9A==}
-    engines: {node: '>=16.9.0'}
-
   html-dom-parser@5.1.8:
     resolution: {integrity: sha512-MCIUng//mF2qTtGHXJWr6OLfHWmg3Pm8ezpfiltF83tizPWY17JxT4dRLE8lykJ5bChJELoY3onQKPbufJHxYA==}
 
@@ -2104,9 +2091,6 @@ packages:
 
   retext@9.0.0:
     resolution: {integrity: sha512-sbMDcpHCNjvlheSgMfEcVrZko3cDzdbe1x/e7G66dFp0Ff7Mldvi2uv6JkJQzdRcvLYE8CA8Oe8siQx8ZOgTcA==}
-
-  rollup-plugin-import-map@3.0.0:
-    resolution: {integrity: sha512-JB4WGCvTEDLU/puADvkJpqw3GqrdGs6UBR9USyYv47hkyWv0w1Nmwim4Cnq5yUZQQK1Po0gtA9s4NQblgc5i3A==}
 
   rollup@4.59.0:
     resolution: {integrity: sha512-2oMpl67a3zCH9H79LeMcbDhXW/UmWG/y2zuqnF2jQq5uq9TbM9TVyXvA4+t+ne2IIkBdrLpAaRQAvo7YI/Yyeg==}
@@ -3137,10 +3121,6 @@ snapshots:
 
   '@floating-ui/utils@0.2.11': {}
 
-  '@hono/node-server@1.19.11(hono@4.12.8)':
-    dependencies:
-      hono: 4.12.8
-
   '@img/colour@1.1.0':
     optional: true
 
@@ -4077,8 +4057,6 @@ snapshots:
 
   help-me@5.0.0: {}
 
-  hono@4.12.8: {}
-
   html-dom-parser@5.1.8:
     dependencies:
       domhandler: 5.0.3
@@ -4910,8 +4888,6 @@ snapshots:
       retext-latin: 4.0.0
       retext-stringify: 4.0.0
       unified: 11.0.5
-
-  rollup-plugin-import-map@3.0.0: {}
 
   rollup@4.59.0:
     dependencies:

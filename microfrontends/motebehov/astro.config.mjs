@@ -6,7 +6,7 @@ import prefixer from "postcss-prefix-selector";
 // https://astro.build/config
 export default defineConfig({
   build: {
-    assetsPrefix: "https://cdn.nav.no/min-side/dialogmote-microfrontend",
+    assetsPrefix: "https://cdn.nav.no/min-side/motebehov-microfrontend",
     inlineStylesheets: "always",
   },
   vite: {
@@ -14,7 +14,7 @@ export default defineConfig({
       postcss: {
         plugins: [
           prefixer({
-            prefix: ".dialogmote-microfrontend",
+            prefix: ".motebehov-microfrontend",
             ignoreFiles: [/module.css/, /ds-css/],
           }),
         ],
@@ -39,17 +39,17 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      ISDIALOGMOTE_API_URL: envField.string({
+      SYFOMOTEBEHOV_API_URL: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:3000/api/dialogmote",
+        default: "http://localhost:3000/api/motebehov",
       }),
-      ISDIALOGMOTE_CLIENT_ID: envField.string({
+      SYFOMOTEBEHOV_CLIENT_ID: envField.string({
         context: "server",
         access: "secret",
-        default: "local:teamsykefravr:isdialogmote",
+        default: "dev-gcp:team-esyfo:syfomotebehov",
       }),
-      DIALOGMOTE_URL: envField.string({
+      MOTEBEHOV_URL: envField.string({
         context: "server",
         access: "secret",
         default: "http://localhost:3000/syk/dialogmoter/sykmeldt",

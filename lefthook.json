@@ -16,6 +16,9 @@
       "typecheck-aktivitetskrav": {
         "run": "pnpm --filter aktivitetskrav-microfrontend run typecheck"
       },
+      "typecheck-motebehov": {
+        "run": "pnpm --filter motebehov-microfrontend run typecheck"
+      },
       "typecheck-shared": {
         "run": "pnpm --filter @esyfo/shared run typecheck"
       }

@@ -38,6 +38,11 @@ description = "Run dev server for meroppfolging"
 depends = ["install"]
 run = "pnpm run dev:meroppfolging-microfrontend"
 
+[tasks.dev-motebehov]
+description = "Run dev server for motebehov"
+depends = ["install"]
+run = "pnpm run dev:motebehov-microfrontend"
+
 [tasks.build-dialogmote]
 description = "Create production build for dialogmote"
 depends = ["install"]
@@ -53,11 +58,17 @@ description = "Create production build for meroppfolging"
 depends = ["install"]
 run = "pnpm run build:meroppfolging-microfrontend"
 
+[tasks.build-motebehov]
+description = "Create production build for motebehov"
+depends = ["install"]
+run = "pnpm run build:motebehov-microfrontend"
+
 [tasks.verify]
 description = "Verify code quality, run builds"
 depends = ["install"]
 run = ["pnpm run check",
 "pnpm run build:dialogmote-microfrontend",
 "pnpm run build:aktivitetskrav-microfrontend",
-"pnpm run build:meroppfolging-microfrontend"
+"pnpm run build:meroppfolging-microfrontend",
+"pnpm run build:motebehov-microfrontend"
 ]

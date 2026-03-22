@@ -2,8 +2,6 @@ import node from "@astrojs/node";
 import react from "@astrojs/react";
 import { defineConfig, envField } from "astro/config";
 import prefixer from "postcss-prefix-selector";
-import { rollupImportMapPlugin } from "rollup-plugin-import-map";
-import importmap from "./importmap.json";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,24 +24,7 @@ export default defineConfig({
       noExternal: ["@astrojs/react"],
     },
   },
-  integrations: [
-    react(),
-    {
-      name: "importmap",
-      hooks: {
-        "astro:build:setup": ({ vite, target }) => {
-          if (target === "client") {
-            vite.plugins.push({
-              // Import map externalizes React to NAV CDN — only needed when using client:only islands
-              ...rollupImportMapPlugin(importmap),
-              enforce: "pre",
-              apply: "build",
-            });
-          }
-        },
-      },
-    },
-  ],
+  integrations: [react()],
   i18n: {
     defaultLocale: "nb",
     locales: ["nb", "nn", "en"],

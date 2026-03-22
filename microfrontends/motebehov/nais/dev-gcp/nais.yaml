@@ -1,10 +1,10 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dialogmote-microfrontend # Change this to your application name
-  namespace: team-esyfo # Change this to your namespace
+  name: motebehov-microfrontend
+  namespace: team-esyfo
   labels:
-    team: team-esyfo # Change this to your team name
+    team: team-esyfo
 spec:
   observability:
     autoInstrumentation:
@@ -30,18 +30,18 @@ spec:
           namespace: min-side
     outbound:
       rules:
-        - application: isdialogmote
-          namespace: teamsykefravr
+        - application: syfomotebehov
+          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
     requests:
       cpu: "20m"
       memory: 128Mi
-  env: # Add your environment variables here
-    - name: ISDIALOGMOTE_API_URL
-      value: "http://isdialogmote.teamsykefravr/api/v2/arbeidstaker/brev"
-    - name: ISDIALOGMOTE_CLIENT_ID
-      value: prod-gcp:teamsykefravr:isdialogmote
-    - name: DIALOGMOTE_URL
-      value: "https://www.nav.no/syk/dialogmoter/sykmeldt"
+  env:
+    - name: SYFOMOTEBEHOV_API_URL
+      value: "http://syfomotebehov.team-esyfo/syfomotebehov/api/v4/arbeidstaker/motebehov"
+    - name: SYFOMOTEBEHOV_CLIENT_ID
+      value: dev-gcp:team-esyfo:syfomotebehov
+    - name: MOTEBEHOV_URL
+      value: "https://www.ekstern.dev.nav.no/syk/dialogmoter/sykmeldt"

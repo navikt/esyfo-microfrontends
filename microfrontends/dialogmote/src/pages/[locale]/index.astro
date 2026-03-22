@@ -1,18 +1,14 @@
 ---
+import { MainPanel } from "@esyfo/shared/components";
 import { isLocal } from "@esyfo/shared/environment";
-import type { BrevDTO } from "@schema/brevSchema";
-import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
-import MoteBehovPanel from "@src/components/motebehov/MoteBehovPanel.astro";
-import DialogmotePanel from "@src/components/moteinkalling/DialogmotePanel.astro";
-import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
-import { fetchBrev, fetchMotebehov } from "@src/utils/fetch";
-import { getShowMotebehovPanel } from "@src/utils/motebehov";
-import "@src/styles/aksel.css";
+import type { BrevDto } from "@schema/brevSchema";
+import { getLatestBrev, getShowDialogmotePanel } from "@src/domain/brev";
+import { resolvePanel } from "@src/domain/panelResolver";
+import { fetchBrev } from "@src/infrastructure/fetch";
 
 const userToken = Astro.locals.token;
 
-let brev: BrevDTO[];
-let motebehov: MotebehovStatusDTO;
+let brev: BrevDto[];
 
 try {
   brev = await fetchBrev(userToken);
@@ -20,29 +16,18 @@ try {
   return new Response("Internal Server Error", { status: 503 });
 }
 
-try {
-  motebehov = await fetchMotebehov(userToken);
-} catch {
-  return new Response("Internal Server Error", { status: 503 });
-}
-
 const latestBrev = getLatestBrev(brev);
-
 const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
-const showMotebehovPanel = getShowMotebehovPanel(motebehov);
 ---
 
 {isLocal && <meta charset="UTF-8" />}
 {() => {
   if (showDialogmotePanel && latestBrev) {
+    const panelProps = resolvePanel(latestBrev);
     return (
-      <DialogmotePanel attending={latestBrev.svar?.svarType || null} date={latestBrev.tid} brevType={latestBrev.brevType} />
-    );
-  }
-
-  if (showMotebehovPanel) {
-    return (
-      <MoteBehovPanel />
+      <div class="dialogmote-microfrontend">
+        <MainPanel {...panelProps} />
+      </div>
     );
   }
 }}
