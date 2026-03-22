@@ -97,7 +97,7 @@ describe("fetchFromBackend", () => {
     fetchMock.mockResolvedValue({
       ok: true,
       json: vi.fn().mockRejectedValue(jsonError),
-    } as Response);
+    } as unknown as Response);
 
     await expect(
       fetchFromBackend({

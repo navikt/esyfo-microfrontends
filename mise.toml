@@ -67,6 +67,7 @@ run = "pnpm run build:motebehov-microfrontend"
 description = "Verify code quality, run builds"
 depends = ["install"]
 run = ["pnpm run check",
+"pnpm test",
 "pnpm run build:dialogmote-microfrontend",
 "pnpm run build:aktivitetskrav-microfrontend",
 "pnpm run build:meroppfolging-microfrontend",
