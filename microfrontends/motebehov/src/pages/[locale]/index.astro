@@ -1,0 +1,36 @@
+---
+import { MOTEBEHOV_URL } from "astro:env/server";
+import { MainPanel } from "@esyfo/shared/components";
+import { isLocal } from "@esyfo/shared/environment";
+import type { MotebehovStatusDTO } from "@schema/motebehovSchema";
+import { fetchMotebehov } from "@src/utils/fetch";
+import { getShowMotebehovPanel } from "@src/utils/motebehov";
+
+const userToken = Astro.locals.token;
+
+let motebehov: MotebehovStatusDTO;
+try {
+  motebehov = await fetchMotebehov(userToken);
+} catch {
+  return new Response("Internal Server Error", { status: 503 });
+}
+
+const showMotebehovPanel = getShowMotebehovPanel(motebehov);
+---
+
+{isLocal && <meta charset="UTF-8" />}
+{() => {
+  if (showMotebehovPanel) {
+    return (
+      <div class="motebehov-microfrontend">
+        <MainPanel
+          headingText="Dialogmøte med NAV"
+          bodyText="Trenger du et dialogmøte?"
+          href={`${MOTEBEHOV_URL}/motebehov/svar`}
+          alertStyle="warning"
+          tag={{ text: "Du har ikke svart", variant: "warning-moderate" }}
+        />
+      </div>
+    );
+  }
+}}
