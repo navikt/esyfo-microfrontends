@@ -19,7 +19,8 @@ export interface TagMeta {
     | "info-moderate"
     | "success-moderate"
     | "warning-moderate"
-    | "error-moderate";
+    | "error-moderate"
+    | "neutral-moderate";
 }
 
 export interface MainPanelProps {
