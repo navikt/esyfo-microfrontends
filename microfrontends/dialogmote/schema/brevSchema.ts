@@ -112,14 +112,14 @@ function transformDocumentKey(key: unknown): string | null {
   return "UNKNOWN";
 }
 
-export type BrevDTO = z.infer<typeof brevSchema>;
-export type BrevTypeDTO = z.infer<typeof brevType>;
-export type BrevDocumentComponentDTO = z.infer<typeof documentComponent>;
-export type BrevDocumentComponentTypeDTO = z.infer<
+export type BrevDto = z.infer<typeof brevSchema>;
+export type BrevTypeDto = z.infer<typeof brevType>;
+export type BrevDocumentComponentDto = z.infer<typeof documentComponent>;
+export type BrevDocumentComponentTypeDto = z.infer<
   typeof documentComponentTypeWithUnknown
 >;
-export type BrevDocumentComponentKeyDTO = z.infer<
+export type BrevDocumentComponentKeyDto = z.infer<
   typeof documentComponentKeyWithUnknown
 >;
-export type SvarTypeDTO = z.infer<typeof svarType>;
-export type SvarResponsDTO = z.infer<typeof svar>;
+export type SvarTypeDto = z.infer<typeof svarType>;
+export type SvarResponsDto = z.infer<typeof svar>;

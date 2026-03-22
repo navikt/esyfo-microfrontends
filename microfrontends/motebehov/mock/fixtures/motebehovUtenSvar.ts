@@ -1,6 +1,6 @@
-import type { MotebehovStatusDTO } from "@schema/motebehovSchema.ts";
+import type { MotebehovStatusDto } from "@schema/motebehovSchema.ts";
 
-export const motebehovUtenSvar: MotebehovStatusDTO = {
+export const motebehovUtenSvar: MotebehovStatusDto = {
   visMotebehov: true,
   skjemaType: "SVAR_BEHOV",
   motebehov: null,

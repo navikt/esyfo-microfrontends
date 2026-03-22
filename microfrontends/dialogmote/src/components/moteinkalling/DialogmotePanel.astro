@@ -1,7 +1,7 @@
 ---
 import { DIALOGMOTE_URL } from "astro:env/server";
 import { getLongDateFormat } from "@esyfo/shared/dateUtils";
-import type { BrevTypeDTO, SvarTypeDTO } from "@schema/brevSchema";
+import type { BrevTypeDto, SvarTypeDto } from "@schema/brevSchema";
 import Content from "../shared/Content.astro";
 import styles from "../shared/Content.module.css";
 
@@ -12,8 +12,8 @@ interface TagMeta {
 
 export interface Props {
   date: string;
-  attending: SvarTypeDTO | null;
-  brevType: BrevTypeDTO;
+  attending: SvarTypeDto | null;
+  brevType: BrevTypeDto;
 }
 
 const mainText =
@@ -69,10 +69,10 @@ const tag = (): TagMeta => {
 <script>
     import { logUmamiEvent } from "@src/utils/analytics";
     import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
-    import type { SvarTypeDTO } from "@schema/brevSchema";
+    import type { SvarTypeDto } from "@schema/brevSchema";
 
     const dialogmotePanel = document.querySelector("#dialogmote-panel");
-    const attending = (dialogmotePanel as HTMLElement)?.dataset.attending as SvarTypeDTO;
+    const attending = (dialogmotePanel as HTMLElement)?.dataset.attending as SvarTypeDto;
     const brevType = (dialogmotePanel as HTMLElement)?.dataset.brevtype ?? "";
     const svar = attendingToSvartypeAnalytics(attending);
 

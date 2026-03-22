@@ -1,4 +1,4 @@
-import type { SvarTypeDTO } from "../../schema/brevSchema.ts";
+import type { SvarTypeDto } from "../../schema/brevSchema.ts";
 
 type SvarTypeAnalytics =
   | "KOMMER"
@@ -7,7 +7,7 @@ type SvarTypeAnalytics =
   | "IKKE_SVART";
 
 export const attendingToSvartypeAnalytics = (
-  attending: SvarTypeDTO | null,
+  attending: SvarTypeDto | null,
 ): SvarTypeAnalytics => {
   switch (attending) {
     case "KOMMER":

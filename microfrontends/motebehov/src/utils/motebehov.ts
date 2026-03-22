@@ -1,7 +1,7 @@
-import type { MotebehovStatusDTO } from "@schema/motebehovSchema.ts";
+import type { MotebehovStatusDto } from "@schema/motebehovSchema.ts";
 
 export const getShowMotebehovPanel = (
-  motebehov: MotebehovStatusDTO,
+  motebehov: MotebehovStatusDto,
 ): boolean => {
   return (
     motebehov &&

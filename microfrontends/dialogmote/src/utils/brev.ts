@@ -1,6 +1,6 @@
-import type { BrevDTO } from "../../schema/brevSchema.ts";
+import type { BrevDto } from "../../schema/brevSchema.ts";
 
-const sortBrevArray = (brev: BrevDTO[]): BrevDTO[] => {
+const sortBrevArray = (brev: BrevDto[]): BrevDto[] => {
   if (brev && brev.length > 0) {
     return brev
       .filter((brev) => brev.brevType !== "REFERAT_ENDRET")
@@ -13,7 +13,7 @@ const sortBrevArray = (brev: BrevDTO[]): BrevDTO[] => {
   return [];
 };
 
-export const getLatestBrev = (brev: BrevDTO[]): BrevDTO | null => {
+export const getLatestBrev = (brev: BrevDto[]): BrevDto | null => {
   const brevArraySorted = sortBrevArray(brev);
 
   if (brevArraySorted.length === 0) {
@@ -23,7 +23,7 @@ export const getLatestBrev = (brev: BrevDTO[]): BrevDTO | null => {
   return brevArraySorted[0];
 };
 
-export const getShowDialogmotePanel = (latestBrev: BrevDTO | null): boolean => {
+export const getShowDialogmotePanel = (latestBrev: BrevDto | null): boolean => {
   if (latestBrev === null) {
     return false;
   }

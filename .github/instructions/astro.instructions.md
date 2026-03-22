@@ -15,10 +15,10 @@ Astro components have two sections separated by `---` fences:
 // - Token exchange + data fetching
 // - Business logic
 import { fetchBrev } from "@src/utils/fetch";
-import type { BrevDTO } from "@schema/brevSchema";
+import type { BrevDto } from "@schema/brevSchema";
 
 const userToken = Astro.locals.token;
-const brev: BrevDTO[] = await fetchBrev(userToken);
+const brev: BrevDto[] = await fetchBrev(userToken);
 ---
 
 <!-- Template: HTML + Astro components + React islands -->

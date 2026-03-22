@@ -5,12 +5,12 @@ import {
 import { getAccessToken } from "@esyfo/shared/token";
 import { logger } from "@navikt/pino-logger";
 import {
-  type MotebehovStatusDTO,
+  type MotebehovStatusDto,
   motebehovStatusSchema,
 } from "@schema/motebehovSchema.ts";
 import { z } from "zod";
 
-const parseMotebehov = (data: unknown): MotebehovStatusDTO => {
+const parseMotebehov = (data: unknown): MotebehovStatusDto => {
   const parsedMotebehov = motebehovStatusSchema.safeParse(data);
 
   if (parsedMotebehov.success) {
@@ -30,7 +30,7 @@ const parseMotebehov = (data: unknown): MotebehovStatusDTO => {
 
 export const fetchMotebehov = async (
   userToken: string,
-): Promise<MotebehovStatusDTO> => {
+): Promise<MotebehovStatusDto> => {
   const accessToken = await getAccessToken(userToken, SYFOMOTEBEHOV_CLIENT_ID);
 
   const response = await fetch(SYFOMOTEBEHOV_API_URL, {

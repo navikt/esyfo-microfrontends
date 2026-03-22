@@ -1,9 +1,9 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
-import type { BrevDocumentComponentDTO, BrevDTO } from "@schema/brevSchema.ts";
+import type { BrevDocumentComponentDto, BrevDto } from "@schema/brevSchema.ts";
 
 export const createDocumentComponent = (
-  props?: Partial<BrevDocumentComponentDTO>,
-): BrevDocumentComponentDTO => {
+  props?: Partial<BrevDocumentComponentDto>,
+): BrevDocumentComponentDto => {
   return {
     type: "PARAGRAPH",
     title: "TEST_HEADER",
@@ -13,7 +13,7 @@ export const createDocumentComponent = (
   };
 };
 
-export const createInnkallingsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
+export const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -7).toISOString();
 
   return {
@@ -34,21 +34,21 @@ export const createInnkallingsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
   };
 };
 
-export const createEndringsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
+export const createEndringsBrev = (props?: Partial<BrevDto>): BrevDto => {
   return {
     ...createInnkallingsBrev({ brevType: "NYTT_TID_STED" }),
     ...props,
   };
 };
 
-export const createAvlysningsBrev = (props?: Partial<BrevDTO>): BrevDTO => {
+export const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
   return {
     ...createInnkallingsBrev({ brevType: "AVLYST" }),
     ...props,
   };
 };
 
-export const createReferatBrev = (props?: Partial<BrevDTO>): BrevDTO => {
+export const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -67).toISOString();
   const defaultDate2 = addDaysToDate(new Date(), -77).toISOString();
 
@@ -61,7 +61,7 @@ export const createReferatBrev = (props?: Partial<BrevDTO>): BrevDTO => {
   };
 };
 
-export const createReferatEndretBrev = (props?: Partial<BrevDTO>): BrevDTO => {
+export const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -87).toISOString();
   const defaultDate2 = addDaysToDate(new Date(), -97).toISOString();
 
