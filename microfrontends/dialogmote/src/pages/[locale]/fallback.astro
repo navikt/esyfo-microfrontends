@@ -1,20 +1,13 @@
 ---
-// Your microfrontend could fail with an error. This is a static version of your microfrontend that will be displayed
-// to the user instead.
-
 import { isLocal } from "@esyfo/shared/environment";
 import { Heading } from "@navikt/ds-react";
-import { text } from "@src/language/text";
-import type { Language } from "@src/language/types";
-
-const language = Astro.currentLocale as Language;
 ---
 
 {isLocal && <meta charset="UTF-8" />}
-<section class="tms-microfrontend-template-ssr">
+<section class="dialogmote-microfrontend">
   <div>
     <Heading size="medium" level="2">
-      {text.title[language]}
+      Dialogmøte
     </Heading>
   </div>
 </section>
