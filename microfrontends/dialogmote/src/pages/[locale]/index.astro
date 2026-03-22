@@ -2,9 +2,9 @@
 import { MainPanel } from "@esyfo/shared/components";
 import { isLocal } from "@esyfo/shared/environment";
 import type { BrevDto } from "@schema/brevSchema";
+import { getLatestBrev, getShowDialogmotePanel } from "@src/domain/brev";
 import { resolvePanel } from "@src/domain/panelResolver";
-import { getLatestBrev, getShowDialogmotePanel } from "@src/utils/brev";
-import { fetchBrev } from "@src/utils/fetch";
+import { fetchBrev } from "@src/infrastructure/fetch";
 
 const userToken = Astro.locals.token;
 
@@ -24,31 +24,10 @@ const showDialogmotePanel = getShowDialogmotePanel(latestBrev);
 {() => {
   if (showDialogmotePanel && latestBrev) {
     const panelProps = resolvePanel(latestBrev);
-    const attending = latestBrev.svar?.svarType || null;
-    const brevType = latestBrev.brevType;
-
     return (
-      <div
-        class="dialogmote-microfrontend"
-        data-attending={attending}
-        data-brevtype={brevType}
-      >
+      <div class="dialogmote-microfrontend">
         <MainPanel {...panelProps} />
       </div>
     );
   }
 }}
-
-<script>
-    import { logUmamiEvent } from "@src/utils/analytics";
-    import { attendingToSvartypeAnalytics } from "@src/utils/dialogmote";
-    import type { SvarTypeDto } from "@schema/brevSchema";
-
-    const wrapper = document.querySelector(".dialogmote-microfrontend");
-    const link = wrapper?.querySelector("#dialogmote-panel");
-    const attending = ((wrapper as HTMLElement | null)?.dataset.attending ?? null) as SvarTypeDto | null;
-    const brevType = (wrapper as HTMLElement | null)?.dataset.brevtype ?? "";
-    const svar = attendingToSvartypeAnalytics(attending);
-
-    link?.addEventListener("click", () => logUmamiEvent("Navigerer til møteinnkalling", { svar: svar, brevType: brevType }));
-</script>

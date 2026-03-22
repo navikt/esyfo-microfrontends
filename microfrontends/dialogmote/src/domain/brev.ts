@@ -1,4 +1,4 @@
-import type { BrevDto } from "../../schema/brevSchema.ts";
+import type { BrevDto } from "@schema/brevSchema.ts";
 
 const sortBrevArray = (brev: BrevDto[]): BrevDto[] => {
   if (brev && brev.length > 0) {

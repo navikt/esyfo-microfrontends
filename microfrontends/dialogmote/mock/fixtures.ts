@@ -1,7 +1,7 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
-import type { BrevDocumentComponentDto, BrevDto } from "@schema/brevSchema.ts";
+import type { BrevDocumentComponentDto, BrevDto } from "schema/brevSchema";
 
-export const createDocumentComponent = (
+const createDocumentComponent = (
   props?: Partial<BrevDocumentComponentDto>,
 ): BrevDocumentComponentDto => {
   return {
@@ -13,7 +13,7 @@ export const createDocumentComponent = (
   };
 };
 
-export const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
+const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -7).toISOString();
 
   return {
@@ -34,21 +34,21 @@ export const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
   };
 };
 
-export const createEndringsBrev = (props?: Partial<BrevDto>): BrevDto => {
+const createEndringsBrev = (props?: Partial<BrevDto>): BrevDto => {
   return {
     ...createInnkallingsBrev({ brevType: "NYTT_TID_STED" }),
     ...props,
   };
 };
 
-export const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
+const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
   return {
     ...createInnkallingsBrev({ brevType: "AVLYST" }),
     ...props,
   };
 };
 
-export const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
+const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -67).toISOString();
   const defaultDate2 = addDaysToDate(new Date(), -77).toISOString();
 
@@ -61,7 +61,7 @@ export const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
   };
 };
 
-export const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
+const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
   const defaultDate = addDaysToDate(new Date(), -87).toISOString();
   const defaultDate2 = addDaysToDate(new Date(), -97).toISOString();
 
@@ -72,4 +72,22 @@ export const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
     tid: props?.createdAt || defaultDate2,
     ...props,
   };
+};
+
+const innkallingsBrev = createInnkallingsBrev({
+  createdAt: addDaysToDate(new Date(), -3).toISOString(),
+});
+
+const fixtures = {
+  innkallingsBrev,
+};
+
+export default fixtures;
+
+export {
+  createAvlysningsBrev,
+  createEndringsBrev,
+  createInnkallingsBrev,
+  createReferatBrev,
+  createReferatEndretBrev,
 };
