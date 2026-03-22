@@ -47,6 +47,9 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   update-manifest-dev:
+    permissions:
+      contents: "read"
+      id-token: "write"
     uses: navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@main
     needs: build
     with:
