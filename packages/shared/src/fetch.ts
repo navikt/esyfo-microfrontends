@@ -45,7 +45,17 @@ export const fetchFromBackend = async <T>({
     throw new Error(`Http error with status: ${response.status}`);
   }
 
-  const data = await response.json();
+  let data: unknown;
+  try {
+    data = await response.json();
+  } catch (error) {
+    logger.error(
+      { api: apiName, error },
+      `Invalid JSON response from ${apiName}`,
+    );
+    throw error;
+  }
+
   const parsed = schema.safeParse(data);
 
   if (parsed.success) {
