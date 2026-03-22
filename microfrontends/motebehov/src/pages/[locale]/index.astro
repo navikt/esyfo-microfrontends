@@ -34,3 +34,10 @@ const showMotebehovPanel = getShowMotebehovPanel(motebehov);
     );
   }
 }}
+
+<script>
+    import { logUmamiEvent } from "@src/utils/analytics";
+
+    const motebehovPanel = document.querySelector("#mikrofrontend__linkPanel");
+    motebehovPanel?.addEventListener("click", () => logUmamiEvent("Navigerer til svar møtebehov"));
+</script>
