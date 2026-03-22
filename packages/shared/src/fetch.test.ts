@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
 const mockState = vi.hoisted(() => ({
@@ -20,7 +20,12 @@ describe("fetchFromBackend", () => {
     mockState.getAccessToken.mockReset();
     mockState.getAccessToken.mockResolvedValue("test-token");
     fetchMock.mockReset();
-    global.fetch = fetchMock as typeof fetch;
+    vi.stubGlobal("fetch", fetchMock);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it("returns parsed data on a successful response", async () => {

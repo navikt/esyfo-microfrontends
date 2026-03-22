@@ -35,6 +35,10 @@ describe("getOppfyltBodyText", () => {
     expect(getOppfyltBodyText("FRISKMELDT")).toContain("friskmeldt");
   });
 
+  it("returns text for TILTAK", () => {
+    expect(getOppfyltBodyText("TILTAK")).toMatch(/tiltak/i);
+  });
+
   it("returns default text for undefined", () => {
     expect(getOppfyltBodyText(undefined)).toBe(BodyDefaultContent.oppfylt);
   });

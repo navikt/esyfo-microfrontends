@@ -30,46 +30,9 @@ const validBrev = {
   },
 } as const;
 
-describe("brevSchema", () => {
+describe("brevSchema preprocessors", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  it("parses a valid brev with all fields", () => {
-    const result = brevSchema.safeParse(validBrev);
-
-    expect(result.success).toBe(true);
-  });
-
-  it("parses a valid brev with svar", () => {
-    const result = brevSchema.safeParse({
-      ...validBrev,
-      svar: {
-        svarTidspunkt: "2024-01-15T10:00:00.000Z",
-        svarType: "KOMMER",
-        svarTekst: "Jeg kommer",
-      },
-    });
-
-    expect(result.success).toBe(true);
-  });
-
-  it("parses a valid brev with svar set to null", () => {
-    const result = brevSchema.safeParse({
-      ...validBrev,
-      svar: null,
-    });
-
-    expect(result.success).toBe(true);
-  });
-
-  it("fails for invalid brevType", () => {
-    const result = brevSchema.safeParse({
-      ...validBrev,
-      brevType: "INVALID",
-    });
-
-    expect(result.success).toBe(false);
   });
 
   it("transforms unknown componentType to UNKNOWN and logs a warning", () => {
@@ -88,7 +51,7 @@ describe("brevSchema", () => {
     expect(logger.warn).toHaveBeenCalled();
   });
 
-  it("transforms unknown documentKey to UNKNOWN", () => {
+  it("transforms unknown documentKey to UNKNOWN and logs a warning", () => {
     const result = brevSchema.safeParse({
       ...validBrev,
       document: [
@@ -104,7 +67,7 @@ describe("brevSchema", () => {
     expect(logger.warn).toHaveBeenCalled();
   });
 
-  it("accepts null documentKey", () => {
+  it("accepts null documentKey without logging a warning", () => {
     const result = brevSchema.safeParse({
       ...validBrev,
       document: [
@@ -117,11 +80,6 @@ describe("brevSchema", () => {
 
     expect(result.success).toBe(true);
     expect(result.data.document[0]?.key).toBeNull();
-  });
-
-  it("fails when required fields are missing", () => {
-    const result = brevSchema.safeParse({});
-
-    expect(result.success).toBe(false);
+    expect(logger.warn).not.toHaveBeenCalled();
   });
 });

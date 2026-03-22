@@ -1,8 +1,8 @@
-import { defineWorkspace } from "vitest/config";
-
-export default defineWorkspace([
+const workspaceProjects = [
   "packages/shared",
   "microfrontends/dialogmote",
   "microfrontends/motebehov",
   "microfrontends/aktivitetskrav",
-]);
+] as const;
+
+export default workspaceProjects;

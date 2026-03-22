@@ -19,6 +19,10 @@ describe("dateUtils", () => {
     expect(result).toContain("2024");
   });
 
+  it("formats an ISO string as a long nb-NO date", () => {
+    expect(getLongDateFormat("2024-01-15T10:00:00.000Z")).toContain("januar");
+  });
+
   it("formats a short nb-NO date", () => {
     const result = getShortDateFormat(new Date(2024, 0, 5, 12));
 
