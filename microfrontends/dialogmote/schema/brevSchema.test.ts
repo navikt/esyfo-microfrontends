@@ -36,7 +36,7 @@ describe("brevSchema preprocessors", () => {
   });
 
   it("transforms unknown componentType to UNKNOWN and logs a warning", () => {
-    const result = brevSchema.safeParse({
+    const result = brevSchema.parse({
       ...validBrev,
       document: [
         {
@@ -46,13 +46,12 @@ describe("brevSchema preprocessors", () => {
       ],
     });
 
-    expect(result.success).toBe(true);
-    expect(result.data.document[0]?.type).toBe("UNKNOWN");
+    expect(result.document[0]?.type).toBe("UNKNOWN");
     expect(logger.warn).toHaveBeenCalled();
   });
 
   it("transforms unknown documentKey to UNKNOWN and logs a warning", () => {
-    const result = brevSchema.safeParse({
+    const result = brevSchema.parse({
       ...validBrev,
       document: [
         {
@@ -62,13 +61,12 @@ describe("brevSchema preprocessors", () => {
       ],
     });
 
-    expect(result.success).toBe(true);
-    expect(result.data.document[0]?.key).toBe("UNKNOWN");
+    expect(result.document[0]?.key).toBe("UNKNOWN");
     expect(logger.warn).toHaveBeenCalled();
   });
 
   it("accepts null documentKey without logging a warning", () => {
-    const result = brevSchema.safeParse({
+    const result = brevSchema.parse({
       ...validBrev,
       document: [
         {
@@ -78,8 +76,7 @@ describe("brevSchema preprocessors", () => {
       ],
     });
 
-    expect(result.success).toBe(true);
-    expect(result.data.document[0]?.key).toBeNull();
+    expect(result.document[0]?.key).toBeNull();
     expect(logger.warn).not.toHaveBeenCalled();
   });
 });
