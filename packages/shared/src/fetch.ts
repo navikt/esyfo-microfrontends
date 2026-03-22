@@ -29,7 +29,10 @@ export const fetchFromBackend = async <T>({
       },
     });
   } catch (error) {
-    logger.error({ api: apiName, error }, `Network error fetching ${apiName}`);
+    logger.error(
+      { api: apiName, url: apiUrl, error },
+      `Network error fetching ${apiName}`,
+    );
     throw error;
   }
 
@@ -37,6 +40,7 @@ export const fetchFromBackend = async <T>({
     logger.error(
       {
         api: apiName,
+        url: apiUrl,
         status: response.status,
         statusText: response.statusText,
       },
@@ -50,7 +54,7 @@ export const fetchFromBackend = async <T>({
     data = await response.json();
   } catch (error) {
     logger.error(
-      { api: apiName, error },
+      { api: apiName, url: apiUrl, error },
       `Invalid JSON response from ${apiName}`,
     );
     throw error;
@@ -63,7 +67,11 @@ export const fetchFromBackend = async <T>({
   }
 
   logger.error(
-    { api: apiName, validationErrors: z.flattenError(parsed.error) },
+    {
+      api: apiName,
+      url: apiUrl,
+      validationErrors: z.flattenError(parsed.error),
+    },
     `Invalid ${apiName} response`,
   );
 
