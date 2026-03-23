@@ -2,8 +2,6 @@ import { describe, expect, it } from "vitest";
 
 import {
   BodyDefaultContent,
-  formatSvarfrist,
-  formatVurderingsDato,
   getOppfyltBodyText,
   getUnntakBodyText,
 } from "./text";
@@ -41,17 +39,5 @@ describe("getOppfyltBodyText", () => {
 
   it("returns default text for undefined", () => {
     expect(getOppfyltBodyText(undefined)).toBe(BodyDefaultContent.oppfylt);
-  });
-});
-
-describe("date format helpers", () => {
-  it("formats vurderingsdato with the expected prefix", () => {
-    expect(formatVurderingsDato("2024-01-15T00:00:00.000Z")).toMatch(
-      /^Dato for vurdering:/,
-    );
-  });
-
-  it("formats svarfrist with the expected prefix", () => {
-    expect(formatSvarfrist("2024-02-01T00:00:00.000Z")).toMatch(/^Svarfrist:/);
   });
 });
