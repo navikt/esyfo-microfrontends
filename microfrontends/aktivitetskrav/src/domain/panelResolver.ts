@@ -1,4 +1,3 @@
-import { AKTIVITETSKRAV_URL } from "astro:env/server";
 import type { MainPanelProps } from "@esyfo/shared/components";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 import {
@@ -23,21 +22,22 @@ const withPanelId = (
   panelId: "aktivitetskrav-panel",
 });
 
-const resolveUnderArbeid = (): MainPanelProps =>
+const resolveUnderArbeid = (href: string): MainPanelProps =>
   withPanelId({
     headingText: HeadingContent.vurderer,
     bodyText: BodyContent.underArbeid,
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "info",
   });
 
 const resolveUnntak = (
   vurdering: VurderingForStatus<"UNNTAK">,
+  href: string,
 ): MainPanelProps =>
   withPanelId({
     headingText: HeadingContent.harVurdert,
     bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "success",
     tag: {
       text: formatVurderingsDato(vurdering.sistVurdert),
@@ -47,11 +47,12 @@ const resolveUnntak = (
 
 const resolveOppfylt = (
   vurdering: VurderingForStatus<"OPPFYLT">,
+  href: string,
 ): MainPanelProps =>
   withPanelId({
     headingText: HeadingContent.harVurdert,
     bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "success",
     tag: {
       text: formatVurderingsDato(vurdering.sistVurdert),
@@ -61,16 +62,17 @@ const resolveOppfylt = (
 
 const resolveForhandsvarsel = (
   vurdering: VurderingForStatus<"FORHANDSVARSEL">,
+  href: string,
   now: Date,
 ): MainPanelProps => {
   if (!vurdering.journalpostId) {
-    return resolveUnderArbeid();
+    return resolveUnderArbeid(href);
   }
 
   return withPanelId({
     headingText: HeadingContent.vurderer,
     bodyText: BodyContent.forhandsvarsel,
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "warning",
     tag: {
       text: formatSvarfrist(vurdering.fristDato),
@@ -84,11 +86,12 @@ const resolveForhandsvarsel = (
 
 const resolveIkkeAktuell = (
   vurdering: VurderingForStatus<"IKKE_AKTUELL">,
+  href: string,
 ): MainPanelProps =>
   withPanelId({
     headingText: HeadingContent.harVurdert,
     bodyText: BodyContent.ikkeAktuell,
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "info",
     tag: {
       text: formatVurderingsDato(vurdering.sistVurdert),
@@ -98,11 +101,12 @@ const resolveIkkeAktuell = (
 
 const resolveIkkeOppfylt = (
   vurdering: VurderingForStatus<"IKKE_OPPFYLT">,
+  href: string,
 ): MainPanelProps =>
   withPanelId({
     headingText: HeadingContent.harVurdert,
     bodyText: BodyContent.ikkeOppfylt,
-    href: AKTIVITETSKRAV_URL,
+    href,
     alertStyle: "error",
     tag: {
       text: formatVurderingsDato(vurdering.sistVurdert),
@@ -112,22 +116,23 @@ const resolveIkkeOppfylt = (
 
 export const resolvePanel = (
   vurdering: AktivitetskravVurdering,
+  href: string,
   now: Date = new Date(),
 ): MainPanelProps => {
   switch (vurdering.status) {
     case "NY":
     case "NY_VURDERING":
     case "AVVENT":
-      return resolveUnderArbeid();
+      return resolveUnderArbeid(href);
     case "UNNTAK":
-      return resolveUnntak(vurdering);
+      return resolveUnntak(vurdering, href);
     case "OPPFYLT":
-      return resolveOppfylt(vurdering);
+      return resolveOppfylt(vurdering, href);
     case "FORHANDSVARSEL":
-      return resolveForhandsvarsel(vurdering, now);
+      return resolveForhandsvarsel(vurdering, href, now);
     case "IKKE_AKTUELL":
-      return resolveIkkeAktuell(vurdering);
+      return resolveIkkeAktuell(vurdering, href);
     case "IKKE_OPPFYLT":
-      return resolveIkkeOppfylt(vurdering);
+      return resolveIkkeOppfylt(vurdering, href);
   }
 };
