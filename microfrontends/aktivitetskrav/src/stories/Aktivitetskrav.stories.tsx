@@ -2,10 +2,12 @@ import { MainPanel } from "@esyfo/shared/components";
 import type { Meta, StoryObj } from "@storybook/react";
 import { resolvePanel } from "../domain/panelResolver";
 import {
+  createAvvent,
   createForhandsvarsel,
   createIkkeAktuell,
   createIkkeOppfylt,
   createNyVurdering,
+  createNyVurderingStatus,
   createOppfylt,
   createUnntak,
 } from "../domain/test-utils/vurdering";
@@ -20,8 +22,16 @@ type Story = StoryObj<typeof meta>;
 const href = "/syk/aktivitetskrav";
 const now = new Date("2024-06-01T12:00:00.000Z");
 
-export const UnderArbeid: Story = {
+export const Ny: Story = {
   args: resolvePanel(createNyVurdering(), href, now),
+};
+
+export const NyVurdering: Story = {
+  args: resolvePanel(createNyVurderingStatus(), href, now),
+};
+
+export const Avvent: Story = {
+  args: resolvePanel(createAvvent(), href, now),
 };
 
 export const Unntak: Story = {
