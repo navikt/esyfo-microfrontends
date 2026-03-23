@@ -1,10 +1,12 @@
 import { defineConfig } from "vitest/config";
 
-import workspaceProjects from "./vitest.workspace";
-
 export default defineConfig({
   test: {
-    passWithNoTests: true,
-    projects: workspaceProjects,
+    projects: [
+      "packages/shared",
+      "microfrontends/dialogmote",
+      "microfrontends/motebehov",
+      "microfrontends/aktivitetskrav",
+    ],
   },
 });
