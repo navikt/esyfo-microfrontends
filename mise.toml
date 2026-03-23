@@ -63,6 +63,11 @@ description = "Create production build for motebehov"
 depends = ["install"]
 run = "pnpm run build:motebehov-microfrontend"
 
+[tasks.test]
+description = "Run tests"
+depends = ["install"]
+run = "pnpm test"
+
 [tasks.verify]
 description = "Verify code quality, run builds"
 depends = ["install"]
