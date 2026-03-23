@@ -69,7 +69,7 @@ depends = ["install"]
 run = "pnpm test"
 
 [tasks.verify]
-description = "Verify code quality, run builds"
+description = "Verify code quality, run tests and builds"
 depends = ["install"]
 run = ["pnpm run check",
 "pnpm test",
