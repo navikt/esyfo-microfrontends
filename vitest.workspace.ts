@@ -3,6 +3,6 @@ const workspaceProjects = [
   "microfrontends/dialogmote",
   "microfrontends/motebehov",
   "microfrontends/aktivitetskrav",
-] as const;
+];
 
 export default workspaceProjects;
