@@ -9,7 +9,8 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+const href = "/syk/dialogmoter/sykmeldt";
 
 export const TrengerDuDialogmote: Story = {
-  args: resolvePanel(),
+  args: resolvePanel(href),
 };

@@ -17,17 +17,18 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+const href = "/syk/aktivitetskrav";
 
 export const UnderArbeid: Story = {
-  args: resolvePanel(createNyVurdering()),
+  args: resolvePanel(createNyVurdering(), href),
 };
 
 export const Unntak: Story = {
-  args: resolvePanel(createUnntak()),
+  args: resolvePanel(createUnntak(), href),
 };
 
 export const Oppfylt: Story = {
-  args: resolvePanel(createOppfylt()),
+  args: resolvePanel(createOppfylt(), href),
 };
 
 export const ForhandsvarselForFrist: Story = {
@@ -35,6 +36,7 @@ export const ForhandsvarselForFrist: Story = {
     createForhandsvarsel({
       fristDato: "2024-07-01T00:00:00.000Z",
     }),
+    href,
     new Date("2024-06-01T12:00:00.000Z"),
   ),
 };
@@ -44,14 +46,15 @@ export const ForhandsvarselEtterFrist: Story = {
     createForhandsvarsel({
       fristDato: "2024-05-01T00:00:00.000Z",
     }),
+    href,
     new Date("2024-06-01T12:00:00.000Z"),
   ),
 };
 
 export const IkkeAktuell: Story = {
-  args: resolvePanel(createIkkeAktuell()),
+  args: resolvePanel(createIkkeAktuell(), href),
 };
 
 export const IkkeOppfylt: Story = {
-  args: resolvePanel(createIkkeOppfylt()),
+  args: resolvePanel(createIkkeOppfylt(), href),
 };
