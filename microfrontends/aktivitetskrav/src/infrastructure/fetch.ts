@@ -6,7 +6,7 @@ import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { vurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
-import fixtures from "../../mock/fixtures";
+import mockData from "../../mock/data";
 
 const realFetchVurdering = async (
   token: string,
@@ -23,7 +23,7 @@ const realFetchVurdering = async (
 const fakeFetchVurdering = async (
   _token: string,
 ): Promise<AktivitetskravVurdering> => {
-  return vurderingSchema.parse(fixtures.forhaandsvarselVurdering);
+  return vurderingSchema.parse(mockData.forhaandsvarselVurdering);
 };
 
 export const fetchVurdering = isLocal ? fakeFetchVurdering : realFetchVurdering;
