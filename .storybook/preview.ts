@@ -1,4 +1,4 @@
-import { __definePreview as definePreview } from "@storybook/react";
+import { definePreview } from "@storybook/react-vite";
 
 import "@navikt/ds-css/dist/global/tokens.css";
 import "@navikt/ds-css/dist/global/baseline.css";
