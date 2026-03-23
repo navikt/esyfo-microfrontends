@@ -4,18 +4,15 @@ on:
   push:
     branches: [main]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: deploy-storybook-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -26,6 +23,7 @@ jobs:
         with:
           node-version: '24'
           cache: pnpm
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build-storybook
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
@@ -35,7 +33,10 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
