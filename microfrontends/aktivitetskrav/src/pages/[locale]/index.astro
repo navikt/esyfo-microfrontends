@@ -19,4 +19,5 @@ const panelProps = resolvePanel(vurdering, AKTIVITETSKRAV_URL, new Date());
 ---
 
  {isLocal && <meta charset="UTF-8" />}
- {panelProps && <div><MainPanel {...panelProps} /></div>}
+ <!-- Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading. -->
+ {panelProps && <div class="aktivitetskrav-microfrontend"><MainPanel {...panelProps} /></div>}

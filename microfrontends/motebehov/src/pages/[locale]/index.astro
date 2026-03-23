@@ -24,6 +24,7 @@ const showMotebehovPanel = shouldShowMotebehovPanel(motebehov);
   if (showMotebehovPanel) {
     const panelProps = resolvePanel(MOTEBEHOV_URL);
     return (
+      // Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading.
       <div class="motebehov-microfrontend">
         <MainPanel {...panelProps} />
       </div>
