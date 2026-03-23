@@ -1,7 +1,7 @@
 import type { MotebehovStatusDto } from "@schema/motebehovSchema";
 import { describe, expect, it } from "vitest";
 
-import { getShowMotebehovPanel } from "./motebehov";
+import { shouldShowMotebehovPanel } from "./motebehov";
 
 const createMotebehovStatus = (
   overrides?: Partial<MotebehovStatusDto>,
@@ -12,14 +12,14 @@ const createMotebehovStatus = (
   ...overrides,
 });
 
-describe("getShowMotebehovPanel", () => {
+describe("shouldShowMotebehovPanel", () => {
   it("returns true when all visibility conditions are met", () => {
-    expect(getShowMotebehovPanel(createMotebehovStatus())).toBe(true);
+    expect(shouldShowMotebehovPanel(createMotebehovStatus())).toBe(true);
   });
 
   it("returns false when visMotebehov is false", () => {
     expect(
-      getShowMotebehovPanel(
+      shouldShowMotebehovPanel(
         createMotebehovStatus({
           visMotebehov: false,
         }),
@@ -29,7 +29,7 @@ describe("getShowMotebehovPanel", () => {
 
   it("returns false when skjemaType is MELD_BEHOV", () => {
     expect(
-      getShowMotebehovPanel(
+      shouldShowMotebehovPanel(
         createMotebehovStatus({
           skjemaType: "MELD_BEHOV",
         }),
@@ -39,7 +39,7 @@ describe("getShowMotebehovPanel", () => {
 
   it("returns false when motebehov already exists", () => {
     expect(
-      getShowMotebehovPanel(
+      shouldShowMotebehovPanel(
         createMotebehovStatus({
           motebehov: {
             id: "123",
@@ -49,9 +49,9 @@ describe("getShowMotebehovPanel", () => {
     ).toBe(false);
   });
 
-  it("returns false when all three blocking conditions are false", () => {
+  it("returns false when multiple visibility conditions are not met", () => {
     expect(
-      getShowMotebehovPanel(
+      shouldShowMotebehovPanel(
         createMotebehovStatus({
           visMotebehov: false,
           skjemaType: "MELD_BEHOV",
