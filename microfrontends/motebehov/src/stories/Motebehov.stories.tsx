@@ -1,5 +1,6 @@
 import { MainPanel } from "@esyfo/shared/components";
 import type { Meta, StoryObj } from "@storybook/react";
+import { BodyContent, HeadingContent, TagContent } from "../language/text";
 
 const meta = {
   component: MainPanel,
@@ -11,11 +12,11 @@ type Story = StoryObj<typeof meta>;
 
 export const TrengerDuDialogmote: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Trenger du et dialogmøte med arbeidsgiveren din og NAV?",
+    headingText: HeadingContent.dialogmote,
+    bodyText: BodyContent.trengerDuDialogmote,
     href: "#/motebehov/svar",
     alertStyle: "warning",
     panelId: "motebehov-panel",
-    tag: { text: "Ikke svart", variant: "warning-moderate" },
+    tag: { text: TagContent.ikkeSvart, variant: "warning-moderate" },
   },
 };

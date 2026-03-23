@@ -1,5 +1,10 @@
 import { MainPanel } from "@esyfo/shared/components";
 import type { Meta, StoryObj } from "@storybook/react";
+import {
+  BodyContent,
+  BodyDefaultContent,
+  HeadingContent,
+} from "../language/text";
 
 const meta = {
   component: MainPanel,
@@ -12,8 +17,8 @@ type Story = StoryObj<typeof meta>;
 
 export const UnderArbeid: Story = {
   args: {
-    headingText: "Aktivitetskravet ditt vurderes",
-    bodyText: "Vi vurderer om du oppfyller aktivitetskravet",
+    headingText: HeadingContent.vurderer,
+    bodyText: BodyContent.underArbeid,
     href: "#",
     alertStyle: "info",
     panelId: "aktivitetskrav-panel",
@@ -22,8 +27,8 @@ export const UnderArbeid: Story = {
 
 export const Unntak: Story = {
   args: {
-    headingText: "NAV har vurdert aktivitetskravet ditt",
-    bodyText: "Du har fått unntak fra aktivitetskravet",
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyDefaultContent.unntak,
     href: "#",
     alertStyle: "success",
     panelId: "aktivitetskrav-panel",
@@ -36,8 +41,8 @@ export const Unntak: Story = {
 
 export const Oppfylt: Story = {
   args: {
-    headingText: "NAV har vurdert aktivitetskravet ditt",
-    bodyText: "Du oppfyller aktivitetskravet",
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyDefaultContent.oppfylt,
     href: "#",
     alertStyle: "success",
     panelId: "aktivitetskrav-panel",
@@ -50,8 +55,8 @@ export const Oppfylt: Story = {
 
 export const ForhandsvarselFørFrist: Story = {
   args: {
-    headingText: "Aktivitetskravet ditt vurderes",
-    bodyText: "Du har fått et forhåndsvarsel om aktivitetskravet",
+    headingText: HeadingContent.vurderer,
+    bodyText: BodyContent.forhandsvarsel,
     href: "#",
     alertStyle: "warning",
     panelId: "aktivitetskrav-panel",
@@ -64,8 +69,8 @@ export const ForhandsvarselFørFrist: Story = {
 
 export const ForhandsvarselEtterFrist: Story = {
   args: {
-    headingText: "Aktivitetskravet ditt vurderes",
-    bodyText: "Du har fått et forhåndsvarsel om aktivitetskravet",
+    headingText: HeadingContent.vurderer,
+    bodyText: BodyContent.forhandsvarsel,
     href: "#",
     alertStyle: "warning",
     panelId: "aktivitetskrav-panel",
@@ -78,8 +83,8 @@ export const ForhandsvarselEtterFrist: Story = {
 
 export const IkkeAktuell: Story = {
   args: {
-    headingText: "NAV har vurdert aktivitetskravet ditt",
-    bodyText: "Aktivitetskravet er ikke lenger aktuelt for deg",
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyContent.ikkeAktuell,
     href: "#",
     alertStyle: "info",
     panelId: "aktivitetskrav-panel",
@@ -92,8 +97,8 @@ export const IkkeAktuell: Story = {
 
 export const IkkeOppfylt: Story = {
   args: {
-    headingText: "NAV har vurdert aktivitetskravet ditt",
-    bodyText: "Du oppfyller ikke aktivitetskravet",
+    headingText: HeadingContent.harVurdert,
+    bodyText: BodyContent.ikkeOppfylt,
     href: "#",
     alertStyle: "error",
     panelId: "aktivitetskrav-panel",

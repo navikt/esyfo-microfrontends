@@ -1,5 +1,6 @@
 import { MainPanel } from "@esyfo/shared/components";
 import type { Meta, StoryObj } from "@storybook/react";
+import { BodyContent, HeadingContent, TagContent } from "../language/text";
 
 const meta = {
   component: MainPanel,
@@ -11,13 +12,13 @@ type Story = StoryObj<typeof meta>;
 
 export const InnkallingIkkeSvart: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: HeadingContent.dialogmote,
+    bodyText: "Du har fått innkalling til dialogmøte",
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Ikke svart",
+      text: TagContent.ikkeSvart,
       variant: "warning-moderate",
     },
   },
@@ -25,13 +26,13 @@ export const InnkallingIkkeSvart: Story = {
 
 export const InnkallingTakketJa: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: HeadingContent.dialogmote,
+    bodyText: "Du har fått innkalling til dialogmøte",
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Takket ja",
+      text: TagContent.takketJa,
       variant: "success-moderate",
     },
   },
@@ -39,13 +40,13 @@ export const InnkallingTakketJa: Story = {
 
 export const InnkallingOnskerAvlyse: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: HeadingContent.dialogmote,
+    bodyText: "Du har fått innkalling til dialogmøte",
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Ønsker å avlyse",
+      text: TagContent.onskerAvlyse,
       variant: "neutral-moderate",
     },
   },
@@ -53,13 +54,13 @@ export const InnkallingOnskerAvlyse: Story = {
 
 export const InnkallingOnskerEndre: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: HeadingContent.dialogmote,
+    bodyText: "Du har fått innkalling til dialogmøte",
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Ønsker å endre",
+      text: TagContent.onskerEndre,
       variant: "neutral-moderate",
     },
   },
@@ -67,13 +68,13 @@ export const InnkallingOnskerEndre: Story = {
 
 export const NyttTidStedIkkeSvart: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Møtet er flyttet",
+    headingText: HeadingContent.dialogmote,
+    bodyText: BodyContent.motetFlyttet,
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Se endringer",
+      text: TagContent.seEndringer,
       variant: "warning-moderate",
     },
   },
@@ -81,13 +82,13 @@ export const NyttTidStedIkkeSvart: Story = {
 
 export const NyttTidStedTakketJa: Story = {
   args: {
-    headingText: "Dialogmøte",
-    bodyText: "Møtet er flyttet",
+    headingText: HeadingContent.dialogmote,
+    bodyText: BodyContent.motetFlyttet,
     href: "#/moteinnkalling",
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: {
-      text: "Takket ja",
+      text: TagContent.takketJa,
       variant: "success-moderate",
     },
   },

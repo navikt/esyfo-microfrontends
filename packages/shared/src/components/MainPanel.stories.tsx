@@ -17,8 +17,8 @@ export const InfoAlert: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "info",
-    headingText: "Aktivitetskravet ditt vurderes",
-    bodyText: "NAV vurderer aktivitetskravet ditt",
+    headingText: "Informasjon",
+    bodyText: "Dette er en informasjonsmelding",
   },
 };
 
@@ -26,8 +26,8 @@ export const SuccessAlert: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "success",
-    headingText: "NAV har vurdert",
-    bodyText: "Aktivitetskravet ditt er oppfylt",
+    headingText: "Fullført",
+    bodyText: "Denne oppgaven er fullført",
   },
 };
 
@@ -35,8 +35,8 @@ export const WarningAlert: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "warning",
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: "Obs!",
+    bodyText: "Denne oppgaven krever din oppmerksomhet",
   },
 };
 
@@ -44,8 +44,8 @@ export const ErrorAlert: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "error",
-    headingText: "NAV har vurdert",
-    bodyText: "Aktivitetskravet ditt er ikke oppfylt",
+    headingText: "Feil",
+    bodyText: "Noe gikk galt",
   },
 };
 
@@ -53,10 +53,10 @@ export const WithInfoTag: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "info",
-    headingText: "Aktivitetskravet ditt vurderes",
-    bodyText: "NAV vurderer aktivitetskravet ditt",
+    headingText: "Informasjon",
+    bodyText: "Dette er en informasjonsmelding",
     tag: {
-      text: "Vurdert 1. mars 2025",
+      text: "Info-tag",
       variant: "info-moderate",
     },
   },
@@ -66,10 +66,10 @@ export const WithSuccessTag: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "success",
-    headingText: "NAV har vurdert",
-    bodyText: "Aktivitetskravet ditt er oppfylt",
+    headingText: "Fullført",
+    bodyText: "Denne oppgaven er fullført",
     tag: {
-      text: "Vurdert 1. mars 2025",
+      text: "Suksess-tag",
       variant: "success-moderate",
     },
   },
@@ -79,10 +79,10 @@ export const WithWarningTag: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "warning",
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: "Obs!",
+    bodyText: "Denne oppgaven krever din oppmerksomhet",
     tag: {
-      text: "Svarfrist 15. april 2025",
+      text: "Advarsel-tag",
       variant: "warning-moderate",
     },
   },
@@ -91,11 +91,11 @@ export const WithWarningTag: Story = {
 export const WithErrorTag: Story = {
   args: {
     ...defaultArgs,
-    alertStyle: "warning",
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    alertStyle: "error",
+    headingText: "Feil",
+    bodyText: "Noe gikk galt",
     tag: {
-      text: "Frist utgått",
+      text: "Feil-tag",
       variant: "error-moderate",
     },
   },
@@ -105,10 +105,10 @@ export const WithNeutralTag: Story = {
   args: {
     ...defaultArgs,
     alertStyle: "warning",
-    headingText: "Dialogmøte",
-    bodyText: "Tirsdag 15. april 2025 kl. 14:00",
+    headingText: "Obs!",
+    bodyText: "Denne oppgaven krever din oppmerksomhet",
     tag: {
-      text: "Ønsker å avlyse",
+      text: "Nøytral-tag",
       variant: "neutral-moderate",
     },
   },
