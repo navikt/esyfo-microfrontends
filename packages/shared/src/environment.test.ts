@@ -4,8 +4,8 @@ import { isInternal } from "./environment.ts";
 describe("environment", () => {
   beforeEach(() => {
     vi.unstubAllEnvs();
-    // isLocal evalueres ved modulinnlasting — vi.resetModules() og dynamisk import
-    // er nødvendig for å teste med ulik NODE_ENV.
+    // isLocal is evaluated on module load — vi.resetModules() and dynamic import
+    // are required to test with different NODE_ENV values.
     vi.resetModules();
     vi.restoreAllMocks();
   });
