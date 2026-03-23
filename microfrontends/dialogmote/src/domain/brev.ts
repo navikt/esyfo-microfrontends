@@ -9,12 +9,8 @@ export const getLatestBrev = (brevList: BrevDto[]): BrevDto | null =>
     )
     .at(0) ?? null;
 
-export const getShowDialogmotePanel = (latestBrev: BrevDto | null): boolean => {
-  if (latestBrev === null) {
-    return false;
-  }
-
-  return (
-    latestBrev.brevType === "INNKALT" || latestBrev.brevType === "NYTT_TID_STED"
-  );
-};
+export const shouldShowDialogmotePanel = (
+  latestBrev: BrevDto | null,
+): boolean =>
+  latestBrev?.brevType === "INNKALT" ||
+  latestBrev?.brevType === "NYTT_TID_STED";

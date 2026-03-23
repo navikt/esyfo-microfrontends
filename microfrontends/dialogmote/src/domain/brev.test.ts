@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createBrev } from "./__fixtures__/brev";
-import { getLatestBrev, getShowDialogmotePanel } from "./brev";
+import { getLatestBrev, shouldShowDialogmotePanel } from "./brev";
 
 describe("getLatestBrev", () => {
   it("returns null for an empty list", () => {
@@ -64,31 +64,31 @@ describe("getLatestBrev", () => {
   });
 });
 
-describe("getShowDialogmotePanel", () => {
+describe("shouldShowDialogmotePanel", () => {
   it("returns false for null", () => {
-    expect(getShowDialogmotePanel(null)).toBe(false);
+    expect(shouldShowDialogmotePanel(null)).toBe(false);
   });
 
   it("returns true for INNKALT", () => {
-    expect(getShowDialogmotePanel(createBrev({ brevType: "INNKALT" }))).toBe(
+    expect(shouldShowDialogmotePanel(createBrev({ brevType: "INNKALT" }))).toBe(
       true,
     );
   });
 
   it("returns true for NYTT_TID_STED", () => {
     expect(
-      getShowDialogmotePanel(createBrev({ brevType: "NYTT_TID_STED" })),
+      shouldShowDialogmotePanel(createBrev({ brevType: "NYTT_TID_STED" })),
     ).toBe(true);
   });
 
   it("returns false for AVLYST", () => {
-    expect(getShowDialogmotePanel(createBrev({ brevType: "AVLYST" }))).toBe(
+    expect(shouldShowDialogmotePanel(createBrev({ brevType: "AVLYST" }))).toBe(
       false,
     );
   });
 
   it("returns false for REFERAT", () => {
-    expect(getShowDialogmotePanel(createBrev({ brevType: "REFERAT" }))).toBe(
+    expect(shouldShowDialogmotePanel(createBrev({ brevType: "REFERAT" }))).toBe(
       false,
     );
   });
