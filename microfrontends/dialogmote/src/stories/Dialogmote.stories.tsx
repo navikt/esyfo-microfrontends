@@ -60,3 +60,23 @@ export const NyttTidStedTakketJa: Story = {
     href,
   ),
 };
+
+export const NyttTidStedOnskerAvlyse: Story = {
+  args: resolvePanel(
+    createBrev({
+      brevType: "NYTT_TID_STED",
+      svar: createSvar("KOMMER_IKKE"),
+    }),
+    href,
+  ),
+};
+
+export const NyttTidStedOnskerEndre: Story = {
+  args: resolvePanel(
+    createBrev({
+      brevType: "NYTT_TID_STED",
+      svar: createSvar("NYTT_TID_STED"),
+    }),
+    href,
+  ),
+};

@@ -50,6 +50,14 @@ export const ForhandsvarselForFrist: Story = {
   ),
 };
 
+export const ForhandsvarselUtenJournalpost: Story = {
+  args: resolvePanel(
+    createForhandsvarsel({ journalpostId: undefined }),
+    href,
+    now,
+  ),
+};
+
 export const ForhandsvarselEtterFrist: Story = {
   args: resolvePanel(
     createForhandsvarsel({ fristDato: "2024-05-01T00:00:00.000Z" }),
