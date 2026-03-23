@@ -8,7 +8,7 @@ import {
   type MotebehovStatusDto,
   motebehovStatusSchema,
 } from "@schema/motebehovSchema.ts";
-import fixtures from "../../mock/fixtures";
+import mockData from "../../mock/data";
 
 const realFetchMotebehov = async (
   token: string,
@@ -25,7 +25,7 @@ const realFetchMotebehov = async (
 const fakeFetchMotebehov = async (
   _token: string,
 ): Promise<MotebehovStatusDto> => {
-  return motebehovStatusSchema.parse(fixtures.motebehovUtenSvar);
+  return motebehovStatusSchema.parse(mockData.motebehovUtenSvar);
 };
 
 export const fetchMotebehov = isLocal ? fakeFetchMotebehov : realFetchMotebehov;

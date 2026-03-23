@@ -34,7 +34,7 @@ const forhaandsvarselVurdering: AktivitetskravVurdering = {
   fristDato: addDaysToDate(new Date(), 14).toISOString(),
 };
 
-const fixtures = {
+const mockData = {
   nyKandidatVurdering,
   unntakVurdering,
   oppfyltVurdering,
@@ -43,4 +43,4 @@ const fixtures = {
   avventVurdering,
 };
 
-export default fixtures;
+export default mockData;

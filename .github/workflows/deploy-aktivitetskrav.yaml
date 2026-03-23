@@ -33,6 +33,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
+      - name: "Run tests"
+        run: "pnpm test"
+
       - name: "Build application"
         run: "pnpm run build:aktivitetskrav-microfrontend"
 

@@ -19,7 +19,9 @@
     "dev:dialogmote-microfrontend": "pnpm --filter dialogmote-microfrontend run dev",
     "dev:aktivitetskrav-microfrontend": "pnpm --filter aktivitetskrav-microfrontend run dev",
     "dev:meroppfolging-microfrontend": "pnpm --filter meroppfolging-microfrontend run dev",
-    "dev:motebehov-microfrontend": "pnpm --filter motebehov-microfrontend run dev"
+    "dev:motebehov-microfrontend": "pnpm --filter motebehov-microfrontend run dev",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/node": "10.0.2",
@@ -48,6 +50,8 @@
     "postcss": "8.5.8",
     "postcss-prefix-selector": "2.1.1",
     "tsx": "4.21.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vite-tsconfig-paths": "6.1.1",
+    "vitest": "4.1.0"
   }
 }

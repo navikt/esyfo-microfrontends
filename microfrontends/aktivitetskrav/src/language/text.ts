@@ -1,32 +1,22 @@
 import { getShortDateFormat } from "@esyfo/shared/dateUtils";
 import type { OppfyltArsaker, UnntakArsaker } from "@schema/vurderingSchema";
 
-type HeadingContentKey = "vurderer" | "harVurdert";
-
-export const HeadingContent: Record<HeadingContentKey, string> = {
+export const HeadingContent = {
   vurderer: "NAV vurderer aktivitetsplikten din",
   harVurdert: "NAV har vurdert aktivitetsplikten din",
-};
+} as const;
 
-type BodyContentKey =
-  | "underArbeid"
-  | "forhandsvarsel"
-  | "ikkeAktuell"
-  | "ikkeOppfylt";
-
-export const BodyContent: Record<BodyContentKey, string> = {
+export const BodyContent = {
   underArbeid: "Les mer om aktivitetsplikten og hva den betyr for deg",
   forhandsvarsel: "NAV vurderer å stanse sykepengene dine",
   ikkeAktuell: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
   ikkeOppfylt: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
-};
+} as const;
 
-type BodyDefaultContentKey = "unntak" | "oppfylt";
-
-export const BodyDefaultContent: Record<BodyDefaultContentKey, string> = {
+export const BodyDefaultContent = {
   unntak: "NAV vurderer at du er unntatt fra aktivitetsplikten",
   oppfylt: "NAV vurderer at du oppfyller aktivitetsplikten",
-};
+} as const;
 
 export const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
   MEDISINSKE_GRUNNER:

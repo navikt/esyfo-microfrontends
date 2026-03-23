@@ -6,8 +6,8 @@ const motebehovUtenSvar: MotebehovStatusDto = {
   motebehov: null,
 };
 
-const fixtures = {
+const mockData = {
   motebehovUtenSvar,
 };
 
-export default fixtures;
+export default mockData;

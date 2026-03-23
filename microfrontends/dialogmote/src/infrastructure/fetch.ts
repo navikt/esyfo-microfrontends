@@ -3,7 +3,7 @@ import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { brevSchema } from "@schema/brevSchema";
 import type { BrevDto } from "@schema/brevSchema.ts";
-import fixtures from "../../mock/fixtures";
+import mockData from "../../mock/data";
 
 const realFetchBrev = async (token: string): Promise<BrevDto[]> => {
   return fetchFromBackend({
@@ -16,7 +16,7 @@ const realFetchBrev = async (token: string): Promise<BrevDto[]> => {
 };
 
 const fakeFetchBrev = async (_token: string): Promise<BrevDto[]> => {
-  return brevSchema.array().parse([fixtures.innkallingsBrev]);
+  return brevSchema.array().parse([mockData.innkallingsBrev]);
 };
 
 export const fetchBrev = isLocal ? fakeFetchBrev : realFetchBrev;
