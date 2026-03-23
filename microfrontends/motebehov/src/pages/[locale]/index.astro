@@ -15,19 +15,12 @@ try {
 } catch {
   return new Response("Internal Server Error", { status: 503 });
 }
-
-const showMotebehovPanel = shouldShowMotebehovPanel(motebehov);
 ---
 
 {isLocal && <meta charset="UTF-8" />}
-{() => {
-  if (showMotebehovPanel) {
-    const panelProps = resolvePanel(MOTEBEHOV_URL);
-    return (
-      // Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading.
-      <div class="motebehov-microfrontend">
-        <MainPanel {...panelProps} />
-      </div>
-    );
-  }
-}}
+<!-- Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading. -->
+{shouldShowMotebehovPanel(motebehov) && (
+  <div class="motebehov-microfrontend">
+    <MainPanel {...resolvePanel(MOTEBEHOV_URL)} />
+  </div>
+)}

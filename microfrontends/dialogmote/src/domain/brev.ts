@@ -11,6 +11,6 @@ export const getLatestBrev = (brevList: BrevDto[]): BrevDto | null =>
 
 export const shouldShowDialogmotePanel = (
   latestBrev: BrevDto | null,
-): boolean =>
+): latestBrev is BrevDto =>
   latestBrev?.brevType === "INNKALT" ||
   latestBrev?.brevType === "NYTT_TID_STED";
