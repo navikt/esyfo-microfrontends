@@ -69,3 +69,7 @@ export const ForhandsvarselEtterFrist: Story = {
 export const IkkeAktuell: Story = {
   args: resolvePanel(createIkkeAktuell(), href, now),
 };
+
+export const IkkeOppfylt: Story = {
+  args: resolvePanel(createIkkeOppfylt(), href, now),
+};
