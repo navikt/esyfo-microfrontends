@@ -1,88 +1,22 @@
-import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 import { formatSvarfrist, formatVurderingsDato } from "@src/language/text";
 import { describe, expect, it } from "vitest";
-
 import { resolvePanel } from "./panelResolver";
+import {
+  createAvvent,
+  createForhandsvarsel,
+  createIkkeAktuell,
+  createIkkeOppfylt,
+  createNyVurdering,
+  createNyVurderingStatus,
+  createOppfylt,
+  createUnntak,
+} from "./test-utils/vurdering";
 
 const now = new Date("2024-06-01T12:00:00.000Z");
 const sistVurdert = "2024-01-15T00:00:00.000Z";
 const fristBefore = "2024-05-01T00:00:00.000Z";
 const fristAfter = "2024-07-01T00:00:00.000Z";
 const expectedHref = "http://localhost:3000/syk/aktivitetskrav";
-
-const createNyVurdering = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "NY" }>>,
-): Extract<AktivitetskravVurdering, { status: "NY" }> => ({
-  status: "NY",
-  ...overrides,
-});
-
-const createNyVurderingStatus = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "NY_VURDERING" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "NY_VURDERING" }> => ({
-  status: "NY_VURDERING",
-  ...overrides,
-});
-
-const createAvvent = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "AVVENT" }>>,
-): Extract<AktivitetskravVurdering, { status: "AVVENT" }> => ({
-  status: "AVVENT",
-  sistVurdert,
-  ...overrides,
-});
-
-const createUnntak = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "UNNTAK" }>>,
-): Extract<AktivitetskravVurdering, { status: "UNNTAK" }> => ({
-  status: "UNNTAK",
-  arsaker: ["MEDISINSKE_GRUNNER"],
-  sistVurdert,
-  ...overrides,
-});
-
-const createOppfylt = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "OPPFYLT" }>>,
-): Extract<AktivitetskravVurdering, { status: "OPPFYLT" }> => ({
-  status: "OPPFYLT",
-  arsaker: ["FRISKMELDT"],
-  sistVurdert,
-  ...overrides,
-});
-
-const createForhandsvarsel = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "FORHANDSVARSEL" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "FORHANDSVARSEL" }> => ({
-  status: "FORHANDSVARSEL",
-  journalpostId: "journalpost-1",
-  sistVurdert,
-  fristDato: fristAfter,
-  ...overrides,
-});
-
-const createIkkeAktuell = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "IKKE_AKTUELL" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "IKKE_AKTUELL" }> => ({
-  status: "IKKE_AKTUELL",
-  sistVurdert,
-  ...overrides,
-});
-
-const createIkkeOppfylt = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "IKKE_OPPFYLT" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "IKKE_OPPFYLT" }> => ({
-  status: "IKKE_OPPFYLT",
-  sistVurdert,
-  ...overrides,
-});
 
 const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
   expect(panel.panelId).toBe("aktivitetskrav-panel");
