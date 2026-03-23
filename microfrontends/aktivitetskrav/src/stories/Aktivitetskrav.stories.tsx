@@ -18,43 +18,40 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 const href = "/syk/aktivitetskrav";
+const now = new Date("2024-06-01T12:00:00.000Z");
 
 export const UnderArbeid: Story = {
-  args: resolvePanel(createNyVurdering(), href),
+  args: resolvePanel(createNyVurdering(), href, now),
 };
 
 export const Unntak: Story = {
-  args: resolvePanel(createUnntak(), href),
+  args: resolvePanel(createUnntak(), href, now),
 };
 
 export const Oppfylt: Story = {
-  args: resolvePanel(createOppfylt(), href),
+  args: resolvePanel(createOppfylt(), href, now),
 };
 
 export const ForhandsvarselForFrist: Story = {
   args: resolvePanel(
-    createForhandsvarsel({
-      fristDato: "2024-07-01T00:00:00.000Z",
-    }),
+    createForhandsvarsel({ fristDato: "2024-07-01T00:00:00.000Z" }),
     href,
-    new Date("2024-06-01T12:00:00.000Z"),
+    now,
   ),
 };
 
 export const ForhandsvarselEtterFrist: Story = {
   args: resolvePanel(
-    createForhandsvarsel({
-      fristDato: "2024-05-01T00:00:00.000Z",
-    }),
+    createForhandsvarsel({ fristDato: "2024-05-01T00:00:00.000Z" }),
     href,
-    new Date("2024-06-01T12:00:00.000Z"),
+    now,
   ),
 };
 
 export const IkkeAktuell: Story = {
-  args: resolvePanel(createIkkeAktuell(), href),
+  args: resolvePanel(createIkkeAktuell(), href, now),
 };
 
 export const IkkeOppfylt: Story = {
-  args: resolvePanel(createIkkeOppfylt(), href),
+  args: resolvePanel(createIkkeOppfylt(), href, now),
 };

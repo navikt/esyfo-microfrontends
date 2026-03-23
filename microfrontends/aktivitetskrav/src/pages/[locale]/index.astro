@@ -15,7 +15,7 @@ try {
   return new Response("Internal Server Error", { status: 503 });
 }
 
-const panelProps = resolvePanel(vurdering, AKTIVITETSKRAV_URL);
+const panelProps = resolvePanel(vurdering, AKTIVITETSKRAV_URL, new Date());
 ---
 
  {isLocal && <meta charset="UTF-8" />}

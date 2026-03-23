@@ -117,7 +117,7 @@ const resolveIkkeOppfylt = (
 export const resolvePanel = (
   vurdering: AktivitetskravVurdering,
   href: string,
-  now: Date = new Date(),
+  now: Date,
 ): MainPanelProps => {
   switch (vurdering.status) {
     case "NY":
