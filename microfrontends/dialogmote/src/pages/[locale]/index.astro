@@ -18,17 +18,12 @@ try {
 }
 
 const latestBrev = getLatestBrev(brev);
-const showDialogmotePanel = shouldShowDialogmotePanel(latestBrev);
 ---
 
 {isLocal && <meta charset="UTF-8" />}
-{() => {
-  if (showDialogmotePanel && latestBrev) {
-    const panelProps = resolvePanel(latestBrev, DIALOGMOTE_URL);
-    return (
-      <div class="dialogmote-microfrontend">
-        <MainPanel {...panelProps} />
-      </div>
-    );
-  }
-}}
+<!-- Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading. -->
+{shouldShowDialogmotePanel(latestBrev) && (
+  <div class="dialogmote-microfrontend">
+    <MainPanel {...resolvePanel(latestBrev, DIALOGMOTE_URL)} />
+  </div>
+)}

@@ -5,7 +5,6 @@ import {
   createAvvent,
   createForhandsvarsel,
   createIkkeAktuell,
-  createIkkeOppfylt,
   createNyVurdering,
   createNyVurderingStatus,
   createOppfylt,
@@ -21,29 +20,38 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 const href = "/syk/aktivitetskrav";
 const now = new Date("2024-06-01T12:00:00.000Z");
+const resolveStoryArgs = (...args: Parameters<typeof resolvePanel>) => {
+  const panel = resolvePanel(...args);
+
+  if (!panel) {
+    throw new Error("Expected panel props for story");
+  }
+
+  return panel;
+};
 
 export const Ny: Story = {
-  args: resolvePanel(createNyVurdering(), href, now),
+  args: resolveStoryArgs(createNyVurdering(), href, now),
 };
 
 export const NyVurdering: Story = {
-  args: resolvePanel(createNyVurderingStatus(), href, now),
+  args: resolveStoryArgs(createNyVurderingStatus(), href, now),
 };
 
 export const Avvent: Story = {
-  args: resolvePanel(createAvvent(), href, now),
+  args: resolveStoryArgs(createAvvent(), href, now),
 };
 
 export const Unntak: Story = {
-  args: resolvePanel(createUnntak(), href, now),
+  args: resolveStoryArgs(createUnntak(), href, now),
 };
 
 export const Oppfylt: Story = {
-  args: resolvePanel(createOppfylt(), href, now),
+  args: resolveStoryArgs(createOppfylt(), href, now),
 };
 
 export const ForhandsvarselForFrist: Story = {
-  args: resolvePanel(
+  args: resolveStoryArgs(
     createForhandsvarsel({ fristDato: "2024-07-01T00:00:00.000Z" }),
     href,
     now,
@@ -51,7 +59,7 @@ export const ForhandsvarselForFrist: Story = {
 };
 
 export const ForhandsvarselUtenJournalpost: Story = {
-  args: resolvePanel(
+  args: resolveStoryArgs(
     createForhandsvarsel({ journalpostId: undefined }),
     href,
     now,
@@ -59,7 +67,7 @@ export const ForhandsvarselUtenJournalpost: Story = {
 };
 
 export const ForhandsvarselEtterFrist: Story = {
-  args: resolvePanel(
+  args: resolveStoryArgs(
     createForhandsvarsel({ fristDato: "2024-05-01T00:00:00.000Z" }),
     href,
     now,
@@ -67,9 +75,5 @@ export const ForhandsvarselEtterFrist: Story = {
 };
 
 export const IkkeAktuell: Story = {
-  args: resolvePanel(createIkkeAktuell(), href, now),
-};
-
-export const IkkeOppfylt: Story = {
-  args: resolvePanel(createIkkeOppfylt(), href, now),
+  args: resolveStoryArgs(createIkkeAktuell(), href, now),
 };
