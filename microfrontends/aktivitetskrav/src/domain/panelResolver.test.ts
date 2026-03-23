@@ -18,16 +18,26 @@ const fristBefore = "2024-05-01T00:00:00.000Z";
 const fristAfter = "2024-07-01T00:00:00.000Z";
 const expectedHref = "http://localhost:3000/syk/aktivitetskrav";
 
-const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
+const expectResolvedPanel = (
+  panel: ReturnType<typeof resolvePanel>,
+): NonNullable<ReturnType<typeof resolvePanel>> => {
+  expect(panel).not.toBeNull();
+  if (!panel) {
+    throw new Error("Expected panel to be resolved");
+  }
+
   expect(panel.panelId).toBe("aktivitetskrav-panel");
   expect(panel.href).toBe(expectedHref);
+
+  return panel;
 };
 
 describe("resolvePanel", () => {
   it("resolves NY to under arbeid state without tag", () => {
-    const panel = resolvePanel(createNyVurdering(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createNyVurdering(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
     expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
@@ -37,9 +47,10 @@ describe("resolvePanel", () => {
   });
 
   it("resolves NY_VURDERING to under arbeid state without tag", () => {
-    const panel = resolvePanel(createNyVurderingStatus(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createNyVurderingStatus(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
     expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
@@ -49,9 +60,10 @@ describe("resolvePanel", () => {
   });
 
   it("resolves AVVENT to under arbeid state without tag", () => {
-    const panel = resolvePanel(createAvvent(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createAvvent(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
     expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
@@ -61,9 +73,10 @@ describe("resolvePanel", () => {
   });
 
   it("resolves UNNTAK with MEDISINSKE_GRUNNER to a success panel", () => {
-    const panel = resolvePanel(createUnntak(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createUnntak(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("success");
     expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
     expect(panel.bodyText).toContain("medisinske");
@@ -74,24 +87,26 @@ describe("resolvePanel", () => {
   });
 
   it("uses default unntak text when arsaker is empty", () => {
-    const panel = resolvePanel(
-      createUnntak({
-        arsaker: [],
-      }),
-      expectedHref,
-      now,
+    const panel = expectResolvedPanel(
+      resolvePanel(
+        createUnntak({
+          arsaker: [],
+        }),
+        expectedHref,
+        now,
+      ),
     );
 
-    expectCommonPanelFields(panel);
     expect(panel.bodyText).toBe(
       "NAV vurderer at du er unntatt fra aktivitetsplikten",
     );
   });
 
   it("resolves OPPFYLT with FRISKMELDT to a success panel", () => {
-    const panel = resolvePanel(createOppfylt(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createOppfylt(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("success");
     expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
     expect(panel.bodyText).toContain("friskmeldt");
@@ -102,28 +117,30 @@ describe("resolvePanel", () => {
   });
 
   it("resolves OPPFYLT with GRADERT body text", () => {
-    const panel = resolvePanel(
-      createOppfylt({
-        arsaker: ["GRADERT"],
-      }),
-      expectedHref,
-      now,
+    const panel = expectResolvedPanel(
+      resolvePanel(
+        createOppfylt({
+          arsaker: ["GRADERT"],
+        }),
+        expectedHref,
+        now,
+      ),
     );
 
-    expectCommonPanelFields(panel);
     expect(panel.bodyText).toContain("gradert");
   });
 
   it("falls back to under arbeid for FORHANDSVARSEL without journalpostId", () => {
-    const panel = resolvePanel(
-      createForhandsvarsel({
-        journalpostId: undefined,
-      }),
-      expectedHref,
-      now,
+    const panel = expectResolvedPanel(
+      resolvePanel(
+        createForhandsvarsel({
+          journalpostId: undefined,
+        }),
+        expectedHref,
+        now,
+      ),
     );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
     expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
@@ -133,15 +150,16 @@ describe("resolvePanel", () => {
   });
 
   it("resolves FORHANDSVARSEL before frist with warning tag", () => {
-    const panel = resolvePanel(
-      createForhandsvarsel({
-        fristDato: fristAfter,
-      }),
-      expectedHref,
-      now,
+    const panel = expectResolvedPanel(
+      resolvePanel(
+        createForhandsvarsel({
+          fristDato: fristAfter,
+        }),
+        expectedHref,
+        now,
+      ),
     );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("warning");
     expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe("NAV vurderer å stanse sykepengene dine");
@@ -152,15 +170,16 @@ describe("resolvePanel", () => {
   });
 
   it("resolves FORHANDSVARSEL after frist with error tag", () => {
-    const panel = resolvePanel(
-      createForhandsvarsel({
-        fristDato: fristBefore,
-      }),
-      expectedHref,
-      now,
+    const panel = expectResolvedPanel(
+      resolvePanel(
+        createForhandsvarsel({
+          fristDato: fristBefore,
+        }),
+        expectedHref,
+        now,
+      ),
     );
 
-    expectCommonPanelFields(panel);
     expect(panel.tag).toEqual({
       text: formatSvarfrist(fristBefore),
       variant: "error-moderate",
@@ -168,9 +187,10 @@ describe("resolvePanel", () => {
   });
 
   it("resolves IKKE_AKTUELL with info tag", () => {
-    const panel = resolvePanel(createIkkeAktuell(), expectedHref, now);
+    const panel = expectResolvedPanel(
+      resolvePanel(createIkkeAktuell(), expectedHref, now),
+    );
 
-    expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
     expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
     expect(panel.tag).toEqual({
@@ -179,15 +199,9 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves IKKE_OPPFYLT with error tag", () => {
+  it("returns undefined for IKKE_OPPFYLT", () => {
     const panel = resolvePanel(createIkkeOppfylt(), expectedHref, now);
 
-    expectCommonPanelFields(panel);
-    expect(panel.alertStyle).toBe("error");
-    expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
-    expect(panel.tag).toEqual({
-      text: formatVurderingsDato(sistVurdert),
-      variant: "error-moderate",
-    });
+    expect(panel).toBeUndefined();
   });
 });

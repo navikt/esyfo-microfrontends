@@ -10,7 +10,6 @@ export const BodyContent = {
   underArbeid: "Les mer om aktivitetsplikten og hva den betyr for deg",
   forhandsvarsel: "NAV vurderer å stanse sykepengene dine",
   ikkeAktuell: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
-  ikkeOppfylt: "NAV vurderer at du ikke oppfyller aktivitetsplikten",
 } as const;
 
 export const BodyDefaultContent = {

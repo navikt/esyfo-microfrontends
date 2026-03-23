@@ -99,26 +99,11 @@ const resolveIkkeAktuell = (
     },
   });
 
-const resolveIkkeOppfylt = (
-  vurdering: VurderingForStatus<"IKKE_OPPFYLT">,
-  href: string,
-): MainPanelProps =>
-  withPanelId({
-    headingText: HeadingContent.harVurdert,
-    bodyText: BodyContent.ikkeOppfylt,
-    href,
-    alertStyle: "error",
-    tag: {
-      text: formatVurderingsDato(vurdering.sistVurdert),
-      variant: "error-moderate",
-    },
-  });
-
 export const resolvePanel = (
   vurdering: AktivitetskravVurdering,
   href: string,
   now: Date,
-): MainPanelProps => {
+): MainPanelProps | undefined => {
   switch (vurdering.status) {
     case "NY":
     case "NY_VURDERING":
@@ -133,6 +118,6 @@ export const resolvePanel = (
     case "IKKE_AKTUELL":
       return resolveIkkeAktuell(vurdering, href);
     case "IKKE_OPPFYLT":
-      return resolveIkkeOppfylt(vurdering, href);
+      return undefined;
   }
 };

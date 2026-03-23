@@ -19,10 +19,4 @@ const panelProps = resolvePanel(vurdering, AKTIVITETSKRAV_URL, new Date());
 ---
 
  {isLocal && <meta charset="UTF-8" />}
- {() => {
-  return (
-    <div>
-      <MainPanel {...panelProps} />
-    </div>
-  );
-}}
+ {panelProps && <div><MainPanel {...panelProps} /></div>}
