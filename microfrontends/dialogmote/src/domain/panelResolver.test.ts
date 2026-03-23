@@ -9,17 +9,18 @@ const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
   svarType,
   svarTekst: null,
 });
+const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
 
 const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
   expect(panel.panelId).toBe("dialogmote-panel");
   expect(panel.alertStyle).toBe("warning");
   expect(panel.headingText).toBe("Dialogmøte med NAV");
-  expect(panel.href).toContain("/moteinnkalling");
+  expect(panel.href).toBe(`${expectedHref}/moteinnkalling`);
 };
 
 describe("resolvePanel", () => {
   it("resolves INNKALT without svar to warning tag", () => {
-    const panel = resolvePanel(createBrev());
+    const panel = resolvePanel(createBrev(), expectedHref);
 
     expectCommonPanelFields(panel);
     expect(panel.bodyText).toBe(getLongDateFormat("2024-02-01T10:00:00.000Z"));
@@ -34,6 +35,7 @@ describe("resolvePanel", () => {
       createBrev({
         svar: createSvar("KOMMER"),
       }),
+      expectedHref,
     );
 
     expectCommonPanelFields(panel);
@@ -48,6 +50,7 @@ describe("resolvePanel", () => {
       createBrev({
         svar: createSvar("KOMMER_IKKE"),
       }),
+      expectedHref,
     );
 
     expectCommonPanelFields(panel);
@@ -62,6 +65,7 @@ describe("resolvePanel", () => {
       createBrev({
         svar: createSvar("NYTT_TID_STED"),
       }),
+      expectedHref,
     );
 
     expectCommonPanelFields(panel);
@@ -76,6 +80,7 @@ describe("resolvePanel", () => {
       createBrev({
         brevType: "NYTT_TID_STED",
       }),
+      expectedHref,
     );
 
     expectCommonPanelFields(panel);
@@ -92,6 +97,7 @@ describe("resolvePanel", () => {
       createBrev({
         tid,
       }),
+      expectedHref,
     );
 
     expectCommonPanelFields(panel);

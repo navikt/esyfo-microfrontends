@@ -1,88 +1,22 @@
-import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 import { formatSvarfrist, formatVurderingsDato } from "@src/language/text";
 import { describe, expect, it } from "vitest";
-
 import { resolvePanel } from "./panelResolver";
+import {
+  createAvvent,
+  createForhandsvarsel,
+  createIkkeAktuell,
+  createIkkeOppfylt,
+  createNyVurdering,
+  createNyVurderingStatus,
+  createOppfylt,
+  createUnntak,
+} from "./test-utils/vurdering";
 
 const now = new Date("2024-06-01T12:00:00.000Z");
 const sistVurdert = "2024-01-15T00:00:00.000Z";
 const fristBefore = "2024-05-01T00:00:00.000Z";
 const fristAfter = "2024-07-01T00:00:00.000Z";
 const expectedHref = "http://localhost:3000/syk/aktivitetskrav";
-
-const createNyVurdering = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "NY" }>>,
-): Extract<AktivitetskravVurdering, { status: "NY" }> => ({
-  status: "NY",
-  ...overrides,
-});
-
-const createNyVurderingStatus = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "NY_VURDERING" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "NY_VURDERING" }> => ({
-  status: "NY_VURDERING",
-  ...overrides,
-});
-
-const createAvvent = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "AVVENT" }>>,
-): Extract<AktivitetskravVurdering, { status: "AVVENT" }> => ({
-  status: "AVVENT",
-  sistVurdert,
-  ...overrides,
-});
-
-const createUnntak = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "UNNTAK" }>>,
-): Extract<AktivitetskravVurdering, { status: "UNNTAK" }> => ({
-  status: "UNNTAK",
-  arsaker: ["MEDISINSKE_GRUNNER"],
-  sistVurdert,
-  ...overrides,
-});
-
-const createOppfylt = (
-  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "OPPFYLT" }>>,
-): Extract<AktivitetskravVurdering, { status: "OPPFYLT" }> => ({
-  status: "OPPFYLT",
-  arsaker: ["FRISKMELDT"],
-  sistVurdert,
-  ...overrides,
-});
-
-const createForhandsvarsel = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "FORHANDSVARSEL" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "FORHANDSVARSEL" }> => ({
-  status: "FORHANDSVARSEL",
-  journalpostId: "journalpost-1",
-  sistVurdert,
-  fristDato: fristAfter,
-  ...overrides,
-});
-
-const createIkkeAktuell = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "IKKE_AKTUELL" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "IKKE_AKTUELL" }> => ({
-  status: "IKKE_AKTUELL",
-  sistVurdert,
-  ...overrides,
-});
-
-const createIkkeOppfylt = (
-  overrides?: Partial<
-    Extract<AktivitetskravVurdering, { status: "IKKE_OPPFYLT" }>
-  >,
-): Extract<AktivitetskravVurdering, { status: "IKKE_OPPFYLT" }> => ({
-  status: "IKKE_OPPFYLT",
-  sistVurdert,
-  ...overrides,
-});
 
 const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
   expect(panel.panelId).toBe("aktivitetskrav-panel");
@@ -91,7 +25,7 @@ const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
 
 describe("resolvePanel", () => {
   it("resolves NY to under arbeid state without tag", () => {
-    const panel = resolvePanel(createNyVurdering(), now);
+    const panel = resolvePanel(createNyVurdering(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
@@ -103,7 +37,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves NY_VURDERING to under arbeid state without tag", () => {
-    const panel = resolvePanel(createNyVurderingStatus(), now);
+    const panel = resolvePanel(createNyVurderingStatus(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
@@ -115,7 +49,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves AVVENT to under arbeid state without tag", () => {
-    const panel = resolvePanel(createAvvent(), now);
+    const panel = resolvePanel(createAvvent(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
@@ -127,7 +61,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves UNNTAK with MEDISINSKE_GRUNNER to a success panel", () => {
-    const panel = resolvePanel(createUnntak(), now);
+    const panel = resolvePanel(createUnntak(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("success");
@@ -144,6 +78,7 @@ describe("resolvePanel", () => {
       createUnntak({
         arsaker: [],
       }),
+      expectedHref,
       now,
     );
 
@@ -154,7 +89,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves OPPFYLT with FRISKMELDT to a success panel", () => {
-    const panel = resolvePanel(createOppfylt(), now);
+    const panel = resolvePanel(createOppfylt(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("success");
@@ -171,6 +106,7 @@ describe("resolvePanel", () => {
       createOppfylt({
         arsaker: ["GRADERT"],
       }),
+      expectedHref,
       now,
     );
 
@@ -183,6 +119,7 @@ describe("resolvePanel", () => {
       createForhandsvarsel({
         journalpostId: undefined,
       }),
+      expectedHref,
       now,
     );
 
@@ -200,6 +137,7 @@ describe("resolvePanel", () => {
       createForhandsvarsel({
         fristDato: fristAfter,
       }),
+      expectedHref,
       now,
     );
 
@@ -218,6 +156,7 @@ describe("resolvePanel", () => {
       createForhandsvarsel({
         fristDato: fristBefore,
       }),
+      expectedHref,
       now,
     );
 
@@ -229,7 +168,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves IKKE_AKTUELL with info tag", () => {
-    const panel = resolvePanel(createIkkeAktuell(), now);
+    const panel = resolvePanel(createIkkeAktuell(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("info");
@@ -241,7 +180,7 @@ describe("resolvePanel", () => {
   });
 
   it("resolves IKKE_OPPFYLT with error tag", () => {
-    const panel = resolvePanel(createIkkeOppfylt(), now);
+    const panel = resolvePanel(createIkkeOppfylt(), expectedHref, now);
 
     expectCommonPanelFields(panel);
     expect(panel.alertStyle).toBe("error");

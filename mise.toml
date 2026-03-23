@@ -78,3 +78,13 @@ run = ["pnpm run check",
 "pnpm run build:meroppfolging-microfrontend",
 "pnpm run build:motebehov-microfrontend"
 ]
+
+[tasks.storybook]
+description = "Run Storybook dev server"
+depends = ["install"]
+run = "pnpm run storybook"
+
+[tasks.build-storybook]
+description = "Build Storybook static site"
+depends = ["install"]
+run = "pnpm run build-storybook"

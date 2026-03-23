@@ -1,4 +1,3 @@
-import { DIALOGMOTE_URL } from "astro:env/server";
 import type { MainPanelProps } from "@esyfo/shared/components";
 import { getLongDateFormat } from "@esyfo/shared/dateUtils";
 import type { BrevDto, BrevTypeDto, SvarTypeDto } from "@schema/brevSchema";
@@ -35,7 +34,7 @@ const getTag = (
   }
 };
 
-export const resolvePanel = (brev: BrevDto): MainPanelProps => {
+export const resolvePanel = (brev: BrevDto, href: string): MainPanelProps => {
   const attending = brev.svar?.svarType ?? null;
 
   return {
@@ -44,7 +43,7 @@ export const resolvePanel = (brev: BrevDto): MainPanelProps => {
       brev.brevType === "NYTT_TID_STED"
         ? BodyContent.motetFlyttet
         : getLongDateFormat(brev.tid),
-    href: `${DIALOGMOTE_URL}/moteinnkalling`,
+    href: `${href}/moteinnkalling`,
     alertStyle: "warning",
     panelId: "dialogmote-panel",
     tag: getTag(attending, brev.brevType),
