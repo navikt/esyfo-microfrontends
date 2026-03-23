@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-
-import { createBrev } from "./__fixtures__/brev";
 import { getLatestBrev, shouldShowDialogmotePanel } from "./brev";
+import { createBrev } from "./test-utils/brev";
 
 describe("getLatestBrev", () => {
   it("returns null for an empty list", () => {

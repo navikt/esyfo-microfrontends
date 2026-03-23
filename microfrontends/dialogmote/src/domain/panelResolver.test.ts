@@ -1,9 +1,8 @@
 import { getLongDateFormat } from "@esyfo/shared/dateUtils";
 import type { BrevDto, SvarTypeDto } from "@schema/brevSchema";
 import { describe, expect, it } from "vitest";
-
-import { createBrev } from "./__fixtures__/brev";
 import { resolvePanel } from "./panelResolver";
+import { createBrev } from "./test-utils/brev";
 
 const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
   svarTidspunkt: "2024-01-20T10:00:00.000Z",
