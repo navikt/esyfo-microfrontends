@@ -4,6 +4,7 @@ import type {
   MeroppfolgingStatusDto,
   SenoppfolgingStatusDto,
 } from "@schema/merOppfolgingStatusSchema";
+import { isRespondedWithinOneWeek } from "@src/domain/dateRules";
 import { BodyContent, HeadingContent, TagContent } from "@src/language/text";
 
 const withPanelId = (
@@ -27,20 +28,6 @@ const resolveSenOppfolgingNoResponse = (
       text: TagContent.noResponse,
     },
   });
-
-const ONE_WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
-
-const isRespondedWithinOneWeek = (
-  responseDateTime: string | null | undefined,
-  now: Date,
-): responseDateTime is string => {
-  if (!responseDateTime) return false;
-
-  const responseDate = new Date(responseDateTime);
-  const oneWeekAgo = new Date(now.getTime() - ONE_WEEK_IN_MS);
-
-  return responseDate > oneWeekAgo;
-};
 
 const getSenOppfolgingResponseBody = (
   responseStatus: "TRENGER_OPPFOLGING" | "TRENGER_IKKE_OPPFOLGING",
