@@ -28,7 +28,12 @@ const resolveSenOppfolgingNoResponse = (
     },
   });
 
-const isRecentResponse = (responseDateTime: string, now: Date): boolean => {
+const isRespondedWithinOneWeek = (
+  responseDateTime: string | null | undefined,
+  now: Date,
+): responseDateTime is string => {
+  if (!responseDateTime) return false;
+
   const responseDate = new Date(responseDateTime);
   const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
@@ -52,11 +57,7 @@ const resolveSenOppfolgingResponded = (
   href: string,
   now: Date,
 ): MainPanelProps | undefined => {
-  if (!senOppfolgingStatus.responseDateTime) {
-    return undefined;
-  }
-
-  if (!isRecentResponse(senOppfolgingStatus.responseDateTime, now)) {
+  if (!isRespondedWithinOneWeek(senOppfolgingStatus.responseDateTime, now)) {
     return undefined;
   }
 
