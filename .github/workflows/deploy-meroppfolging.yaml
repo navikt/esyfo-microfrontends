@@ -1,6 +1,13 @@
 name: "Deploy dev&prod"
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+      - "deploy-meroppfolging"
+    paths:
+      - "microfrontends/meroppfolging/**"
+      - "pnpm-lock.yaml"
+      - "package.json"
 
 jobs:
   build:
