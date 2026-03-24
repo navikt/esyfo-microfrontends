@@ -121,11 +121,14 @@ const resolveSenOppfolging = (
 const resolveKartlegging = (
   kartleggingStatus: KartleggingStatusDTO,
   href: string,
-): MainPanelProps => {
+): MainPanelProps | undefined => {
   switch (kartleggingStatus.responseStatus) {
     case "NO_RESPONSE":
       return resolveKartleggingNoResponse(href);
     case "SUBMITTED":
+      if (!kartleggingStatus.responseDateTime) {
+        return resolveKartleggingNoResponse(href);
+      }
       return resolveKartleggingSubmitted(kartleggingStatus, href);
   }
 };

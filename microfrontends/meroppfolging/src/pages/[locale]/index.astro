@@ -19,4 +19,5 @@ const panelProps = resolvePanel(status, SSPS_URL, KARTLEGGING_URL, new Date());
 ---
 
 {isLocal && <meta charset="UTF-8" />}
+<!-- Wrapping div is necessary to load CSS for MainPanel. This is how Astro handles CSS loading. -->
 {panelProps && <div class="meroppfolging-microfrontend"><MainPanel {...panelProps} /></div>}
