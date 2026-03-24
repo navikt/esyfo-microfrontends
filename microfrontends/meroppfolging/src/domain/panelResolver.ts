@@ -48,6 +48,7 @@ const getSenOppfolgingResponseBody = (
 
 const resolveSenOppfolgingResponded = (
   senOppfolgingStatus: SenOppfolgingStatusDTO,
+  responseStatus: "TRENGER_OPPFOLGING" | "TRENGER_IKKE_OPPFOLGING",
   href: string,
   now: Date,
 ): MainPanelProps | undefined => {
@@ -61,7 +62,7 @@ const resolveSenOppfolgingResponded = (
 
   return withPanelId({
     headingText: HeadingContent.senOppfolging,
-    bodyText: getSenOppfolgingResponseBody(senOppfolgingStatus.responseStatus),
+    bodyText: getSenOppfolgingResponseBody(responseStatus),
     href,
     alertStyle: "info",
     tag: {
@@ -108,7 +109,12 @@ const resolveSenOppfolging = (
       return resolveSenOppfolgingNoResponse(senOppfolgingStatus, href);
     case "TRENGER_OPPFOLGING":
     case "TRENGER_IKKE_OPPFOLGING":
-      return resolveSenOppfolgingResponded(senOppfolgingStatus, href, now);
+      return resolveSenOppfolgingResponded(
+        senOppfolgingStatus,
+        senOppfolgingStatus.responseStatus,
+        href,
+        now,
+      );
   }
 };
 
