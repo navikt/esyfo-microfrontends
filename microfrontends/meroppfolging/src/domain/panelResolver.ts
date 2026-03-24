@@ -1,8 +1,8 @@
 import type { MainPanelProps } from "@esyfo/shared/components";
 import type {
-  KartleggingStatusDTO,
-  MerOppfolgingStatusDTO,
-  SenOppfolgingStatusDTO,
+  KartleggingStatusDto,
+  MeroppfolgingStatusDto,
+  SenoppfolgingStatusDto,
 } from "@schema/merOppfolgingStatusSchema";
 import { BodyContent, HeadingContent, TagContent } from "@src/language/text";
 
@@ -14,7 +14,7 @@ const withPanelId = (
 });
 
 const resolveSenOppfolgingNoResponse = (
-  senOppfolgingStatus: SenOppfolgingStatusDTO,
+  senOppfolgingStatus: SenoppfolgingStatusDto,
   href: string,
 ): MainPanelProps =>
   withPanelId({
@@ -47,7 +47,7 @@ const getSenOppfolgingResponseBody = (
 };
 
 const resolveSenOppfolgingResponded = (
-  senOppfolgingStatus: SenOppfolgingStatusDTO,
+  senOppfolgingStatus: SenoppfolgingStatusDto,
   responseStatus: "TRENGER_OPPFOLGING" | "TRENGER_IKKE_OPPFOLGING",
   href: string,
   now: Date,
@@ -85,7 +85,7 @@ const resolveKartleggingNoResponse = (href: string): MainPanelProps =>
   });
 
 const resolveKartleggingSubmitted = (
-  kartleggingStatus: KartleggingStatusDTO,
+  kartleggingStatus: KartleggingStatusDto,
   href: string,
 ): MainPanelProps =>
   withPanelId({
@@ -100,7 +100,7 @@ const resolveKartleggingSubmitted = (
   });
 
 const resolveSenOppfolging = (
-  senOppfolgingStatus: SenOppfolgingStatusDTO,
+  senOppfolgingStatus: SenoppfolgingStatusDto,
   href: string,
   now: Date,
 ): MainPanelProps | undefined => {
@@ -119,7 +119,7 @@ const resolveSenOppfolging = (
 };
 
 const resolveKartlegging = (
-  kartleggingStatus: KartleggingStatusDTO,
+  kartleggingStatus: KartleggingStatusDto,
   href: string,
 ): MainPanelProps | undefined => {
   switch (kartleggingStatus.responseStatus) {
@@ -134,7 +134,7 @@ const resolveKartlegging = (
 };
 
 export const resolvePanel = (
-  status: MerOppfolgingStatusDTO,
+  status: MeroppfolgingStatusDto,
   sspsUrl: string,
   kartleggingUrl: string,
   now: Date,

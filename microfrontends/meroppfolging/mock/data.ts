@@ -1,7 +1,7 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
-import type { MerOppfolgingStatusDTO } from "schema/merOppfolgingStatusSchema";
+import type { MeroppfolgingStatusDto } from "schema/merOppfolgingStatusSchema";
 
-const senNeedsHelp: MerOppfolgingStatusDTO = {
+const senNeedsHelp: MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_OPPFOLGING",
@@ -11,7 +11,7 @@ const senNeedsHelp: MerOppfolgingStatusDTO = {
   },
 };
 
-const senDoesntNeedHelp: MerOppfolgingStatusDTO = {
+const senDoesntNeedHelp: MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_IKKE_OPPFOLGING",
@@ -21,7 +21,7 @@ const senDoesntNeedHelp: MerOppfolgingStatusDTO = {
   },
 };
 
-const senNoResponse: MerOppfolgingStatusDTO = {
+const senNoResponse: MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "NO_RESPONSE",
@@ -31,7 +31,7 @@ const senNoResponse: MerOppfolgingStatusDTO = {
   },
 };
 
-const senOutdated: MerOppfolgingStatusDTO = {
+const senOutdated: MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_IKKE_OPPFOLGING",
@@ -41,7 +41,7 @@ const senOutdated: MerOppfolgingStatusDTO = {
   },
 };
 
-const kartleggingResponded: MerOppfolgingStatusDTO = {
+const kartleggingResponded: MeroppfolgingStatusDto = {
   oppfolgingsType: "KARTLEGGING",
   kartleggingStatus: {
     responseStatus: "SUBMITTED",
@@ -50,7 +50,7 @@ const kartleggingResponded: MerOppfolgingStatusDTO = {
   },
 };
 
-const kartleggingNotResponded: MerOppfolgingStatusDTO = {
+const kartleggingNotResponded: MeroppfolgingStatusDto = {
   oppfolgingsType: "KARTLEGGING",
   kartleggingStatus: {
     responseStatus: "NO_RESPONSE",
@@ -59,7 +59,7 @@ const kartleggingNotResponded: MerOppfolgingStatusDTO = {
   },
 };
 
-const ingenOppfolging: MerOppfolgingStatusDTO = {
+const ingenOppfolging: MeroppfolgingStatusDto = {
   oppfolgingsType: "INGEN_OPPFOLGING",
   senOppfolgingStatus: null,
 };

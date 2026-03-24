@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const senOppfolgingStatusSchema = z.object({
+const senoppfolgingStatusSchema = z.object({
   responseStatus: z.union([
     z.literal("NO_RESPONSE"),
     z.literal("TRENGER_OPPFOLGING"),
@@ -17,12 +17,12 @@ const kartleggingStatusSchema = z.object({
   hasAccessToKartlegging: z.boolean(),
 });
 
-export const merOppfolgingStatusSchema = z.discriminatedUnion(
+export const meroppfolgingStatusSchema = z.discriminatedUnion(
   "oppfolgingsType",
   [
     z.object({
       oppfolgingsType: z.literal("SEN_OPPFOLGING"),
-      senOppfolgingStatus: senOppfolgingStatusSchema,
+      senOppfolgingStatus: senoppfolgingStatusSchema,
     }),
     z.object({
       oppfolgingsType: z.literal("KARTLEGGING"),
@@ -35,6 +35,6 @@ export const merOppfolgingStatusSchema = z.discriminatedUnion(
   ],
 );
 
-export type MerOppfolgingStatusDTO = z.infer<typeof merOppfolgingStatusSchema>;
-export type SenOppfolgingStatusDTO = z.infer<typeof senOppfolgingStatusSchema>;
-export type KartleggingStatusDTO = z.infer<typeof kartleggingStatusSchema>;
+export type MeroppfolgingStatusDto = z.infer<typeof meroppfolgingStatusSchema>;
+export type SenoppfolgingStatusDto = z.infer<typeof senoppfolgingStatusSchema>;
+export type KartleggingStatusDto = z.infer<typeof kartleggingStatusSchema>;

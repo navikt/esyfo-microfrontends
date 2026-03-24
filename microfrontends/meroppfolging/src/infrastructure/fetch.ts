@@ -4,26 +4,26 @@ import {
 } from "astro:env/server";
 import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
-import type { MerOppfolgingStatusDTO } from "@schema/merOppfolgingStatusSchema";
-import { merOppfolgingStatusSchema } from "@schema/merOppfolgingStatusSchema";
+import type { MeroppfolgingStatusDto } from "@schema/merOppfolgingStatusSchema";
+import { meroppfolgingStatusSchema } from "@schema/merOppfolgingStatusSchema";
 import mockData from "../../mock/data";
 
 const realFetchStatus = async (
   token: string,
-): Promise<MerOppfolgingStatusDTO> => {
+): Promise<MeroppfolgingStatusDto> => {
   return fetchFromBackend({
     token,
     clientId: MEROPPFOLGING_CLIENT_ID,
     apiUrl: MEROPPFOLGING_API_URL,
     apiName: "meroppfolging",
-    schema: merOppfolgingStatusSchema,
+    schema: meroppfolgingStatusSchema,
   });
 };
 
 const fakeFetchStatus = async (
   _token: string,
-): Promise<MerOppfolgingStatusDTO> => {
-  return merOppfolgingStatusSchema.parse(mockData.senNoResponse);
+): Promise<MeroppfolgingStatusDto> => {
+  return meroppfolgingStatusSchema.parse(mockData.senNoResponse);
 };
 
 export const fetchStatus = isLocal ? fakeFetchStatus : realFetchStatus;
