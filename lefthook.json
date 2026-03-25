@@ -9,6 +9,7 @@
     }
   },
   "pre-push": {
+    "parallel": true,
     "commands": {
       "typecheck-dialogmote": {
         "run": "pnpm --filter dialogmote-microfrontend run typecheck"
