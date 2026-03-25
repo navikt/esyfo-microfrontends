@@ -19,6 +19,9 @@
       "typecheck-motebehov": {
         "run": "pnpm --filter motebehov-microfrontend run typecheck"
       },
+      "typecheck-meroppfolging": {
+        "run": "pnpm --filter meroppfolging-microfrontend run typecheck"
+      },
       "typecheck-shared": {
         "run": "pnpm --filter @esyfo/shared run typecheck"
       }
