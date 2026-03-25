@@ -3,7 +3,7 @@ import type {
   KartleggingStatusDto,
   MeroppfolgingStatusDto,
   SenoppfolgingStatusDto,
-} from "@schema/merOppfolgingStatusSchema";
+} from "@schema/meroppfolgingStatusSchema";
 import { isRespondedWithinOneWeek } from "@src/domain/dateRules";
 import { BodyContent, HeadingContent, TagContent } from "@src/language/text";
 

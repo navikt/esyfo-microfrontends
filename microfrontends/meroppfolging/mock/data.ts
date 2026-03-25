@@ -1,7 +1,7 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
-import type { MeroppfolgingStatusDto } from "schema/merOppfolgingStatusSchema";
+import type * as meroppfolgingStatusSchema from "@schema/meroppfolgingStatusSchema";
 
-const senNeedsHelp: MeroppfolgingStatusDto = {
+const senNeedsHelp: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_OPPFOLGING",
@@ -11,7 +11,7 @@ const senNeedsHelp: MeroppfolgingStatusDto = {
   },
 };
 
-const senDoesntNeedHelp: MeroppfolgingStatusDto = {
+const senDoesntNeedHelp: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_IKKE_OPPFOLGING",
@@ -21,7 +21,7 @@ const senDoesntNeedHelp: MeroppfolgingStatusDto = {
   },
 };
 
-const senNoResponse: MeroppfolgingStatusDto = {
+const senNoResponse: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "NO_RESPONSE",
@@ -31,7 +31,7 @@ const senNoResponse: MeroppfolgingStatusDto = {
   },
 };
 
-const senOutdated: MeroppfolgingStatusDto = {
+const senOutdated: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_IKKE_OPPFOLGING",
@@ -41,7 +41,7 @@ const senOutdated: MeroppfolgingStatusDto = {
   },
 };
 
-const kartleggingResponded: MeroppfolgingStatusDto = {
+const kartleggingResponded: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "KARTLEGGING",
   kartleggingStatus: {
     responseStatus: "SUBMITTED",
@@ -50,21 +50,22 @@ const kartleggingResponded: MeroppfolgingStatusDto = {
   },
 };
 
-const kartleggingNotResponded: MeroppfolgingStatusDto = {
-  oppfolgingsType: "KARTLEGGING",
-  kartleggingStatus: {
-    responseStatus: "NO_RESPONSE",
-    hasAccessToKartlegging: true,
-    responseDateTime: null,
-  },
-};
+const kartleggingNotResponded: meroppfolgingStatusSchema.MeroppfolgingStatusDto =
+  {
+    oppfolgingsType: "KARTLEGGING",
+    kartleggingStatus: {
+      responseStatus: "NO_RESPONSE",
+      hasAccessToKartlegging: true,
+      responseDateTime: null,
+    },
+  };
 
-const ingenOppfolging: MeroppfolgingStatusDto = {
+const ingenOppfolging: meroppfolgingStatusSchema.MeroppfolgingStatusDto = {
   oppfolgingsType: "INGEN_OPPFOLGING",
   senOppfolgingStatus: null,
 };
 
-const mockData = {
+export const mockData = {
   senNeedsHelp,
   senDoesntNeedHelp,
   senNoResponse,
@@ -73,5 +74,3 @@ const mockData = {
   kartleggingNotResponded,
   ingenOppfolging,
 };
-
-export default mockData;
