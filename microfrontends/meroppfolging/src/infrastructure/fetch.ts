@@ -25,7 +25,7 @@ const realFetchStatus = async (
 const fakeFetchStatus = async (
   _token: string,
 ): Promise<MeroppfolgingStatusDto> => {
-  return meroppfolgingStatusSchema.parse(mockData.senNoResponse);
+  return meroppfolgingStatusSchema.parse(mockData.senOppfolging.noResponse);
 };
 
 export const fetchStatus = isLocal ? fakeFetchStatus : realFetchStatus;
