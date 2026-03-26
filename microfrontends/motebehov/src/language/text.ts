@@ -1,5 +1,5 @@
 export const HeadingContent = {
-  dialogmote: "Dialogmøte med NAV",
+  dialogmote: "Dialogmøte med Nav",
 } as const;
 
 export const BodyContent = {

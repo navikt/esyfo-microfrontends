@@ -18,7 +18,7 @@ const validBrev = {
   digitalt: true,
   lestDato: "2024-01-16T10:00:00.000Z",
   fritekst: "Fritekst",
-  sted: "NAV-kontoret",
+  sted: "Nav-kontoret",
   tid: "2024-02-01 10:00",
   videoLink: "https://example.com/video",
   document: [validDocumentComponent],

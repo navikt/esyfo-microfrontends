@@ -117,5 +117,5 @@ flowchart LR
 
 ## Kontakt
 
-- **Team:** team-esyfo, NAV IT
+- **Team:** team-esyfo, Nav IT
 - **Slack:** #team-esyfo

@@ -2,19 +2,19 @@ import { getShortDateFormat } from "@esyfo/shared/dateUtils";
 import type { OppfyltArsaker, UnntakArsaker } from "@schema/vurderingSchema";
 
 export const HeadingContent = {
-  vurderer: "NAV vurderer aktivitetsplikten din",
-  harVurdert: "NAV har vurdert aktivitetsplikten din",
+  vurderer: "Nav vurderer aktivitetsplikten din",
+  harVurdert: "Nav har vurdert aktivitetsplikten din",
 } as const;
 
 export const BodyContent = {
   underArbeid: "Les mer om aktivitetsplikten og hva den betyr for deg",
-  forhandsvarsel: "NAV vurderer å stanse sykepengene dine",
-  ikkeAktuell: "NAV vurderer at aktivitetsplikten ikke er aktuell for deg",
+  forhandsvarsel: "Nav vurderer å stanse sykepengene dine",
+  ikkeAktuell: "Nav vurderer at aktivitetsplikten ikke er aktuell for deg",
 } as const;
 
 export const BodyDefaultContent = {
-  unntak: "NAV vurderer at du er unntatt fra aktivitetsplikten",
-  oppfylt: "NAV vurderer at du oppfyller aktivitetsplikten",
+  unntak: "Nav vurderer at du er unntatt fra aktivitetsplikten",
+  oppfylt: "Nav vurderer at du oppfyller aktivitetsplikten",
 } as const;
 
 export const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
@@ -27,10 +27,10 @@ export const unntakBodyTextByArsak: Record<UnntakArsaker, string> = {
 
 export const oppfyltBodyTextByArsak: Record<OppfyltArsaker, string> = {
   FRISKMELDT:
-    "NAV vurderer at du oppfyller aktivitetsplikten siden du er friskmeldt",
+    "Nav vurderer at du oppfyller aktivitetsplikten siden du er friskmeldt",
   GRADERT:
-    "NAV vurderer at du oppfyller aktivitetsplikten siden du er i gradert arbeid",
-  TILTAK: "NAV vurderer at du oppfyller aktivitetsplikten siden du er i tiltak",
+    "Nav vurderer at du oppfyller aktivitetsplikten siden du er i gradert arbeid",
+  TILTAK: "Nav vurderer at du oppfyller aktivitetsplikten siden du er i tiltak",
 };
 
 export const getUnntakBodyText = (arsak?: UnntakArsaker): string =>
