@@ -20,6 +20,7 @@ const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
 });
 
 export const InnkaltIkkeSvart: Story = {
+  name: "Innkalt — ikke svart",
   args: resolvePanel(
     createBrev({ brevType: "INNKALT", svar: null, lestDato: null }),
     href,
@@ -27,6 +28,7 @@ export const InnkaltIkkeSvart: Story = {
 };
 
 export const InnkaltTakketJa: Story = {
+  name: "Innkalt — takket ja",
   args: resolvePanel(
     createBrev({ brevType: "INNKALT", svar: createSvar("KOMMER") }),
     href,
@@ -34,6 +36,7 @@ export const InnkaltTakketJa: Story = {
 };
 
 export const InnkaltOnskerAvlyse: Story = {
+  name: "Innkalt — ønsker avlyse",
   args: resolvePanel(
     createBrev({ brevType: "INNKALT", svar: createSvar("KOMMER_IKKE") }),
     href,
@@ -41,6 +44,7 @@ export const InnkaltOnskerAvlyse: Story = {
 };
 
 export const InnkaltOnskerEndre: Story = {
+  name: "Innkalt — ønsker endre",
   args: resolvePanel(
     createBrev({ brevType: "INNKALT", svar: createSvar("NYTT_TID_STED") }),
     href,
@@ -48,6 +52,7 @@ export const InnkaltOnskerEndre: Story = {
 };
 
 export const NyttTidStedIkkeSvart: Story = {
+  name: "Nytt tid/sted — ikke svart",
   args: resolvePanel(
     createBrev({ brevType: "NYTT_TID_STED", svar: null, lestDato: null }),
     href,
@@ -55,6 +60,7 @@ export const NyttTidStedIkkeSvart: Story = {
 };
 
 export const NyttTidStedTakketJa: Story = {
+  name: "Nytt tid/sted — takket ja",
   args: resolvePanel(
     createBrev({ brevType: "NYTT_TID_STED", svar: createSvar("KOMMER") }),
     href,
@@ -62,6 +68,7 @@ export const NyttTidStedTakketJa: Story = {
 };
 
 export const NyttTidStedOnskerAvlyse: Story = {
+  name: "Nytt tid/sted — ønsker avlyse",
   args: resolvePanel(
     createBrev({
       brevType: "NYTT_TID_STED",
@@ -72,6 +79,7 @@ export const NyttTidStedOnskerAvlyse: Story = {
 };
 
 export const NyttTidStedOnskerEndre: Story = {
+  name: "Nytt tid/sted — ønsker endre",
   args: resolvePanel(
     createBrev({
       brevType: "NYTT_TID_STED",

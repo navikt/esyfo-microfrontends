@@ -31,26 +31,32 @@ const resolveStoryArgs = (...args: Parameters<typeof resolvePanel>) => {
 };
 
 export const Ny: Story = {
+  name: "Ny",
   args: resolveStoryArgs(createNyVurdering(), href, now),
 };
 
 export const NyVurdering: Story = {
+  name: "Ny vurdering",
   args: resolveStoryArgs(createNyVurderingStatus(), href, now),
 };
 
 export const Avvent: Story = {
+  name: "Avvent",
   args: resolveStoryArgs(createAvvent(), href, now),
 };
 
 export const Unntak: Story = {
+  name: "Unntak",
   args: resolveStoryArgs(createUnntak(), href, now),
 };
 
 export const Oppfylt: Story = {
+  name: "Oppfylt",
   args: resolveStoryArgs(createOppfylt(), href, now),
 };
 
 export const ForhandsvarselForFrist: Story = {
+  name: "Forhåndsvarsel — før frist",
   args: resolveStoryArgs(
     createForhandsvarsel({ fristDato: "2024-07-01T00:00:00.000Z" }),
     href,
@@ -59,6 +65,7 @@ export const ForhandsvarselForFrist: Story = {
 };
 
 export const ForhandsvarselUtenJournalpost: Story = {
+  name: "Forhåndsvarsel — uten journalpost",
   args: resolveStoryArgs(
     createForhandsvarsel({ journalpostId: undefined }),
     href,
@@ -67,6 +74,7 @@ export const ForhandsvarselUtenJournalpost: Story = {
 };
 
 export const ForhandsvarselEtterFrist: Story = {
+  name: "Forhåndsvarsel — etter frist",
   args: resolveStoryArgs(
     createForhandsvarsel({ fristDato: "2024-05-01T00:00:00.000Z" }),
     href,
@@ -75,5 +83,6 @@ export const ForhandsvarselEtterFrist: Story = {
 };
 
 export const IkkeAktuell: Story = {
+  name: "Ikke aktuell",
   args: resolveStoryArgs(createIkkeAktuell(), href, now),
 };
