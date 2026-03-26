@@ -40,6 +40,6 @@ spec:
       memory: 128Mi
   env:
     - name: AKTIVITETSKRAV_API_URL
-      value: "https://aktivitetskrav-backend.intern.dev.nav.no/api/v1/aktivitetsplikt"
+      value: "http://aktivitetskrav-backend.team-esyfo/api/v1/aktivitetsplikt"
     - name: AKTIVITETSKRAV_CLIENT_ID
       value: "dev-gcp:team-esyfo:aktivitetskrav-backend"

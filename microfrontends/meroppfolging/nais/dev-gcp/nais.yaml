@@ -40,7 +40,7 @@ spec:
       memory: 128Mi
   env:
     - name: MEROPPFOLGING_API_URL
-      value: "https://meroppfolging-backend.intern.dev.nav.no/api/mikrofrontend/v1/status"
+      value: "http://meroppfolging-backend.team-esyfo/api/mikrofrontend/v1/status"
     - name: MEROPPFOLGING_CLIENT_ID
       value: "dev-gcp:team-esyfo:meroppfolging-backend"
     - name: SSPS_URL
