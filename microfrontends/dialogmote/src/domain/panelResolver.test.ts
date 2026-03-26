@@ -38,7 +38,7 @@ describe("resolvePanel", () => {
   const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
     expect(panel.panelId).toBe("dialogmote-panel");
     expect(panel.alertStyle).toBe("warning");
-    expect(panel.headingText).toBe("Dialogmøte med NAV");
+    expect(panel.headingText).toBe("Dialogmøte med Nav");
     expect(panel.href).toBe(`${expectedHref}/moteinnkalling`);
   };
 
@@ -77,7 +77,7 @@ describe("resolvePanel", () => {
     );
 
     expectCommonPanelFields(panel);
-    expect(panel.bodyText).toBe("Møtet med NAV er flyttet");
+    expect(panel.bodyText).toBe("Møtet med Nav er flyttet");
     expect(panel.tag).toEqual({
       text: "Se endringene og svar",
       variant: "warning-moderate",

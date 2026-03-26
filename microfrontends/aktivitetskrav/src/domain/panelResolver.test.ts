@@ -39,7 +39,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("info");
-    expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
       "Les mer om aktivitetsplikten og hva den betyr for deg",
     );
@@ -52,7 +52,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("info");
-    expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
       "Les mer om aktivitetsplikten og hva den betyr for deg",
     );
@@ -65,7 +65,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("info");
-    expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
       "Les mer om aktivitetsplikten og hva den betyr for deg",
     );
@@ -78,7 +78,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("success");
-    expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav har vurdert aktivitetsplikten din");
     expect(panel.bodyText).toContain("medisinske");
     expect(panel.tag).toEqual({
       text: formatVurderingsDato(sistVurdert),
@@ -98,7 +98,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.bodyText).toBe(
-      "NAV vurderer at du er unntatt fra aktivitetsplikten",
+      "Nav vurderer at du er unntatt fra aktivitetsplikten",
     );
   });
 
@@ -108,7 +108,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("success");
-    expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav har vurdert aktivitetsplikten din");
     expect(panel.bodyText).toContain("friskmeldt");
     expect(panel.tag).toEqual({
       text: formatVurderingsDato(sistVurdert),
@@ -142,7 +142,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("info");
-    expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
     expect(panel.bodyText).toBe(
       "Les mer om aktivitetsplikten og hva den betyr for deg",
     );
@@ -161,8 +161,8 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("warning");
-    expect(panel.headingText).toBe("NAV vurderer aktivitetsplikten din");
-    expect(panel.bodyText).toBe("NAV vurderer å stanse sykepengene dine");
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
+    expect(panel.bodyText).toBe("Nav vurderer å stanse sykepengene dine");
     expect(panel.tag).toEqual({
       text: formatSvarfrist(fristAfter),
       variant: "warning-moderate",
@@ -192,7 +192,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.alertStyle).toBe("info");
-    expect(panel.headingText).toBe("NAV har vurdert aktivitetsplikten din");
+    expect(panel.headingText).toBe("Nav har vurdert aktivitetsplikten din");
     expect(panel.tag).toEqual({
       text: formatVurderingsDato(sistVurdert),
       variant: "info-moderate",

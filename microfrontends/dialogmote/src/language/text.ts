@@ -1,9 +1,9 @@
 export const HeadingContent = {
-  dialogmote: "Dialogmøte med NAV",
+  dialogmote: "Dialogmøte med Nav",
 } as const;
 
 export const BodyContent = {
-  motetFlyttet: "Møtet med NAV er flyttet",
+  motetFlyttet: "Møtet med Nav er flyttet",
 } as const;
 
 export const TagContent = {

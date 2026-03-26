@@ -8,7 +8,7 @@ export const createBrev = (overrides?: Partial<BrevDto>): BrevDto => ({
   digitalt: true,
   lestDato: null,
   fritekst: "Fritekst",
-  sted: "NAV Oslo",
+  sted: "Nav Oslo",
   tid: "2024-02-01T10:00:00.000Z",
   videoLink: null,
   document: [],

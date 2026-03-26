@@ -7,7 +7,7 @@ const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
 describe("resolvePanel", () => {
   it("shows panel asking user if they need a dialogmøte", () => {
     expect(resolvePanel(expectedHref)).toEqual({
-      headingText: "Dialogmøte med NAV",
+      headingText: "Dialogmøte med Nav",
       bodyText: "Trenger du et dialogmøte?",
       href: `${expectedHref}/motebehov/svar`,
       alertStyle: "warning",
