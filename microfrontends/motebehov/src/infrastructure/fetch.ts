@@ -8,7 +8,7 @@ import {
   type MotebehovStatusDto,
   motebehovStatusSchema,
 } from "@schema/motebehovSchema.ts";
-import { mockData } from "../../mock/data";
+import { mockData } from "mock/data";
 
 const realFetchMotebehov = async (
   token: string,
