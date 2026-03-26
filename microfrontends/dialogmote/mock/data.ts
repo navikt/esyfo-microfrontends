@@ -78,11 +78,9 @@ const innkallingsBrev = createInnkallingsBrev({
   createdAt: addDaysToDate(new Date(), -3).toISOString(),
 });
 
-const mockData = {
+export const mockData = {
   innkallingsBrev,
 };
-
-export default mockData;
 
 export {
   createAvlysningsBrev,

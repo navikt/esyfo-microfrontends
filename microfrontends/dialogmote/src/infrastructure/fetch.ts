@@ -3,7 +3,7 @@ import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { brevSchema } from "@schema/brevSchema";
 import type { BrevDto } from "@schema/brevSchema.ts";
-import mockData from "../../mock/data";
+import { mockData } from "../../mock/data";
 
 const realFetchBrev = async (token: string): Promise<BrevDto[]> => {
   return fetchFromBackend({

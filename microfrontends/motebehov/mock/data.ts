@@ -6,8 +6,6 @@ const motebehovUtenSvar: MotebehovStatusDto = {
   motebehov: null,
 };
 
-const mockData = {
+export const mockData = {
   motebehovUtenSvar,
 };
-
-export default mockData;
