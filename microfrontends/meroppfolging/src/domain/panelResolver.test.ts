@@ -27,7 +27,7 @@ const expectResolvedPanel = (
 };
 
 describe("resolvePanel", () => {
-  it("returns undefined for INGEN_OPPFOLGING", () => {
+  it("returns no panel when user has no oppfølging", () => {
     const panel = resolvePanel(
       createIngenOppfolging(),
       sspsUrl,
@@ -38,7 +38,7 @@ describe("resolvePanel", () => {
     expect(panel).toBeUndefined();
   });
 
-  it("resolves SEN_OPPFOLGING with NO_RESPONSE and maxDate to a warning panel", () => {
+  it("shows warning with last sykepenger date for sen oppfølging when user has not responded", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createSenOppfolgingNoResponse(),
@@ -59,7 +59,7 @@ describe("resolvePanel", () => {
     expect(panel.href).toBe(sspsUrl);
   });
 
-  it("resolves SEN_OPPFOLGING with NO_RESPONSE without maxDate to fallback body text", () => {
+  it("shows generic warning for sen oppfølging when last sykepenger date is unknown", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createSenOppfolgingNoResponse({
@@ -76,7 +76,7 @@ describe("resolvePanel", () => {
     );
   });
 
-  it("resolves SEN_OPPFOLGING with TRENGER_OPPFOLGING and fresh response to a success panel", () => {
+  it("shows confirmation for sen oppfølging when user recently said they need oppfølging", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createSenOppfolgingTrengerOppfolging(),
@@ -95,7 +95,7 @@ describe("resolvePanel", () => {
     expect(panel.href).toBe(sspsUrl);
   });
 
-  it("returns undefined for SEN_OPPFOLGING with TRENGER_OPPFOLGING and expired response", () => {
+  it("returns no panel for sen oppfølging when oppfølging response is older than one week", () => {
     const panel = resolvePanel(
       createSenOppfolgingTrengerOppfolging({
         responseDateTime: "2024-06-01T00:00:00.000Z",
@@ -108,7 +108,7 @@ describe("resolvePanel", () => {
     expect(panel).toBeUndefined();
   });
 
-  it("resolves SEN_OPPFOLGING with TRENGER_IKKE_OPPFOLGING and fresh response to a success panel", () => {
+  it("shows confirmation for sen oppfølging when user recently said they do not need oppfølging", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createSenOppfolgingTrengerIkkeOppfolging(),
@@ -125,7 +125,7 @@ describe("resolvePanel", () => {
     expect(panel.href).toBe(sspsUrl);
   });
 
-  it("returns undefined for SEN_OPPFOLGING with TRENGER_IKKE_OPPFOLGING and expired response", () => {
+  it("returns no panel for sen oppfølging when no-oppfølging response is older than one week", () => {
     const panel = resolvePanel(
       createSenOppfolgingTrengerIkkeOppfolging({
         responseDateTime: "2024-06-01T00:00:00.000Z",
@@ -138,7 +138,7 @@ describe("resolvePanel", () => {
     expect(panel).toBeUndefined();
   });
 
-  it("resolves KARTLEGGING with NO_RESPONSE to a warning panel", () => {
+  it("shows warning for kartlegging when user has not responded", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createKartleggingNoResponse(),
@@ -160,7 +160,7 @@ describe("resolvePanel", () => {
     expect(panel.href).toBe(kartleggingUrl);
   });
 
-  it("resolves KARTLEGGING with SUBMITTED and responseDateTime to a success panel", () => {
+  it("shows confirmation for kartlegging when user has submitted answers", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createKartleggingSubmitted(),
@@ -177,7 +177,7 @@ describe("resolvePanel", () => {
     expect(panel.href).toBe(kartleggingUrl);
   });
 
-  it("falls back to warning panel for KARTLEGGING with SUBMITTED without responseDateTime", () => {
+  it("falls back to warning for kartlegging when submitted but response date is missing", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createKartleggingSubmitted({
