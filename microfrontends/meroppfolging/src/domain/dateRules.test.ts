@@ -14,12 +14,12 @@ const testCases = [
     expected: false,
   },
   {
-    description: "returns true when response is within 7 days",
+    description: "returns true when response is within one week (7 days)",
     responseDateTime: "2024-06-14T10:00:00.000Z",
     expected: true,
   },
   {
-    description: "returns false when response is older than 7 days",
+    description: "returns false when response is older than one week",
     responseDateTime: "2024-06-01T10:00:00.000Z",
     expected: false,
   },
