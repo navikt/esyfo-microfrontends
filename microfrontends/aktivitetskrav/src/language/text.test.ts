@@ -7,37 +7,57 @@ import {
 } from "./text";
 
 describe("getUnntakBodyText", () => {
-  it("returns text for MEDISINSKE_GRUNNER", () => {
-    expect(getUnntakBodyText("MEDISINSKE_GRUNNER")).toContain("medisinske");
-  });
+  const testCases = [
+    {
+      description: "returns text for MEDISINSKE_GRUNNER",
+      input: "MEDISINSKE_GRUNNER",
+      matcher: (result: string) => expect(result).toContain("medisinske"),
+    },
+    {
+      description: "returns text for TILRETTELEGGING_IKKE_MULIG",
+      input: "TILRETTELEGGING_IKKE_MULIG",
+      matcher: (result: string) => expect(result).toContain("tilrettelegging"),
+    },
+    {
+      description: "returns default text for SJOMENN_UTENRIKS",
+      input: "SJOMENN_UTENRIKS",
+      matcher: (result: string) =>
+        expect(result).toBe(BodyDefaultContent.unntak),
+    },
+    {
+      description: "returns default text for undefined",
+      input: undefined,
+      matcher: (result: string) =>
+        expect(result).toBe(BodyDefaultContent.unntak),
+    },
+  ] as const;
 
-  it("returns text for TILRETTELEGGING_IKKE_MULIG", () => {
-    expect(getUnntakBodyText("TILRETTELEGGING_IKKE_MULIG")).toContain(
-      "tilrettelegging",
-    );
-  });
-
-  it("returns default text for SJOMENN_UTENRIKS", () => {
-    expect(getUnntakBodyText("SJOMENN_UTENRIKS")).toBe(
-      BodyDefaultContent.unntak,
-    );
-  });
-
-  it("returns default text for undefined", () => {
-    expect(getUnntakBodyText(undefined)).toBe(BodyDefaultContent.unntak);
+  it.each(testCases)("$description", ({ input, matcher }) => {
+    matcher(getUnntakBodyText(input));
   });
 });
 
 describe("getOppfyltBodyText", () => {
-  it("returns text for FRISKMELDT", () => {
-    expect(getOppfyltBodyText("FRISKMELDT")).toContain("friskmeldt");
-  });
+  const testCases = [
+    {
+      description: "returns text for FRISKMELDT",
+      input: "FRISKMELDT",
+      matcher: (result: string) => expect(result).toContain("friskmeldt"),
+    },
+    {
+      description: "returns text for TILTAK",
+      input: "TILTAK",
+      matcher: (result: string) => expect(result).toMatch(/tiltak/i),
+    },
+    {
+      description: "returns default text for undefined",
+      input: undefined,
+      matcher: (result: string) =>
+        expect(result).toBe(BodyDefaultContent.oppfylt),
+    },
+  ] as const;
 
-  it("returns text for TILTAK", () => {
-    expect(getOppfyltBodyText("TILTAK")).toMatch(/tiltak/i);
-  });
-
-  it("returns default text for undefined", () => {
-    expect(getOppfyltBodyText(undefined)).toBe(BodyDefaultContent.oppfylt);
+  it.each(testCases)("$description", ({ input, matcher }) => {
+    matcher(getOppfyltBodyText(input));
   });
 });
