@@ -40,48 +40,30 @@ describe("dateUtils", () => {
         description: "adds positive days",
         date: new Date(2024, 0, 10, 12),
         days: 5,
-        expectedYear: 2024,
-        expectedMonth: 0,
-        expectedDate: 15,
+        expected: new Date(2024, 0, 15, 12),
       },
       {
         description: "adds negative days",
         date: new Date(2024, 0, 10, 12),
         days: -4,
-        expectedYear: 2024,
-        expectedMonth: 0,
-        expectedDate: 6,
+        expected: new Date(2024, 0, 6, 12),
       },
       {
         description: "crosses month boundaries",
         date: new Date(2024, 0, 30, 12),
         days: 3,
-        expectedYear: 2024,
-        expectedMonth: 1,
-        expectedDate: 2,
+        expected: new Date(2024, 1, 2, 12),
       },
       {
         description: "crosses year boundaries",
         date: new Date(2024, 11, 30, 12),
         days: 3,
-        expectedYear: 2025,
-        expectedMonth: 0,
-        expectedDate: 2,
+        expected: new Date(2025, 0, 2, 12),
       },
-    ] as const;
+    ];
 
-    it.each(addDaysCases)("$description to a date", ({
-      date,
-      days,
-      expectedYear,
-      expectedMonth,
-      expectedDate,
-    }) => {
-      const result = addDaysToDate(date, days);
-
-      expect(result.getFullYear()).toBe(expectedYear);
-      expect(result.getMonth()).toBe(expectedMonth);
-      expect(result.getDate()).toBe(expectedDate);
+    it.each(addDaysCases)("$description", ({ date, days, expected }) => {
+      expect(addDaysToDate(date, days).getTime()).toBe(expected.getTime());
     });
 
     it("returns a new date unchanged when adding zero days", () => {
