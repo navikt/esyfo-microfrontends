@@ -19,7 +19,7 @@ const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
 };
 
 describe("resolvePanel", () => {
-  it("resolves INNKALT without svar to warning tag", () => {
+  it("shows warning when user is innkalt to dialogmøte but has not responded", () => {
     const panel = resolvePanel(createBrev(), expectedHref);
 
     expectCommonPanelFields(panel);
@@ -30,7 +30,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves INNKALT with KOMMER to success tag", () => {
+  it("shows confirmation when user accepted dialogmøte invitation", () => {
     const panel = resolvePanel(
       createBrev({
         svar: createSvar("KOMMER"),
@@ -45,7 +45,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves INNKALT with KOMMER_IKKE to neutral tag", () => {
+  it("shows status when user declined dialogmøte invitation", () => {
     const panel = resolvePanel(
       createBrev({
         svar: createSvar("KOMMER_IKKE"),
@@ -60,7 +60,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves INNKALT with NYTT_TID_STED svar to neutral tag", () => {
+  it("shows status when user requested new time for dialogmøte", () => {
     const panel = resolvePanel(
       createBrev({
         svar: createSvar("NYTT_TID_STED"),
@@ -75,7 +75,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves NYTT_TID_STED without svar to moved meeting body and change tag", () => {
+  it("shows warning when dialogmøte is rescheduled but user has not responded", () => {
     const panel = resolvePanel(
       createBrev({
         brevType: "NYTT_TID_STED",
@@ -91,7 +91,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("formats INNKALT body text from brev.tid", () => {
+  it("formats dialogmøte time from the invitation letter", () => {
     const tid = "2024-06-10T12:00:00.000Z";
     const panel = resolvePanel(
       createBrev({

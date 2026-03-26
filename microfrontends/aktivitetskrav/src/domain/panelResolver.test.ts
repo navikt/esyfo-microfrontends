@@ -33,7 +33,7 @@ const expectResolvedPanel = (
 };
 
 describe("resolvePanel", () => {
-  it("resolves NY to under arbeid state without tag", () => {
+  it("shows aktivitetsplikt is being evaluated for new cases", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createNyVurdering(), expectedHref, now),
     );
@@ -46,7 +46,7 @@ describe("resolvePanel", () => {
     expect(panel.tag).toBeUndefined();
   });
 
-  it("resolves NY_VURDERING to under arbeid state without tag", () => {
+  it("shows aktivitetsplikt is being evaluated for new vurdering", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createNyVurderingStatus(), expectedHref, now),
     );
@@ -59,7 +59,7 @@ describe("resolvePanel", () => {
     expect(panel.tag).toBeUndefined();
   });
 
-  it("resolves AVVENT to under arbeid state without tag", () => {
+  it("shows aktivitetsplikt is being evaluated when on hold", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createAvvent(), expectedHref, now),
     );
@@ -72,7 +72,7 @@ describe("resolvePanel", () => {
     expect(panel.tag).toBeUndefined();
   });
 
-  it("resolves UNNTAK with MEDISINSKE_GRUNNER to a success panel", () => {
+  it("shows unntak granted for medical reasons", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createUnntak(), expectedHref, now),
     );
@@ -86,7 +86,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("uses default unntak text when arsaker is empty", () => {
+  it("shows generic unntak text when no reasons are given", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createUnntak({
@@ -102,7 +102,7 @@ describe("resolvePanel", () => {
     );
   });
 
-  it("resolves OPPFYLT with FRISKMELDT to a success panel", () => {
+  it("shows aktivitetsplikt fulfilled when user is friskmeldt", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createOppfylt(), expectedHref, now),
     );
@@ -116,7 +116,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves OPPFYLT with GRADERT body text", () => {
+  it("shows aktivitetsplikt fulfilled when user is gradert", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createOppfylt({
@@ -130,7 +130,7 @@ describe("resolvePanel", () => {
     expect(panel.bodyText).toContain("gradert");
   });
 
-  it("falls back to under arbeid for FORHANDSVARSEL without journalpostId", () => {
+  it("falls back to evaluation view for forhåndsvarsel without journal entry", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createForhandsvarsel({
@@ -149,7 +149,7 @@ describe("resolvePanel", () => {
     expect(panel.tag).toBeUndefined();
   });
 
-  it("resolves FORHANDSVARSEL before frist with warning tag", () => {
+  it("shows forhåndsvarsel warning when svarfrist has not passed", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createForhandsvarsel({
@@ -169,7 +169,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves FORHANDSVARSEL after frist with error tag", () => {
+  it("shows forhåndsvarsel error when svarfrist has passed", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
         createForhandsvarsel({
@@ -186,7 +186,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves IKKE_AKTUELL with info tag", () => {
+  it("shows aktivitetsplikt is no longer relevant", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createIkkeAktuell(), expectedHref, now),
     );
@@ -199,7 +199,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("returns undefined for IKKE_OPPFYLT", () => {
+  it("returns no panel when aktivitetsplikt is not fulfilled", () => {
     const panel = resolvePanel(createIkkeOppfylt(), expectedHref, now);
 
     expect(panel).toBeUndefined();

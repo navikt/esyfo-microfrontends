@@ -5,7 +5,7 @@ import { resolvePanel } from "./panelResolver";
 const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
 
 describe("resolvePanel", () => {
-  it("returns the expected panel props", () => {
+  it("shows panel asking user if they need a dialogmøte", () => {
     expect(resolvePanel(expectedHref)).toEqual({
       headingText: "Dialogmøte med NAV",
       bodyText: "Trenger du et dialogmøte?",
@@ -19,7 +19,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("builds href for the motebehov answer page", () => {
+  it("links to the møtebehov answer page", () => {
     expect(resolvePanel(expectedHref).href).toBe(
       `${expectedHref}/motebehov/svar`,
     );
