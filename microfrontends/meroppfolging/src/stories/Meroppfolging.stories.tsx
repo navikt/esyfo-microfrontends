@@ -72,10 +72,12 @@ const kartleggingSvart: MeroppfolgingStatusDto = {
 };
 
 export const SenOppfolgingIkkeSvart: Story = {
+  name: "Sen oppfølging — ikke svart",
   args: resolveStoryArgs(senOppfolgingIkkeSvart, sspsUrl, kartleggingUrl, now),
 };
 
 export const SenOppfolgingTrengerOppfolging: Story = {
+  name: "Sen oppfølging — trenger oppfølging",
   args: resolveStoryArgs(
     senOppfolgingTrengerOppfolging,
     sspsUrl,
@@ -85,6 +87,7 @@ export const SenOppfolgingTrengerOppfolging: Story = {
 };
 
 export const SenOppfolgingTrengerIkkeOppfolging: Story = {
+  name: "Sen oppfølging — trenger ikke oppfølging",
   args: resolveStoryArgs(
     senOppfolgingTrengerIkkeOppfolging,
     sspsUrl,
@@ -94,9 +97,11 @@ export const SenOppfolgingTrengerIkkeOppfolging: Story = {
 };
 
 export const KartleggingIkkeSvart: Story = {
+  name: "Kartlegging — ikke svart",
   args: resolveStoryArgs(kartleggingIkkeSvart, sspsUrl, kartleggingUrl, now),
 };
 
 export const KartleggingSvart: Story = {
+  name: "Kartlegging — svart",
   args: resolveStoryArgs(kartleggingSvart, sspsUrl, kartleggingUrl, now),
 };

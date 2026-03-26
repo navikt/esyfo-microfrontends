@@ -12,5 +12,6 @@ type Story = StoryObj<typeof meta>;
 const href = "/syk/dialogmoter/sykmeldt";
 
 export const TrengerDuDialogmote: Story = {
+  name: "Trenger du dialogmøte?",
   args: resolvePanel(href),
 };
