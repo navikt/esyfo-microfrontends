@@ -12,7 +12,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 const sspsUrl = "/syk/meroppfolging";
 const kartleggingUrl = "/syk/meroppfolging/kartlegging";
-const now = new Date("2024-06-15T12:00:00.000Z");
+const evaluatedAt = new Date("2024-06-15T12:00:00.000Z");
 const resolveStoryArgs = (...args: Parameters<typeof resolvePanel>) => {
   const panel = resolvePanel(...args);
 
@@ -73,7 +73,12 @@ const kartleggingSvart: MeroppfolgingStatusDto = {
 
 export const SenOppfolgingIkkeSvart: Story = {
   name: "Sen oppfølging — ikke svart",
-  args: resolveStoryArgs(senOppfolgingIkkeSvart, sspsUrl, kartleggingUrl, now),
+  args: resolveStoryArgs(
+    senOppfolgingIkkeSvart,
+    sspsUrl,
+    kartleggingUrl,
+    evaluatedAt,
+  ),
 };
 
 export const SenOppfolgingTrengerOppfolging: Story = {
@@ -82,7 +87,7 @@ export const SenOppfolgingTrengerOppfolging: Story = {
     senOppfolgingTrengerOppfolging,
     sspsUrl,
     kartleggingUrl,
-    now,
+    evaluatedAt,
   ),
 };
 
@@ -92,16 +97,26 @@ export const SenOppfolgingTrengerIkkeOppfolging: Story = {
     senOppfolgingTrengerIkkeOppfolging,
     sspsUrl,
     kartleggingUrl,
-    now,
+    evaluatedAt,
   ),
 };
 
 export const KartleggingIkkeSvart: Story = {
   name: "Kartlegging — ikke svart",
-  args: resolveStoryArgs(kartleggingIkkeSvart, sspsUrl, kartleggingUrl, now),
+  args: resolveStoryArgs(
+    kartleggingIkkeSvart,
+    sspsUrl,
+    kartleggingUrl,
+    evaluatedAt,
+  ),
 };
 
 export const KartleggingSvart: Story = {
   name: "Kartlegging — svart",
-  args: resolveStoryArgs(kartleggingSvart, sspsUrl, kartleggingUrl, now),
+  args: resolveStoryArgs(
+    kartleggingSvart,
+    sspsUrl,
+    kartleggingUrl,
+    evaluatedAt,
+  ),
 };

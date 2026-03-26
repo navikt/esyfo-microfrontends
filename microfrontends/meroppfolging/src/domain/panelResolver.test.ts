@@ -9,7 +9,7 @@ import {
   createSenOppfolgingTrengerOppfolging,
 } from "./test-utils/meroppfolgingStatus";
 
-const now = new Date("2024-06-15T12:00:00.000Z");
+const evaluatedAt = new Date("2024-06-15T12:00:00.000Z");
 const sspsUrl =
   "https://test.nav.no/syk/meroppfolging/snart-slutt-pa-sykepengene";
 const kartleggingUrl = "https://test.nav.no/syk/kartleggingssporsmal";
@@ -32,7 +32,7 @@ describe("resolvePanel", () => {
       createIngenOppfolging(),
       sspsUrl,
       kartleggingUrl,
-      now,
+      evaluatedAt,
     );
 
     expect(panel).toBeUndefined();
@@ -44,7 +44,7 @@ describe("resolvePanel", () => {
         createSenOppfolgingNoResponse(),
         sspsUrl,
         kartleggingUrl,
-        now,
+        evaluatedAt,
       ),
     );
 
@@ -67,7 +67,7 @@ describe("resolvePanel", () => {
         }),
         sspsUrl,
         kartleggingUrl,
-        now,
+        evaluatedAt,
       ),
     );
 
@@ -82,7 +82,7 @@ describe("resolvePanel", () => {
         createSenOppfolgingTrengerOppfolging(),
         sspsUrl,
         kartleggingUrl,
-        now,
+        evaluatedAt,
       ),
     );
 
@@ -102,7 +102,7 @@ describe("resolvePanel", () => {
       }),
       sspsUrl,
       kartleggingUrl,
-      now,
+      evaluatedAt,
     );
 
     expect(panel).toBeUndefined();
@@ -114,7 +114,7 @@ describe("resolvePanel", () => {
         createSenOppfolgingTrengerIkkeOppfolging(),
         sspsUrl,
         kartleggingUrl,
-        now,
+        evaluatedAt,
       ),
     );
 
@@ -132,7 +132,7 @@ describe("resolvePanel", () => {
       }),
       sspsUrl,
       kartleggingUrl,
-      now,
+      evaluatedAt,
     );
 
     expect(panel).toBeUndefined();
@@ -140,7 +140,12 @@ describe("resolvePanel", () => {
 
   it("resolves KARTLEGGING with NO_RESPONSE to a warning panel", () => {
     const panel = expectResolvedPanel(
-      resolvePanel(createKartleggingNoResponse(), sspsUrl, kartleggingUrl, now),
+      resolvePanel(
+        createKartleggingNoResponse(),
+        sspsUrl,
+        kartleggingUrl,
+        evaluatedAt,
+      ),
     );
 
     expect(panel.alertStyle).toBe("info");
@@ -157,7 +162,12 @@ describe("resolvePanel", () => {
 
   it("resolves KARTLEGGING with SUBMITTED and responseDateTime to a success panel", () => {
     const panel = expectResolvedPanel(
-      resolvePanel(createKartleggingSubmitted(), sspsUrl, kartleggingUrl, now),
+      resolvePanel(
+        createKartleggingSubmitted(),
+        sspsUrl,
+        kartleggingUrl,
+        evaluatedAt,
+      ),
     );
 
     expect(panel.alertStyle).toBe("info");
@@ -175,7 +185,7 @@ describe("resolvePanel", () => {
         }),
         sspsUrl,
         kartleggingUrl,
-        now,
+        evaluatedAt,
       ),
     );
 

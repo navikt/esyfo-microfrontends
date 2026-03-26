@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { isRespondedWithinOneWeek } from "./dateRules";
 
-const now = new Date("2024-06-15T12:00:00.000Z");
+const evaluatedAt = new Date("2024-06-15T12:00:00.000Z");
 const testCases = [
   {
     description: "returns false when responseDateTime is null",
@@ -38,6 +38,8 @@ const testCases = [
 
 describe("isRespondedWithinOneWeek", () => {
   it.each(testCases)("$description", ({ responseDateTime, expected }) => {
-    expect(isRespondedWithinOneWeek(responseDateTime, now)).toBe(expected);
+    expect(isRespondedWithinOneWeek(responseDateTime, evaluatedAt)).toBe(
+      expected,
+    );
   });
 });
