@@ -4,22 +4,45 @@ import { describe, expect, it } from "vitest";
 import { resolvePanel } from "./panelResolver";
 import { createBrev } from "./test-utils/brev";
 
-const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
-  svarTidspunkt: "2024-01-20T10:00:00.000Z",
-  svarType,
-  svarTekst: null,
-});
-const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
-
-const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
-  expect(panel.panelId).toBe("dialogmote-panel");
-  expect(panel.alertStyle).toBe("warning");
-  expect(panel.headingText).toBe("Dialogmøte med NAV");
-  expect(panel.href).toBe(`${expectedHref}/moteinnkalling`);
-};
-
 describe("resolvePanel", () => {
-  it("resolves INNKALT without svar to warning tag", () => {
+  const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
+    svarTidspunkt: "2024-01-20T10:00:00.000Z",
+    svarType,
+    svarTekst: null,
+  });
+  const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
+  const svarTypeCases = [
+    {
+      svarType: "KOMMER",
+      expectedTag: {
+        text: "Du har takket ja",
+        variant: "success-moderate",
+      },
+    },
+    {
+      svarType: "KOMMER_IKKE",
+      expectedTag: {
+        text: "Du ønsker å avlyse",
+        variant: "neutral-moderate",
+      },
+    },
+    {
+      svarType: "NYTT_TID_STED",
+      expectedTag: {
+        text: "Du ønsker å endre tid eller sted",
+        variant: "neutral-moderate",
+      },
+    },
+  ] as const;
+
+  const expectCommonPanelFields = (panel: ReturnType<typeof resolvePanel>) => {
+    expect(panel.panelId).toBe("dialogmote-panel");
+    expect(panel.alertStyle).toBe("warning");
+    expect(panel.headingText).toBe("Dialogmøte med NAV");
+    expect(panel.href).toBe(`${expectedHref}/moteinnkalling`);
+  };
+
+  it("shows warning when user is innkalt to dialogmøte but has not responded", () => {
     const panel = resolvePanel(createBrev(), expectedHref);
 
     expectCommonPanelFields(panel);
@@ -30,52 +53,22 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("resolves INNKALT with KOMMER to success tag", () => {
+  it.each(svarTypeCases)("shows correct tag for $svarType response", ({
+    svarType,
+    expectedTag,
+  }) => {
     const panel = resolvePanel(
       createBrev({
-        svar: createSvar("KOMMER"),
+        svar: createSvar(svarType),
       }),
       expectedHref,
     );
 
     expectCommonPanelFields(panel);
-    expect(panel.tag).toEqual({
-      text: "Du har takket ja",
-      variant: "success-moderate",
-    });
+    expect(panel.tag).toEqual(expectedTag);
   });
 
-  it("resolves INNKALT with KOMMER_IKKE to neutral tag", () => {
-    const panel = resolvePanel(
-      createBrev({
-        svar: createSvar("KOMMER_IKKE"),
-      }),
-      expectedHref,
-    );
-
-    expectCommonPanelFields(panel);
-    expect(panel.tag).toEqual({
-      text: "Du ønsker å avlyse",
-      variant: "neutral-moderate",
-    });
-  });
-
-  it("resolves INNKALT with NYTT_TID_STED svar to neutral tag", () => {
-    const panel = resolvePanel(
-      createBrev({
-        svar: createSvar("NYTT_TID_STED"),
-      }),
-      expectedHref,
-    );
-
-    expectCommonPanelFields(panel);
-    expect(panel.tag).toEqual({
-      text: "Du ønsker å endre tid eller sted",
-      variant: "neutral-moderate",
-    });
-  });
-
-  it("resolves NYTT_TID_STED without svar to moved meeting body and change tag", () => {
+  it("shows warning when dialogmøte is rescheduled but user has not responded", () => {
     const panel = resolvePanel(
       createBrev({
         brevType: "NYTT_TID_STED",
@@ -91,7 +84,7 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("formats INNKALT body text from brev.tid", () => {
+  it("formats dialogmøte time from the invitation letter", () => {
     const tid = "2024-06-10T12:00:00.000Z";
     const panel = resolvePanel(
       createBrev({

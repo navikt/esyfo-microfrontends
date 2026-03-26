@@ -44,9 +44,11 @@ const resolveSenOppfolgingResponded = (
   senOppfolgingStatus: SenoppfolgingStatusDto,
   responseStatus: "TRENGER_OPPFOLGING" | "TRENGER_IKKE_OPPFOLGING",
   href: string,
-  now: Date,
+  evaluatedAt: Date,
 ): MainPanelProps | undefined => {
-  if (!isRespondedWithinOneWeek(senOppfolgingStatus.responseDateTime, now)) {
+  if (
+    !isRespondedWithinOneWeek(senOppfolgingStatus.responseDateTime, evaluatedAt)
+  ) {
     return undefined;
   }
 
@@ -92,7 +94,7 @@ const resolveKartleggingSubmitted = (
 const resolveSenOppfolging = (
   senOppfolgingStatus: SenoppfolgingStatusDto,
   href: string,
-  now: Date,
+  evaluatedAt: Date,
 ): MainPanelProps | undefined => {
   switch (senOppfolgingStatus.responseStatus) {
     case "NO_RESPONSE":
@@ -103,7 +105,7 @@ const resolveSenOppfolging = (
         senOppfolgingStatus,
         senOppfolgingStatus.responseStatus,
         href,
-        now,
+        evaluatedAt,
       );
   }
 };
@@ -127,13 +129,17 @@ export const resolvePanel = (
   status: MeroppfolgingStatusDto,
   sspsUrl: string,
   kartleggingUrl: string,
-  now: Date,
+  evaluatedAt: Date,
 ): MainPanelProps | undefined => {
   switch (status.oppfolgingsType) {
     case "INGEN_OPPFOLGING":
       return undefined;
     case "SEN_OPPFOLGING":
-      return resolveSenOppfolging(status.senOppfolgingStatus, sspsUrl, now);
+      return resolveSenOppfolging(
+        status.senOppfolgingStatus,
+        sspsUrl,
+        evaluatedAt,
+      );
     case "KARTLEGGING":
       return resolveKartlegging(status.kartleggingStatus, kartleggingUrl);
   }

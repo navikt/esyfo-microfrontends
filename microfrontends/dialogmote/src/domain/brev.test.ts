@@ -68,27 +68,17 @@ describe("shouldShowDialogmotePanel", () => {
     expect(shouldShowDialogmotePanel(null)).toBe(false);
   });
 
-  it("returns true for INNKALT", () => {
-    expect(shouldShowDialogmotePanel(createBrev({ brevType: "INNKALT" }))).toBe(
-      true,
-    );
-  });
+  const shouldShowCases = [
+    { brevType: "INNKALT", expected: true },
+    { brevType: "NYTT_TID_STED", expected: true },
+    { brevType: "AVLYST", expected: false },
+    { brevType: "REFERAT", expected: false },
+  ] as const;
 
-  it("returns true for NYTT_TID_STED", () => {
-    expect(
-      shouldShowDialogmotePanel(createBrev({ brevType: "NYTT_TID_STED" })),
-    ).toBe(true);
-  });
-
-  it("returns false for AVLYST", () => {
-    expect(shouldShowDialogmotePanel(createBrev({ brevType: "AVLYST" }))).toBe(
-      false,
-    );
-  });
-
-  it("returns false for REFERAT", () => {
-    expect(shouldShowDialogmotePanel(createBrev({ brevType: "REFERAT" }))).toBe(
-      false,
-    );
+  it.each(shouldShowCases)("returns $expected for $brevType", ({
+    brevType,
+    expected,
+  }) => {
+    expect(shouldShowDialogmotePanel(createBrev({ brevType }))).toBe(expected);
   });
 });

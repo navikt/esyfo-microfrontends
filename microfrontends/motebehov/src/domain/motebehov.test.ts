@@ -13,11 +13,11 @@ const createMotebehovStatus = (
 });
 
 describe("shouldShowMotebehovPanel", () => {
-  it("returns true when all visibility conditions are met", () => {
+  it("shows møtebehov when all conditions are met", () => {
     expect(shouldShowMotebehovPanel(createMotebehovStatus())).toBe(true);
   });
 
-  it("returns false when visMotebehov is false", () => {
+  it("hides møtebehov when visibility flag is off", () => {
     expect(
       shouldShowMotebehovPanel(
         createMotebehovStatus({
@@ -27,7 +27,7 @@ describe("shouldShowMotebehovPanel", () => {
     ).toBe(false);
   });
 
-  it("returns false when skjemaType is MELD_BEHOV", () => {
+  it("hides møtebehov when skjemaType is meld behov", () => {
     expect(
       shouldShowMotebehovPanel(
         createMotebehovStatus({
@@ -37,7 +37,7 @@ describe("shouldShowMotebehovPanel", () => {
     ).toBe(false);
   });
 
-  it("returns false when motebehov already exists", () => {
+  it("hides møtebehov when user has already responded", () => {
     expect(
       shouldShowMotebehovPanel(
         createMotebehovStatus({
@@ -49,7 +49,7 @@ describe("shouldShowMotebehovPanel", () => {
     ).toBe(false);
   });
 
-  it("returns false when multiple visibility conditions are not met", () => {
+  it("hides møtebehov when multiple conditions are not met", () => {
     expect(
       shouldShowMotebehovPanel(
         createMotebehovStatus({
