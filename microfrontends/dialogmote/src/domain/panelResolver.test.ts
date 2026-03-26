@@ -41,6 +41,7 @@ describe("resolvePanel", () => {
     expect(panel.headingText).toBe("Dialogmøte med NAV");
     expect(panel.href).toBe(`${expectedHref}/moteinnkalling`);
   };
+
   it("shows warning when user is innkalt to dialogmøte but has not responded", () => {
     const panel = resolvePanel(createBrev(), expectedHref);
 

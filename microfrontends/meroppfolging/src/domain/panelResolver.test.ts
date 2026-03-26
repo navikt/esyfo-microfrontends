@@ -9,24 +9,23 @@ import {
   createSenOppfolgingTrengerOppfolging,
 } from "./test-utils/meroppfolgingStatus";
 
-const evaluatedAt = new Date("2024-06-15T12:00:00.000Z");
-const sspsUrl =
-  "https://test.nav.no/syk/meroppfolging/snart-slutt-pa-sykepengene";
-const kartleggingUrl = "https://test.nav.no/syk/kartleggingssporsmal";
-
-const expectResolvedPanel = (
-  panel: ReturnType<typeof resolvePanel>,
-): NonNullable<ReturnType<typeof resolvePanel>> => {
-  expect(panel).not.toBeUndefined();
-  if (!panel) {
-    throw new Error("Expected panel to be resolved");
-  }
-
-  expect(panel.panelId).toBe("meroppfolging-panel");
-  return panel;
-};
-
 describe("resolvePanel", () => {
+  const evaluatedAt = new Date("2024-06-15T12:00:00.000Z");
+  const sspsUrl =
+    "https://test.nav.no/syk/meroppfolging/snart-slutt-pa-sykepengene";
+  const kartleggingUrl = "https://test.nav.no/syk/kartleggingssporsmal";
+
+  const expectResolvedPanel = (
+    panel: ReturnType<typeof resolvePanel>,
+  ): NonNullable<ReturnType<typeof resolvePanel>> => {
+    expect(panel).not.toBeUndefined();
+    if (!panel) {
+      throw new Error("Expected panel to be resolved");
+    }
+
+    expect(panel.panelId).toBe("meroppfolging-panel");
+    return panel;
+  };
   it("returns no panel when user has no oppfølging", () => {
     const panel = resolvePanel(
       createIngenOppfolging(),
