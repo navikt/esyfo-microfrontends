@@ -1,0 +1,17 @@
+{
+  "name": "meroppfolging-microfrontend",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev | pino-pretty --messageKey=message",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "@esyfo/shared": "workspace:*"
+  },
+  "devDependencies": {}
+}

@@ -6,7 +6,7 @@ import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { vurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
-import mockData from "../../mock/data";
+import { mockData } from "mock/data";
 
 const realFetchVurdering = async (
   token: string,

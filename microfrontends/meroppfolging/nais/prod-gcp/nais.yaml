@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: aktivitetskrav-microfrontend
+  name: meroppfolging-microfrontend
   namespace: team-esyfo
   labels:
     team: team-esyfo
@@ -12,7 +12,7 @@ spec:
       runtime: nodejs
   tokenx:
     enabled: true
-  image: {{ image }}
+  image: "{{ image }}"
   port: 3000
   liveness:
     path: /api/internal/isAlive
@@ -30,7 +30,7 @@ spec:
           namespace: min-side
     outbound:
       rules:
-        - application: aktivitetskrav-backend
+        - application: meroppfolging-backend
           namespace: team-esyfo
   resources:
     limits:
@@ -39,7 +39,11 @@ spec:
       cpu: "20m"
       memory: 128Mi
   env:
-    - name: AKTIVITETSKRAV_API_URL
-      value: "http://aktivitetskrav-backend.team-esyfo/api/v1/aktivitetsplikt"
-    - name: AKTIVITETSKRAV_CLIENT_ID
-      value: "dev-gcp:team-esyfo:aktivitetskrav-backend"
+    - name: MEROPPFOLGING_API_URL
+      value: "http://meroppfolging-backend.team-esyfo/api/mikrofrontend/v1/status"
+    - name: MEROPPFOLGING_CLIENT_ID
+      value: "prod-gcp:team-esyfo:meroppfolging-backend"
+    - name: SSPS_URL
+      value: "https://www.nav.no/syk/meroppfolging/snart-slutt-pa-sykepengene"
+    - name: KARTLEGGING_URL
+      value: "https://www.nav.no/syk/kartleggingssporsmal"
