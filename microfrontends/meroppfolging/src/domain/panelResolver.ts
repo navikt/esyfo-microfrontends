@@ -22,7 +22,7 @@ const resolveSenOppfolgingNoResponse = (
     headingText: HeadingContent.senOppfolging,
     bodyText: BodyContent.senOppfolgingNoResponse(senOppfolgingStatus.maxDate),
     href,
-    alertStyle: "info",
+    alertStyle: "warning",
     tag: {
       variant: "warning-moderate",
       text: TagContent.noResponse,
@@ -56,7 +56,7 @@ const resolveSenOppfolgingResponded = (
     headingText: HeadingContent.senOppfolging,
     bodyText: getSenOppfolgingResponseBody(responseStatus),
     href,
-    alertStyle: "info",
+    alertStyle: "success",
     tag: {
       variant: "success-moderate",
       text: TagContent.responded(senOppfolgingStatus.responseDateTime),
@@ -69,7 +69,7 @@ const resolveKartleggingNoResponse = (href: string): MainPanelProps =>
     headingText: HeadingContent.kartlegging,
     bodyText: BodyContent.kartleggingNotResponded,
     href,
-    alertStyle: "info",
+    alertStyle: "warning",
     tag: {
       variant: "warning-moderate",
       text: TagContent.noResponse,
@@ -84,7 +84,7 @@ const resolveKartleggingSubmitted = (
     headingText: HeadingContent.kartlegging,
     bodyText: BodyContent.kartleggingSubmitted,
     href,
-    alertStyle: "info",
+    alertStyle: "success",
     tag: {
       variant: "success-moderate",
       text: TagContent.responded(kartleggingStatus.responseDateTime ?? ""),

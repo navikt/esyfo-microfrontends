@@ -47,7 +47,7 @@ describe("resolvePanel", () => {
       ),
     );
 
-    expect(panel.alertStyle).toBe("info");
+    expect(panel.alertStyle).toBe("warning");
     expect(panel.headingText).toBe("Snart slutt på sykepengene");
     expect(panel.bodyText).toContain("31. desember 2024");
     expect(panel.bodyText).toContain("er din siste dag med sykepenger");
@@ -85,7 +85,7 @@ describe("resolvePanel", () => {
       ),
     );
 
-    expect(panel.alertStyle).toBe("info");
+    expect(panel.alertStyle).toBe("success");
     expect(panel.headingText).toBe("Snart slutt på sykepengene");
     expect(panel.bodyText).toBe(
       "Du har svart at du ønsker oppfølging. Du får beskjed når vi har vurdert behovet ditt.",
@@ -147,7 +147,7 @@ describe("resolvePanel", () => {
       ),
     );
 
-    expect(panel.alertStyle).toBe("info");
+    expect(panel.alertStyle).toBe("warning");
     expect(panel.headingText).toBe("Kartlegging av din situasjon");
     expect(panel.bodyText).toBe(
       "Vi ber deg svare på tre spørsmål om ditt sykefravær.",
@@ -169,7 +169,7 @@ describe("resolvePanel", () => {
       ),
     );
 
-    expect(panel.alertStyle).toBe("info");
+    expect(panel.alertStyle).toBe("success");
     expect(panel.headingText).toBe("Kartlegging av din situasjon");
     expect(panel.bodyText).toBe("Se svarene du har sendt til Nav.");
     expect(panel.tag?.variant).toBe("success-moderate");
