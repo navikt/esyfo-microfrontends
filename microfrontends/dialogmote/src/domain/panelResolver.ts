@@ -36,6 +36,7 @@ const getTag = (
 
 export const resolvePanel = (brev: BrevDto, href: string): MainPanelProps => {
   const attending = brev.svar?.svarType ?? null;
+  const hasResponded = attending !== null;
 
   return {
     headingText: HeadingContent.dialogmote,
@@ -44,7 +45,7 @@ export const resolvePanel = (brev: BrevDto, href: string): MainPanelProps => {
         ? BodyContent.motetFlyttet
         : getLongDateFormat(brev.tid),
     href: `${href}/moteinnkalling`,
-    alertStyle: "warning",
+    alertStyle: hasResponded ? "success" : "warning",
     panelId: "dialogmote-panel",
     tag: getTag(attending, brev.brevType),
   };
