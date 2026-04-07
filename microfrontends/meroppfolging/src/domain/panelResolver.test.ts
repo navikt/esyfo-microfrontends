@@ -118,7 +118,7 @@ describe("resolvePanel", () => {
     );
 
     expect(panel.bodyText).toBe(
-      "Du har svart at du ikke trenger oppfølging nå. Ta kontakt hvis situasjonen din endrer seg.",
+      "Du har svart at du ikke trenger oppfølging nå. Du må ta kontakt hvis situasjonen din endrer seg.",
     );
     expect(panel.tag?.variant).toBe("success-moderate");
     expect(panel.href).toBe(sspsUrl);
