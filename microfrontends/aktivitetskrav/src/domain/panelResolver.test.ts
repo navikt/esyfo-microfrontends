@@ -8,8 +8,8 @@ import {
   createIkkeOppfylt,
   createNyVurdering,
   createNyVurderingStatus,
-  createOppfylt,
-  createUnntak,
+  createOppfyltFriskmeldt,
+  createUnntakMedisinskGrunn,
 } from "./test-utils/vurdering";
 
 const now = new Date("2024-06-01T12:00:00.000Z");
@@ -74,7 +74,7 @@ describe("resolvePanel", () => {
 
   it("shows unntak granted for medical reasons", () => {
     const panel = expectResolvedPanel(
-      resolvePanel(createUnntak(), expectedHref, now),
+      resolvePanel(createUnntakMedisinskGrunn(), expectedHref, now),
     );
 
     expect(panel.alertStyle).toBe("success");
@@ -89,7 +89,7 @@ describe("resolvePanel", () => {
   it("shows generic unntak text when no reasons are given", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
-        createUnntak({
+        createUnntakMedisinskGrunn({
           arsaker: [],
         }),
         expectedHref,
@@ -104,7 +104,7 @@ describe("resolvePanel", () => {
 
   it("shows aktivitetsplikt fulfilled when user is friskmeldt", () => {
     const panel = expectResolvedPanel(
-      resolvePanel(createOppfylt(), expectedHref, now),
+      resolvePanel(createOppfyltFriskmeldt(), expectedHref, now),
     );
 
     expect(panel.alertStyle).toBe("success");
@@ -119,7 +119,7 @@ describe("resolvePanel", () => {
   it("shows aktivitetsplikt fulfilled when user is gradert", () => {
     const panel = expectResolvedPanel(
       resolvePanel(
-        createOppfylt({
+        createOppfyltFriskmeldt({
           arsaker: ["GRADERT"],
         }),
         expectedHref,
