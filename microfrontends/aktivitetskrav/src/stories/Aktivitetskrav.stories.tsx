@@ -7,8 +7,12 @@ import {
   createIkkeAktuell,
   createNyVurdering,
   createNyVurderingStatus,
-  createOppfylt,
-  createUnntak,
+  createOppfyltFriskmeldt,
+  createOppfyltGradert,
+  createOppfyltTiltak,
+  createUnntakMedisinskGrunn,
+  createUnntakSjomennUtenriks,
+  createUnntakTilretteleggingIkkeMulig,
 } from "../domain/test-utils/vurdering";
 
 const meta = {
@@ -45,14 +49,34 @@ export const Avvent: Story = {
   args: resolveStoryArgs(createAvvent(), href, now),
 };
 
-export const Unntak: Story = {
-  name: "Unntak",
-  args: resolveStoryArgs(createUnntak(), href, now),
+export const UnntakMedisinskGrunn: Story = {
+  name: "Unntak - medisinsk grunn",
+  args: resolveStoryArgs(createUnntakMedisinskGrunn(), href, now),
 };
 
-export const Oppfylt: Story = {
-  name: "Oppfylt",
-  args: resolveStoryArgs(createOppfylt(), href, now),
+export const UnntakTilretteleggingIkkeMulig: Story = {
+  name: "Unntak - tilrettelegging ikke mulig",
+  args: resolveStoryArgs(createUnntakTilretteleggingIkkeMulig(), href, now),
+};
+
+export const UnntakSjomennUtenriks: Story = {
+  name: "Unntak - sjømenn utenriks",
+  args: resolveStoryArgs(createUnntakSjomennUtenriks(), href, now),
+};
+
+export const OppfyltFriskmeldt: Story = {
+  name: "Oppfylt - friskmeldt",
+  args: resolveStoryArgs(createOppfyltFriskmeldt(), href, now),
+};
+
+export const OppfyltGradert: Story = {
+  name: "Oppfylt - gradert",
+  args: resolveStoryArgs(createOppfyltGradert(), href, now),
+};
+
+export const OppfyltTiltak: Story = {
+  name: "Oppfylt - tiltak",
+  args: resolveStoryArgs(createOppfyltTiltak(), href, now),
 };
 
 export const ForhandsvarselForFrist: Story = {

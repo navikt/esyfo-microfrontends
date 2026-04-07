@@ -27,7 +27,7 @@ export const createAvvent = (
   ...overrides,
 });
 
-export const createUnntak = (
+export const createUnntakMedisinskGrunn = (
   overrides?: Partial<Extract<AktivitetskravVurdering, { status: "UNNTAK" }>>,
 ): Extract<AktivitetskravVurdering, { status: "UNNTAK" }> => ({
   status: "UNNTAK",
@@ -36,11 +36,47 @@ export const createUnntak = (
   ...overrides,
 });
 
-export const createOppfylt = (
+export const createUnntakTilretteleggingIkkeMulig = (
+  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "UNNTAK" }>>,
+): Extract<AktivitetskravVurdering, { status: "UNNTAK" }> => ({
+  status: "UNNTAK",
+  arsaker: ["TILRETTELEGGING_IKKE_MULIG"],
+  sistVurdert,
+  ...overrides,
+});
+
+export const createUnntakSjomennUtenriks = (
+  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "UNNTAK" }>>,
+): Extract<AktivitetskravVurdering, { status: "UNNTAK" }> => ({
+  status: "UNNTAK",
+  arsaker: ["SJOMENN_UTENRIKS"],
+  sistVurdert,
+  ...overrides,
+});
+
+export const createOppfyltFriskmeldt = (
   overrides?: Partial<Extract<AktivitetskravVurdering, { status: "OPPFYLT" }>>,
 ): Extract<AktivitetskravVurdering, { status: "OPPFYLT" }> => ({
   status: "OPPFYLT",
   arsaker: ["FRISKMELDT"],
+  sistVurdert,
+  ...overrides,
+});
+
+export const createOppfyltGradert = (
+  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "OPPFYLT" }>>,
+): Extract<AktivitetskravVurdering, { status: "OPPFYLT" }> => ({
+  status: "OPPFYLT",
+  arsaker: ["GRADERT"],
+  sistVurdert,
+  ...overrides,
+});
+
+export const createOppfyltTiltak = (
+  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "OPPFYLT" }>>,
+): Extract<AktivitetskravVurdering, { status: "OPPFYLT" }> => ({
+  status: "OPPFYLT",
+  arsaker: ["TILTAK"],
   sistVurdert,
   ...overrides,
 });
