@@ -16,7 +16,7 @@ export const BodyContent = {
   senOppfolgingTrengerOppfolging:
     "Du har svart at du ønsker oppfølging. Du får beskjed når vi har vurdert behovet ditt.",
   senOppfolgingTrengerIkkeOppfolging:
-    "Du har svart at du ikke trenger oppfølging nå. Ta kontakt hvis situasjonen din endrer seg.",
+    "Du har svart at du ikke trenger oppfølging nå. Du må ta kontakt hvis situasjonen din endrer seg.",
   kartleggingNotResponded:
     "Vi ber deg svare på tre spørsmål om ditt sykefravær.",
   kartleggingSubmitted: "Se svarene du har sendt til Nav.",
