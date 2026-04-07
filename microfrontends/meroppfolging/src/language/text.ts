@@ -11,7 +11,7 @@ export const BodyContent = {
       ? `${maxDate} er din siste dag med sykepenger.`
       : "Det nærmer seg siste dag du kan motta sykepenger.";
 
-    return `${maxDateText} Vi ber deg derfor vurdere situasjonen din.`;
+    return `${maxDateText} Vi ber deg vurdere situasjonen din.`;
   },
   senOppfolgingTrengerOppfolging:
     "Du har svart at du ønsker oppfølging. Du får beskjed når vi har vurdert behovet ditt.",
