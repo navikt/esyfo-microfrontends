@@ -25,10 +25,7 @@ const getTag = (
       };
     default:
       return {
-        text:
-          brevType === "NYTT_TID_STED"
-            ? TagContent.seEndringer
-            : TagContent.ikkeSvart,
+        text: TagContent.ikkeSvart,
         variant: "warning-moderate",
       };
   }

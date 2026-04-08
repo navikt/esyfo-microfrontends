@@ -82,7 +82,7 @@ describe("resolvePanel", () => {
     expectCommonPanelFields(panel);
     expect(panel.bodyText).toBe("Møtet med Nav er flyttet");
     expect(panel.tag).toEqual({
-      text: "Se endringene og svar",
+      text: "Du har ikke svart",
       variant: "warning-moderate",
     });
   });
