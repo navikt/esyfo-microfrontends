@@ -82,8 +82,27 @@ describe("resolvePanel", () => {
     expectCommonPanelFields(panel);
     expect(panel.bodyText).toBe("Møtet med Nav er flyttet");
     expect(panel.tag).toEqual({
-      text: "Se endringene og svar",
+      text: "Du har ikke svart",
       variant: "warning-moderate",
+    });
+  });
+
+  it("shows meeting date when dialogmøte is rescheduled and user has accepted", () => {
+    const tid = "2024-02-01T10:00:00.000Z";
+    const panel = resolvePanel(
+      createBrev({
+        brevType: "NYTT_TID_STED",
+        tid,
+        svar: createSvar("KOMMER"),
+      }),
+      expectedHref,
+    );
+
+    expectCommonPanelFields(panel, "success");
+    expect(panel.bodyText).toBe(getLongDateFormat(tid));
+    expect(panel.tag).toEqual({
+      text: "Du har takket ja",
+      variant: "success-moderate",
     });
   });
 

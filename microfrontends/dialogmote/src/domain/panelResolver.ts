@@ -1,11 +1,10 @@
 import type { MainPanelProps } from "@esyfo/shared/components";
 import { getLongDateFormat } from "@esyfo/shared/dateUtils";
-import type { BrevDto, BrevTypeDto, SvarTypeDto } from "@schema/brevSchema";
+import type { BrevDto, SvarTypeDto } from "@schema/brevSchema";
 import { BodyContent, HeadingContent, TagContent } from "@src/language/text";
 
 const getTag = (
   attending: SvarTypeDto | null,
-  brevType: BrevTypeDto,
 ): NonNullable<MainPanelProps["tag"]> => {
   switch (attending) {
     case "KOMMER":
@@ -25,10 +24,7 @@ const getTag = (
       };
     default:
       return {
-        text:
-          brevType === "NYTT_TID_STED"
-            ? TagContent.seEndringer
-            : TagContent.ikkeSvart,
+        text: TagContent.ikkeSvart,
         variant: "warning-moderate",
       };
   }
@@ -40,12 +36,12 @@ export const resolvePanel = (brev: BrevDto, href: string): MainPanelProps => {
   return {
     headingText: HeadingContent.dialogmote,
     bodyText:
-      brev.brevType === "NYTT_TID_STED"
+      brev.brevType === "NYTT_TID_STED" && attending !== "KOMMER"
         ? BodyContent.motetFlyttet
         : getLongDateFormat(brev.tid),
     href: `${href}/moteinnkalling`,
     alertStyle: attending ? "success" : "warning",
     panelId: "dialogmote-panel",
-    tag: getTag(attending, brev.brevType),
+    tag: getTag(attending),
   };
 };

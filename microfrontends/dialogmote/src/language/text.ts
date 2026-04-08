@@ -10,6 +10,5 @@ export const TagContent = {
   takketJa: "Du har takket ja",
   onskerAvlyse: "Du ønsker å avlyse",
   onskerEndre: "Du ønsker å endre tid eller sted",
-  seEndringer: "Se endringene og svar",
   ikkeSvart: "Du har ikke svart",
 } as const;
