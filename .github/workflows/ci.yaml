@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+  merge_group:
+    types:
+      - checks_requested
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reusable-ci:
+    name: Reusable CI
+    uses: ./.github/workflows/ci-reusable.yml
+    secrets: inherit
+
+  merge-gate:
+    name: Merge gate
+    needs:
+      - reusable-ci
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Check required jobs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          results=(
+            "reusable-ci=${{ needs.reusable-ci.result }}"
+          )
+          printf '%s\n' "${results[@]}"
+
+          for result in "${results[@]}"; do
+            status="${result#*=}"
+
+            case "$status" in
+              success)
+                ;;
+              cancelled)
+                echo "::error::Required job was cancelled: $result"
+                exit 1
+                ;;
+              skipped)
+                echo "::error::Required job was unexpectedly skipped: $result"
+                exit 1
+                ;;
+              *)
+                echo "::error::Required job failed: $result"
+                exit 1
+                ;;
+            esac
+          done
