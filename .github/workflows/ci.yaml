@@ -33,25 +33,21 @@ jobs:
         run: |
           set -euo pipefail
 
-          results=("ci=${{ needs.ci.result }}")
-          printf '%s\n' "${results[@]}"
+          result="ci=${{ needs.ci.result }}"
+          printf '%s\n' "$result"
 
-          for result in "${results[@]}"; do
-            status="${result#*=}"
-
-            case "$status" in
-              success)
-                ;;
-              cancelled)
-                echo "::error::Required job was cancelled: $result. Likely causes: a newer push cancelled an in-flight run due to concurrency.cancel-in-progress, the run was cancelled manually, or this merge queue attempt was superseded or re-queued. Re-run CI from the latest commit or merge queue entry."
-                exit 1
-                ;;
-              skipped)
-                echo "Accepting skipped job result: $result"
-                ;;
-              *)
-                echo "::error::Required job failed: $result"
-                exit 1
-                ;;
-            esac
-          done
+          case "${{ needs.ci.result }}" in
+            success)
+              ;;
+            cancelled)
+              echo "::error::Required job was cancelled: $result. Likely causes: a newer push cancelled an in-flight run due to concurrency.cancel-in-progress, the run was cancelled manually, or this merge queue attempt was superseded or re-queued. Re-run CI from the latest commit or merge queue entry."
+              exit 1
+              ;;
+            skipped)
+              echo "Accepting skipped job result: $result"
+              ;;
+            *)
+              echo "::error::Required job failed: $result"
+              exit 1
+              ;;
+          esac
