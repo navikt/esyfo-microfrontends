@@ -42,7 +42,7 @@ jobs:
               success)
                 ;;
               cancelled)
-                echo "::error::Required job was cancelled: $result"
+                echo "::error::Required job was cancelled: $result. Likely causes: a newer push cancelled an in-flight run due to concurrency.cancel-in-progress, the run was cancelled manually, or this merge queue attempt was superseded or re-queued. Re-run CI from the latest commit or merge queue entry."
                 exit 1
                 ;;
               skipped)
