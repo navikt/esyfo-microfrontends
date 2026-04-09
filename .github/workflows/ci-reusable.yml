@@ -2,6 +2,9 @@ name: Reusable CI
 
 on:
   workflow_call:
+    secrets:
+      npm-auth-token:
+        required: true
 
 env:
   NODE_VERSION: '24'
@@ -24,7 +27,7 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm-auth-token }}
       - run: pnpm run lint
       - run: pnpm run check
 
@@ -45,7 +48,7 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm-auth-token }}
       - run: pnpm run test
 
   build-storybook:
@@ -65,7 +68,7 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm-auth-token }}
       - run: pnpm run build-storybook
 
   build-microfrontends:
@@ -97,5 +100,5 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - run: pnpm install --frozen-lockfile
         env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.npm-auth-token }}
       - run: pnpm run ${{ matrix.script }}
