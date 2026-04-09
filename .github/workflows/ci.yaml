@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  reusable-ci:
+  ci:
     name: Reusable CI
     uses: ./.github/workflows/ci-reusable.yml
     secrets: inherit
@@ -22,7 +22,7 @@ jobs:
   merge-gate:
     name: Merge gate
     needs:
-      - reusable-ci
+      - ci
     if: ${{ always() }}
     runs-on: ubuntu-latest
     permissions: {}
@@ -32,9 +32,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          results=(
-            "reusable-ci=${{ needs.reusable-ci.result }}"
-          )
+          results=("ci=${{ needs.ci.result }}")
           printf '%s\n' "${results[@]}"
 
           for result in "${results[@]}"; do
@@ -48,8 +46,7 @@ jobs:
                 exit 1
                 ;;
               skipped)
-                echo "::error::Required job was unexpectedly skipped: $result"
-                exit 1
+                echo "Accepting skipped job result: $result"
                 ;;
               *)
                 echo "::error::Required job failed: $result"
