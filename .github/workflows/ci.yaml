@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  pull_request:
+  merge_group:
+    types:
+      - checks_requested
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Reusable CI
+    uses: ./.github/workflows/ci-reusable.yml
+    secrets:
+      npm-auth-token: ${{ secrets.READER_TOKEN }}
+
+  merge-gate:
+    name: Merge gate
+    needs:
+      - ci
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Check required jobs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          result="ci=${{ needs.ci.result }}"
+          printf '%s\n' "$result"
+
+          case "${{ needs.ci.result }}" in
+            success)
+              ;;
+            cancelled)
+              echo "::error::Required job was cancelled: $result. Likely causes: a newer push cancelled an in-flight run due to concurrency.cancel-in-progress, the run was cancelled manually, or this merge queue attempt was superseded or re-queued. Re-run CI from the latest commit or merge queue entry."
+              exit 1
+              ;;
+            skipped)
+              echo "Accepting skipped job result: $result"
+              ;;
+            *)
+              echo "::error::Required job failed: $result"
+              exit 1
+              ;;
+          esac

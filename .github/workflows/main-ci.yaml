@@ -1,0 +1,17 @@
+name: Main CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  ci:
+    name: Reusable CI
+    uses: ./.github/workflows/ci-reusable.yml
+    secrets:
+      npm-auth-token: ${{ secrets.READER_TOKEN }}

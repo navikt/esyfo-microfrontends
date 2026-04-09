@@ -76,7 +76,8 @@ run = ["pnpm run check",
 "pnpm run build:dialogmote-microfrontend",
 "pnpm run build:aktivitetskrav-microfrontend",
 "pnpm run build:meroppfolging-microfrontend",
-"pnpm run build:motebehov-microfrontend"
+"pnpm run build:motebehov-microfrontend",
+"pnpm run build-storybook"
 ]
 
 [tasks.storybook]
