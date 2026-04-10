@@ -115,8 +115,10 @@ Følgende må være på plass for at Dependabot-PR-er skal kunne auto-merges try
 2. Dependabot må ha tilgang til `AUTOMERGE_APP_PRIVATE_KEY` som Dependabot secret.
 3. Dependabot må ha tilgang til `READER_TOKEN` for å kunne lese pakker fra `npm.pkg.github.com`.
 4. Repository settings må ha `Allow auto-merge` aktivert.
-5. Settings → Actions → General må bruke `Read and write permissions` og `Allow GitHub Actions to create and approve pull requests`.
+5. Settings → Actions → General må ha `Allow GitHub Actions to create and approve pull requests` aktivert.
 6. Ruleset eller branch protection på `main` må kreve status checken `Merge gate`, siden den er CI-gaten for både `pull_request` og `merge_group`.
+
+Teamets reusable workflow ber om write-scope eksplisitt i jobben. I dette repoet er standard workflow-permissions forelopig `read`, og org-policy blokkerer endring av default til `write`.
 
 ### Verifisering
 
