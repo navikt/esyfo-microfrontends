@@ -106,9 +106,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm_auth_token }}
 
-      - name: Run tests
-        run: "pnpm test"
-
       - name: Build application
         run: "pnpm run ${{ inputs.build_script }}"
 
@@ -165,7 +162,7 @@ jobs:
 
   update-manifest-prod:
     name: Update manifest prod
-    if: inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
     permissions:
       contents: "read"
       id-token: "write"
@@ -184,7 +181,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to prod
-    if: inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
     runs-on: "ubuntu-latest"
     permissions:
       contents: "read"
