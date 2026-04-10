@@ -33,12 +33,6 @@ flowchart LR
 
 Ved svart status viser appen bare panelet i en begrenset periode. Etter det skjules panelet igjen.
 
-## Viktige filer
-
-- `src/pages/[locale]/index.astro`
-- `src/infrastructure/fetch.ts`
-- `src/domain/panelResolver.ts`
-
 ## Backend og lenker
 
 | Del | Verdi |
@@ -48,9 +42,3 @@ Ved svart status viser appen bare panelet i en begrenset periode. Etter det skju
 | Lenke ved sen oppfølging | `SSPS_URL` |
 | Lenke ved kartlegging | `KARTLEGGING_URL` |
 | Manifest-id | `syfo-meroppfolging` |
-
-## Notater
-
-- I development bruker appen mock-data.
-- Denne mikrofrontenden bygger på samme shared middleware og fetch-mønster som de andre appene.
-- Panelet bruker `MainPanel` fra `@esyfo/shared/components`.

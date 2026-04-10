@@ -34,13 +34,6 @@ Panelet vises bare når alle disse vilkårene er oppfylt:
 
 Hvis brukeren allerede har svart, viser appen ikke panelet.
 
-## Viktige filer
-
-- `src/pages/[locale]/index.astro`
-- `src/infrastructure/fetch.ts`
-- `src/domain/motebehov.ts`
-- `src/domain/panelResolver.ts`
-
 ## Backend og lenker
 
 | Del | Verdi |
@@ -49,9 +42,3 @@ Hvis brukeren allerede har svart, viser appen ikke panelet.
 | Client ID for OBO | `SYFOMOTEBEHOV_CLIENT_ID` |
 | Mål for lenken i panelet | `${MOTEBEHOV_URL}/motebehov/svar` |
 | Manifest-id | `syfo-motebehov` |
-
-## Notater
-
-- I development bruker appen mock-data.
-- Panelet har fast tekst og warning-stil når det vises.
-- Appen bruker samme shared middleware og shared fetch-hjelpere som resten av repoet.

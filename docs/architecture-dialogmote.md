@@ -23,13 +23,6 @@ flowchart LR
 4. Appen finner siste relevante brev.
 5. Panelet vises bare når brevtypen er `INNKALT` eller `NYTT_TID_STED`.
 
-## Viktige filer
-
-- `src/pages/[locale]/index.astro`
-- `src/infrastructure/fetch.ts`
-- `src/domain/brev.ts`
-- `src/domain/panelResolver.ts`
-
 ## Backend og lenker
 
 | Del | Verdi |
@@ -38,9 +31,3 @@ flowchart LR
 | Client ID for OBO | `ISDIALOGMOTE_CLIENT_ID` |
 | Mål for lenken i panelet | `${DIALOGMOTE_URL}/moteinnkalling` |
 | Manifest-id | `syfo-dialog` |
-
-## Notater
-
-- I development bruker appen mock-data i stedet for ekte backend-kall.
-- Middleware kommer fra `@esyfo/shared/middleware`.
-- Den visuelle boksen bygger på `MainPanel` fra `@esyfo/shared/components`.

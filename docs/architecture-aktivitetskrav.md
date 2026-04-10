@@ -31,12 +31,6 @@ flowchart LR
 - `FORHANDSVARSEL`: viser varsel og svarfrist
 - `IKKE_OPPFYLT`: viser ingenting på Min side
 
-## Viktige filer
-
-- `src/pages/[locale]/index.astro`
-- `src/infrastructure/fetch.ts`
-- `src/domain/panelResolver.ts`
-
 ## Backend og lenker
 
 | Del | Verdi |
@@ -45,9 +39,3 @@ flowchart LR
 | Client ID for OBO | `AKTIVITETSKRAV_CLIENT_ID` |
 | Mål for lenken i panelet | `AKTIVITETSKRAV_URL` |
 | Manifest-id | `syfo-aktivitetskrav` |
-
-## Notater
-
-- I development bruker appen mock-data.
-- Zod-skjemaet avviser ugyldige svar fra backend.
-- Panelet bygges med `MainPanel` fra `@esyfo/shared/components`.
