@@ -11,8 +11,6 @@
 
 Astro SSR-monorepo for eSyfo-mikrofronter på Min side. Inneholder dialogmøte, aktivitetskrav, motebehov og meroppfølging, med felles bygg, deploy og dokumentasjon.
 
-## Nyttige lenker
-
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
 [🛠️ GitHub Actions](https://github.com/navikt/esyfo-microfrontends/actions)
