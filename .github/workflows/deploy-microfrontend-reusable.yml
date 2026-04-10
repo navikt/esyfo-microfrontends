@@ -1,0 +1,202 @@
+name: Reusable microfrontend deploy
+
+on:
+  workflow_call:
+    inputs:
+      microfrontend_name:
+        description: Human-readable microfrontend name for job labels
+        required: true
+        type: string
+      build_script:
+        description: Root package.json build script for the microfrontend
+        required: true
+        type: string
+      dockerfile:
+        description: Path to the microfrontend Dockerfile
+        required: true
+        type: string
+      cdn_source:
+        description: Built client asset directory to upload
+        required: true
+        type: string
+      cdn_destination:
+        description: CDN destination directory
+        required: true
+        type: string
+      manifest_id:
+        description: TMS microfrontend id
+        required: true
+        type: string
+      app_name:
+        description: Application name registered in the manifest
+        required: true
+        type: string
+      dev_manifest_url:
+        description: Dev URL registered in the manifest
+        required: true
+        type: string
+      dev_namespace:
+        description: Namespace used when updating the dev manifest
+        required: true
+        type: string
+      fallback:
+        description: Fallback route path relative to locale pages
+        required: true
+        type: string
+      dev_resource:
+        description: NAIS resource used for dev deploy
+        required: true
+        type: string
+      commit_message:
+        description: Head commit message used for manifest updates
+        required: true
+        type: string
+      enable_prod:
+        description: Enables prod manifest update and deploy when prod inputs are also set
+        required: false
+        default: false
+        type: boolean
+      prod_manifest_url:
+        description: Prod URL registered in the manifest
+        required: false
+        default: ""
+        type: string
+      prod_namespace:
+        description: Namespace used when updating the prod manifest
+        required: false
+        default: ""
+        type: string
+      prod_resource:
+        description: NAIS resource used for prod deploy
+        required: false
+        default: ""
+        type: string
+      prod_environment:
+        description: GitHub environment name used to gate prod deploy
+        required: false
+        default: ""
+        type: string
+    secrets:
+      npm_auth_token:
+        required: true
+
+env:
+  NODE_VERSION: "24"
+  TEAM: "team-esyfo"
+
+jobs:
+  build:
+    name: Build ${{ inputs.microfrontend_name }}
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: "read"
+      id-token: "write"
+      packages: "write"
+    steps:
+      - uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
+      - uses: "pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320" # v5.0.0
+      - uses: "actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f" # v6.3.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          registry-url: "https://npm.pkg.github.com"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: "pnpm install --frozen-lockfile"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.npm_auth_token }}
+
+      - name: Run tests
+        run: "pnpm test"
+
+      - name: Build application
+        run: "pnpm run ${{ inputs.build_script }}"
+
+      - name: Upload to cdn
+        uses: "nais/deploy/actions/cdn-upload/v2@437e4adfe270e3f1c98fd0eed7f86ecf0e0873db" # master
+        with:
+          team: ${{ env.TEAM }}
+          source: ${{ inputs.cdn_source }}
+          destination: ${{ inputs.cdn_destination }}
+
+      - name: Build and push
+        uses: "nais/docker-build-push@45d352fb62fb52ccb5ff6cba22c047fa02b35321" # v0
+        id: docker-build-push
+        with:
+          team: ${{ env.TEAM }}
+          dockerfile: ${{ inputs.dockerfile }}
+
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
+
+  update-manifest-dev:
+    name: Update manifest dev
+    permissions:
+      contents: "read"
+      id-token: "write"
+    uses: "navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@67dc876fb9e1a0b115e47a36fd46a1c7b0064d4c" # main
+    needs: build
+    with:
+      id: ${{ inputs.manifest_id }}
+      url: ${{ inputs.dev_manifest_url }}
+      appname: ${{ inputs.app_name }}
+      namespace: ${{ inputs.dev_namespace }}
+      cluster: "dev-gcp"
+      commitmsg: ${{ inputs.commit_message }}
+      fallback: ${{ inputs.fallback }}
+      ssr: true
+    secrets: inherit
+
+  deploy-dev:
+    name: Deploy to dev
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: "read"
+      id-token: "write"
+    needs: [build, update-manifest-dev]
+    steps:
+      - uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
+      - name: Deploy to dev
+        uses: "nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1" # v2
+        env:
+          CLUSTER: "dev-gcp"
+          RESOURCE: ${{ inputs.dev_resource }}
+          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
+
+  update-manifest-prod:
+    name: Update manifest prod
+    if: inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    permissions:
+      contents: "read"
+      id-token: "write"
+    uses: "navikt/tms-deploy/.github/workflows/oppdater-mikrofrontend-manifest-v3.yaml@67dc876fb9e1a0b115e47a36fd46a1c7b0064d4c" # main
+    needs: build
+    with:
+      id: ${{ inputs.manifest_id }}
+      url: ${{ inputs.prod_manifest_url }}
+      appname: ${{ inputs.app_name }}
+      namespace: ${{ inputs.prod_namespace }}
+      cluster: "prod-gcp"
+      commitmsg: ${{ inputs.commit_message }}
+      fallback: ${{ inputs.fallback }}
+      ssr: true
+    secrets: inherit
+
+  deploy-prod:
+    name: Deploy to prod
+    if: inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: "read"
+      id-token: "write"
+    needs: [build, update-manifest-prod]
+    environment:
+      name: ${{ inputs.prod_environment }}
+    steps:
+      - uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
+      - name: Deploy to prod
+        uses: "nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1" # v2
+        env:
+          CLUSTER: "prod-gcp"
+          RESOURCE: ${{ inputs.prod_resource }}
+          VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
