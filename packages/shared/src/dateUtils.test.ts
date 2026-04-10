@@ -13,7 +13,7 @@ describe("dateUtils", () => {
 
   describe("getLongDateFormat", () => {
     it("formats a long nb-NO date", () => {
-      const result = getLongDateFormat(new Date(2024, 0, 5, 12));
+      const result = getLongDateFormat(new Date(2024, 0, 4, 12));
 
       expect(result).toContain("5.");
       expect(result).toContain("januar");
