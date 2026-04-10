@@ -19,16 +19,12 @@ on:
         description: Built client asset directory to upload
         required: true
         type: string
-      cdn_destination:
-        description: CDN destination directory
-        required: true
-        type: string
       manifest_id:
         description: TMS microfrontend id
         required: true
         type: string
-      app_name:
-        description: Application name registered in the manifest
+      application_name:
+        description: Application name reused for CDN destination and manifest registration
         required: true
         type: string
       dev_manifest_url:
@@ -96,7 +92,7 @@ jobs:
         with:
           team: "team-esyfo"
           source: ${{ inputs.cdn_source }}
-          destination: ${{ inputs.cdn_destination }}
+          destination: ${{ inputs.application_name }}
 
       - name: Build and push
         uses: "nais/docker-build-push@45d352fb62fb52ccb5ff6cba22c047fa02b35321" # v0
@@ -118,7 +114,7 @@ jobs:
     with:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.dev_manifest_url }}
-      appname: ${{ inputs.app_name }}
+      appname: ${{ inputs.application_name }}
       namespace: "team-esyfo"
       cluster: "dev-gcp"
       commitmsg: ${{ github.event.head_commit.message }}
@@ -153,7 +149,7 @@ jobs:
     with:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.prod_manifest_url }}
-      appname: ${{ inputs.app_name }}
+      appname: ${{ inputs.application_name }}
       namespace: "team-esyfo"
       cluster: "prod-gcp"
       commitmsg: ${{ github.event.head_commit.message }}

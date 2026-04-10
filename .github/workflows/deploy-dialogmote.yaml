@@ -18,9 +18,8 @@ jobs:
       build_script: "build:dialogmote-microfrontend"
       dockerfile: "./microfrontends/dialogmote/Dockerfile"
       cdn_source: "./microfrontends/dialogmote/dist/client/_astro"
-      cdn_destination: "dialogmote-microfrontend"
       manifest_id: "syfo-dialog"
-      app_name: "dialogmote-microfrontend"
+      application_name: "dialogmote-microfrontend"
       dev_manifest_url: "http://dialogmote-microfrontend.min-side"
       dev_resource: "microfrontends/dialogmote/nais/dev-gcp/nais.yaml"
       enable_prod: false

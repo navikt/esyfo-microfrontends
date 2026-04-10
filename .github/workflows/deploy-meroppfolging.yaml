@@ -18,9 +18,8 @@ jobs:
       build_script: "build:meroppfolging-microfrontend"
       dockerfile: "./microfrontends/meroppfolging/Dockerfile"
       cdn_source: "./microfrontends/meroppfolging/dist/client/_astro"
-      cdn_destination: "meroppfolging-microfrontend"
       manifest_id: "syfo-meroppfolging"
-      app_name: "meroppfolging-microfrontend"
+      application_name: "meroppfolging-microfrontend"
       dev_manifest_url: "http://meroppfolging-microfrontend.min-side"
       dev_resource: "microfrontends/meroppfolging/nais/dev-gcp/nais.yaml"
       enable_prod: false

@@ -18,9 +18,8 @@ jobs:
       build_script: "build:motebehov-microfrontend"
       dockerfile: "./microfrontends/motebehov/Dockerfile"
       cdn_source: "./microfrontends/motebehov/dist/client/_astro"
-      cdn_destination: "motebehov-microfrontend"
       manifest_id: "syfo-motebehov"
-      app_name: "motebehov-microfrontend"
+      application_name: "motebehov-microfrontend"
       dev_manifest_url: "http://motebehov-microfrontend.min-side"
       dev_resource: "microfrontends/motebehov/nais/dev-gcp/nais.yaml"
       enable_prod: false
