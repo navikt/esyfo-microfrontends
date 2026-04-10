@@ -50,11 +50,6 @@ on:
         required: false
         default: ""
         type: string
-      prod_environment:
-        description: GitHub environment name used to gate prod deploy
-        required: false
-        default: ""
-        type: string
     secrets:
       npm_auth_token:
         required: true
@@ -140,7 +135,7 @@ jobs:
 
   update-manifest-prod:
     name: Update manifest prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != ''
     permissions:
       contents: "read"
       id-token: "write"
@@ -159,14 +154,12 @@ jobs:
 
   deploy-prod:
     name: Deploy to prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != ''
     runs-on: "ubuntu-latest"
     permissions:
       contents: "read"
       id-token: "write"
     needs: [build, update-manifest-prod]
-    environment:
-      name: ${{ inputs.prod_environment }}
     steps:
       - uses: "actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd" # v6.0.2
       - name: Deploy to prod
