@@ -35,20 +35,12 @@ on:
         description: Dev URL registered in the manifest
         required: true
         type: string
-      dev_namespace:
-        description: Namespace used when updating the dev manifest
-        required: true
-        type: string
-      fallback:
-        description: Fallback route path relative to locale pages
+      namespace:
+        description: Namespace used when updating manifests
         required: true
         type: string
       dev_resource:
         description: NAIS resource used for dev deploy
-        required: true
-        type: string
-      commit_message:
-        description: Head commit message used for manifest updates
         required: true
         type: string
       enable_prod:
@@ -58,11 +50,6 @@ on:
         type: boolean
       prod_manifest_url:
         description: Prod URL registered in the manifest
-        required: false
-        default: ""
-        type: string
-      prod_namespace:
-        description: Namespace used when updating the prod manifest
         required: false
         default: ""
         type: string
@@ -137,10 +124,10 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.dev_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ inputs.dev_namespace }}
+      namespace: ${{ inputs.namespace }}
       cluster: "dev-gcp"
-      commitmsg: ${{ inputs.commit_message }}
-      fallback: ${{ inputs.fallback }}
+      commitmsg: ${{ github.event.head_commit.message }}
+      fallback: "fallback"
       ssr: true
     secrets: inherit
 
@@ -162,7 +149,7 @@ jobs:
 
   update-manifest-prod:
     name: Update manifest prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
     permissions:
       contents: "read"
       id-token: "write"
@@ -172,16 +159,16 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.prod_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ inputs.prod_namespace }}
+      namespace: ${{ inputs.namespace }}
       cluster: "prod-gcp"
-      commitmsg: ${{ inputs.commit_message }}
-      fallback: ${{ inputs.fallback }}
+      commitmsg: ${{ github.event.head_commit.message }}
+      fallback: "fallback"
       ssr: true
     secrets: inherit
 
   deploy-prod:
     name: Deploy to prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_namespace != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != '' && inputs.prod_environment != ''
     runs-on: "ubuntu-latest"
     permissions:
       contents: "read"

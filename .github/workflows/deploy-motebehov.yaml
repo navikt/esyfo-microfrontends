@@ -22,9 +22,7 @@ jobs:
       manifest_id: "syfo-motebehov"
       app_name: "motebehov-microfrontend"
       dev_manifest_url: "http://motebehov-microfrontend.min-side"
-      dev_namespace: "team-esyfo"
-      fallback: "fallback"
+      namespace: "team-esyfo"
       dev_resource: "microfrontends/motebehov/nais/dev-gcp/nais.yaml"
-      commit_message: ${{ github.event.head_commit.message }}
       enable_prod: false
     secrets: inherit
