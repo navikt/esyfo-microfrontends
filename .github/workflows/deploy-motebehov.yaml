@@ -11,6 +11,11 @@ on:
       - "package.json"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
 jobs:
   deploy:
     uses: ./.github/workflows/deploy-microfrontend-reusable.yml
