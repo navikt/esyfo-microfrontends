@@ -7,6 +7,8 @@ on:
     paths:
       - "microfrontends/motebehov/**"
       - "packages/shared/**"
+      - ".github/workflows/deploy-motebehov.yaml"
+      - ".github/workflows/deploy-microfrontend-reusable.yml"
       - "pnpm-lock.yaml"
       - "package.json"
   workflow_dispatch:

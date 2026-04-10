@@ -7,6 +7,8 @@ on:
     paths:
       - "microfrontends/dialogmote/**"
       - "packages/shared/**"
+      - ".github/workflows/deploy-dialogmote.yaml"
+      - ".github/workflows/deploy-microfrontend-reusable.yml"
       - "pnpm-lock.yaml"
       - "package.json"
   workflow_dispatch:
