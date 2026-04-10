@@ -29,26 +29,9 @@ flowchart LR
 
 ## Meldingsformat
 
-Min side bruker enable- og disable-meldinger på Kafka-topicet for mikrofronter. Formatet er beskrevet i TMS-dokumentasjonen.
+Min side bruker enable- og disable-meldinger på Kafka-topicet for mikrofronter. Selve meldingsformatet er dokumentert i TMS-dokumentasjonen:
 
-```json
-{
-  "@action": "enable",
-  "ident": "<fnr eller dnr>",
-  "microfrontend_id": "syfo-dialog",
-  "sensitivitet": "high",
-  "@initiated_by": "team-esyfo"
-}
-```
-
-```json
-{
-  "@action": "disable",
-  "ident": "<fnr eller dnr>",
-  "microfrontend_id": "syfo-dialog",
-  "@initiated_by": "team-esyfo"
-}
-```
+- [Aktivere og deaktivere microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
 ## Manifest-id-er i dette repoet
 
