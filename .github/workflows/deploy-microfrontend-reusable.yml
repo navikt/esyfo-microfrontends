@@ -112,7 +112,7 @@ jobs:
       appname: ${{ inputs.application_name }}
       namespace: "team-esyfo"
       cluster: "dev-gcp"
-      commitmsg: ${{ github.event.head_commit.message }}
+      commitmsg: ${{ github.event.head_commit.message || format('Manual deploy from {0} ({1})', github.ref_name, github.sha) }}
       fallback: "fallback"
       ssr: true
     secrets: inherit
@@ -147,7 +147,7 @@ jobs:
       appname: ${{ inputs.application_name }}
       namespace: "team-esyfo"
       cluster: "prod-gcp"
-      commitmsg: ${{ github.event.head_commit.message }}
+      commitmsg: ${{ github.event.head_commit.message || format('Manual deploy from {0} ({1})', github.ref_name, github.sha) }}
       fallback: "fallback"
       ssr: true
     secrets: inherit
