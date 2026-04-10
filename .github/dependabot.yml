@@ -24,6 +24,11 @@ updates:
         patterns:
           - "astro"
           - "@astrojs/*"
+      vite:
+        patterns:
+          - "vite"
+          - "vite-*"
+          - "@vitejs/*"
       storybook:
         patterns:
           - "storybook"
