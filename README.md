@@ -41,7 +41,7 @@ flowchart LR
 | motebehov      | `syfo-motebehov`      | `syfomotebehov`         |
 | meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend` |
 
-## Dokumentasjon
+## Les mer
 
 - [Lokal utvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
