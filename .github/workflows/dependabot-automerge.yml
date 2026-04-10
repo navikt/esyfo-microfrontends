@@ -9,7 +9,6 @@ on:
 
 jobs:
   automerge:
-    if: ${{ github.actor == 'dependabot[bot]' }}
     permissions:
       contents: write
       pull-requests: write
