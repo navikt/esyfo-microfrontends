@@ -51,7 +51,7 @@ on:
         default: ""
         type: string
     secrets:
-      npm_auth_token:
+      READER_TOKEN:
         required: true
 
 env:
@@ -77,7 +77,7 @@ jobs:
       - name: Install dependencies
         run: "pnpm install --frozen-lockfile"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_auth_token }}
+          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Build application
         run: "pnpm run ${{ inputs.build_script }}"
