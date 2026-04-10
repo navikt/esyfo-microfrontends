@@ -35,10 +35,6 @@ on:
         description: Dev URL registered in the manifest
         required: true
         type: string
-      namespace:
-        description: Namespace used when updating manifests
-        required: true
-        type: string
       dev_resource:
         description: NAIS resource used for dev deploy
         required: true
@@ -124,7 +120,7 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.dev_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ inputs.namespace }}
+      namespace: ${{ env.TEAM }}
       cluster: "dev-gcp"
       commitmsg: ${{ github.event.head_commit.message }}
       fallback: "fallback"
@@ -159,7 +155,7 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.prod_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ inputs.namespace }}
+      namespace: ${{ env.TEAM }}
       cluster: "prod-gcp"
       commitmsg: ${{ github.event.head_commit.message }}
       fallback: "fallback"

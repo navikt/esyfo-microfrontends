@@ -22,7 +22,6 @@ jobs:
       manifest_id: "syfo-meroppfolging"
       app_name: "meroppfolging-microfrontend"
       dev_manifest_url: "http://meroppfolging-microfrontend.min-side"
-      namespace: "team-esyfo"
       dev_resource: "microfrontends/meroppfolging/nais/dev-gcp/nais.yaml"
       enable_prod: false
     secrets: inherit

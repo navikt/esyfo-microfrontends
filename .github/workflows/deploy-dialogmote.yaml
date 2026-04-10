@@ -22,7 +22,6 @@ jobs:
       manifest_id: "syfo-dialog"
       app_name: "dialogmote-microfrontend"
       dev_manifest_url: "http://dialogmote-microfrontend.min-side"
-      namespace: "team-esyfo"
       dev_resource: "microfrontends/dialogmote/nais/dev-gcp/nais.yaml"
       enable_prod: false
     secrets: inherit

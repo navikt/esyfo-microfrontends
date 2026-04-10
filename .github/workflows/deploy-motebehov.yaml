@@ -22,7 +22,6 @@ jobs:
       manifest_id: "syfo-motebehov"
       app_name: "motebehov-microfrontend"
       dev_manifest_url: "http://motebehov-microfrontend.min-side"
-      namespace: "team-esyfo"
       dev_resource: "microfrontends/motebehov/nais/dev-gcp/nais.yaml"
       enable_prod: false
     secrets: inherit
