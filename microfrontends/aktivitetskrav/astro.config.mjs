@@ -47,7 +47,7 @@ export default defineConfig({
       AKTIVITETSKRAV_CLIENT_ID: envField.string({
         context: "server",
         access: "secret",
-        default: "local:teamsykefravr:aktivietskrav-api",
+        default: "local:team-esyfo:aktivitetskrav-backend",
       }),
       AKTIVITETSKRAV_URL: envField.string({
         context: "server",

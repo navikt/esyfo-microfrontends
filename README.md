@@ -37,7 +37,7 @@ flowchart LR
 | Mikrofrontend  | Manifest-id           | Backend                 |
 | -------------- | --------------------- | ----------------------- |
 | dialogmøte     | `syfo-dialog`         | `isdialogmote`          |
-| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-api`    |
+| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend` |
 | motebehov      | `syfo-motebehov`      | `syfomotebehov`         |
 | meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend` |
 

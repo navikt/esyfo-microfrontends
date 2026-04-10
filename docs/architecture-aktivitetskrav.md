@@ -1,6 +1,6 @@
 # Arkitektur for aktivitetskrav
 
-`aktivitetskrav` viser status for aktivitetskrav på Min side. Mikrofrontenden henter én vurdering fra `aktivitetskrav-api` og oversetter statusen til riktig paneltekst, tag og lenke.
+`aktivitetskrav` viser status for aktivitetskrav på Min side. Mikrofrontenden henter én vurdering fra `aktivitetskrav-backend` og oversetter statusen til riktig paneltekst, tag og lenke.
 
 ## Flyt
 
@@ -10,7 +10,7 @@ flowchart LR
   M --> A[aktivitetskrav-microfrontend]
   A --> MW[Shared middleware]
   MW --> OBO[requestOboToken]
-  OBO --> API[aktivitetskrav-api]
+  OBO --> API[aktivitetskrav-backend]
   API --> A
   A --> P[resolvePanel]
   P --> L[Lenke til aktivitetskrav]
