@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - "main"
-      - "deploy-motebehov"
     paths:
       - "microfrontends/motebehov/**"
       - "pnpm-lock.yaml"
       - "package.json"
+  workflow_dispatch:
 
 jobs:
   deploy:

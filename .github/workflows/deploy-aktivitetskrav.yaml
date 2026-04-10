@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - "main"
-      - "deploy-aktivitetskrav"
     paths:
       - "microfrontends/aktivitetskrav/**"
       - "pnpm-lock.yaml"
       - "package.json"
+  workflow_dispatch:
 
 jobs:
   deploy:

@@ -4,11 +4,11 @@ on:
   push:
     branches:
       - "main"
-      - "deploy-dialogmote"
     paths:
       - "microfrontends/dialogmote/**"
       - "pnpm-lock.yaml"
       - "package.json"
+  workflow_dispatch:
 
 jobs:
   deploy:
