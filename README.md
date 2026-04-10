@@ -94,6 +94,34 @@ flowchart LR
 
 > **Merk:** Prod-deploy er foreløpig deaktivert. Kun dev-gcp er aktivt.
 
+## Dependabot og automerge
+
+Repoet bruker `.github/dependabot.yml` for ukentlige oppdateringer av rot-workspace-et og GitHub Actions. Trygg auto-godkjenning og auto-merge styres av `.github/workflows/dependabot-automerge.yml`, som kaller teamets reusable workflow fra `navikt/teamesyfo-github-actions-workflows`.
+
+### Forventet policy
+
+| Oppdateringstype | Behandles automatisk |
+|------------------|----------------------|
+| GitHub Actions | Ja, inkludert major |
+| npm patch | Ja |
+| npm minor | Ja |
+| npm major | Nei, manuell vurdering |
+
+### Påkrevd GitHub-oppsett
+
+Følgende må være på plass for at Dependabot-PR-er skal kunne auto-merges trygt:
+
+1. GitHub App-en `teamesyfo-automerge` må ha repository access til repoet.
+2. Dependabot må ha tilgang til `AUTOMERGE_APP_PRIVATE_KEY` som Dependabot secret.
+3. Dependabot må ha tilgang til `READER_TOKEN` for å kunne lese pakker fra `npm.pkg.github.com`.
+4. Repository settings må ha `Allow auto-merge` aktivert.
+5. Settings → Actions → General må bruke `Read and write permissions` og `Allow GitHub Actions to create and approve pull requests`.
+6. Ruleset eller branch protection på `main` må kreve status checken `Merge gate`, siden den er CI-gaten for både `pull_request` og `merge_group`.
+
+### Verifisering
+
+Når oppsettet er aktivt, skal en Dependabot-PR for patch/minor enten auto-godkjennes og legges i merge queue eller vente på at `Merge gate` blir grønn. Major-oppdateringer utenfor GitHub Actions skal bli stående til manuell vurdering.
+
 ## Backend-integrasjoner
 
 ### Dialogmote
