@@ -120,7 +120,7 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.dev_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ env.TEAM }}
+      namespace: "team-esyfo"
       cluster: "dev-gcp"
       commitmsg: ${{ github.event.head_commit.message }}
       fallback: "fallback"
@@ -155,7 +155,7 @@ jobs:
       id: ${{ inputs.manifest_id }}
       url: ${{ inputs.prod_manifest_url }}
       appname: ${{ inputs.app_name }}
-      namespace: ${{ env.TEAM }}
+      namespace: "team-esyfo"
       cluster: "prod-gcp"
       commitmsg: ${{ github.event.head_commit.message }}
       fallback: "fallback"
