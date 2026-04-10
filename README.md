@@ -19,8 +19,6 @@ Astro SSR-monorepo for eSyfo-mikrofronter på Min side. Inneholder dialogmøte, 
 
 [🧩 TMS-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
-[📚 Dokumentasjon](docs/)
-
 ## Formålet med repoet
 
 Repoet samler eSyfo-mikrofronter som vises på Min side. Hver mikrofrontend er en Astro SSR-app som validerer token i middleware, henter data på serversiden og renderer et panel med felles komponenter fra `@esyfo/shared`.
