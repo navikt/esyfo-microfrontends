@@ -11,11 +11,13 @@
 
 Astro SSR-monorepo for eSyfo-mikrofronter på Min side. Inneholder dialogmøte, aktivitetskrav, motebehov og meroppfølging, med felles bygg, deploy og dokumentasjon.
 
-## Miljøer
+## Nyttige lenker
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
 [🛠️ GitHub Actions](https://github.com/navikt/esyfo-microfrontends/actions)
+
+[🧩 TMS-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
 [📚 Dokumentasjon](docs/)
 
@@ -45,7 +47,6 @@ flowchart LR
 
 ## Dokumentasjon
 
-- [TMS-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 - [Lokal utvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
 - [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md)
