@@ -45,6 +45,7 @@ flowchart LR
 
 ## Dokumentasjon
 
+- [TMS-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 - [Lokal utvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
 - [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md)
