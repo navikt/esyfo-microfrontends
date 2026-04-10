@@ -6,6 +6,7 @@ on:
       - "main"
     paths:
       - "microfrontends/aktivitetskrav/**"
+      - "packages/shared/**"
       - "pnpm-lock.yaml"
       - "package.json"
   workflow_dispatch:

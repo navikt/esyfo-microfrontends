@@ -6,6 +6,7 @@ on:
       - "main"
     paths:
       - "microfrontends/motebehov/**"
+      - "packages/shared/**"
       - "pnpm-lock.yaml"
       - "package.json"
   workflow_dispatch:
