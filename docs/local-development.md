@@ -14,16 +14,6 @@ For å se tilgjengelige tasks i repoet:
 mise tasks
 ```
 
-De vanligste er:
-
-- `mise run install`
-- `mise run verify`
-- `mise run storybook`
-- `mise run dev-dialogmote`
-- `mise run dev-aktivitetskrav`
-- `mise run dev-meroppfolging`
-- `mise run dev-motebehov`
-
 Hvis du heller vil bruke `pnpm`, finner du de tilsvarende script-ene i `package.json`.
 
 ## Lokal kjøring
