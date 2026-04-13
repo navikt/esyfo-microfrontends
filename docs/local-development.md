@@ -14,8 +14,6 @@ For å se tilgjengelige tasks i repoet:
 mise tasks
 ```
 
-Hvis du heller vil bruke `pnpm`, finner du de tilsvarende script-ene i `package.json`.
-
 ## Lokal kjøring
 
 Hver mikrofrontend har sitt eget dev-script i rotrepoet. Scriptet starter Astro og bruker mock-data i development.
