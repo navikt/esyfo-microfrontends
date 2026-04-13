@@ -9,19 +9,19 @@
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Astro SSR-monorepo for eSyfo-mikrofronter på Min side. Inneholder [dialogmøte](docs/architecture-dialogmote.md), [aktivitetskrav](docs/architecture-aktivitetskrav.md), [motebehov](docs/architecture-motebehov.md) og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
+Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [dialogmøte](docs/architecture-dialogmote.md), [aktivitetskrav](docs/architecture-aktivitetskrav.md), [motebehov](docs/architecture-motebehov.md) og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
 [🛠️ GitHub Actions](https://github.com/navikt/esyfo-microfrontends/actions)
 
-[🧩 TMS-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
+[🧩 TMS (Team Min Side)-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
 ## Formålet med repoet
 
 Repoet samler eSyfo-mikrofronter som vises på Min side. Hver mikrofrontend er en Astro SSR-app som validerer token i middleware, henter data på serversiden og renderer et panel med felles komponenter fra `@esyfo/shared`.
 
-Vi bruker Storybook til å vise tekster, tilstander og komponentvarianter uten å starte hele Min side. Det gjør det enklere å gå gjennom innhold, domenevarianter og UI-endringer.
+Vi bruker [Storybook](https://navikt.github.io/esyfo-microfrontends/) til å vise tekster, tilstander og komponentvarianter uten å starte hele Min side. Det gjør det enklere å gå gjennom innhold, domenevarianter og UI-endringer.
 
 ```mermaid
 flowchart LR
@@ -34,12 +34,12 @@ flowchart LR
 
 ## Mikrofronter i repoet
 
-| Mikrofrontend  | Manifest-id           | Backend                 |
-| -------------- | --------------------- | ----------------------- |
-| dialogmøte     | `syfo-dialog`         | `isdialogmote`          |
-| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend` |
-| motebehov      | `syfo-motebehov`      | `syfomotebehov`         |
-| meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend` |
+| Mikrofrontend  | Manifest-id           | Backend                      |
+| -------------- | --------------------- | ---------------------------- |
+| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend`     |
+| dialogmøte     | `syfo-dialog`         | `isdialogmote.teamsykefravr` |
+| meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend`      |
+| motebehov      | `syfo-motebehov`      | `syfomotebehov`              |
 
 ## Les mer
 
