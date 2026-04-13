@@ -34,12 +34,12 @@ flowchart LR
 
 ## Mikrofronter i repoet
 
-| Mikrofrontend  | Manifest-id           | Backend                      |
-| -------------- | --------------------- | ---------------------------- |
-| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend`     |
-| dialogmøte     | `syfo-dialog`         | `isdialogmote.teamsykefravr` |
-| meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend`      |
-| motebehov      | `syfo-motebehov`      | `syfomotebehov`              |
+| Mikrofrontend  | Manifest-id           | Backend                  |
+| -------------- | --------------------- | ------------------------ |
+| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend` |
+| dialogmøte     | `syfo-dialog`         | `isdialogmote`           |
+| meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend`  |
+| motebehov      | `syfo-motebehov`      | `syfomotebehov`          |
 
 ## Les mer
 
