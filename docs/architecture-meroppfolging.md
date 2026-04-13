@@ -35,10 +35,10 @@ Ved svart status viser appen bare panelet i en begrenset periode. Etter det skju
 
 ## Backend og lenker
 
-| Del | Verdi |
-| --- | --- |
-| Backend | `MEROPPFOLGING_API_URL` |
-| Client ID for OBO | `MEROPPFOLGING_CLIENT_ID` |
-| Lenke ved sen oppfølging | `SSPS_URL` |
-| Lenke ved kartlegging | `KARTLEGGING_URL` |
-| Manifest-id | `syfo-meroppfolging` |
+| Del                      | Verdi                     |
+| ------------------------ | ------------------------- |
+| Backend                  | `MEROPPFOLGING_API_URL`   |
+| Client ID for OBO        | `MEROPPFOLGING_CLIENT_ID` |
+| Lenke ved sen oppfølging | `SSPS_URL`                |
+| Lenke ved kartlegging    | `KARTLEGGING_URL`         |
+| Manifest-id              | `syfo-meroppfolging`      |

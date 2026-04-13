@@ -36,9 +36,9 @@ Hvis brukeren allerede har svart, viser appen ikke panelet.
 
 ## Backend og lenker
 
-| Del | Verdi |
-| --- | --- |
-| Backend | `SYFOMOTEBEHOV_API_URL` |
-| Client ID for OBO | `SYFOMOTEBEHOV_CLIENT_ID` |
+| Del                      | Verdi                             |
+| ------------------------ | --------------------------------- |
+| Backend                  | `SYFOMOTEBEHOV_API_URL`           |
+| Client ID for OBO        | `SYFOMOTEBEHOV_CLIENT_ID`         |
 | Mål for lenken i panelet | `${MOTEBEHOV_URL}/motebehov/svar` |
-| Manifest-id | `syfo-motebehov` |
+| Manifest-id              | `syfo-motebehov`                  |

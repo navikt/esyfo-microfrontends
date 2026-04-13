@@ -25,9 +25,9 @@ flowchart LR
 
 ## Backend og lenker
 
-| Del | Verdi |
-| --- | --- |
-| Backend | `ISDIALOGMOTE_API_URL` |
-| Client ID for OBO | `ISDIALOGMOTE_CLIENT_ID` |
+| Del                      | Verdi                              |
+| ------------------------ | ---------------------------------- |
+| Backend                  | `ISDIALOGMOTE_API_URL`             |
+| Client ID for OBO        | `ISDIALOGMOTE_CLIENT_ID`           |
 | Mål for lenken i panelet | `${DIALOGMOTE_URL}/moteinnkalling` |
-| Manifest-id | `syfo-dialog` |
+| Manifest-id              | `syfo-dialog`                      |

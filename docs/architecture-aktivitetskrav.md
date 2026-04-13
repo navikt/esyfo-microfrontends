@@ -33,9 +33,9 @@ flowchart LR
 
 ## Backend og lenker
 
-| Del | Verdi |
-| --- | --- |
-| Backend | `AKTIVITETSKRAV_API_URL` |
-| Client ID for OBO | `AKTIVITETSKRAV_CLIENT_ID` |
-| Mål for lenken i panelet | `AKTIVITETSKRAV_URL` |
-| Manifest-id | `syfo-aktivitetskrav` |
+| Del                      | Verdi                      |
+| ------------------------ | -------------------------- |
+| Backend                  | `AKTIVITETSKRAV_API_URL`   |
+| Client ID for OBO        | `AKTIVITETSKRAV_CLIENT_ID` |
+| Mål for lenken i panelet | `AKTIVITETSKRAV_URL`       |
+| Manifest-id              | `syfo-aktivitetskrav`      |

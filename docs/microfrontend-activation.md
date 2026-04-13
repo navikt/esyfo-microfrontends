@@ -9,12 +9,12 @@ Dette repoet eier bygg, deploy og manifest. `esyfovarsel` eier om en bruker fakt
 
 ## Ansvarsdeling
 
-| Ansvar | Repo |
-| --- | --- |
+| Ansvar                                               | Repo                   |
+| ---------------------------------------------------- | ---------------------- |
 | Bygge Astro-app, laste opp assets og deploye SSR-app | `esyfo-microfrontends` |
-| Registrere `manifest_id` og URL i TMS-manifestet | `esyfo-microfrontends` |
-| Avgjøre om en bruker skal se en mikrofrontend | `esyfovarsel` |
-| Sende enable- og disable-meldinger til Min side | `esyfovarsel` |
+| Registrere `manifest_id` og URL i TMS-manifestet     | `esyfo-microfrontends` |
+| Avgjøre om en bruker skal se en mikrofrontend        | `esyfovarsel`          |
+| Sende enable- og disable-meldinger til Min side      | `esyfovarsel`          |
 
 ## Hvordan flyten virker
 
@@ -35,12 +35,12 @@ Min side bruker enable- og disable-meldinger på Kafka-topicet for mikrofronter.
 
 ## Manifest-id-er i dette repoet
 
-| Mikrofrontend | Manifest-id |
-| --- | --- |
-| dialogmøte | `syfo-dialog` |
+| Mikrofrontend  | Manifest-id           |
+| -------------- | --------------------- |
+| dialogmøte     | `syfo-dialog`         |
 | aktivitetskrav | `syfo-aktivitetskrav` |
-| motebehov | `syfo-motebehov` |
-| meroppfølging | `syfo-meroppfolging` |
+| motebehov      | `syfo-motebehov`      |
+| meroppfølging  | `syfo-meroppfolging`  |
 
 `esyfovarsel` må bruke samme `microfrontend_id` som manifestet i dette repoet.
 
