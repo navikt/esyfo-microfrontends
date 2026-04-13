@@ -4,13 +4,13 @@ Repoet bruker GitHub Actions for CI, Storybook og deploy av mikrofronter. CI kj�
 
 ## Oversikt
 
-| Workflow | Fil | Hva den gjør |
-| --- | --- | --- |
-| CI | `.github/workflows/ci.yaml` | Kjører lint, check, tester, Storybook-build og build av alle mikrofronter |
-| Reusable CI | `.github/workflows/ci-reusable.yml` | Deler CI-jobbene mellom triggere |
-| Deploy per mikrofrontend | `deploy-*.yaml` | Tynne wrappers med egne triggere og app-spesifikke verdier |
-| Reusable deploy | `.github/workflows/deploy-microfrontend-reusable.yml` | Bygger appen, laster opp assets til CDN, oppdaterer manifest og deployer til NAIS |
-| Deploy Storybook | `.github/workflows/deploy-storybook.yml` | Bygger Storybook og publiserer til GitHub Pages |
+| Workflow                 | Fil                                                   | Hva den gjør                                                                      |
+| ------------------------ | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
+| CI                       | `.github/workflows/ci.yaml`                           | Kjører lint, check, tester, Storybook-build og build av alle mikrofronter         |
+| Reusable CI              | `.github/workflows/ci-reusable.yml`                   | Deler CI-jobbene mellom triggere                                                  |
+| Deploy per mikrofrontend | `deploy-*.yaml`                                       | Tynne wrappers med egne triggere og app-spesifikke verdier                        |
+| Reusable deploy          | `.github/workflows/deploy-microfrontend-reusable.yml` | Bygger appen, laster opp assets til CDN, oppdaterer manifest og deployer til NAIS |
+| Deploy Storybook         | `.github/workflows/deploy-storybook.yml`              | Bygger Storybook og publiserer til GitHub Pages                                   |
 
 ## Hva som skjer på pull request
 
