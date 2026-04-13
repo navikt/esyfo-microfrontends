@@ -24,16 +24,6 @@ flowchart LR
 4. `shouldShowMotebehovPanel` avgjør om panelet skal vises.
 5. `resolvePanel` lager teksten og lenken til svarskjemaet.
 
-## Når panelet vises
-
-Panelet vises bare når alle disse vilkårene er oppfylt:
-
-- `visMotebehov === true`
-- `skjemaType === "SVAR_BEHOV"`
-- `motebehov === null`
-
-Hvis brukeren allerede har svart, viser appen ikke panelet.
-
 ## Backend og lenker
 
 | Del                      | Verdi                             |

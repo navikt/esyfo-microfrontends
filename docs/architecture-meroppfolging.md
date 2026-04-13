@@ -25,14 +25,6 @@ flowchart LR
 4. `resolvePanel` velger visning ut fra `oppfolgingsType`.
 5. Panelet lenker videre til riktig Nav-side.
 
-## Hvordan panelet velges
-
-- `INGEN_OPPFOLGING`: viser ingenting
-- `SEN_OPPFOLGING`: viser status for snart slutt på sykepengene
-- `KARTLEGGING`: viser status for kartleggingsspørsmål
-
-Ved svart status viser appen bare panelet i en begrenset periode. Etter det skjules panelet igjen.
-
 ## Backend og lenker
 
 | Del                      | Verdi                     |

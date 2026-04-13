@@ -24,13 +24,6 @@ flowchart LR
 4. `resolvePanel` velger hva brukeren skal se ut fra `status`.
 5. Appen viser ikke panel når status er `IKKE_OPPFYLT`.
 
-## Statuser som påvirker panelet
-
-- `NY`, `NY_VURDERING`, `AVVENT`: viser at Nav vurderer saken
-- `UNNTAK`, `OPPFYLT`, `IKKE_AKTUELL`: viser resultat med dato-tag
-- `FORHANDSVARSEL`: viser varsel og svarfrist
-- `IKKE_OPPFYLT`: viser ingenting på Min side
-
 ## Backend og lenker
 
 | Del                      | Verdi                      |
