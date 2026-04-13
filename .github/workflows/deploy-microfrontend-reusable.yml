@@ -54,6 +54,10 @@ on:
       READER_TOKEN:
         required: true
 
+concurrency:
+  group: deploy-${{ inputs.microfrontend_name }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
 env:
   NODE_VERSION: "24"
 
@@ -95,6 +99,7 @@ jobs:
         with:
           team: "team-esyfo"
           dockerfile: ${{ inputs.dockerfile }}
+          image_suffix: ${{ inputs.microfrontend_name }}
 
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
