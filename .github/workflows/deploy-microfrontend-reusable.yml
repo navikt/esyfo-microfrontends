@@ -95,6 +95,7 @@ jobs:
         with:
           team: "team-esyfo"
           dockerfile: ${{ inputs.dockerfile }}
+          image_suffix: ${{ inputs.microfrontend_name }}
 
     outputs:
       image: ${{ steps.docker-build-push.outputs.image }}
