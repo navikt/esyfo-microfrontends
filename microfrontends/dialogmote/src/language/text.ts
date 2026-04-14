@@ -4,6 +4,7 @@ export const HeadingContent = {
 
 export const BodyContent = {
   motetFlyttet: "Møtet med Nav er flyttet",
+  trengerDuDialogmote: "Trenger du et dialogmøte?",
 } as const;
 
 export const TagContent = {
