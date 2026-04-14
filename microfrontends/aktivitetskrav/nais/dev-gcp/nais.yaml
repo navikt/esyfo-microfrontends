@@ -31,7 +31,6 @@ spec:
     outbound:
       rules:
         - application: aktivitetskrav-backend
-          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
