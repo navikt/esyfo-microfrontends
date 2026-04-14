@@ -32,6 +32,7 @@ spec:
       rules:
         - application: isdialogmote
           namespace: teamsykefravr
+        - application: syfomotebehov
   resources:
     limits:
       memory: 768Mi
@@ -43,5 +44,9 @@ spec:
       value: "http://isdialogmote.teamsykefravr"
     - name: ISDIALOGMOTE_CLIENT_ID
       value: prod-gcp:teamsykefravr:isdialogmote
+    - name: SYFOMOTEBEHOV_BACKEND_HOST
+      value: "http://syfomotebehov"
+    - name: SYFOMOTEBEHOV_CLIENT_ID
+      value: prod-gcp:team-esyfo:syfomotebehov
     - name: DIALOGMOTE_URL
       value: "https://www.nav.no/syk/dialogmoter/sykmeldt"
