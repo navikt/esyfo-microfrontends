@@ -9,6 +9,6 @@ vi.mock("@navikt/pino-logger", () => ({
 }));
 
 vi.mock("astro:env/server", () => ({
-  ISDIALOGMOTE_API_URL: "http://localhost:3000/api/dialogmote",
+  ISDIALOGMOTE_BACKEND_HOST: "http://localhost:3000",
   ISDIALOGMOTE_CLIENT_ID: "local:teamsykefravr:isdialogmote",
 }));

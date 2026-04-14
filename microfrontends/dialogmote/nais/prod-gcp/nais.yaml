@@ -39,8 +39,8 @@ spec:
       cpu: "20m"
       memory: 128Mi
   env: # Add your environment variables here
-    - name: ISDIALOGMOTE_API_URL
-      value: "http://isdialogmote.teamsykefravr/api/v2/arbeidstaker/brev"
+    - name: ISDIALOGMOTE_BACKEND_HOST
+      value: "http://isdialogmote.teamsykefravr"
     - name: ISDIALOGMOTE_CLIENT_ID
       value: prod-gcp:teamsykefravr:isdialogmote
     - name: DIALOGMOTE_URL

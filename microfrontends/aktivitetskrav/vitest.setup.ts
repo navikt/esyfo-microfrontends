@@ -9,6 +9,6 @@ vi.mock("@navikt/pino-logger", () => ({
 }));
 
 vi.mock("astro:env/server", () => ({
-  AKTIVITETSKRAV_API_URL: "http://aktivitetskrav-api/api/aktivitetsplikt",
+  AKTIVITETSKRAV_BACKEND_HOST: "http://aktivitetskrav-backend",
   AKTIVITETSKRAV_CLIENT_ID: "local:teamsykefravr:aktivitetskrav-api",
 }));

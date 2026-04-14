@@ -39,8 +39,8 @@ spec:
       cpu: "20m"
       memory: 128Mi
   env:
-    - name: MEROPPFOLGING_API_URL
-      value: "http://meroppfolging-backend.team-esyfo/api/mikrofrontend/v1/status"
+    - name: MEROPPFOLGING_BACKEND_HOST
+      value: "http://meroppfolging-backend"
     - name: MEROPPFOLGING_CLIENT_ID
       value: "prod-gcp:team-esyfo:meroppfolging-backend"
     - name: SSPS_URL

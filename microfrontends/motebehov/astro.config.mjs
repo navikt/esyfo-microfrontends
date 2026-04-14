@@ -39,10 +39,10 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      SYFOMOTEBEHOV_API_URL: envField.string({
+      SYFOMOTEBEHOV_BACKEND_HOST: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:3000/api/motebehov",
+        default: "http://localhost:3000",
       }),
       SYFOMOTEBEHOV_CLIENT_ID: envField.string({
         context: "server",

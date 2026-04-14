@@ -39,10 +39,10 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      MEROPPFOLGING_API_URL: envField.string({
+      MEROPPFOLGING_BACKEND_HOST: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:3000/api/mikrofrontend/v1/status",
+        default: "http://localhost:3000",
       }),
       MEROPPFOLGING_CLIENT_ID: envField.string({
         context: "server",
