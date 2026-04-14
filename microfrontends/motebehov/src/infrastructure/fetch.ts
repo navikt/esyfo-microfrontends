@@ -1,5 +1,5 @@
 import {
-  SYFOMOTEBEHOV_API_URL,
+  SYFOMOTEBEHOV_BACKEND_HOST,
   SYFOMOTEBEHOV_CLIENT_ID,
 } from "astro:env/server";
 import { isLocal } from "@esyfo/shared/environment";
@@ -10,13 +10,19 @@ import {
 } from "@schema/motebehovSchema.ts";
 import { mockData } from "mock/data";
 
+const motebehovPath = "/syfomotebehov/api/v4/arbeidstaker/motebehov";
+const motebehovApiUrl = new URL(
+  motebehovPath,
+  SYFOMOTEBEHOV_BACKEND_HOST,
+).toString();
+
 const realFetchMotebehov = async (
   token: string,
 ): Promise<MotebehovStatusDto> => {
   return fetchFromBackend({
     token,
     clientId: SYFOMOTEBEHOV_CLIENT_ID,
-    apiUrl: SYFOMOTEBEHOV_API_URL,
+    apiUrl: motebehovApiUrl,
     apiName: "motebehov",
     schema: motebehovStatusSchema,
   });
