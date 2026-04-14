@@ -9,14 +9,14 @@ import { resolvePanel } from "./panelResolver";
 
 export const resolveCombinedPanel = (
   latestBrev: BrevDto | null,
-  motebehov: MotebehovStatusDto,
+  motebehov: MotebehovStatusDto | null,
   href: string,
 ): MainPanelProps | null => {
   if (shouldShowDialogmotePanel(latestBrev)) {
     return resolvePanel(latestBrev, href);
   }
 
-  if (shouldShowMotebehovPanel(motebehov)) {
+  if (motebehov && shouldShowMotebehovPanel(motebehov)) {
     return resolveMotebehovPanel(href);
   }
 

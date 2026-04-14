@@ -25,6 +25,14 @@ describe("resolveCombinedPanel", () => {
     ).toEqual(resolvePanel(latestBrev, expectedHref));
   });
 
+  it("shows dialogmøte when motebehov is unavailable", () => {
+    const latestBrev = createBrev({ brevType: "INNKALT" });
+
+    expect(resolveCombinedPanel(latestBrev, null, expectedHref)).toEqual(
+      resolvePanel(latestBrev, expectedHref),
+    );
+  });
+
   it("shows motebehov when dialogmøte should not be shown", () => {
     expect(
       resolveCombinedPanel(
