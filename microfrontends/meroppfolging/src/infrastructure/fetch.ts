@@ -10,9 +10,8 @@ import {
 } from "@schema/meroppfolgingStatusSchema";
 import { mockData } from "mock/data";
 
-const meroppfolgingStatusPath = "/api/mikrofrontend/v1/status";
 const meroppfolgingApiUrl = new URL(
-  meroppfolgingStatusPath,
+  "/api/mikrofrontend/v1/status",
   MEROPPFOLGING_BACKEND_HOST,
 ).toString();
 

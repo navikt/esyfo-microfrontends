@@ -10,9 +10,8 @@ import {
 } from "@schema/motebehovSchema.ts";
 import { mockData } from "mock/data";
 
-const motebehovPath = "/syfomotebehov/api/v4/arbeidstaker/motebehov";
 const motebehovApiUrl = new URL(
-  motebehovPath,
+  "/syfomotebehov/api/v4/arbeidstaker/motebehov",
   SYFOMOTEBEHOV_BACKEND_HOST,
 ).toString();
 

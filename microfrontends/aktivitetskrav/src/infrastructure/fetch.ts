@@ -8,9 +8,8 @@ import { vurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
 import { mockData } from "mock/data";
 
-const aktivitetskravBackendPath = "/api/v1/aktivitetsplikt";
 const aktivitetskravApiUrl = new URL(
-  aktivitetskravBackendPath,
+  "/api/v1/aktivitetsplikt",
   AKTIVITETSKRAV_BACKEND_HOST,
 ).toString();
 

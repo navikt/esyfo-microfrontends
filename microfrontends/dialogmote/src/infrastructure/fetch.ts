@@ -8,9 +8,8 @@ import { brevSchema } from "@schema/brevSchema";
 import type { BrevDto } from "@schema/brevSchema.ts";
 import { mockData } from "mock/data";
 
-const dialogmoteBrevPath = "/api/v2/arbeidstaker/brev";
 const dialogmoteApiUrl = new URL(
-  dialogmoteBrevPath,
+  "/api/v2/arbeidstaker/brev",
   ISDIALOGMOTE_BACKEND_HOST,
 ).toString();
 
