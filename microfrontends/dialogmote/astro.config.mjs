@@ -39,10 +39,10 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      ISDIALOGMOTE_API_URL: envField.string({
+      ISDIALOGMOTE_BACKEND_HOST: envField.string({
         context: "server",
         access: "secret",
-        default: "http://localhost:3000/api/dialogmote",
+        default: "http://localhost:3000",
       }),
       ISDIALOGMOTE_CLIENT_ID: envField.string({
         context: "server",

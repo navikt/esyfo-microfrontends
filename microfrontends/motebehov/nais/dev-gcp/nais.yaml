@@ -31,7 +31,6 @@ spec:
     outbound:
       rules:
         - application: syfomotebehov
-          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
@@ -39,8 +38,8 @@ spec:
       cpu: "20m"
       memory: 128Mi
   env:
-    - name: SYFOMOTEBEHOV_API_URL
-      value: "http://syfomotebehov.team-esyfo/syfomotebehov/api/v4/arbeidstaker/motebehov"
+    - name: SYFOMOTEBEHOV_BACKEND_HOST
+      value: "http://syfomotebehov"
     - name: SYFOMOTEBEHOV_CLIENT_ID
       value: dev-gcp:team-esyfo:syfomotebehov
     - name: MOTEBEHOV_URL

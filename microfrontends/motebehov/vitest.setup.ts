@@ -9,6 +9,6 @@ vi.mock("@navikt/pino-logger", () => ({
 }));
 
 vi.mock("astro:env/server", () => ({
-  SYFOMOTEBEHOV_API_URL: "http://localhost:3000/api/motebehov",
+  SYFOMOTEBEHOV_BACKEND_HOST: "http://localhost:3000",
   SYFOMOTEBEHOV_CLIENT_ID: "local:team-esyfo:syfomotebehov",
 }));

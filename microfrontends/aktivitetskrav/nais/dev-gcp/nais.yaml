@@ -31,7 +31,6 @@ spec:
     outbound:
       rules:
         - application: aktivitetskrav-backend
-          namespace: team-esyfo
   resources:
     limits:
       memory: 768Mi
@@ -39,7 +38,9 @@ spec:
       cpu: "20m"
       memory: 128Mi
   env:
-    - name: AKTIVITETSKRAV_API_URL
-      value: "http://aktivitetskrav-backend.team-esyfo/api/v1/aktivitetsplikt"
+    - name: AKTIVITETSKRAV_BACKEND_HOST
+      value: "http://aktivitetskrav-backend"
     - name: AKTIVITETSKRAV_CLIENT_ID
       value: "dev-gcp:team-esyfo:aktivitetskrav-backend"
+    - name: AKTIVITETSKRAV_URL
+      value: "https://www.ekstern.dev.nav.no/syk/aktivitetskrav"

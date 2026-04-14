@@ -1,5 +1,5 @@
 import {
-  AKTIVITETSKRAV_API_URL,
+  AKTIVITETSKRAV_BACKEND_HOST,
   AKTIVITETSKRAV_CLIENT_ID,
 } from "astro:env/server";
 import { isLocal } from "@esyfo/shared/environment";
@@ -8,13 +8,18 @@ import { vurderingSchema } from "@schema/vurderingSchema";
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema.ts";
 import { mockData } from "mock/data";
 
+const aktivitetskravApiUrl = new URL(
+  "/api/v1/aktivitetsplikt",
+  AKTIVITETSKRAV_BACKEND_HOST,
+).toString();
+
 const realFetchVurdering = async (
   token: string,
 ): Promise<AktivitetskravVurdering> => {
   return fetchFromBackend({
     token,
     clientId: AKTIVITETSKRAV_CLIENT_ID,
-    apiUrl: AKTIVITETSKRAV_API_URL,
+    apiUrl: aktivitetskravApiUrl,
     apiName: "aktivitetskrav",
     schema: vurderingSchema,
   });

@@ -39,10 +39,10 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      AKTIVITETSKRAV_API_URL: envField.string({
+      AKTIVITETSKRAV_BACKEND_HOST: envField.string({
         context: "server",
         access: "secret",
-        default: "http://aktivitetskrav-api/api/aktivitetsplikt",
+        default: "http://aktivitetskrav-backend",
       }),
       AKTIVITETSKRAV_CLIENT_ID: envField.string({
         context: "server",
