@@ -17,9 +17,6 @@
       "typecheck-aktivitetskrav": {
         "run": "pnpm --filter aktivitetskrav-microfrontend run typecheck"
       },
-      "typecheck-motebehov": {
-        "run": "pnpm --filter motebehov-microfrontend run typecheck"
-      },
       "typecheck-meroppfolging": {
         "run": "pnpm --filter meroppfolging-microfrontend run typecheck"
       },
