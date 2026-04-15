@@ -1,121 +1,53 @@
-# esyfo-microfrontends
+# eSyfo microfrontends for Min side
 
-`esyfo-microfrontends` er et Astro SSR-monorepo for syfo-relaterte microfrontender på Min side (nav.no) for innloggede privatpersoner.
+[![Build Status](https://github.com/navikt/esyfo-microfrontends/actions/workflows/ci.yaml/badge.svg)](https://github.com/navikt/esyfo-microfrontends/actions/workflows/ci.yaml)
 
-Repoet samler og erstatter fire tidligere repoer i én løsning:
-- `aktivitetskrav-mikrofrontend`
-- `dialogmote-mikrofrontend`
-- `meroppfolging-mikrofrontend`
-- `esyfo-proxy`
+[![Astro](https://img.shields.io/badge/Astro-FF5D01?logo=astro&logoColor=white)](https://astro.build/)
+[![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-F69220?logo=pnpm&logoColor=white)](https://pnpm.io/)
+[![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
+[![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Microfrontendene aktiveres av [esyfovarsel](https://github.com/navikt/esyfovarsel) og følger [TMS-modellen for microfrontender på Min side](https://navikt.github.io/tms-dokumentasjon/microfrontend/).
+Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [aktivitetskrav](docs/aktivitetskravarkitektur.md), [dialogmøte](docs/dialogmotearkitektur.md)og [meroppfølging](docs/meroppfolgingsarkitektur.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
 
-## Arkitektur (ny løsning)
+[🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
-```mermaid
-flowchart TD
-  U[Bruker] --> M[Min side]
+[🧩 TMS (Team Min Side)-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
-  subgraph MF[Astro SSR microfrontender]
-    direction TB
-    D[dialogmote]
-    A[aktivitetskrav]
-    MP[meroppfolging]
-  end
+## Formålet med repoet
 
-  M --> D
-  M --> A
-  M --> MP
+Repoet samler eSyfo-mikrofronter som vises på Min side. Hver mikrofrontend er en Astro SSR-app som validerer token i middleware, henter data på serversiden og renderer et panel med felles komponenter fra `@esyfo/shared`.
 
-  D -- "TokenX OBO" --> B1[isdialogmote]
-  D -- "TokenX OBO" --> B2[syfomotebehov]
-  A -- "TokenX OBO" --> B3[aktivitetskrav-api]
-```
-
-Alle workspace-appene følger samme mønster: SSR i Astro, token-validering og OBO på serversiden, deretter kall til backend-APIer.
-
-## Monorepostruktur
-
-```text
-esyfo-microfrontends/
-├── package.json                  # Root: delte avhengigheter + workspace-scripts
-├── microfrontends/
-│   ├── dialogmote/               # Dialogmøte-microfrontend
-│   ├── aktivitetskrav/           # Aktivitetskrav-microfrontend
-│   └── meroppfolging/            # Meroppfølging-microfrontend (ikke påbegynt)
-```
-
-Repoet bruker **pnpm workspaces**. Workspace-konfigurasjonen ligger i `pnpm-workspace.yaml`, avhengigheter ligger i root `package.json`, og hvert workspace er en selvstendig Astro SSR-app med egne scripts, build og deploy.
-
-## Teknologioversikt
-
-| Kategori | Teknologi |
-|----------|-----------|
-| Framework | Astro 5 (SSR med @astrojs/node) |
-| UI | React 18, @navikt/ds-react (Aksel) |
-| Auth | @navikt/oasis (TokenX validering + OBO) |
-| Validering | Zod |
-| Logging | pino |
-| Observability | OpenTelemetry (auto-instrumentert av NAIS) |
-| Lint/format | Biome |
-| Mock server | Hono |
-| CSS-scoping | postcss-prefix-selector |
-| Container | distroless Node.js |
-| Plattform | NAIS (Kubernetes på GCP) |
-
-## Lokal utvikling
-
-```bash
-pnpm install
-pnpm run dev:dialogmote-microfrontend     # Astro dev + mock server
-pnpm run dev:aktivitetskrav-microfrontend
-```
-
-Appen kjører på `http://localhost:4321/`. I dev brukes mock-server for å simulere backend-APIer.
-
-## Bygging
-
-```bash
-pnpm run build:dialogmote-microfrontend
-pnpm run build:aktivitetskrav-microfrontend
-```
-
-## Deploy-flyt
+Vi bruker [Storybook](https://navikt.github.io/esyfo-microfrontends/) til å vise tekster, tilstander og komponentvarianter uten å starte hele Min side. Det gjør det enklere å gå gjennom innhold, domenevarianter og UI-endringer.
 
 ```mermaid
 flowchart LR
-  A[Push til main] --> B[GitHub Actions]
-  B --> C[pnpm install --frozen-lockfile + build]
-  C --> D[CDN-upload assets]
-  D --> E[Docker build]
-  E --> F[Registrer manifest]
-  F --> G[NAIS deploy dev-gcp]
+  U[Bruker] --> M[Min side]
+  M --> T[TMS-manifest og aktivering]
+  T --> D[SSR-mikrofrontend]
+  D --> B[Syfo-backend]
+  D --> C[CDN-assets]
 ```
 
-> **Merk:** Prod-deploy er foreløpig deaktivert. Kun dev-gcp er aktivt.
+## Mikrofronter i repoet
 
-## Backend-integrasjoner
+| Mikrofrontend                                      | Backend                         | Appnavn                      |
+| -------------------------------------------------- | ------------------------------- | ---------------------------- |
+| [aktivitetskrav](docs/aktivitetskravarkitektur.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
+| [dialogmøte](docs/dialogmotearkitektur.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
+| [meroppfølging](docs/meroppfolgingsarkitektur.md)  | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
-### Dialogmote
-- `isdialogmote` (teamsykefravr) — dialogmøtebrev
-- `syfomotebehov` (team-esyfo) — møtebehov
+## Les mer
 
-### Aktivitetskrav
-- `aktivitetskrav-api` — aktivitetskravvurdering
+- [Lokal utvikling](docs/local-development.md)
+- [GitHub workflows](docs/github-workflows.md)
+- [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md) – inkluderer manifest-id-er
+- [Integrasjon i Min side](docs/min-side-integration.md)
+- [Aktivitetskravarkitektur](docs/aktivitetskravarkitektur.md)
+- [Dialogmøtearkitektur](docs/dialogmotearkitektur.md)
+- [Meroppfølgingarkitektur](docs/meroppfolgingsarkitektur.md)
 
-### Meroppfolging
-- Ikke påbegynt
+## For Nav-ansatte
 
-## Migreringsstatus
-
-| Workspace | Status | Merknad |
-|-----------|--------|---------|
-| dialogmote | ✅ Under aktiv utvikling | Domenelogikk migrert, deployes til dev |
-| aktivitetskrav | ✅ Under aktiv utvikling | Domenelogikk implementert, deployes til dev |
-| meroppfolging | ⏳ Ikke påbegynt | Workflow finnes, men kode mangler |
-| esyfo-proxy | 🔄 Erstattet | Innebygd i hver workspace via Astro middleware |
-
-## Kontakt
-
-- **Team:** team-esyfo, Nav IT
-- **Slack:** #team-esyfo
+Interne henvendelser kan sendes via Slack i kanalen [#esyfo](https://nav-it.slack.com/archives/C012X796B4L).
