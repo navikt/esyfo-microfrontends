@@ -80,7 +80,3 @@ curl -i http://localhost:8080/api/internal/isReady
 - `logs` gjør det enkelt å se om appen starter og håndterer kall som forventet.
 - `port-forward` gjør den deployede appen tilgjengelig lokalt uten å gå via Min side.
 - `isAlive` og `isReady` bekrefter at containeren kjører og er klar til å ta trafikk.
-
-## Storybook i denne sammenhengen
-
-Storybook er ikke en del av Min side-integrasjonen. Vi bruker Storybook til å vise komponenter, tekster og tilstander i isolasjon. Det gjør det enklere å gå gjennom innhold uten å trigge aktivering i Min side.
