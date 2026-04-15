@@ -32,11 +32,11 @@ flowchart LR
 
 ## Mikrofronter i repoet
 
-| Mikrofrontend                                         | Backend                         | Appnavn                      |
-| ----------------------------------------------------- | ------------------------------- | ---------------------------- |
+| Mikrofrontend                                      | Backend                         | Appnavn                      |
+| -------------------------------------------------- | ------------------------------- | ---------------------------- |
 | [aktivitetskrav](docs/aktivitetskravarkitektur.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
 | [dialogmøte](docs/dialogmotearkitektur.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
-| [meroppfølging](docs/meroppfolgingsarkitektur.md)   | `meroppfolging-backend`         | meroppfolging-microfrontend  |
+| [meroppfølging](docs/meroppfolgingsarkitektur.md)  | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
 ## Les mer
 
@@ -44,9 +44,9 @@ flowchart LR
 - [GitHub workflows](docs/github-workflows.md)
 - [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md) – inkluderer manifest-id-er
 - [Integrasjon i Min side](docs/min-side-integration.md)
-- [Arkitektur for dialogmøte](docs/dialogmotearkitektur.md)
-- [Arkitektur for aktivitetskrav](docs/aktivitetskravarkitektur.md)
-- [Arkitektur for meroppfølging](docs/meroppfolgingsarkitektur.md)
+- [Aktivitetskravarkitektur](docs/aktivitetskravarkitektur.md)
+- [Dialogmøtearkitektur](docs/dialogmotearkitektur.md)
+- [Meroppfølgingarkitektur](docs/meroppfolgingsarkitektur.md)
 
 ## For Nav-ansatte
 
