@@ -47,3 +47,7 @@ flowchart LR
 - [Arkitektur for dialogmøte](docs/architecture-dialogmote.md)
 - [Arkitektur for aktivitetskrav](docs/architecture-aktivitetskrav.md)
 - [Arkitektur for meroppfølging](docs/architecture-meroppfolging.md)
+
+## For Nav-ansatte
+
+Interne henvendelser kan sendes via Slack i kanalen #esyfo.
