@@ -9,7 +9,7 @@
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [dialogmøte](docs/architecture-dialogmote.md), [aktivitetskrav](docs/architecture-aktivitetskrav.md) og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
+Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [aktivitetskrav](docs/architecture-aktivitetskrav.md), [dialogmøte](docs/architecture-dialogmote.md)og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
