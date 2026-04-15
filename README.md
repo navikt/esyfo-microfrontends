@@ -50,4 +50,4 @@ flowchart LR
 
 ## For Nav-ansatte
 
-Interne henvendelser kan sendes via Slack i kanalen #esyfo.
+Interne henvendelser kan sendes via Slack i kanalen [#esyfo](https://nav-it.slack.com/archives/C012X796B4L).
