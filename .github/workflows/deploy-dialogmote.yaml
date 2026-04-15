@@ -28,7 +28,7 @@ jobs:
       cdn_source: "./microfrontends/dialogmote/dist/client/_astro"
       manifest_id: "syfo-dialog"
       application_name: "dialogmote-microfrontend"
-      dev_manifest_url: "http://dialogmote-microfrontend.min-side"
+      dev_manifest_url: "http://dialogmote-microfrontend.team-esyfo"
       dev_resource: "microfrontends/dialogmote/nais/dev-gcp/nais.yaml"
       enable_prod: false
     secrets: inherit
