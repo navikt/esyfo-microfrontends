@@ -7,6 +7,7 @@ Repoet bruker GitHub Actions for CI, Storybook og deploy av mikrofronter. CI kj�
 | Workflow                 | Fil                                                   | Hva den gjør                                                                      |
 | ------------------------ | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
 | CI                       | `.github/workflows/ci.yaml`                           | Kjører lint, check, tester, Storybook-build og build av alle mikrofronter         |
+| Main CI                  | `.github/workflows/main-ci.yaml`                      | Kjører samme gjenbrukbare CI ved push til `main`                                  |
 | Reusable CI              | `.github/workflows/ci-reusable.yml`                   | Deler CI-jobbene mellom triggere                                                  |
 | Deploy per mikrofrontend | `deploy-*.yaml`                                       | Tynne wrappers med egne triggere og app-spesifikke verdier                        |
 | Reusable deploy          | `.github/workflows/deploy-microfrontend-reusable.yml` | Bygger appen, laster opp assets til CDN, oppdaterer manifest og deployer til NAIS |
@@ -27,6 +28,7 @@ Et eget merge gate-steg stopper merge hvis den gjenbrukbare CI-jobben feiler ell
 
 Når endringer treffer `main`, skjer dette:
 
+- `main-ci.yaml` kjører samme gjenbrukbare CI som på pull request
 - Storybook blir bygget og publisert til GitHub Pages
 - den relevante deploy-wrapperen kan starte deploy til dev
 
