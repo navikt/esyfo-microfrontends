@@ -9,7 +9,7 @@
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [dialogmøte](docs/architecture-dialogmote.md), [aktivitetskrav](docs/architecture-aktivitetskrav.md), [motebehov](docs/architecture-motebehov.md) og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
+Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [dialogmøte](docs/architecture-dialogmote.md), [aktivitetskrav](docs/architecture-aktivitetskrav.md) og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
@@ -34,12 +34,11 @@ flowchart LR
 
 ## Mikrofronter i repoet
 
-| Mikrofrontend  | Manifest-id           | Backend                  |
-| -------------- | --------------------- | ------------------------ |
-| aktivitetskrav | `syfo-aktivitetskrav` | `aktivitetskrav-backend` |
-| dialogmøte     | `syfo-dialog`         | `isdialogmote`           |
-| meroppfølging  | `syfo-meroppfolging`  | `meroppfolging-backend`  |
-| motebehov      | `syfo-motebehov`      | `syfomotebehov`          |
+| Mikrofrontend                                         | Manifest-id           | Backend                         | Appnavn                      |
+| ----------------------------------------------------- | --------------------- | ------------------------------- | ---------------------------- |
+| [aktivitetskrav](docs/architecture-aktivitetskrav.md) | `syfo-aktivitetskrav` | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
+| [dialogmøte](docs/architecture-dialogmote.md)         | `syfo-dialog`         | `isdialogmote`, `syfomotebehov` | dialgmote-microfrontend      |
+| [meroppfølging](docs/architecture-meroppfolging.md)   | `syfo-meroppfolging`  | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
 ## Les mer
 
@@ -49,5 +48,4 @@ flowchart LR
 - [Integrasjon i Min side](docs/min-side-integration.md)
 - [Arkitektur for dialogmøte](docs/architecture-dialogmote.md)
 - [Arkitektur for aktivitetskrav](docs/architecture-aktivitetskrav.md)
-- [Arkitektur for motebehov](docs/architecture-motebehov.md)
 - [Arkitektur for meroppfølging](docs/architecture-meroppfolging.md)

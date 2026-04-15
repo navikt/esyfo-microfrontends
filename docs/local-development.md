@@ -26,7 +26,7 @@ Astro kjører på `http://localhost:4321`, og Storybook kjører på `http://loca
 
 - `pnpm run check`
 - `pnpm test`
-- build av alle fire mikrofronter
+- build av alle mikrofrontene
 - build av Storybook
 
 Bruk denne kommandoen før du åpner en pull request når du vil sjekke hele repoet, ikke bare én mikrofrontend.
