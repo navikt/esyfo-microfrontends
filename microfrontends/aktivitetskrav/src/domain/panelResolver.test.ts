@@ -13,9 +13,9 @@ import {
 } from "./test-utils/vurdering";
 
 const now = new Date("2024-06-01T12:00:00.000Z");
-const sistVurdert = "2024-01-15T00:00:00";
-const fristBefore = "2024-05-01";
-const fristAfter = "2024-07-01";
+const sistVurdert = "2024-01-15T00:00:00.000Z";
+const fristBefore = "2024-05-01T00:00:00.000Z";
+const fristAfter = "2024-07-01T00:00:00.000Z";
 const expectedHref = "http://localhost:3000/syk/aktivitetskrav";
 
 const expectResolvedPanel = (
