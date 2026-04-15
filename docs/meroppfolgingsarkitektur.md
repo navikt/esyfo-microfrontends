@@ -1,4 +1,4 @@
-# Arkitektur for meroppfølging
+# Meroppfølgingsarkitektur
 
 `meroppfolging` viser om brukeren bør svare på spørsmål om mer oppfølging. Mikrofrontenden henter status fra `meroppfolging-backend` og viser enten sen oppfølging eller kartlegging, avhengig av hvilken type oppfølging brukeren er i.
 

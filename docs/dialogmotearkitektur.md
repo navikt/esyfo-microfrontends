@@ -1,4 +1,4 @@
-# Arkitektur for dialogmøte
+# Dialogmøtearkitektur
 
 `dialogmote` viser status for dialogmøte på Min side, og håndterer også møtebehov i samme mikrofrontend. Mikrofrontenden henter brevdata fra `isdialogmote` og møtebehovstatus fra `syfomotebehov`, og velger hvilket panel som skal vises ut fra den samlede flyten.
 

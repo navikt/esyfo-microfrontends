@@ -9,7 +9,7 @@
 [![Storybook](https://img.shields.io/badge/Storybook-FF4785?logo=storybook&logoColor=white)](https://storybook.js.org/)
 [![Vitest](https://img.shields.io/badge/Vitest-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [aktivitetskrav](docs/architecture-aktivitetskrav.md), [dialogmøte](docs/architecture-dialogmote.md)og [meroppfølging](docs/architecture-meroppfolging.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
+Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. Inneholder [aktivitetskrav](docs/aktivitetskravarkitektur.md), [dialogmøte](docs/dialogmotearkitektur.md)og [meroppfølging](docs/meroppfolgingsarkitektur.md), med felles [bygg og deploy](docs/github-workflows.md) og [dokumentasjon](#les-mer).
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
@@ -34,9 +34,9 @@ flowchart LR
 
 | Mikrofrontend                                         | Backend                         | Appnavn                      |
 | ----------------------------------------------------- | ------------------------------- | ---------------------------- |
-| [aktivitetskrav](docs/architecture-aktivitetskrav.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
-| [dialogmøte](docs/architecture-dialogmote.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
-| [meroppfølging](docs/architecture-meroppfolging.md)   | `meroppfolging-backend`         | meroppfolging-microfrontend  |
+| [aktivitetskrav](docs/aktivitetskravarkitektur.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
+| [dialogmøte](docs/dialogmotearkitektur.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
+| [meroppfølging](docs/meroppfolgingsarkitektur.md)   | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
 ## Les mer
 
@@ -44,9 +44,9 @@ flowchart LR
 - [GitHub workflows](docs/github-workflows.md)
 - [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md) – inkluderer manifest-id-er
 - [Integrasjon i Min side](docs/min-side-integration.md)
-- [Arkitektur for dialogmøte](docs/architecture-dialogmote.md)
-- [Arkitektur for aktivitetskrav](docs/architecture-aktivitetskrav.md)
-- [Arkitektur for meroppfølging](docs/architecture-meroppfolging.md)
+- [Arkitektur for dialogmøte](docs/dialogmotearkitektur.md)
+- [Arkitektur for aktivitetskrav](docs/aktivitetskravarkitektur.md)
+- [Arkitektur for meroppfølging](docs/meroppfolgingsarkitektur.md)
 
 ## For Nav-ansatte
 

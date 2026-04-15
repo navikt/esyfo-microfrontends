@@ -1,4 +1,4 @@
-# Arkitektur for aktivitetskrav
+# Aktivitetskravarkitektur
 
 `aktivitetskrav` viser status for aktivitetskrav på Min side. Mikrofrontenden henter én vurdering fra `aktivitetskrav-backend` og oversetter statusen til riktig paneltekst, tag og lenke.
 
