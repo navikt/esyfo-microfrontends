@@ -29,7 +29,7 @@ flowchart LR
 
 | Del                      | Verdi                     |
 | ------------------------ | ------------------------- |
-| Backend                  | `MEROPPFOLGING_API_URL`   |
+| Backend                  | `MEROPPFOLGING_BACKEND_HOST` |
 | Client ID for OBO        | `MEROPPFOLGING_CLIENT_ID` |
 | Lenke ved sen oppfølging | `SSPS_URL`                |
 | Lenke ved kartlegging    | `KARTLEGGING_URL`         |

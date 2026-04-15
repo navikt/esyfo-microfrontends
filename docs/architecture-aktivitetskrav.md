@@ -28,7 +28,7 @@ flowchart LR
 
 | Del                      | Verdi                      |
 | ------------------------ | -------------------------- |
-| Backend                  | `AKTIVITETSKRAV_API_URL`   |
+| Backend                  | `AKTIVITETSKRAV_BACKEND_HOST` |
 | Client ID for OBO        | `AKTIVITETSKRAV_CLIENT_ID` |
 | Mål for lenken i panelet | `AKTIVITETSKRAV_URL`       |
 | Manifest-id              | `syfo-aktivitetskrav`      |
