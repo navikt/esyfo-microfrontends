@@ -5,7 +5,6 @@ export default defineConfig({
     projects: [
       "packages/shared",
       "microfrontends/dialogmote",
-      "microfrontends/motebehov",
       "microfrontends/aktivitetskrav",
       "microfrontends/meroppfolging",
     ],

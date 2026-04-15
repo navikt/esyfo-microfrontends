@@ -121,12 +121,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shared
 
-  microfrontends/motebehov:
-    dependencies:
-      '@esyfo/shared':
-        specifier: workspace:*
-        version: link:../../packages/shared
-
   packages/shared: {}
 
 packages:

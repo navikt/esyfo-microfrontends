@@ -9,7 +9,7 @@ const motebehov = object({
 
 export const motebehovStatusSchema = object({
   visMotebehov: boolean(),
-  skjemaType: skjemaType,
+  skjemaType,
   motebehov: motebehov.nullable(),
 });
 
