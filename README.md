@@ -32,17 +32,17 @@ flowchart LR
 
 ## Mikrofronter i repoet
 
-| Mikrofrontend                                         | Manifest-id           | Backend                         | Appnavn                      |
-| ----------------------------------------------------- | --------------------- | ------------------------------- | ---------------------------- |
-| [aktivitetskrav](docs/architecture-aktivitetskrav.md) | `syfo-aktivitetskrav` | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
-| [dialogmøte](docs/architecture-dialogmote.md)         | `syfo-dialog`         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
-| [meroppfølging](docs/architecture-meroppfolging.md)   | `syfo-meroppfolging`  | `meroppfolging-backend`         | meroppfolging-microfrontend  |
+| Mikrofrontend                                         | Backend                         | Appnavn                      |
+| ----------------------------------------------------- | ------------------------------- | ---------------------------- |
+| [aktivitetskrav](docs/architecture-aktivitetskrav.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
+| [dialogmøte](docs/architecture-dialogmote.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
+| [meroppfølging](docs/architecture-meroppfolging.md)   | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
 ## Les mer
 
 - [Lokal utvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
-- [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md)
+- [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md) – inkluderer manifest-id-er
 - [Integrasjon i Min side](docs/min-side-integration.md)
 - [Arkitektur for dialogmøte](docs/architecture-dialogmote.md)
 - [Arkitektur for aktivitetskrav](docs/architecture-aktivitetskrav.md)
