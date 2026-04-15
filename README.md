@@ -13,8 +13,6 @@ Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. 
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
-[🛠️ GitHub Actions](https://github.com/navikt/esyfo-microfrontends/actions)
-
 [🧩 TMS (Team Min Side)-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
 ## Formålet med repoet
