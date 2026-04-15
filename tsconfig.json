@@ -3,7 +3,6 @@
   "references": [
     { "path": "microfrontends/dialogmote" },
     { "path": "microfrontends/aktivitetskrav" },
-    { "path": "microfrontends/motebehov" },
     { "path": "packages/shared" }
   ]
 }

@@ -1,4 +1,4 @@
-import type { MotebehovStatusDto } from "@schema/motebehovSchema.ts";
+import type { MotebehovStatusDto } from "@schema/motebehovSchema";
 
 export const shouldShowMotebehovPanel = (
   motebehov: MotebehovStatusDto,

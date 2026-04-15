@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { resolvePanel } from "./panelResolver";
+import { resolveMotebehovPanel } from "./motebehovPanelResolver";
 
 const expectedHref = "http://localhost:3000/syk/dialogmoter/sykmeldt";
 
-describe("resolvePanel", () => {
+describe("resolveMotebehovPanel", () => {
   it("shows panel asking user if they need a dialogmøte", () => {
-    expect(resolvePanel(expectedHref)).toEqual({
+    expect(resolveMotebehovPanel(expectedHref)).toEqual({
       headingText: "Dialogmøte med Nav",
       bodyText: "Trenger du et dialogmøte?",
       href: `${expectedHref}/motebehov/svar`,
@@ -20,7 +20,7 @@ describe("resolvePanel", () => {
   });
 
   it("links to the møtebehov answer page", () => {
-    expect(resolvePanel(expectedHref).href).toBe(
+    expect(resolveMotebehovPanel(expectedHref).href).toBe(
       `${expectedHref}/motebehov/svar`,
     );
   });
