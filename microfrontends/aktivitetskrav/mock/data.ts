@@ -29,9 +29,9 @@ const avventVurdering: AktivitetskravVurdering = {
 
 const forhaandsvarselVurdering: AktivitetskravVurdering = {
   status: "FORHANDSVARSEL",
-  sistVurdert: addDaysToDate(new Date(), -5).toISOString(),
+  sistVurdert: addDaysToDate(new Date(), -5).toISOString().slice(0, 19),
   journalpostId: "123",
-  fristDato: addDaysToDate(new Date(), 14).toISOString(),
+  fristDato: addDaysToDate(new Date(), 14).toISOString().slice(0, 10),
 };
 
 export const mockData = {

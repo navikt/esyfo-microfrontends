@@ -32,6 +32,10 @@ describe("dateUtils", () => {
       expect(result).toMatch(/^\d{2}\.\d{2}\.\d{4}$/);
       expect(result).toContain("2024");
     });
+
+    it("formats a date-only string without shifting the day", () => {
+      expect(getShortDateFormat("2024-07-01")).toBe("01.07.2024");
+    });
   });
 
   describe("addDaysToDate", () => {
