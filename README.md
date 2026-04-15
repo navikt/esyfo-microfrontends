@@ -42,7 +42,7 @@ flowchart LR
 
 - [Lokal utvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
-- [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md) – inkluderer manifest-id-er
+- [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md)
 - [Integrasjon i Min side](docs/min-side-integration.md)
 - [Aktivitetskravarkitektur](docs/aktivitetskravarkitektur.md)
 - [Dialogmøtearkitektur](docs/dialogmotearkitektur.md)
