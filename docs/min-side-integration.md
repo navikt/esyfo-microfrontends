@@ -54,29 +54,23 @@ Lenkene i panelene peker videre til vanlige Nav-sider. Mikrofrontenden har ansva
 
 ## Feilsøking: er mikrofrontenden faktisk oppe?
 
-Hvis du vil verifisere fra egen maskin at en deployet mikrofrontend kjører i Kubernetes og svarer på health-endepunktene, kan du sjekke logger, starte `port-forward` og kalle endepunktene direkte.
+Start med logger i GCP/Grafana. I praksis er det som regel nok med to hovedsjekker.
 
-Sjekk først at `kubectl` peker mot riktig cluster og context. Bytt også ut appnavn og lokal port ved behov. Her brukes `aktivitetskrav-microfrontend` og `8080` som eksempel:
+### Mikrofrontenden lastes ikke i det hele tatt
 
-1. Se logger i ett terminalvindu hvis du vil følge oppstart og kall fortløpende:
+Når bare et grått panel er synlig, er det ofte best å starte i loggene til Min side, siden det er Min side som prøver å hente SSR-innholdet fra mikrofrontenden.
 
-```bash
-kubectl -n team-esyfo logs -l app=aktivitetskrav-microfrontend --tail=200 -f
-```
+📙 [Team Min side app logs i Grafana](https://grafana.nav.cloud.nais.io/d/d0c65ea3-1f01-4d11-b5dd-d4d3fb874c9f/team-min-side-app-logs?orgId=1&from=now-1h&to=now&timezone=browser&var-cluster=PD969E40991D5C4A8&var-app_name=$__all&var-include_status_code=$__all&var-detection_level=error)
 
-2. Start `port-forward` i et eget terminalvindu, og la kommandoen stå og kjøre:
+Hvis mikrofrontenden ikke lastes, er det ofte her du først ser feil knyttet til manifest, tilgjengelighet, kall mot SSR-appen eller andre integrasjonsfeil mellom Min side og mikrofrontenden.
 
-```bash
-kubectl -n team-esyfo port-forward svc/aktivitetskrav-microfrontend 8080:80
-```
+2. Appen lastes, men fallback vises
 
-3. Kall health-endepunktene fra et tredje terminalvindu, eller fra det første etter at du er ferdig med å følge logger:
+Da har Min side nådd mikrofrontenden, men selve appen har feilet under rendering eller datainnhenting. Start med loggene til mikrofrontenden, og sjekk deretter backend-loggene hvis det ser ut som problemet ligger i et downstream-kall.
 
-```bash
-curl -i http://localhost:8080/api/internal/isAlive
-curl -i http://localhost:8080/api/internal/isReady
-```
+Et nyttig spor her er schema-validering. Når backend-respons ikke matcher forventet schema, logges dette med `validationErrors` i Grafana. Se derfor etter logger som viser:
 
-- `logs` gjør det enkelt å se om appen starter og håndterer kall som forventet.
-- `port-forward` gjør den deployede appen tilgjengelig lokalt uten å gå via Min side.
-- `isAlive` og `isReady` bekrefter at containeren kjører og er klar til å ta trafikk.
+- `Invalid <appnavn> response`
+- `validationErrors`
+
+Hvis mikrofrontend-loggene ser riktige ut, men data fortsatt ikke stemmer, bør du også sjekke loggene til den aktuelle backend-tjenesten.
