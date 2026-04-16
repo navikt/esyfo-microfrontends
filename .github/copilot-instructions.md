@@ -1,6 +1,6 @@
 # esyfo-microfrontends
 
-Astro 5 SSR monorepo that consolidates three separate microfrontends and a shared proxy backend into one application. Replaces `aktivitetskrav-mikrofrontend`, `dialogmote-mikrofrontend`, `meroppfolging-mikrofrontend`, and `esyfo-proxy`.
+Astro 5 SSR monorepo that consolidates three separate microfrontends and a shared proxy backend into one application. Replaces `aktivitetskrav-mikrofrontend`, `dialogmote-mikrofrontend`, `meroppfolging-mikrofrontend`.
 
 ## Team
 - **Team**: team-esyfo, NAV IT
@@ -68,8 +68,8 @@ Each workspace is a self-contained Astro SSR app with its own `Dockerfile`, `nai
 - React components used as client islands via `client:only="react"` when interactivity is needed
 - React 18 shared via import maps from NAV CDN (`importmap.json`) — not bundled
 
-### Token Exchange (replaces esyfo-proxy)
-Each Astro workspace handles its own token exchange server-side, eliminating the need for the separate `esyfo-proxy` Express app:
+### Token Exchange
+Each Astro workspace handles its own token exchange server-side:
 
 1. Middleware validates incoming TokenX token → stores in `Astro.locals.token`
 2. Page frontmatter calls `requestOboToken(token, clientId)` via `@navikt/oasis`
