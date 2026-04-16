@@ -1,7 +1,7 @@
 import type { AktivitetskravVurdering } from "@schema/vurderingSchema";
 
-const sistVurdert = "2024-01-15T00:00:00.000Z";
-const defaultFristDato = "2024-07-01T00:00:00.000Z";
+const sistVurdert = new Date("2024-01-15T00:00:00.000Z");
+const defaultFristDato = new Date("2024-07-01T00:00:00.000Z");
 
 export const createNyVurdering = (
   overrides?: Partial<Extract<AktivitetskravVurdering, { status: "NY" }>>,

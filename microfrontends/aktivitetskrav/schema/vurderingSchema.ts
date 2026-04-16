@@ -1,13 +1,4 @@
-import { iso, literal, object, string, union, z } from "zod";
-
-const localDateTime = z
-  .string()
-  .regex(
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?$/,
-    "Invalid ISO datetime",
-  );
-const apiDateTime = z.union([iso.datetime(), localDateTime]);
-const apiDate = z.union([iso.date(), apiDateTime]);
+import { literal, object, string, union, z } from "zod";
 
 const unntakArsaker = z.union([
   literal("MEDISINSKE_GRUNNER"),
@@ -25,12 +16,12 @@ export const vurderingSchema = union([
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),
-    sistVurdert: apiDateTime,
+    sistVurdert: z.coerce.date(),
   }),
   object({
     status: z.literal("OPPFYLT"),
     arsaker: z.array(oppfyltArsaker),
-    sistVurdert: apiDateTime,
+    sistVurdert: z.coerce.date(),
   }),
   object({
     status: z.literal("NY"),
@@ -40,21 +31,21 @@ export const vurderingSchema = union([
   }),
   object({
     status: z.literal("AVVENT"),
-    sistVurdert: apiDateTime,
+    sistVurdert: z.coerce.date(),
   }),
   object({
     status: z.literal("FORHANDSVARSEL"),
     journalpostId: string().optional(),
-    sistVurdert: apiDateTime,
-    fristDato: apiDate,
+    sistVurdert: z.coerce.date(),
+    fristDato: z.coerce.date(),
   }),
   object({
     status: z.literal("IKKE_OPPFYLT"),
-    sistVurdert: apiDateTime,
+    sistVurdert: z.coerce.date(),
   }),
   object({
     status: z.literal("IKKE_AKTUELL"),
-    sistVurdert: apiDateTime,
+    sistVurdert: z.coerce.date(),
   }),
 ]);
 

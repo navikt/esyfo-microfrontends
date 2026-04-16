@@ -12,17 +12,20 @@ describe("vurderingSchema", () => {
 
     expect(result).toMatchObject({
       status: "FORHANDSVARSEL",
-      sistVurdert: "2026-04-15T13:33:40",
-      fristDato: "2026-04-29",
+      sistVurdert: new Date("2026-04-15T13:33:40"),
+      fristDato: new Date("2026-04-29"),
     });
   });
 
-  it("rejects date-only sistVurdert", () => {
-    expect(() =>
-      vurderingSchema.parse({
-        status: "IKKE_AKTUELL",
-        sistVurdert: "2026-04-15",
-      }),
-    ).toThrow("Invalid ISO datetime");
+  it("accepts date-only sistVurdert", () => {
+    const result = vurderingSchema.parse({
+      status: "IKKE_AKTUELL",
+      sistVurdert: "2026-04-15",
+    });
+
+    expect(result).toMatchObject({
+      status: "IKKE_AKTUELL",
+      sistVurdert: new Date("2026-04-15"),
+    });
   });
 });

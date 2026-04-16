@@ -77,9 +77,7 @@ const resolveForhandsvarsel = (
     tag: {
       text: formatSvarfrist(vurdering.fristDato),
       variant:
-        now > new Date(vurdering.fristDato)
-          ? "error-moderate"
-          : "warning-moderate",
+        now > vurdering.fristDato ? "error-moderate" : "warning-moderate",
     },
   });
 };

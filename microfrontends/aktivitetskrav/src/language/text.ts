@@ -39,8 +39,8 @@ export const getUnntakBodyText = (arsak?: UnntakArsaker): string =>
 export const getOppfyltBodyText = (arsak?: OppfyltArsaker): string =>
   arsak ? oppfyltBodyTextByArsak[arsak] : BodyDefaultContent.oppfylt;
 
-export const formatVurderingsDato = (date: string): string =>
+export const formatVurderingsDato = (date: Date): string =>
   `Dato for vurdering: ${getShortDateFormat(date)}`;
 
-export const formatSvarfrist = (date: string): string =>
+export const formatSvarfrist = (date: Date): string =>
   `Svarfrist: ${getShortDateFormat(date)}`;

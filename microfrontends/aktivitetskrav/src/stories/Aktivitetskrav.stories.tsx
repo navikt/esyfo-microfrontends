@@ -82,7 +82,7 @@ export const OppfyltTiltak: Story = {
 export const ForhandsvarselForFrist: Story = {
   name: "Forhåndsvarsel — før frist",
   args: resolveStoryArgs(
-    createForhandsvarsel({ fristDato: "2024-07-01T00:00:00.000Z" }),
+    createForhandsvarsel({ fristDato: new Date("2024-07-01T00:00:00.000Z") }),
     href,
     now,
   ),
@@ -100,7 +100,7 @@ export const ForhandsvarselUtenJournalpost: Story = {
 export const ForhandsvarselEtterFrist: Story = {
   name: "Forhåndsvarsel — etter frist",
   args: resolveStoryArgs(
-    createForhandsvarsel({ fristDato: "2024-05-01T00:00:00.000Z" }),
+    createForhandsvarsel({ fristDato: new Date("2024-05-01T00:00:00.000Z") }),
     href,
     now,
   ),
