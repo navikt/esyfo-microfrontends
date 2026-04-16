@@ -77,7 +77,7 @@ const resolveKartleggingNoResponse = (href: string): MainPanelProps =>
   });
 
 const resolveKartleggingSubmitted = (
-  kartleggingStatus: KartleggingStatusDto,
+  responseDateTime: Date,
   href: string,
 ): MainPanelProps =>
   withPanelId({
@@ -87,7 +87,7 @@ const resolveKartleggingSubmitted = (
     alertStyle: "success",
     tag: {
       variant: "success-moderate",
-      text: TagContent.responded(kartleggingStatus.responseDateTime!),
+      text: TagContent.responded(responseDateTime),
     },
   });
 
@@ -121,7 +121,10 @@ const resolveKartlegging = (
       if (!kartleggingStatus.responseDateTime) {
         return resolveKartleggingNoResponse(href);
       }
-      return resolveKartleggingSubmitted(kartleggingStatus, href);
+      return resolveKartleggingSubmitted(
+        kartleggingStatus.responseDateTime,
+        href,
+      );
   }
 };
 
