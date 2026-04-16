@@ -36,7 +36,7 @@ on:
         required: true
         type: string
       enable_prod:
-        description: Enables prod manifest update and deploy when prod inputs are also set
+        description: Enables prod manifest update and deploy
         required: false
         default: false
         type: boolean
@@ -137,7 +137,7 @@ jobs:
 
   update-manifest-prod:
     name: Update manifest prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod
     permissions:
       contents: "read"
       id-token: "write"
@@ -156,7 +156,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod && inputs.prod_manifest_url != '' && inputs.prod_resource != ''
+    if: github.ref == 'refs/heads/main' && inputs.enable_prod
     runs-on: "ubuntu-latest"
     permissions:
       contents: "read"
