@@ -87,7 +87,7 @@ const resolveKartleggingSubmitted = (
     alertStyle: "success",
     tag: {
       variant: "success-moderate",
-      text: TagContent.responded(kartleggingStatus.responseDateTime ?? ""),
+      text: TagContent.responded(kartleggingStatus.responseDateTime!),
     },
   });
 

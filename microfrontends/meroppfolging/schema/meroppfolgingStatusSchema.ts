@@ -6,14 +6,14 @@ const senoppfolgingStatusSchema = z.object({
     z.literal("TRENGER_OPPFOLGING"),
     z.literal("TRENGER_IKKE_OPPFOLGING"),
   ]),
-  responseDateTime: z.string().nullish(),
+  responseDateTime: z.coerce.date().nullish(),
   hasAccessToSenOppfolging: z.boolean(),
-  maxDate: z.string().nullish(),
+  maxDate: z.coerce.date().nullish(),
 });
 
 const kartleggingStatusSchema = z.object({
   responseStatus: z.union([z.literal("NO_RESPONSE"), z.literal("SUBMITTED")]),
-  responseDateTime: z.string().nullish(),
+  responseDateTime: z.coerce.date().nullish(),
   hasAccessToKartlegging: z.boolean(),
 });
 

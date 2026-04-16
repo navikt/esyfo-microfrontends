@@ -97,7 +97,7 @@ describe("resolvePanel", () => {
   it("returns no panel for sen oppfølging when oppfølging response is older than one week", () => {
     const panel = resolvePanel(
       createSenOppfolgingTrengerOppfolging({
-        responseDateTime: "2024-06-01T00:00:00.000Z",
+        responseDateTime: new Date("2024-06-01T00:00:00.000Z"),
       }),
       sspsUrl,
       kartleggingUrl,
@@ -127,7 +127,7 @@ describe("resolvePanel", () => {
   it("returns no panel for sen oppfølging when no-oppfølging response is older than one week", () => {
     const panel = resolvePanel(
       createSenOppfolgingTrengerIkkeOppfolging({
-        responseDateTime: "2024-06-01T00:00:00.000Z",
+        responseDateTime: new Date("2024-06-01T00:00:00.000Z"),
       }),
       sspsUrl,
       kartleggingUrl,

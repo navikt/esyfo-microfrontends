@@ -1,4 +1,4 @@
-import { getShortDateFormat } from "@esyfo/shared/dateUtils";
+import { getLongDateFormat, getShortDateFormat } from "@esyfo/shared/dateUtils";
 
 export const HeadingContent = {
   senOppfolging: "Snart slutt på sykepengene",
@@ -6,9 +6,9 @@ export const HeadingContent = {
 } as const;
 
 export const BodyContent = {
-  senOppfolgingNoResponse: (maxDate: string | null | undefined) => {
+  senOppfolgingNoResponse: (maxDate: Date | null | undefined) => {
     const maxDateText = maxDate
-      ? `${maxDate} er din siste dag med sykepenger.`
+      ? `${getLongDateFormat(maxDate)} er din siste dag med sykepenger.`
       : "Det nærmer seg siste dag du kan motta sykepenger.";
 
     return `${maxDateText} Vi ber deg vurdere situasjonen din.`;
@@ -24,5 +24,5 @@ export const BodyContent = {
 
 export const TagContent = {
   noResponse: "Du har ikke svart",
-  responded: (date: string) => `Du svarte den ${getShortDateFormat(date)}`,
+  responded: (date: Date) => `Du svarte den ${getShortDateFormat(date)}`,
 } as const;
