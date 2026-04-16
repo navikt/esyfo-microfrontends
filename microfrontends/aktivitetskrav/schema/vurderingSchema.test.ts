@@ -17,12 +17,15 @@ describe("vurderingSchema", () => {
     });
   });
 
-  it("rejects date-only sistVurdert", () => {
-    expect(() =>
-      vurderingSchema.parse({
-        status: "IKKE_AKTUELL",
-        sistVurdert: "2026-04-15",
-      }),
-    ).toThrow("Invalid ISO datetime");
+  it("accepts datetime without timezone suffix (Kotlin LocalDateTime)", () => {
+    const result = vurderingSchema.parse({
+      status: "IKKE_AKTUELL",
+      sistVurdert: "2026-04-15T00:00:00",
+    });
+
+    expect(result).toMatchObject({
+      status: "IKKE_AKTUELL",
+      sistVurdert: "2026-04-15T00:00:00",
+    });
   });
 });

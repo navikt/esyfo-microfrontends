@@ -26,3 +26,9 @@ export function addDaysToDate(date: Date, daysToAdd: number) {
   nyDato.setTime(newTime);
   return nyDato;
 }
+
+export const toLocalDateTime = (date: Date): string =>
+  date.toISOString().replace("Z", "");
+
+export const toLocalDate = (date: Date): string =>
+  date.toISOString().split("T")[0];

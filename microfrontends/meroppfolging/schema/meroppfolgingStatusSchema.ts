@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { iso, z } from "zod";
 
 const senoppfolgingStatusSchema = z.object({
   responseStatus: z.union([
@@ -6,14 +6,14 @@ const senoppfolgingStatusSchema = z.object({
     z.literal("TRENGER_OPPFOLGING"),
     z.literal("TRENGER_IKKE_OPPFOLGING"),
   ]),
-  responseDateTime: z.string().nullish(),
+  responseDateTime: iso.datetime({ local: true }).nullish(),
   hasAccessToSenOppfolging: z.boolean(),
-  maxDate: z.string().nullish(),
+  maxDate: iso.date().nullish(),
 });
 
 const kartleggingStatusSchema = z.object({
   responseStatus: z.union([z.literal("NO_RESPONSE"), z.literal("SUBMITTED")]),
-  responseDateTime: z.string().nullish(),
+  responseDateTime: iso.datetime({ local: true }).nullish(),
   hasAccessToKartlegging: z.boolean(),
 });
 

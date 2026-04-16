@@ -28,7 +28,7 @@ export const createSenOppfolgingNoResponse = (
     responseStatus: "NO_RESPONSE",
     responseDateTime: null,
     hasAccessToSenOppfolging: true,
-    maxDate: "31. desember 2024",
+    maxDate: "2024-12-31",
     ...overrides,
   },
 });

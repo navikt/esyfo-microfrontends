@@ -6,8 +6,7 @@ export const isRespondedWithinOneWeek = (
 ): responseDateTime is string => {
   if (!responseDateTime) return false;
 
-  const responseDate = new Date(responseDateTime);
   const oneWeekAgo = new Date(evaluatedAt.getTime() - ONE_WEEK_IN_MS);
 
-  return responseDate > oneWeekAgo;
+  return new Date(responseDateTime) > oneWeekAgo;
 };
