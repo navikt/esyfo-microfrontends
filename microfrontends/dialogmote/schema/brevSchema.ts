@@ -68,7 +68,7 @@ const documentComponent = object({
 });
 
 const svar = object({
-  svarTidspunkt: string(),
+  svarTidspunkt: z.coerce.date(),
   svarType: svarType,
   svarTekst: string().nullable(),
 });
@@ -76,13 +76,13 @@ const svar = object({
 export const brevSchema = object({
   uuid: string(),
   deltakerUuid: string(),
-  createdAt: string(),
+  createdAt: z.coerce.date(),
   brevType: brevType,
-  digitalt: boolean().nullish(),
-  lestDato: string().nullable(),
+  digitalt: boolean(),
+  lestDato: z.coerce.date().nullable(),
   fritekst: string(),
   sted: string(),
-  tid: string(),
+  tid: z.coerce.date(),
   videoLink: string().nullable(),
   document: array(documentComponent),
   virksomhetsnummer: string(),
