@@ -12,20 +12,20 @@ describe("vurderingSchema", () => {
 
     expect(result).toMatchObject({
       status: "FORHANDSVARSEL",
-      sistVurdert: new Date("2026-04-15T13:33:40"),
-      fristDato: new Date("2026-04-29"),
+      sistVurdert: "2026-04-15T13:33:40",
+      fristDato: "2026-04-29",
     });
   });
 
-  it("accepts date-only sistVurdert", () => {
+  it("accepts datetime without timezone suffix (Kotlin LocalDateTime)", () => {
     const result = vurderingSchema.parse({
       status: "IKKE_AKTUELL",
-      sistVurdert: "2026-04-15",
+      sistVurdert: "2026-04-15T00:00:00",
     });
 
     expect(result).toMatchObject({
       status: "IKKE_AKTUELL",
-      sistVurdert: new Date("2026-04-15"),
+      sistVurdert: "2026-04-15T00:00:00",
     });
   });
 });

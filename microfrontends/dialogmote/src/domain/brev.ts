@@ -3,7 +3,10 @@ import type { BrevDto } from "@schema/brevSchema.ts";
 export const getLatestBrev = (brevList: BrevDto[]): BrevDto | null =>
   brevList
     .filter((b) => b.brevType !== "REFERAT_ENDRET")
-    .sort((a, b) => b.createdAt.valueOf() - a.createdAt.valueOf())
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf(),
+    )
     .at(0) ?? null;
 
 export const shouldShowDialogmotePanel = (

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 const href = "/syk/dialogmoter/sykmeldt";
 
 const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
-  svarTidspunkt: new Date("2024-01-20T10:00:00.000Z"),
+  svarTidspunkt: "2024-01-20T10:00:00.000Z",
   svarType,
   svarTekst: null,
 });

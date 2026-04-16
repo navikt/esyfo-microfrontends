@@ -6,7 +6,7 @@ export const HeadingContent = {
 } as const;
 
 export const BodyContent = {
-  senOppfolgingNoResponse: (maxDate: Date | null | undefined) => {
+  senOppfolgingNoResponse: (maxDate: string | null | undefined) => {
     const maxDateText = maxDate
       ? `${getLongDateFormat(maxDate)} er din siste dag med sykepenger.`
       : "Det nærmer seg siste dag du kan motta sykepenger.";
@@ -24,5 +24,5 @@ export const BodyContent = {
 
 export const TagContent = {
   noResponse: "Du har ikke svart",
-  responded: (date: Date) => `Du svarte den ${getShortDateFormat(date)}`,
+  responded: (date: string) => `Du svarte den ${getShortDateFormat(date)}`,
 } as const;

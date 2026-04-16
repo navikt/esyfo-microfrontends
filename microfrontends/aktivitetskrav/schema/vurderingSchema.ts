@@ -1,5 +1,8 @@
 import { literal, object, string, union, z } from "zod";
 
+const localDateTime = z.string().datetime({ local: true });
+const localDate = z.string().date();
+
 const unntakArsaker = z.union([
   literal("MEDISINSKE_GRUNNER"),
   literal("TILRETTELEGGING_IKKE_MULIG"),
@@ -16,12 +19,12 @@ export const vurderingSchema = union([
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),
-    sistVurdert: z.coerce.date(),
+    sistVurdert: localDateTime,
   }),
   object({
     status: z.literal("OPPFYLT"),
     arsaker: z.array(oppfyltArsaker),
-    sistVurdert: z.coerce.date(),
+    sistVurdert: localDateTime,
   }),
   object({
     status: z.literal("NY"),
@@ -31,21 +34,21 @@ export const vurderingSchema = union([
   }),
   object({
     status: z.literal("AVVENT"),
-    sistVurdert: z.coerce.date(),
+    sistVurdert: localDateTime,
   }),
   object({
     status: z.literal("FORHANDSVARSEL"),
     journalpostId: string().optional(),
-    sistVurdert: z.coerce.date(),
-    fristDato: z.coerce.date(),
+    sistVurdert: localDateTime,
+    fristDato: localDate,
   }),
   object({
     status: z.literal("IKKE_OPPFYLT"),
-    sistVurdert: z.coerce.date(),
+    sistVurdert: localDateTime,
   }),
   object({
     status: z.literal("IKKE_AKTUELL"),
-    sistVurdert: z.coerce.date(),
+    sistVurdert: localDateTime,
   }),
 ]);
 

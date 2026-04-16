@@ -7,7 +7,7 @@ const senOppfolging = {
     senOppfolgingStatus: {
       responseStatus: "TRENGER_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: new Date(),
+      responseDateTime: new Date().toISOString(),
       maxDate: null,
     },
   },
@@ -16,7 +16,7 @@ const senOppfolging = {
     senOppfolgingStatus: {
       responseStatus: "TRENGER_IKKE_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: new Date(),
+      responseDateTime: new Date().toISOString(),
       maxDate: null,
     },
   },
@@ -26,7 +26,7 @@ const senOppfolging = {
       responseStatus: "NO_RESPONSE",
       hasAccessToSenOppfolging: true,
       responseDateTime: null,
-      maxDate: new Date("2024-12-31"),
+      maxDate: "2024-12-31",
     },
   },
   outdated: {
@@ -34,7 +34,7 @@ const senOppfolging = {
     senOppfolgingStatus: {
       responseStatus: "TRENGER_IKKE_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: addDaysToDate(new Date(), -10),
+      responseDateTime: addDaysToDate(new Date(), -10).toISOString(),
       maxDate: null,
     },
   },
@@ -46,7 +46,7 @@ const kartlegging = {
     kartleggingStatus: {
       responseStatus: "SUBMITTED",
       hasAccessToKartlegging: true,
-      responseDateTime: new Date(),
+      responseDateTime: new Date().toISOString(),
     },
   },
   notResponded: {

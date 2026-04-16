@@ -1,19 +1,22 @@
 import { z } from "zod";
 
+const localDateTime = z.string().datetime({ local: true });
+const localDate = z.string().date();
+
 const senoppfolgingStatusSchema = z.object({
   responseStatus: z.union([
     z.literal("NO_RESPONSE"),
     z.literal("TRENGER_OPPFOLGING"),
     z.literal("TRENGER_IKKE_OPPFOLGING"),
   ]),
-  responseDateTime: z.coerce.date().nullish(),
+  responseDateTime: localDateTime.nullish(),
   hasAccessToSenOppfolging: z.boolean(),
-  maxDate: z.coerce.date().nullish(),
+  maxDate: localDate.nullish(),
 });
 
 const kartleggingStatusSchema = z.object({
   responseStatus: z.union([z.literal("NO_RESPONSE"), z.literal("SUBMITTED")]),
-  responseDateTime: z.coerce.date().nullish(),
+  responseDateTime: localDateTime.nullish(),
   hasAccessToKartlegging: z.boolean(),
 });
 

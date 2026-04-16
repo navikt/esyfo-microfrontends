@@ -28,7 +28,7 @@ export const createSenOppfolgingNoResponse = (
     responseStatus: "NO_RESPONSE",
     responseDateTime: null,
     hasAccessToSenOppfolging: true,
-    maxDate: new Date("2024-12-31"),
+    maxDate: "2024-12-31",
     ...overrides,
   },
 });
@@ -39,7 +39,7 @@ export const createSenOppfolgingTrengerOppfolging = (
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_OPPFOLGING",
-    responseDateTime: new Date("2024-06-14T10:00:00.000Z"),
+    responseDateTime: "2024-06-14T10:00:00.000Z",
     hasAccessToSenOppfolging: true,
     maxDate: null,
     ...overrides,
@@ -52,7 +52,7 @@ export const createSenOppfolgingTrengerIkkeOppfolging = (
   oppfolgingsType: "SEN_OPPFOLGING",
   senOppfolgingStatus: {
     responseStatus: "TRENGER_IKKE_OPPFOLGING",
-    responseDateTime: new Date("2024-06-14T10:00:00.000Z"),
+    responseDateTime: "2024-06-14T10:00:00.000Z",
     hasAccessToSenOppfolging: true,
     maxDate: null,
     ...overrides,
@@ -77,7 +77,7 @@ export const createKartleggingSubmitted = (
   oppfolgingsType: "KARTLEGGING",
   kartleggingStatus: {
     responseStatus: "SUBMITTED",
-    responseDateTime: new Date("2024-06-14T10:00:00.000Z"),
+    responseDateTime: "2024-06-14T10:00:00.000Z",
     hasAccessToKartlegging: true,
     ...overrides,
   },

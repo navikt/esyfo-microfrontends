@@ -15,7 +15,7 @@ const createDocumentComponent = (
 };
 
 const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -7);
+  const defaultDate = addDaysToDate(new Date(), -7).toISOString();
 
   return {
     uuid: "brev_uuid",
@@ -50,8 +50,8 @@ const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -67);
-  const defaultDate2 = addDaysToDate(new Date(), -77);
+  const defaultDate = addDaysToDate(new Date(), -67).toISOString();
+  const defaultDate2 = addDaysToDate(new Date(), -77).toISOString();
 
   return {
     ...createInnkallingsBrev(),
@@ -63,8 +63,8 @@ const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -87);
-  const defaultDate2 = addDaysToDate(new Date(), -97);
+  const defaultDate = addDaysToDate(new Date(), -87).toISOString();
+  const defaultDate2 = addDaysToDate(new Date(), -97).toISOString();
 
   return {
     ...createInnkallingsBrev(),
@@ -76,7 +76,7 @@ const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const innkallingsBrev = createInnkallingsBrev({
-  createdAt: addDaysToDate(new Date(), -3),
+  createdAt: addDaysToDate(new Date(), -3).toISOString(),
 });
 
 const motebehovVisible: MotebehovStatusDto = {

@@ -77,7 +77,7 @@ const resolveKartleggingNoResponse = (href: string): MainPanelProps =>
   });
 
 const resolveKartleggingSubmitted = (
-  responseDateTime: Date,
+  responseDateTime: string,
   href: string,
 ): MainPanelProps =>
   withPanelId({

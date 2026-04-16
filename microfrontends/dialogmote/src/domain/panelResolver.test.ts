@@ -6,7 +6,7 @@ import { createBrev } from "./test-utils/brev";
 
 describe("resolvePanel", () => {
   const createSvar = (svarType: SvarTypeDto): NonNullable<BrevDto["svar"]> => ({
-    svarTidspunkt: new Date("2024-01-20T10:00:00.000Z"),
+    svarTidspunkt: "2024-01-20T10:00:00.000Z",
     svarType,
     svarTekst: null,
   });
@@ -49,9 +49,7 @@ describe("resolvePanel", () => {
     const panel = resolvePanel(createBrev(), expectedHref);
 
     expectCommonPanelFields(panel);
-    expect(panel.bodyText).toBe(
-      getLongDateFormat(new Date("2024-02-01T10:00:00.000Z")),
-    );
+    expect(panel.bodyText).toBe(getLongDateFormat("2024-02-01T10:00:00.000Z"));
     expect(panel.tag).toEqual({
       text: "Du har ikke svart",
       variant: "warning-moderate",
@@ -90,7 +88,7 @@ describe("resolvePanel", () => {
   });
 
   it("shows meeting date when dialogmøte is rescheduled and user has accepted", () => {
-    const tid = new Date("2024-02-01T10:00:00.000Z");
+    const tid = "2024-02-01T10:00:00.000Z";
     const panel = resolvePanel(
       createBrev({
         brevType: "NYTT_TID_STED",
@@ -109,7 +107,7 @@ describe("resolvePanel", () => {
   });
 
   it("formats dialogmøte time from the invitation letter", () => {
-    const tid = new Date("2024-06-10T12:00:00.000Z");
+    const tid = "2024-06-10T12:00:00.000Z";
     const panel = resolvePanel(
       createBrev({
         tid,

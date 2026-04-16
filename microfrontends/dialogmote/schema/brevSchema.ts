@@ -10,6 +10,8 @@ import {
   z,
 } from "zod";
 
+const localDateTime = z.string().datetime({ local: true });
+
 const documentComponentType = union([
   literal("HEADER"),
   literal("HEADER_H1"),
@@ -68,7 +70,7 @@ const documentComponent = object({
 });
 
 const svar = object({
-  svarTidspunkt: z.coerce.date(),
+  svarTidspunkt: localDateTime,
   svarType: svarType,
   svarTekst: string().nullable(),
 });
@@ -76,13 +78,13 @@ const svar = object({
 export const brevSchema = object({
   uuid: string(),
   deltakerUuid: string(),
-  createdAt: z.coerce.date(),
+  createdAt: localDateTime,
   brevType: brevType,
   digitalt: boolean(),
-  lestDato: z.coerce.date().nullable(),
+  lestDato: localDateTime.nullable(),
   fritekst: string(),
   sted: string(),
-  tid: z.coerce.date(),
+  tid: localDateTime,
   videoLink: string().nullable(),
   document: array(documentComponent),
   virksomhetsnummer: string(),
