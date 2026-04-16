@@ -5,7 +5,7 @@ import { resolvePanel } from "../domain/panelResolver";
 import { createBrev } from "../domain/test-utils/brev";
 
 const meta = {
-  title: "Dialogmote",
+  title: "Dialogmøte",
   component: MainPanel,
 } satisfies Meta<typeof MainPanel>;
 

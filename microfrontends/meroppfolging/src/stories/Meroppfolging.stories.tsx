@@ -10,7 +10,7 @@ import {
 } from "../domain/test-utils/meroppfolgingStatus";
 
 const meta = {
-  title: "Meroppfolging",
+  title: "Meroppfølging",
   component: MainPanel,
 } satisfies Meta<typeof MainPanel>;
 
