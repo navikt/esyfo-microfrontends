@@ -23,14 +23,6 @@ jobs:
     uses: ./.github/workflows/deploy-microfrontend-reusable.yml
     with:
       microfrontend_name: "aktivitetskrav"
-      build_script: "build:aktivitetskrav-microfrontend"
-      dockerfile: "./microfrontends/aktivitetskrav/Dockerfile"
-      cdn_source: "./microfrontends/aktivitetskrav/dist/client/_astro"
       manifest_id: "syfo-aktivitetskrav"
-      application_name: "aktivitetskrav-microfrontend"
-      dev_manifest_url: "http://aktivitetskrav-microfrontend.team-esyfo"
-      dev_resource: "microfrontends/aktivitetskrav/nais/dev-gcp/nais.yaml"
       enable_prod: false
-      prod_manifest_url: "http://aktivitetskrav-microfrontend.team-esyfo"
-      prod_resource: "microfrontends/aktivitetskrav/nais/prod-gcp/nais.yaml"
     secrets: inherit

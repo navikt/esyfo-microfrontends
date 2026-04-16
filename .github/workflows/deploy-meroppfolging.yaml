@@ -23,14 +23,6 @@ jobs:
     uses: ./.github/workflows/deploy-microfrontend-reusable.yml
     with:
       microfrontend_name: "meroppfolging"
-      build_script: "build:meroppfolging-microfrontend"
-      dockerfile: "./microfrontends/meroppfolging/Dockerfile"
-      cdn_source: "./microfrontends/meroppfolging/dist/client/_astro"
       manifest_id: "syfo-meroppfolging"
-      application_name: "meroppfolging-microfrontend"
-      dev_manifest_url: "http://meroppfolging-microfrontend.team-esyfo"
-      dev_resource: "microfrontends/meroppfolging/nais/dev-gcp/nais.yaml"
       enable_prod: false
-      prod_manifest_url: "http://meroppfolging-microfrontend.team-esyfo"
-      prod_resource: "microfrontends/meroppfolging/nais/prod-gcp/nais.yaml"
     secrets: inherit
