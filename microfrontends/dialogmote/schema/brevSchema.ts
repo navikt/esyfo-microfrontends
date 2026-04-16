@@ -2,6 +2,7 @@ import { logger } from "@navikt/pino-logger";
 import {
   array,
   boolean,
+  iso,
   literal,
   object,
   preprocess,
@@ -9,8 +10,6 @@ import {
   union,
   z,
 } from "zod";
-
-const localDateTime = z.string().datetime({ local: true });
 
 const documentComponentType = union([
   literal("HEADER"),
@@ -70,7 +69,7 @@ const documentComponent = object({
 });
 
 const svar = object({
-  svarTidspunkt: localDateTime,
+  svarTidspunkt: iso.datetime({ local: true }),
   svarType: svarType,
   svarTekst: string().nullable(),
 });
@@ -78,13 +77,13 @@ const svar = object({
 export const brevSchema = object({
   uuid: string(),
   deltakerUuid: string(),
-  createdAt: localDateTime,
+  createdAt: iso.datetime({ local: true }),
   brevType: brevType,
   digitalt: boolean(),
-  lestDato: localDateTime.nullable(),
+  lestDato: iso.datetime({ local: true }).nullable(),
   fritekst: string(),
   sted: string(),
-  tid: localDateTime,
+  tid: iso.datetime({ local: true }),
   videoLink: string().nullable(),
   document: array(documentComponent),
   virksomhetsnummer: string(),

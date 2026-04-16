@@ -1,13 +1,16 @@
 import { addDaysToDate } from "@esyfo/shared/dateUtils";
 import type * as meroppfolgingStatusSchema from "@schema/meroppfolgingStatusSchema";
 
+const toLocalDateTime = (date: Date): string =>
+  date.toISOString().replace("Z", "");
+
 const senOppfolging = {
   needsHelp: {
     oppfolgingsType: "SEN_OPPFOLGING",
     senOppfolgingStatus: {
       responseStatus: "TRENGER_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: new Date().toISOString(),
+      responseDateTime: toLocalDateTime(new Date()),
       maxDate: null,
     },
   },
@@ -16,7 +19,7 @@ const senOppfolging = {
     senOppfolgingStatus: {
       responseStatus: "TRENGER_IKKE_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: new Date().toISOString(),
+      responseDateTime: toLocalDateTime(new Date()),
       maxDate: null,
     },
   },
@@ -34,7 +37,7 @@ const senOppfolging = {
     senOppfolgingStatus: {
       responseStatus: "TRENGER_IKKE_OPPFOLGING",
       hasAccessToSenOppfolging: true,
-      responseDateTime: addDaysToDate(new Date(), -10).toISOString(),
+      responseDateTime: toLocalDateTime(addDaysToDate(new Date(), -10)),
       maxDate: null,
     },
   },
@@ -46,7 +49,7 @@ const kartlegging = {
     kartleggingStatus: {
       responseStatus: "SUBMITTED",
       hasAccessToKartlegging: true,
-      responseDateTime: new Date().toISOString(),
+      responseDateTime: toLocalDateTime(new Date()),
     },
   },
   notResponded: {
