@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { resolveMotebehovPanel } from "../domain/motebehovPanelResolver";
 
 const meta = {
-  title: "Dialogmote/Motebehov",
+  title: "Møtebehov",
   component: MainPanel,
 } satisfies Meta<typeof MainPanel>;
 
