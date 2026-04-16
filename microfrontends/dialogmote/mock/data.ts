@@ -1,4 +1,4 @@
-import { addDaysToDate } from "@esyfo/shared/dateUtils";
+import { addDaysToDate, toLocalDateTime } from "@esyfo/shared/dateUtils";
 import type { BrevDocumentComponentDto, BrevDto } from "schema/brevSchema";
 import type { MotebehovStatusDto } from "schema/motebehovSchema";
 
@@ -15,7 +15,7 @@ const createDocumentComponent = (
 };
 
 const createInnkallingsBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -7).toISOString();
+  const defaultDate = toLocalDateTime(addDaysToDate(new Date(), -7));
 
   return {
     uuid: "brev_uuid",
@@ -50,8 +50,8 @@ const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -67).toISOString();
-  const defaultDate2 = addDaysToDate(new Date(), -77).toISOString();
+  const defaultDate = toLocalDateTime(addDaysToDate(new Date(), -67));
+  const defaultDate2 = toLocalDateTime(addDaysToDate(new Date(), -77));
 
   return {
     ...createInnkallingsBrev(),
@@ -63,8 +63,8 @@ const createReferatBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
-  const defaultDate = addDaysToDate(new Date(), -87).toISOString();
-  const defaultDate2 = addDaysToDate(new Date(), -97).toISOString();
+  const defaultDate = toLocalDateTime(addDaysToDate(new Date(), -87));
+  const defaultDate2 = toLocalDateTime(addDaysToDate(new Date(), -97));
 
   return {
     ...createInnkallingsBrev(),
@@ -76,7 +76,7 @@ const createReferatEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
 };
 
 const innkallingsBrev = createInnkallingsBrev({
-  createdAt: addDaysToDate(new Date(), -3).toISOString(),
+  createdAt: toLocalDateTime(addDaysToDate(new Date(), -3)),
 });
 
 const motebehovVisible: MotebehovStatusDto = {

@@ -1,8 +1,5 @@
-import { addDaysToDate } from "@esyfo/shared/dateUtils";
+import { addDaysToDate, toLocalDateTime } from "@esyfo/shared/dateUtils";
 import type * as meroppfolgingStatusSchema from "@schema/meroppfolgingStatusSchema";
-
-const toLocalDateTime = (date: Date): string =>
-  date.toISOString().replace("Z", "");
 
 const senOppfolging = {
   needsHelp: {
