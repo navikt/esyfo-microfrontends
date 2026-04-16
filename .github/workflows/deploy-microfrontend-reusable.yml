@@ -4,35 +4,11 @@ on:
   workflow_call:
     inputs:
       microfrontend_name:
-        description: Human-readable microfrontend name for job labels
-        required: true
-        type: string
-      build_script:
-        description: Root package.json build script for the microfrontend
-        required: true
-        type: string
-      dockerfile:
-        description: Path to the microfrontend Dockerfile
-        required: true
-        type: string
-      cdn_source:
-        description: Built client asset directory to upload
+        description: Base microfrontend name used to derive deploy configuration
         required: true
         type: string
       manifest_id:
         description: TMS microfrontend id
-        required: true
-        type: string
-      application_name:
-        description: Application name reused for CDN destination and manifest registration
-        required: true
-        type: string
-      dev_manifest_url:
-        description: Dev URL registered in the manifest
-        required: true
-        type: string
-      dev_resource:
-        description: NAIS resource used for dev deploy
         required: true
         type: string
       enable_prod:
@@ -40,16 +16,6 @@ on:
         required: false
         default: false
         type: boolean
-      prod_manifest_url:
-        description: Prod URL registered in the manifest
-        required: false
-        default: ""
-        type: string
-      prod_resource:
-        description: NAIS resource used for prod deploy
-        required: false
-        default: ""
-        type: string
     secrets:
       READER_TOKEN:
         required: true
@@ -81,21 +47,21 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Build application
-        run: "pnpm run ${{ inputs.build_script }}"
+        run: "pnpm run ${{ format('build:{0}-microfrontend', inputs.microfrontend_name) }}"
 
       - name: Upload to cdn
         uses: "nais/deploy/actions/cdn-upload/v2@437e4adfe270e3f1c98fd0eed7f86ecf0e0873db" # master
         with:
           team: "team-esyfo"
-          source: ${{ inputs.cdn_source }}
-          destination: ${{ inputs.application_name }}
+          source: ${{ format('./microfrontends/{0}/dist/client/_astro', inputs.microfrontend_name) }}
+          destination: ${{ format('{0}-microfrontend', inputs.microfrontend_name) }}
 
       - name: Build and push
         uses: "nais/docker-build-push@45d352fb62fb52ccb5ff6cba22c047fa02b35321" # v0
         id: docker-build-push
         with:
           team: "team-esyfo"
-          dockerfile: ${{ inputs.dockerfile }}
+          dockerfile: ${{ format('./microfrontends/{0}/Dockerfile', inputs.microfrontend_name) }}
           image_suffix: ${{ inputs.microfrontend_name }}
 
     outputs:
@@ -110,8 +76,8 @@ jobs:
     needs: build
     with:
       id: ${{ inputs.manifest_id }}
-      url: ${{ inputs.dev_manifest_url }}
-      appname: ${{ inputs.application_name }}
+      url: ${{ format('http://{0}-microfrontend.team-esyfo', inputs.microfrontend_name) }}
+      appname: ${{ format('{0}-microfrontend', inputs.microfrontend_name) }}
       namespace: "team-esyfo"
       cluster: "dev-gcp"
       commitmsg: ${{ github.event.head_commit.message || format('Manual deploy from {0} ({1})', github.ref_name, github.sha) }}
@@ -132,7 +98,7 @@ jobs:
         uses: "nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1" # v2
         env:
           CLUSTER: "dev-gcp"
-          RESOURCE: ${{ inputs.dev_resource }}
+          RESOURCE: ${{ format('microfrontends/{0}/nais/dev-gcp/nais.yaml', inputs.microfrontend_name) }}
           VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
 
   update-manifest-prod:
@@ -145,8 +111,8 @@ jobs:
     needs: build
     with:
       id: ${{ inputs.manifest_id }}
-      url: ${{ inputs.prod_manifest_url }}
-      appname: ${{ inputs.application_name }}
+      url: ${{ format('http://{0}-microfrontend.team-esyfo', inputs.microfrontend_name) }}
+      appname: ${{ format('{0}-microfrontend', inputs.microfrontend_name) }}
       namespace: "team-esyfo"
       cluster: "prod-gcp"
       commitmsg: ${{ github.event.head_commit.message || format('Manual deploy from {0} ({1})', github.ref_name, github.sha) }}
@@ -168,5 +134,5 @@ jobs:
         uses: "nais/deploy/actions/deploy@fa754451577294aae42872a69b888b3470478ec1" # v2
         env:
           CLUSTER: "prod-gcp"
-          RESOURCE: ${{ inputs.prod_resource }}
+          RESOURCE: ${{ format('microfrontends/{0}/nais/prod-gcp/nais.yaml', inputs.microfrontend_name) }}
           VAR: image=${{ needs.build.outputs.image }},version=${{ github.sha }}
