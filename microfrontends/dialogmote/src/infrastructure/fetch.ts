@@ -18,6 +18,7 @@ const dialogmoteApiUrl = new URL(
   "/api/v2/arbeidstaker/brev",
   ISDIALOGMOTE_BACKEND_HOST,
 ).toString();
+
 const motebehovApiUrl = new URL(
   "/syfomotebehov/api/v4/arbeidstaker/motebehov",
   SYFOMOTEBEHOV_BACKEND_HOST,
