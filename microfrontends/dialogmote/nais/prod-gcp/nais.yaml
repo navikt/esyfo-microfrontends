@@ -10,6 +10,9 @@ spec:
     autoInstrumentation:
       enabled: true
       runtime: nodejs
+  prometheus:
+    enabled: true
+    path: /api/internal/metrics
   tokenx:
     enabled: true
   image: {{ image }}
