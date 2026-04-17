@@ -1,10 +1,10 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: dialogmote-microfrontend # Change this to your application name
-  namespace: team-esyfo # Change this to your namespace
+  name: dialogmote-microfrontend
+  namespace: team-esyfo
   labels:
-    team: team-esyfo # Change this to your team name
+    team: team-esyfo
 spec:
   observability:
     autoInstrumentation:
@@ -39,7 +39,7 @@ spec:
     requests:
       cpu: "20m"
       memory: 128Mi
-  env: # Add your environment variables here
+  env:
     - name: ISDIALOGMOTE_BACKEND_HOST
       value: "http://isdialogmote.teamsykefravr"
     - name: ISDIALOGMOTE_CLIENT_ID
