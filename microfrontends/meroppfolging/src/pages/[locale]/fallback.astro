@@ -1,6 +1,9 @@
 ---
 import { isLocal } from "@esyfo/shared/environment";
 import { Heading } from "@navikt/ds-react";
+import { logger } from "@navikt/pino-logger";
+
+logger.warn({ microfrontend: "meroppfolging" }, "fallback-rendered");
 ---
 
 {isLocal && <meta charset="UTF-8" />}
