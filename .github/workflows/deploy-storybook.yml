@@ -3,6 +3,12 @@ name: Deploy Storybook to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".github/instructions/**"
+      - ".github/skills/**"
+      - "LICENSE"
   workflow_dispatch:
 
 concurrency:
