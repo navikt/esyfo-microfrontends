@@ -48,6 +48,7 @@ const documentComponentKey = union([
   literal("UNNTAK_ARBEIDSGIVERPERIODE"),
   literal("REISETILSKUDD"),
   literal("HJELPEMIDLER_TILRETTELEGGING"),
+  literal("EKSPERTBISTAND"),
   literal("MIDLERTIDIG_LONNSTILSKUDD"),
   literal("OKONOMISK_STOTTE"),
   literal("INGEN_RETTIGHETER"),
