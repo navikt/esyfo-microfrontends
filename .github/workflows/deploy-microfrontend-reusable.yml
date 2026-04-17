@@ -11,11 +11,6 @@ on:
         description: TMS microfrontend id
         required: true
         type: string
-      enable_prod:
-        description: Enables prod manifest update and deploy
-        required: false
-        default: false
-        type: boolean
     secrets:
       READER_TOKEN:
         required: true
@@ -105,7 +100,7 @@ jobs:
 
   update-manifest-prod:
     name: Update manifest prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: "read"
       id-token: "write"
@@ -124,7 +119,7 @@ jobs:
 
   deploy-prod:
     name: Deploy to prod
-    if: github.ref == 'refs/heads/main' && inputs.enable_prod
+    if: github.ref == 'refs/heads/main'
     runs-on: "ubuntu-latest"
     timeout-minutes: 10
     permissions:

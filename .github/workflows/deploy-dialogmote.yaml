@@ -24,5 +24,4 @@ jobs:
     with:
       microfrontend_name: "dialogmote"
       manifest_id: "syfo-dialog"
-      enable_prod: true
     secrets: inherit

@@ -24,5 +24,4 @@ jobs:
     with:
       microfrontend_name: "meroppfolging"
       manifest_id: "syfo-meroppfolging"
-      enable_prod: true
     secrets: inherit
