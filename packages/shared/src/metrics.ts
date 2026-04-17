@@ -8,7 +8,7 @@ const registry = new Registry();
 collectDefaultMetrics({ register: registry });
 
 const renderCounter = new Counter({
-  name: "microfrontend_renders_total",
+  name: "esyfo_microfrontends_renders_total",
   help: "Counts rendered microfrontends by render type",
   labelNames: ["type", "microfrontend"],
   registers: [registry],
