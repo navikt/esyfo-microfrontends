@@ -13,6 +13,10 @@ Astro SSR-monorepo (server side rendering) for eSyfo-mikrofronter på Min side. 
 
 [🎬 Storybook](https://navikt.github.io/esyfo-microfrontends/)
 
+[🚨 Grafana — Error summary](https://grafana.nav.cloud.nais.io/d/eeivq822edhj4c/esyfo3a-error-summary?orgId=1)
+
+[📊 Grafana — Funksjonelle metrikker](https://grafana.nav.cloud.nais.io/d/be6i7hziaaiv4f/funksjonelle-metrikker?orgId=1)
+
 [🧩 TMS (Team Min Side)-dokumentasjon for microfrontends](https://navikt.github.io/tms-dokumentasjon/microfrontend/)
 
 ## Formålet med repoet
