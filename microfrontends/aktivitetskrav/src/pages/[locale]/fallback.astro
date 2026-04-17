@@ -1,10 +1,10 @@
 ---
 import { isLocal } from "@esyfo/shared/environment";
-import { incrementMicrofrontendRender } from "@esyfo/shared/metrics";
+import { incrementRender } from "@esyfo/shared/metrics";
 import { Heading } from "@navikt/ds-react";
 import { logger } from "@navikt/pino-logger";
 
-incrementMicrofrontendRender("aktivitetskrav", "fallback");
+incrementRender("aktivitetskrav", "fallback");
 logger.warn({ microfrontend: "aktivitetskrav" }, "fallback-rendered");
 ---
 

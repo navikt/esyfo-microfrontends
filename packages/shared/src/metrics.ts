@@ -3,44 +3,32 @@ import { Counter, collectDefaultMetrics, Registry } from "prom-client";
 type RenderType = "success" | "fallback";
 type MicrofrontendName = "dialogmote" | "aktivitetskrav" | "meroppfolging";
 
-type MetricsState = {
-  registry: Registry;
-  microfrontendRenderCounter: Counter<"type" | "microfrontend">;
-};
+const registry = new Registry();
 
-const globalMetrics = globalThis as typeof globalThis & {
-  __esyfoMetrics__?: MetricsState;
-};
+collectDefaultMetrics({ register: registry });
 
-function createMetricsState(): MetricsState {
-  const registry = new Registry();
+const renderCounter = new Counter({
+  name: "microfrontend_renders_total",
+  help: "Counts rendered microfrontends by render type",
+  labelNames: ["type", "microfrontend"],
+  registers: [registry],
+});
 
-  collectDefaultMetrics({ register: registry });
+export const metricsRegistry = registry;
+export { renderCounter };
 
-  const microfrontendRenderCounter = new Counter({
-    name: "microfrontend_renders_total",
-    help: "Counts rendered microfrontends by render type",
-    labelNames: ["type", "microfrontend"],
-    registers: [registry],
-  });
-
-  return {
-    registry,
-    microfrontendRenderCounter,
-  };
-}
-
-const metricsState = globalMetrics.__esyfoMetrics__ ?? createMetricsState();
-
-globalMetrics.__esyfoMetrics__ = metricsState;
-
-export const metricsRegistry = metricsState.registry;
-export const microfrontendRenderCounter =
-  metricsState.microfrontendRenderCounter;
-
-export function incrementMicrofrontendRender(
+export function incrementRender(
   microfrontend: MicrofrontendName,
   type: RenderType,
 ) {
-  microfrontendRenderCounter.inc({ microfrontend, type });
+  renderCounter.inc({ microfrontend, type });
+}
+
+export async function handleMetricsRequest(): Promise<Response> {
+  return new Response(await metricsRegistry.metrics(), {
+    status: 200,
+    headers: {
+      "Content-Type": metricsRegistry.contentType,
+    },
+  });
 }
