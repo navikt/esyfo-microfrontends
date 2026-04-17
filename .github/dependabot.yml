@@ -9,8 +9,7 @@ registries:
 updates:
   - package-ecosystem: "npm"
     directory: "/"
-    registries:
-      - github-npm
+    registries: '*'
     schedule:
       interval: "weekly"
     cooldown:
