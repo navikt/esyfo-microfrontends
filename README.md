@@ -44,7 +44,7 @@ flowchart LR
 
 ## Les mer
 
-- [Lokal utvikling](docs/local-development.md)
+- [Lokalutvikling](docs/local-development.md)
 - [GitHub workflows](docs/github-workflows.md)
 - [Aktivering og deaktivering i esyfovarsel](docs/microfrontend-activation.md)
 - [Integrasjon i Min side](docs/min-side-integration.md)
