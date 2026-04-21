@@ -28,5 +28,4 @@ describe("vurderingSchema", () => {
       sistVurdert: "2026-04-15T00:00:00",
     });
   });
-
 });
