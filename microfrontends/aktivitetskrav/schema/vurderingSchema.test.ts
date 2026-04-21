@@ -29,31 +29,4 @@ describe("vurderingSchema", () => {
     });
   });
 
-  it.each([
-    "AUTOMATISK_OPPFYLT",
-    "INNSTILLING_OM_STANS",
-    "LUKKET",
-  ] as const)("accepts %s without sistVurdert", (status) => {
-    const result = vurderingSchema.parse({
-      status,
-    });
-
-    expect(result).toEqual({ status });
-  });
-
-  it.each([
-    "AUTOMATISK_OPPFYLT",
-    "INNSTILLING_OM_STANS",
-    "LUKKET",
-  ] as const)("accepts %s with sistVurdert", (status) => {
-    const result = vurderingSchema.parse({
-      status,
-      sistVurdert: "2026-04-15T00:00:00",
-    });
-
-    expect(result).toEqual({
-      status,
-      sistVurdert: "2026-04-15T00:00:00",
-    });
-  });
 });

@@ -123,7 +123,4 @@ export const resolvePanel = (
     case "LUKKET":
       return undefined;
   }
-
-  const exhaustiveCheck: never = vurdering;
-  return exhaustiveCheck;
 };

@@ -1,4 +1,4 @@
-import { iso, literal, object, string, union, z } from "zod";
+import { iso, literal, object, string, z } from "zod";
 
 const unntakArsaker = z.union([
   literal("MEDISINSKE_GRUNNER"),
@@ -12,7 +12,7 @@ const oppfyltArsaker = z.union([
   literal("TILTAK"),
 ]);
 
-export const vurderingSchema = union([
+export const vurderingSchema = z.discriminatedUnion("status", [
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),

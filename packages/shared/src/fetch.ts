@@ -1,5 +1,5 @@
 import { logger } from "@navikt/pino-logger";
-import type { ZodType } from "zod";
+import { type ZodType, z } from "zod";
 import { getAccessToken } from "./token";
 
 interface FetchConfig<T> {
@@ -66,16 +66,11 @@ export const fetchFromBackend = async <T>({
     return parsed.data;
   }
 
-  // Zod issues can include messages and inferred values from the payload.
-  // We only log path/code pairs here to avoid leaking PII from backend responses.
   logger.error(
     {
       api: apiName,
       url: apiUrl,
-      validationIssues: parsed.error.issues.map((issue) => ({
-        path: issue.path.join("."),
-        code: issue.code,
-      })),
+      validationErrors: z.flattenError(parsed.error),
     },
     `Invalid ${apiName} response`,
   );

@@ -202,26 +202,13 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("returns no panel when aktivitetsplikt is not fulfilled", () => {
-    const panel = resolvePanel(createIkkeOppfylt(), expectedHref, now);
-
-    expect(panel).toBeUndefined();
-  });
-
-  it("returns no panel when aktivitetsplikt is automatically fulfilled", () => {
-    const panel = resolvePanel(createAutomatiskOppfylt(), expectedHref, now);
-
-    expect(panel).toBeUndefined();
-  });
-
-  it("returns no panel when aktivitetsplikt is set to innstilling om stans", () => {
-    const panel = resolvePanel(createInnstillingOmStans(), expectedHref, now);
-
-    expect(panel).toBeUndefined();
-  });
-
-  it("returns no panel when aktivitetsplikt is lukket", () => {
-    const panel = resolvePanel(createLukket(), expectedHref, now);
+  it.each([
+    ["IKKE_OPPFYLT", createIkkeOppfylt],
+    ["AUTOMATISK_OPPFYLT", createAutomatiskOppfylt],
+    ["INNSTILLING_OM_STANS", createInnstillingOmStans],
+    ["LUKKET", createLukket],
+  ] as const)("returns no panel for %s", (_status, createVurdering) => {
+    const panel = resolvePanel(createVurdering(), expectedHref, now);
 
     expect(panel).toBeUndefined();
   });
