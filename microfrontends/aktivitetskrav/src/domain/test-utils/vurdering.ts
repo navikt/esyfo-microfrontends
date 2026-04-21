@@ -112,3 +112,31 @@ export const createIkkeOppfylt = (
   sistVurdert,
   ...overrides,
 });
+
+export const createAutomatiskOppfylt = (
+  overrides?: Partial<
+    Extract<AktivitetskravVurdering, { status: "AUTOMATISK_OPPFYLT" }>
+  >,
+): Extract<AktivitetskravVurdering, { status: "AUTOMATISK_OPPFYLT" }> => ({
+  status: "AUTOMATISK_OPPFYLT",
+  sistVurdert,
+  ...overrides,
+});
+
+export const createInnstillingOmStans = (
+  overrides?: Partial<
+    Extract<AktivitetskravVurdering, { status: "INNSTILLING_OM_STANS" }>
+  >,
+): Extract<AktivitetskravVurdering, { status: "INNSTILLING_OM_STANS" }> => ({
+  status: "INNSTILLING_OM_STANS",
+  sistVurdert,
+  ...overrides,
+});
+
+export const createLukket = (
+  overrides?: Partial<Extract<AktivitetskravVurdering, { status: "LUKKET" }>>,
+): Extract<AktivitetskravVurdering, { status: "LUKKET" }> => ({
+  status: "LUKKET",
+  sistVurdert,
+  ...overrides,
+});

@@ -47,6 +47,18 @@ export const vurderingSchema = union([
     status: z.literal("IKKE_AKTUELL"),
     sistVurdert: iso.datetime({ local: true }),
   }),
+  object({
+    status: z.literal("AUTOMATISK_OPPFYLT"),
+    sistVurdert: iso.datetime({ local: true }).optional(),
+  }),
+  object({
+    status: z.literal("INNSTILLING_OM_STANS"),
+    sistVurdert: iso.datetime({ local: true }).optional(),
+  }),
+  object({
+    status: z.literal("LUKKET"),
+    sistVurdert: iso.datetime({ local: true }).optional(),
+  }),
 ]);
 
 export type AktivitetskravVurdering = z.infer<typeof vurderingSchema>;
