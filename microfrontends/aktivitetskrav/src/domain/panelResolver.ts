@@ -118,6 +118,9 @@ export const resolvePanel = (
     case "IKKE_AKTUELL":
       return resolveIkkeAktuell(vurdering, href);
     case "IKKE_OPPFYLT":
+    case "AUTOMATISK_OPPFYLT":
+    case "INNSTILLING_OM_STANS":
+    case "LUKKET":
       return undefined;
   }
 };

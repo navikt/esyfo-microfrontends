@@ -16,7 +16,7 @@ describe("fetchFromBackend", () => {
   const fetchMock = vi.fn();
 
   beforeEach(() => {
-    vi.restoreAllMocks();
+    vi.clearAllMocks();
     mockState.getAccessToken.mockReset();
     mockState.getAccessToken.mockResolvedValue("test-token");
     fetchMock.mockReset();

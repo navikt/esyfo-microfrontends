@@ -2,10 +2,13 @@ import { formatSvarfrist, formatVurderingsDato } from "@src/language/text";
 import { describe, expect, it } from "vitest";
 import { resolvePanel } from "./panelResolver";
 import {
+  createAutomatiskOppfylt,
   createAvvent,
   createForhandsvarsel,
   createIkkeAktuell,
   createIkkeOppfylt,
+  createInnstillingOmStans,
+  createLukket,
   createNyVurdering,
   createNyVurderingStatus,
   createOppfyltFriskmeldt,
@@ -199,8 +202,13 @@ describe("resolvePanel", () => {
     });
   });
 
-  it("returns no panel when aktivitetsplikt is not fulfilled", () => {
-    const panel = resolvePanel(createIkkeOppfylt(), expectedHref, now);
+  it.each([
+    ["IKKE_OPPFYLT", createIkkeOppfylt],
+    ["AUTOMATISK_OPPFYLT", createAutomatiskOppfylt],
+    ["INNSTILLING_OM_STANS", createInnstillingOmStans],
+    ["LUKKET", createLukket],
+  ] as const)("returns no panel for %s", (_status, createVurdering) => {
+    const panel = resolvePanel(createVurdering(), expectedHref, now);
 
     expect(panel).toBeUndefined();
   });

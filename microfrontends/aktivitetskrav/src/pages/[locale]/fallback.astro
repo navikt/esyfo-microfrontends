@@ -1,7 +1,6 @@
 ---
 import { isLocal } from "@esyfo/shared/environment";
 import { incrementRender } from "@esyfo/shared/metrics";
-import { Heading } from "@navikt/ds-react";
 import { logger } from "@navikt/pino-logger";
 
 incrementRender("aktivitetskrav", "fallback");
@@ -9,10 +8,3 @@ logger.warn({ microfrontend: "aktivitetskrav" }, "fallback-rendered");
 ---
 
 {isLocal && <meta charset="UTF-8" />}
-<section class="aktivitetskrav-microfrontend">
-  <div>
-    <Heading size="medium" level="2">
-      Aktivitetskrav
-    </Heading>
-  </div>
-</section>
