@@ -1,6 +1,7 @@
 name: Story
 description: Brukerhistorie eller use case
 type: Story
+projects: ["navikt/157"]
 body:
   - type: textarea
     id: user-story
