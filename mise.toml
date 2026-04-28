@@ -22,32 +22,32 @@ description = "Run lint and formatter checks"
 depends = ["install"]
 run = "pnpm run check:fix"
 
-[tasks.dev-dialogmote]
+[tasks."dialogmote:dev"]
 description = "Run dev server for dialogmote"
 depends = ["install"]
 run = "pnpm run dev:dialogmote-microfrontend"
 
-[tasks.dev-aktivitetskrav]
+[tasks."aktivitetskrav:dev"]
 description = "Run dev server for aktivitetskrav"
 depends = ["install"]
 run = "pnpm run dev:aktivitetskrav-microfrontend"
 
-[tasks.dev-meroppfolging]
+[tasks."meroppfolging:dev"]
 description = "Run dev server for meroppfolging"
 depends = ["install"]
 run = "pnpm run dev:meroppfolging-microfrontend"
 
-[tasks.build-dialogmote]
+[tasks."dialogmote:build"]
 description = "Create production build for dialogmote"
 depends = ["install"]
 run = "pnpm run build:dialogmote-microfrontend"
 
-[tasks.build-aktivitetskrav]
+[tasks."aktivitetskrav:build"]
 description = "Create production build for aktivitetskrav"
 depends = ["install"]
 run = "pnpm run build:aktivitetskrav-microfrontend"
 
-[tasks.build-meroppfolging]
+[tasks."meroppfolging:build"]
 description = "Create production build for meroppfolging"
 depends = ["install"]
 run = "pnpm run build:meroppfolging-microfrontend"
@@ -68,12 +68,12 @@ run = ["pnpm run check",
 "pnpm run build-storybook"
 ]
 
-[tasks.storybook]
+[tasks."storybook:dev"]
 description = "Run Storybook dev server"
 depends = ["install"]
 run = "pnpm run storybook"
 
-[tasks.build-storybook]
+[tasks."storybook:build"]
 description = "Build Storybook static site"
 depends = ["install"]
 run = "pnpm run build-storybook"
