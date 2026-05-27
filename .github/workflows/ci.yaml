@@ -19,8 +19,6 @@ jobs:
   ci:
     name: Reusable CI
     uses: ./.github/workflows/ci-reusable.yml
-    secrets:
-      npm-auth-token: ${{ secrets.READER_TOKEN }}
 
   merge-gate:
     name: Merge gate

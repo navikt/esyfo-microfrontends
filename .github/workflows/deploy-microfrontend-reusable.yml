@@ -11,9 +11,6 @@ on:
         description: TMS microfrontend id
         required: true
         type: string
-    secrets:
-      READER_TOKEN:
-        required: true
 
 concurrency:
   group: deploy-${{ inputs.microfrontend_name }}-${{ github.ref_name }}
@@ -40,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: "pnpm install --frozen-lockfile"
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build application
         run: "pnpm run ${{ format('build:{0}-microfrontend', inputs.microfrontend_name) }}"
