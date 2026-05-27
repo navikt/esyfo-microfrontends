@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         run: "pnpm install --frozen-lockfile"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.READER_TOKEN }}
 
       - name: Build application
         run: "pnpm run ${{ format('build:{0}-microfrontend', inputs.microfrontend_name) }}"
