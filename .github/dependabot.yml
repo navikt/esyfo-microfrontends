@@ -57,8 +57,7 @@ updates:
     cooldown:
       default-days: 7
     open-pull-requests-limit: 10
-    # pnpm/action-setup v6 bundler pnpm 11 som er inkompatibelt med vår pnpm 10 lockfile.
-    # Fjern denne ignore-regelen når repoet migrerer til pnpm 11.
+    # Major upgrades of pnpm/action-setup must be coordinated with pnpm toolchain/config changes.
     ignore:
       - dependency-name: "pnpm/action-setup"
         update-types:
