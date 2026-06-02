@@ -12,4 +12,9 @@ allowBuilds:
   lefthook: false
 
 overrides:
+  # Aksel 8.11.0 caused SSR runtime errors in prod; keep this temporary lock
+  # until a newer Aksel version has been verified.
+  '@navikt/aksel-icons': 8.10.6
+  '@navikt/ds-css': 8.10.6
+  '@navikt/ds-react': 8.10.6
   yaml: 2.8.3

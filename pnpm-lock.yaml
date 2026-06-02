@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  '@navikt/aksel-icons': 8.10.6
+  '@navikt/ds-css': 8.10.6
+  '@navikt/ds-react': 8.10.6
   yaml: 2.8.3
 
 importers:
