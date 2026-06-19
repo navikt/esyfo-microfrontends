@@ -43,7 +43,7 @@ jobs:
         run: "pnpm run ${{ format('build:{0}-microfrontend', inputs.microfrontend_name) }}"
 
       - name: Upload to cdn
-        uses: "nais/deploy/actions/cdn-upload/v2@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb" # v2
+        uses: "nais/deploy/actions/cdn-upload/v2@5fdd91aaf69bb0d6dd5e5118cdacb639f487b93b" # v2
         with:
           team: "team-esyfo"
           source: ${{ format('./microfrontends/{0}/dist/client/_astro', inputs.microfrontend_name) }}
@@ -89,7 +89,7 @@ jobs:
     steps:
       - uses: "actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10" # v6.0.3
       - name: Deploy to dev
-        uses: "nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb" # v2
+        uses: "nais/deploy/actions/deploy@5fdd91aaf69bb0d6dd5e5118cdacb639f487b93b" # v2
         env:
           CLUSTER: "dev-gcp"
           RESOURCE: ${{ format('microfrontends/{0}/nais/dev-gcp/nais.yaml', inputs.microfrontend_name) }}
@@ -126,7 +126,7 @@ jobs:
     steps:
       - uses: "actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10" # v6.0.3
       - name: Deploy to prod
-        uses: "nais/deploy/actions/deploy@a7f8690f9b367fcbf5348a0a1e21d44f1aae50eb" # v2
+        uses: "nais/deploy/actions/deploy@5fdd91aaf69bb0d6dd5e5118cdacb639f487b93b" # v2
         env:
           CLUSTER: "prod-gcp"
           RESOURCE: ${{ format('microfrontends/{0}/nais/prod-gcp/nais.yaml', inputs.microfrontend_name) }}
