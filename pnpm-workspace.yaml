@@ -18,3 +18,4 @@ overrides:
   '@navikt/ds-css': 8.10.6
   '@navikt/ds-react': 8.10.6
   yaml: 2.8.3
+  esbuild: 0.28.01
