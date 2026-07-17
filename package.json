@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
-    "@biomejs/biome": "2.5.2",
+    "@biomejs/biome": "2.5.3",
     "@storybook/react": "10.4.6",
     "@storybook/react-vite": "10.4.6",
     "@types/node": "24.13.2",
