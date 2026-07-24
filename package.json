@@ -54,7 +54,7 @@
     "postcss": "8.5.18",
     "postcss-prefix-selector": "2.1.1",
     "storybook": "10.5.2",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "vite": "8.1.5",
     "vitest": "4.1.10"
   }
