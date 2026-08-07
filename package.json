@@ -27,7 +27,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@astrojs/node": "10.1.4",
+    "@astrojs/node": "11.0.2",
     "@astrojs/react": "5.0.7",
     "@navikt/aksel-icons": "8.16.1",
     "@navikt/ds-css": "8.16.1",
