@@ -75,10 +75,12 @@ describe("shouldShowDialogmotePanel", () => {
     { brevType: "REFERAT", expected: false },
   ] as const;
 
-  it.each(shouldShowCases)("returns $expected for $brevType", ({
-    brevType,
-    expected,
-  }) => {
-    expect(shouldShowDialogmotePanel(createBrev({ brevType }))).toBe(expected);
-  });
+  it.each(shouldShowCases)(
+    "returns $expected for $brevType",
+    ({ brevType, expected }) => {
+      expect(shouldShowDialogmotePanel(createBrev({ brevType }))).toBe(
+        expected,
+      );
+    },
+  );
 });
