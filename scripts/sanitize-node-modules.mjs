@@ -42,11 +42,17 @@ const missingGroups = Object.entries(matchesByGroup)
   .filter(([, matches]) => matches.size === 0)
   .map(([group]) => group);
 
-if (missingGroups.length > 0) {
+if (Object.values(matchesByGroup).every((matches) => matches.size === 0)) {
   throw new Error(
-    `Expected sanitize candidates for ${missingGroups.join(
+    `Expected sanitize candidates in ${rootDir}, but found none. Refusing silent no-op.`,
+  );
+}
+
+if (missingGroups.length > 0) {
+  console.warn(
+    `No sanitize candidates found for ${missingGroups.join(
       " and ",
-    )} in ${rootDir}, but found none. Refusing silent no-op.`,
+    )} in ${rootDir}. Continuing with remaining groups.`,
   );
 }
 
