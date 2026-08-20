@@ -3,6 +3,7 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+  injectWorkspacePackages: true
 
 overrides:
   '@navikt/aksel-icons': 8.10.6
@@ -103,18 +104,120 @@ importers:
 
   microfrontends/aktivitetskrav:
     dependencies:
+      '@navikt/aksel-icons':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-css':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-react':
+        specifier: 8.10.6
+        version: 8.10.6(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@navikt/oasis':
+        specifier: 4.1.4
+        version: 4.1.4
+      '@navikt/pino-logger':
+        specifier: 5.0.0
+        version: 5.0.0(pino@10.3.1)
+      pino:
+        specifier: 10.3.1
+        version: 10.3.1
+      prom-client:
+        specifier: 15.1.3
+        version: 15.1.3
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+    devDependencies:
       '@esyfo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
 
   microfrontends/dialogmote:
     dependencies:
+      '@navikt/aksel-icons':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-css':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-react':
+        specifier: 8.10.6
+        version: 8.10.6(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@navikt/oasis':
+        specifier: 4.1.4
+        version: 4.1.4
+      '@navikt/pino-logger':
+        specifier: 5.0.0
+        version: 5.0.0(pino@10.3.1)
+      pino:
+        specifier: 10.3.1
+        version: 10.3.1
+      prom-client:
+        specifier: 15.1.3
+        version: 15.1.3
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+    devDependencies:
       '@esyfo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
 
   microfrontends/meroppfolging:
     dependencies:
+      '@navikt/aksel-icons':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-css':
+        specifier: 8.10.6
+        version: 8.10.6
+      '@navikt/ds-react':
+        specifier: 8.10.6
+        version: 8.10.6(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@navikt/oasis':
+        specifier: 4.1.4
+        version: 4.1.4
+      '@navikt/pino-logger':
+        specifier: 5.0.0
+        version: 5.0.0(pino@10.3.1)
+      pino:
+        specifier: 10.3.1
+        version: 10.3.1
+      prom-client:
+        specifier: 15.1.3
+        version: 15.1.3
+      react:
+        specifier: 19.2.8
+        version: 19.2.8
+      react-dom:
+        specifier: 19.2.8
+        version: 19.2.8(react@19.2.8)
+      sharp:
+        specifier: 0.34.5
+        version: 0.34.5
+      zod:
+        specifier: 4.4.3
+        version: 4.4.3
+    devDependencies:
       '@esyfo/shared':
         specifier: workspace:*
         version: link:../../packages/shared
@@ -3886,8 +3989,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@img/colour@1.1.0':
-    optional: true
+  '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.34.5':
     optionalDependencies:
@@ -6307,7 +6409,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.34.5
       '@img/sharp-win32-ia32': 0.34.5
       '@img/sharp-win32-x64': 0.34.5
-    optional: true
 
   shiki@4.2.0:
     dependencies:

@@ -5,6 +5,7 @@ packages:
 saveExact: true
 minimumReleaseAge: 4320
 blockExoticSubdeps: true
+injectWorkspacePackages: true
 
 allowBuilds:
   esbuild: true
