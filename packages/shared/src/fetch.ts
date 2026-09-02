@@ -1,5 +1,5 @@
 import { logger } from "@navikt/pino-logger";
-import type { ZodType } from "zod";
+import type { ZodError, ZodType } from "zod";
 import type { BackendFetchDefinitionFromCatalog } from "./backendFetchCatalog";
 import { getAccessToken } from "./token";
 
@@ -27,6 +27,41 @@ const validUpstreamStatus = (status: number): number | undefined =>
   Number.isInteger(status) && status >= 100 && status <= 599
     ? status
     : undefined;
+
+type SafeExceptionType =
+  | "SyntaxError"
+  | "TypeError"
+  | "RangeError"
+  | "Error"
+  | "NonErrorThrown";
+
+const safeExceptionType = (error: unknown): SafeExceptionType => {
+  if (error instanceof SyntaxError) return "SyntaxError";
+  if (error instanceof TypeError) return "TypeError";
+  if (error instanceof RangeError) return "RangeError";
+  if (error instanceof Error) return "Error";
+  return "NonErrorThrown";
+};
+
+const safeValidationPath = (path: PropertyKey[]): string =>
+  path
+    .map((segment) => {
+      if (typeof segment === "number") return `[${segment}]`;
+      if (
+        typeof segment === "string" &&
+        /^[A-Za-z][A-Za-z0-9_]{0,63}$/.test(segment)
+      ) {
+        return segment;
+      }
+      return "*";
+    })
+    .join(".") || "$";
+
+const safeValidationErrors = (error: ZodError) =>
+  error.issues.slice(0, 20).map((issue) => ({
+    code: issue.code,
+    path: safeValidationPath(issue.path),
+  }));
 
 export const fetchFromBackend = async <T>({
   token,
@@ -60,12 +95,13 @@ export const fetchFromBackend = async <T>({
         Authorization: `Bearer ${accessToken}`,
       },
     });
-  } catch {
+  } catch (error) {
     logger.error(
       {
         event_type: backend.eventType,
         error_code: FETCH_ERROR_CODE.network,
         operation: backend.operation,
+        exception_type: safeExceptionType(error),
       },
       backend.message,
     );
@@ -91,12 +127,13 @@ export const fetchFromBackend = async <T>({
   let data: unknown;
   try {
     data = await response.json();
-  } catch {
+  } catch (error) {
     logger.error(
       {
         event_type: backend.eventType,
         error_code: FETCH_ERROR_CODE.invalidJson,
         operation: backend.operation,
+        exception_type: safeExceptionType(error),
       },
       backend.message,
     );
@@ -114,6 +151,9 @@ export const fetchFromBackend = async <T>({
       event_type: backend.eventType,
       error_code: FETCH_ERROR_CODE.schemaMismatch,
       operation: backend.operation,
+      validation_target: "upstream_response",
+      validationErrors: safeValidationErrors(parsed.error),
+      validation_issue_count: parsed.error.issues.length,
     },
     backend.message,
   );

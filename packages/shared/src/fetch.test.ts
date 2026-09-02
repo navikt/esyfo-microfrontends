@@ -282,7 +282,7 @@ describe("fetchFromBackend", () => {
   });
 
   it("replaces network errors with a safe backend fetch error", async () => {
-    const networkError = new Error(
+    const networkError = new TypeError(
       `network failed for ${incomingToken} at ${apiUrl}`,
     );
     fetchMock.mockRejectedValue(networkError);
@@ -303,6 +303,7 @@ describe("fetchFromBackend", () => {
         event_type: "aktivitetskrav_vurdering_fetch_failed",
         error_code: "UPSTREAM_NETWORK_ERROR",
         operation: "hent_aktivitetskrav_vurdering",
+        exception_type: "TypeError",
         message: "Kunne ikke hente vurdering av aktivitetskravet",
       }),
     ]);
@@ -310,7 +311,7 @@ describe("fetchFromBackend", () => {
   });
 
   it("replaces invalid JSON errors with a safe backend fetch error", async () => {
-    const jsonError = new Error(`invalid json for ${accessToken}`);
+    const jsonError = new SyntaxError(`invalid json for ${accessToken}`);
     fetchMock.mockResolvedValue({
       ok: true,
       json: vi.fn().mockRejectedValue(jsonError),
@@ -332,6 +333,7 @@ describe("fetchFromBackend", () => {
         event_type: "aktivitetskrav_vurdering_fetch_failed",
         error_code: "UPSTREAM_INVALID_JSON",
         operation: "hent_aktivitetskrav_vurdering",
+        exception_type: "SyntaxError",
         message: "Kunne ikke hente vurdering av aktivitetskravet",
       }),
     ]);
@@ -369,13 +371,38 @@ describe("fetchFromBackend", () => {
         event_type: "aktivitetskrav_vurdering_fetch_failed",
         error_code: "UPSTREAM_SCHEMA_MISMATCH",
         operation: "hent_aktivitetskrav_vurdering",
+        validation_target: "upstream_response",
+        validationErrors: [{ code: "invalid_type", path: "id" }],
+        validation_issue_count: 1,
         message: "Kunne ikke hente vurdering av aktivitetskravet",
       }),
     ]);
 
     const serializedLog = JSON.stringify(parsedLogLines());
-    expect(serializedLog).not.toContain("validationErrors");
+    expect(serializedLog).not.toContain("wrongKey");
     expect(serializedLog).not.toContain("url");
     expectNoPrivateCanaries(serializedLog);
+  });
+
+  it("masks dynamic keys in validation paths", async () => {
+    fetchMock.mockResolvedValue(
+      Response.json({ "someone@example.com": "not-a-number" }),
+    );
+
+    await expectSafeFailure(
+      fetchFromBackend({
+        token: incomingToken,
+        clientId,
+        apiUrl,
+        schema: z.record(z.string(), z.number()),
+        backend,
+      }),
+    );
+
+    expect(parsedLogLines()[0]).toMatchObject({
+      error_code: "UPSTREAM_SCHEMA_MISMATCH",
+      validationErrors: [{ code: "invalid_type", path: "*" }],
+    });
+    expectNoPrivateCanaries(parsedLogLines());
   });
 });
