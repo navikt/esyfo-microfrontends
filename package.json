@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
-    "@biomejs/biome": "2.5.10",
+    "@biomejs/biome": "2.5.11",
     "@opentelemetry/api": "1.9.1",
     "@storybook/react": "10.5.10",
     "@storybook/react-vite": "10.5.10",
