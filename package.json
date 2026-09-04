@@ -33,7 +33,7 @@
     "@navikt/ds-css": "8.16.1",
     "@navikt/ds-react": "8.16.1",
     "@navikt/oasis": "4.1.4",
-    "@navikt/pino-logger": "5.0.0",
+    "@navikt/pino-logger": "5.0.1",
     "astro": "6.4.8",
     "pino": "10.3.1",
     "prom-client": "15.1.3",
