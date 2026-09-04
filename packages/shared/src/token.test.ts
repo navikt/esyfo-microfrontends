@@ -29,7 +29,7 @@ describe("getAccessToken", () => {
 
     const result = await getAccessToken("incoming-token", "client-id");
 
-    expect(result).toBe("Fake token");
+    expect(result).toEqual({ ok: true, token: "Fake token" });
     expect(mockState.requestOboToken).not.toHaveBeenCalled();
   });
 
@@ -41,30 +41,34 @@ describe("getAccessToken", () => {
 
     const result = await getAccessToken("incoming-token", "client-id");
 
-    expect(result).toBe("obo-token");
+    expect(result).toEqual({ ok: true, token: "obo-token" });
     expect(mockState.requestOboToken).toHaveBeenCalledWith(
       "incoming-token",
       "client-id",
     );
   });
 
-  it("throws when the OBO exchange returns a failure result", async () => {
+  it("returns a typed failure when the OBO exchange returns a failure result", async () => {
     mockState.requestOboToken.mockResolvedValue({
       ok: false,
       error: new Error("exchange failed"),
     });
 
-    await expect(getAccessToken("incoming-token", "client-id")).rejects.toThrow(
-      "Failed to get OBO token",
-    );
+    await expect(
+      getAccessToken("incoming-token", "client-id"),
+    ).resolves.toEqual({
+      ok: false,
+    });
   });
 
-  it("rethrows network failures from the OBO request", async () => {
+  it("returns the same typed failure for request exceptions", async () => {
     const networkError = new Error("network down");
     mockState.requestOboToken.mockRejectedValue(networkError);
 
-    await expect(getAccessToken("incoming-token", "client-id")).rejects.toBe(
-      networkError,
-    );
+    await expect(
+      getAccessToken("incoming-token", "client-id"),
+    ).resolves.toEqual({
+      ok: false,
+    });
   });
 });
