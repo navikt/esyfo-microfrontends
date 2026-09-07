@@ -16,12 +16,12 @@ export const vurderingSchema = z.discriminatedUnion("status", [
   object({
     status: z.literal("UNNTAK"),
     arsaker: z.array(unntakArsaker),
-    sistVurdert: iso.datetime({ local: true }),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("OPPFYLT"),
     arsaker: z.array(oppfyltArsaker),
-    sistVurdert: iso.datetime({ local: true }),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("NY"),
@@ -31,33 +31,33 @@ export const vurderingSchema = z.discriminatedUnion("status", [
   }),
   object({
     status: z.literal("AVVENT"),
-    sistVurdert: iso.datetime({ local: true }),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("FORHANDSVARSEL"),
-    journalpostId: string().optional(),
-    sistVurdert: iso.datetime({ local: true }),
+    journalpostId: string().nullish(),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
     fristDato: iso.date(),
   }),
   object({
     status: z.literal("IKKE_OPPFYLT"),
-    sistVurdert: iso.datetime({ local: true }),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("IKKE_AKTUELL"),
-    sistVurdert: iso.datetime({ local: true }),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("AUTOMATISK_OPPFYLT"),
-    sistVurdert: iso.datetime({ local: true }).optional(),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("INNSTILLING_OM_STANS"),
-    sistVurdert: iso.datetime({ local: true }).optional(),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
   object({
     status: z.literal("LUKKET"),
-    sistVurdert: iso.datetime({ local: true }).optional(),
+    sistVurdert: iso.datetime({ local: true }).nullish(),
   }),
 ]);
 
