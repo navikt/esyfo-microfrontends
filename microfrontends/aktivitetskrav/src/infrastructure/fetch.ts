@@ -2,6 +2,7 @@ import {
   AKTIVITETSKRAV_BACKEND_HOST,
   AKTIVITETSKRAV_CLIENT_ID,
 } from "astro:env/server";
+import { BACKEND_FETCH_CATALOG } from "@esyfo/shared/backendFetchCatalog";
 import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { vurderingSchema } from "@schema/vurderingSchema";
@@ -20,8 +21,8 @@ const realFetchVurdering = async (
     token,
     clientId: AKTIVITETSKRAV_CLIENT_ID,
     apiUrl: aktivitetskravApiUrl,
-    apiName: "aktivitetskrav",
     schema: vurderingSchema,
+    backend: BACKEND_FETCH_CATALOG.aktivitetskravVurdering,
   });
 };
 

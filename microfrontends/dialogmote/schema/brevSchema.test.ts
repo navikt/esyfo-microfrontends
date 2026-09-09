@@ -10,6 +10,8 @@ const validDocumentComponent = {
   texts: ["Linje 1", "Linje 2"],
 } as const;
 
+const PRIVATE_VALUE = "person-12345678901@example.com";
+
 const validBrev = {
   uuid: "brev-uuid",
   deltakerUuid: "deltaker-uuid",
@@ -47,7 +49,14 @@ describe("brevSchema preprocessors", () => {
     });
 
     expect(result.document[0]?.type).toBe("UNKNOWN");
-    expect(logger.warn).toHaveBeenCalled();
+    expect(logger.warn).toHaveBeenCalledWith(
+      {
+        event_type: "dialogmote_document_component_value_unknown",
+        component_field: "type",
+        received_value: "TOTALLY_NEW_TYPE",
+      },
+      "Ukjent verdi i dokumentkomponent fra dialogmøte-backend",
+    );
   });
 
   it("transforms unknown documentKey to UNKNOWN and logs a warning", () => {
@@ -62,7 +71,14 @@ describe("brevSchema preprocessors", () => {
     });
 
     expect(result.document[0]?.key).toBe("UNKNOWN");
-    expect(logger.warn).toHaveBeenCalled();
+    expect(logger.warn).toHaveBeenCalledWith(
+      {
+        event_type: "dialogmote_document_component_value_unknown",
+        component_field: "key",
+        received_value: "NEW_KEY",
+      },
+      "Ukjent verdi i dokumentkomponent fra dialogmøte-backend",
+    );
   });
 
   it("accepts null documentKey without logging a warning", () => {
@@ -78,5 +94,29 @@ describe("brevSchema preprocessors", () => {
 
     expect(result.document[0]?.key).toBeNull();
     expect(logger.warn).not.toHaveBeenCalled();
+  });
+
+  it("omits a malformed value from the warning", () => {
+    const result = brevSchema.parse({
+      ...validBrev,
+      document: [
+        {
+          ...validDocumentComponent,
+          type: PRIVATE_VALUE,
+        },
+      ],
+    });
+
+    expect(result.document[0]?.type).toBe("UNKNOWN");
+    expect(logger.warn).toHaveBeenCalledWith(
+      {
+        event_type: "dialogmote_document_component_value_unknown",
+        component_field: "type",
+      },
+      "Ukjent verdi i dokumentkomponent fra dialogmøte-backend",
+    );
+    expect(JSON.stringify(vi.mocked(logger.warn).mock.calls)).not.toContain(
+      PRIVATE_VALUE,
+    );
   });
 });

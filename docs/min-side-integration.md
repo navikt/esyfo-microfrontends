@@ -68,9 +68,12 @@ Hvis mikrofrontenden ikke lastes, er det ofte her du først ser feil knyttet til
 
 Da har Min side nådd mikrofrontenden, men selve appen har feilet under rendering eller datainnhenting. Start med loggene til mikrofrontenden, og sjekk deretter backend-loggene hvis det ser ut som problemet ligger i et downstream-kall.
 
-Et nyttig spor her er schema-validering. Når backend-respons ikke matcher forventet schema, logges dette med `validationErrors` i Grafana. Se derfor etter logger som viser:
+Et nyttig spor her er schema-validering. Når en backend-respons ikke matcher forventet schema, logges én strukturert feilhendelse i Grafana. Avgrens på mikrofrontend og se etter:
 
-- `Invalid <appnavn> response`
-- `validationErrors`
+- `event_type`, for eksempel `aktivitetskrav_vurdering_fetch_failed`
+- `error_code=UPSTREAM_SCHEMA_MISMATCH`
+- den kodeeide `operation`-verdien
+
+URL, responsinnhold og detaljer fra schema-valideringen logges ikke. Bruk trace og backend-loggene for videre graving.
 
 Hvis mikrofrontend-loggene ser riktige ut, men data fortsatt ikke stemmer, bør du også sjekke loggene til den aktuelle backend-tjenesten.

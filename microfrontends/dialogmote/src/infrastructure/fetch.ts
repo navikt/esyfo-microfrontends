@@ -4,6 +4,7 @@ import {
   SYFOMOTEBEHOV_BACKEND_HOST,
   SYFOMOTEBEHOV_CLIENT_ID,
 } from "astro:env/server";
+import { BACKEND_FETCH_CATALOG } from "@esyfo/shared/backendFetchCatalog";
 import { isLocal } from "@esyfo/shared/environment";
 import { fetchFromBackend } from "@esyfo/shared/fetch";
 import { brevSchema } from "@schema/brevSchema";
@@ -29,8 +30,8 @@ const realFetchBrev = async (token: string): Promise<BrevDto[]> => {
     token,
     clientId: ISDIALOGMOTE_CLIENT_ID,
     apiUrl: dialogmoteApiUrl,
-    apiName: "dialogmote",
     schema: brevSchema.array(),
+    backend: BACKEND_FETCH_CATALOG.dialogmoteBrev,
   });
 };
 
@@ -45,8 +46,8 @@ const realFetchMotebehov = async (
     token,
     clientId: SYFOMOTEBEHOV_CLIENT_ID,
     apiUrl: motebehovApiUrl,
-    apiName: "motebehov",
     schema: motebehovStatusSchema,
+    backend: BACKEND_FETCH_CATALOG.motebehovStatus,
   });
 };
 

@@ -56,20 +56,20 @@ describe("resolvePanel", () => {
     });
   });
 
-  it.each(svarTypeCases)("shows correct tag for $svarType response", ({
-    svarType,
-    expectedTag,
-  }) => {
-    const panel = resolvePanel(
-      createBrev({
-        svar: createSvar(svarType),
-      }),
-      expectedHref,
-    );
+  it.each(svarTypeCases)(
+    "shows correct tag for $svarType response",
+    ({ svarType, expectedTag }) => {
+      const panel = resolvePanel(
+        createBrev({
+          svar: createSvar(svarType),
+        }),
+        expectedHref,
+      );
 
-    expectCommonPanelFields(panel, "success");
-    expect(panel.tag).toEqual(expectedTag);
-  });
+      expectCommonPanelFields(panel, "success");
+      expect(panel.tag).toEqual(expectedTag);
+    },
+  );
 
   it("shows warning when dialogmøte is rescheduled but user has not responded", () => {
     const panel = resolvePanel(

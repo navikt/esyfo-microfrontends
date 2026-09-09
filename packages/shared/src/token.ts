@@ -1,27 +1,25 @@
 import { requestOboToken } from "@navikt/oasis";
-import { logger } from "@navikt/pino-logger";
 import { isLocal } from "./environment.ts";
+
+export type AccessTokenResult = { ok: true; token: string } | { ok: false };
 
 export const getAccessToken = async (
   token: string,
   clientId: string,
-): Promise<string> => {
+): Promise<AccessTokenResult> => {
   if (isLocal) {
-    return "Fake token";
+    return { ok: true, token: "Fake token" };
   }
 
-  let oboResult: Awaited<ReturnType<typeof requestOboToken>>;
   try {
-    oboResult = await requestOboToken(token, clientId);
-  } catch (error) {
-    logger.error({ error }, "Token exchange request failed");
-    throw error;
-  }
+    const oboResult = await requestOboToken(token, clientId);
 
-  if (!oboResult.ok) {
-    logger.error({ error: oboResult.error }, "Token exchange returned error");
-    throw new Error("Failed to get OBO token");
-  }
+    if (!oboResult.ok) {
+      return { ok: false };
+    }
 
-  return oboResult.token;
+    return { ok: true, token: oboResult.token };
+  } catch {
+    return { ok: false };
+  }
 };

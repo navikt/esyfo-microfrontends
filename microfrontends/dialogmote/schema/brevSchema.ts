@@ -8,7 +8,7 @@ import {
   preprocess,
   string,
   union,
-  z,
+  type z,
 } from "zod";
 
 const documentComponentType = union([
@@ -96,10 +96,7 @@ function transformComponentType(type: unknown): string {
 
   if (parsedType.success) return parsedType.data;
 
-  logger.warn(
-    { type, validationErrors: z.flattenError(parsedType.error) },
-    "Error parsing document transformComponentType",
-  );
+  logUnknownDocumentComponentValue("type", type);
   return "UNKNOWN";
 }
 
@@ -107,11 +104,28 @@ function transformDocumentKey(key: unknown): string | null {
   const parsedKey = documentComponentKey.nullable().safeParse(key);
 
   if (parsedKey.success) return parsedKey.data;
-  logger.warn(
-    { key, validationErrors: z.flattenError(parsedKey.error) },
-    "Error parsing document transformDocumentKey",
-  );
+  logUnknownDocumentComponentValue("key", key);
   return "UNKNOWN";
+}
+
+const safeEnumToken = (value: unknown): string | undefined =>
+  typeof value === "string" && /^[A-Z][A-Z0-9_]{0,63}$/.test(value)
+    ? value
+    : undefined;
+
+function logUnknownDocumentComponentValue(
+  componentField: "type" | "key",
+  value: unknown,
+): void {
+  const receivedValue = safeEnumToken(value);
+  logger.warn(
+    {
+      event_type: "dialogmote_document_component_value_unknown",
+      component_field: componentField,
+      ...(receivedValue === undefined ? {} : { received_value: receivedValue }),
+    },
+    "Ukjent verdi i dokumentkomponent fra dialogmøte-backend",
+  );
 }
 
 export type BrevDto = z.infer<typeof brevSchema>;

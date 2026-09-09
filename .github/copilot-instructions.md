@@ -106,17 +106,15 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 ## Conventions
 - English code and comments — Norwegian for user-facing text and domain terms (e.g. dialogmøte, sykmelding, aktivitetskrav, motebehov)
 - **Documentation lookup strategy** (prioritert rekkefølge):
-  1. **Repo first**: Check existing code and custom instructions (`.github/instructions/`)
+  1. **Repo first**: Check existing code and this repository guidance
   2. **NAV-docs when needed**: Look up aksel.nav.no (UI components, design tokens) and doc.nais.io (platform, deploy, observability) when creating or changing something in these domains
   3. **External docs when uncertain**: Use web search for external libraries only when unsure about API correctness — not routinely
 - Check existing code patterns in the repository before writing new code
-- Follow the ✅ Always / ⚠️ Ask First / 🚫 Never boundaries in instruction files
+- Follow the ✅ Always / ⚠️ Ask First / 🚫 Never boundaries below
 - Biome for all formatting and linting (not ESLint/Prettier)
 - Path aliases: `@src/*` → `src/*`, `@schema/*` → `schema/*` (in tsconfig.json)
 
 ## Migration Status
-
-See `.github/instructions/migration.instructions.md` for full details.
 
 | Workspace | Status | Notes |
 |-----------|--------|-------|
@@ -130,7 +128,10 @@ See `.github/instructions/migration.instructions.md` for full details.
 - Fetch data server-side in Astro frontmatter — never client-side against NAV backends
 - Validate tokens in middleware via `@navikt/oasis`
 - Use Aksel components from `@navikt/ds-react`
+- Preserve semantic HTML, keyboard access, visible focus, meaningful labels, and screen-reader-compatible validation
 - Use Zod for API response validation (schemas in `schema/` directory)
+- Validate input at system boundaries and use parameterized database queries
+- Pin third-party GitHub Actions to a full commit SHA, use explicit least-privilege permissions, and set job timeouts
 - Keep CSS prefix unique per microfrontend
 - Run `pnpm run build` in the workspace to verify changes
 - Use `astro:env/server` for server secrets — never expose to client
@@ -146,6 +147,8 @@ See `.github/instructions/migration.instructions.md` for full details.
 - Client-side data fetching against NAV backends (all data is fetched server-side)
 - Skip TokenX validation in middleware
 - Log tokens, PII, or fødselsnummer
+- Commit secrets or expose them through workflow output
+- Check out or execute pull-request code from a privileged `pull_request_target` workflow
 - Import between workspaces without explicit sharing mechanism
 - Bundle React (it's shared via import map from CDN)
 - Use `getStaticPaths` (this is SSR, not SSG)
@@ -159,17 +162,3 @@ See `.github/instructions/migration.instructions.md` for full details.
 | **Permanent docs** | `docs/` | Finalized documentation (ADRs, API docs) | Yes | Yes |
 
 **Defaults**: Planning/research/drafts → `.local-notes/`. Finalized docs → `docs/`. Task tracking → session state.
-
-## Keeping Copilot Config in Sync
-
-When making changes that affect patterns described in `.github/` config files (instructions, prompts, skills), **suggest** updating — but do not update automatically.
-
-Examples: upgrading frameworks, changing test patterns, adding auth mechanisms, changing build tooling.
-
-**Check the file header first** to determine where changes belong:
-
-- **Managed files** (header: `<!-- Managed by esyfo-cli …-->`) — Do NOT edit locally. Changes will be overwritten by the next sync.
-  Format: *"This change affects patterns in `.github/instructions/<file>`, which is managed by esyfo-cli. The source should be updated in the esyfo-cli repo under `copilot-config/`."*
-
-- **Locally owned files** (no managed header) — Suggest updating the file directly in this repo.
-  Format: *"This change affects patterns in `.github/instructions/<file>` — want me to update it?"*

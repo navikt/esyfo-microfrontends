@@ -1,5 +1,8 @@
 .git
 .github
+node_modules
+!.deploy/*/node_modules
+!.deploy/*/node_modules/**
 .storybook
 storybook-static
 docs
