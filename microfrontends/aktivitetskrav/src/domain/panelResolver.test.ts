@@ -1,3 +1,4 @@
+import { vurderingSchema } from "@schema/vurderingSchema";
 import { formatSvarfrist, formatVurderingsDato } from "@src/language/text";
 import { describe, expect, it } from "vitest";
 import { resolvePanel } from "./panelResolver";
@@ -36,6 +37,56 @@ const expectResolvedPanel = (
 };
 
 describe("resolvePanel", () => {
+  it.each(["UNNTAK", "OPPFYLT", "IKKE_AKTUELL"])(
+    "keeps the %s panel without inventing a missing date",
+    (status) => {
+      for (const date of [null, undefined]) {
+        const response = { status, arsaker: [], sistVurdert: date };
+        const panel = expectResolvedPanel(
+          resolvePanel(vurderingSchema.parse(response), expectedHref, now),
+        );
+        const datedPanel = resolvePanel(
+          vurderingSchema.parse({
+            ...response,
+            sistVurdert: "2026-04-15T00:00:00",
+          }),
+          expectedHref,
+          now,
+        );
+        expect(panel).toEqual({ ...datedPanel, tag: undefined });
+      }
+    },
+  );
+
+  it.each([
+    "IKKE_OPPFYLT",
+    "AUTOMATISK_OPPFYLT",
+    "INNSTILLING_OM_STANS",
+    "LUKKET",
+  ])("keeps %s hidden with a nullable date", (status) => {
+    expect(
+      resolvePanel(
+        vurderingSchema.parse({ status, sistVurdert: null }),
+        expectedHref,
+        now,
+      ),
+    ).toBeUndefined();
+  });
+
+  it("shows evaluation state when the backend has no journal entry", () => {
+    const response = vurderingSchema.parse({
+      status: "FORHANDSVARSEL",
+      journalpostId: null,
+      sistVurdert: null,
+      fristDato: "2026-04-29",
+    });
+    const panel = expectResolvedPanel(
+      resolvePanel(response, expectedHref, now),
+    );
+    expect(panel.headingText).toBe("Nav vurderer aktivitetsplikten din");
+    expect(panel.tag).toBeUndefined();
+  });
+
   it("shows aktivitetsplikt is being evaluated for new cases", () => {
     const panel = expectResolvedPanel(
       resolvePanel(createNyVurdering(), expectedHref, now),

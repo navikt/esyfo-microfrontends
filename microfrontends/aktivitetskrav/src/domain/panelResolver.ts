@@ -30,6 +30,12 @@ const resolveUnderArbeid = (href: string): MainPanelProps =>
     alertStyle: "info",
   });
 
+const vurderingsTag = (
+  date: string | null | undefined,
+  variant: "success-moderate" | "info-moderate",
+): MainPanelProps["tag"] =>
+  date ? { text: formatVurderingsDato(date), variant } : undefined;
+
 const resolveUnntak = (
   vurdering: VurderingForStatus<"UNNTAK">,
   href: string,
@@ -39,10 +45,7 @@ const resolveUnntak = (
     bodyText: getUnntakBodyText(vurdering.arsaker.at(0)),
     href,
     alertStyle: "success",
-    tag: {
-      text: formatVurderingsDato(vurdering.sistVurdert),
-      variant: "success-moderate",
-    },
+    tag: vurderingsTag(vurdering.sistVurdert, "success-moderate"),
   });
 
 const resolveOppfylt = (
@@ -54,10 +57,7 @@ const resolveOppfylt = (
     bodyText: getOppfyltBodyText(vurdering.arsaker.at(0)),
     href,
     alertStyle: "success",
-    tag: {
-      text: formatVurderingsDato(vurdering.sistVurdert),
-      variant: "success-moderate",
-    },
+    tag: vurderingsTag(vurdering.sistVurdert, "success-moderate"),
   });
 
 const resolveForhandsvarsel = (
@@ -93,10 +93,7 @@ const resolveIkkeAktuell = (
     bodyText: BodyContent.ikkeAktuell,
     href,
     alertStyle: "info",
-    tag: {
-      text: formatVurderingsDato(vurdering.sistVurdert),
-      variant: "info-moderate",
-    },
+    tag: vurderingsTag(vurdering.sistVurdert, "info-moderate"),
   });
 
 export const resolvePanel = (
