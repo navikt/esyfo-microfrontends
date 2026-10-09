@@ -73,14 +73,14 @@ jobs:
           MICROFRONTEND_NAME: ${{ inputs.microfrontend_name }}
 
       - name: Upload to cdn
-        uses: "nais/deploy/actions/cdn-upload/v2@7ad7c2b833e1db74a80954e3ee6bb6ac060a8ae7" # v2
+        uses: "nais/deploy/actions/cdn-upload/v2@9850be311389ca754d9a9f2280615419d738c891" # v3
         with:
           team: "team-esyfo"
           source: ${{ format('./microfrontends/{0}/dist/client/_astro', inputs.microfrontend_name) }}
           destination: ${{ format('{0}-microfrontend', inputs.microfrontend_name) }}
 
       - name: Build and push
-        uses: "nais/docker-build-push@423a915c9b72edf2ba848b88171ccb0489e2a40a" # v0
+        uses: "nais/docker-build-push@bfe52e3ad6d0e96fd1056a03acb7b619aaffb39d" # v0
         id: docker-build-push
         with:
           team: "team-esyfo"
@@ -119,7 +119,7 @@ jobs:
     steps:
       - uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
       - name: Deploy to dev
-        uses: "nais/deploy/actions/deploy@7ad7c2b833e1db74a80954e3ee6bb6ac060a8ae7" # v2
+        uses: "nais/deploy/actions/deploy@9850be311389ca754d9a9f2280615419d738c891" # v3
         env:
           CLUSTER: "dev-gcp"
           RESOURCE: ${{ format('microfrontends/{0}/nais/dev-gcp/nais.yaml', inputs.microfrontend_name) }}
@@ -156,7 +156,7 @@ jobs:
     steps:
       - uses: "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1" # v7.0.1
       - name: Deploy to prod
-        uses: "nais/deploy/actions/deploy@7ad7c2b833e1db74a80954e3ee6bb6ac060a8ae7" # v2
+        uses: "nais/deploy/actions/deploy@9850be311389ca754d9a9f2280615419d738c891" # v3
         env:
           CLUSTER: "prod-gcp"
           RESOURCE: ${{ format('microfrontends/{0}/nais/prod-gcp/nais.yaml', inputs.microfrontend_name) }}
