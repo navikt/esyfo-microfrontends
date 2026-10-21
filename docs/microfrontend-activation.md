@@ -55,20 +55,6 @@ Dialogmøte og møtebehov har hver sin mikrofrontend og hver sin manifest-id. Hv
 
 Med én produsent per id kan synligheten styres med enkle enable- og disable-meldinger, der siste melding vinner. Tidligere delte de to produsentene `syfo-dialog`, og `esyfovarsel` måtte flette tilstanden deres.
 
-### Overgangsfase
-
-Til møtebehov-grenen er fjernet fra dialogmøte-appen, kan `dialogmote-microfrontend` fortsatt vise møtebehov-panelet via `resolveCombinedPanel`. Det dekker brukere som har `syfo-dialog` aktivert bare på grunn av møtebehov, til `esyfovarsel` har flyttet dem over til `syfo-motebehov`. Rekkefølgen er:
-
-1. Deploy `motebehov-microfrontend` og gi den tilgang i `syfomotebehov`.
-2. Deploy `esyfovarsel` med egen mapping for `syfo-motebehov` og kjør backfill.
-3. Fjern møtebehov-grenen fra dialogmøte-appen.
-
-Her kan brukere se to paneler eller ingen:
-
-- Steg 2 før steg 1 gir ingen panel: nye møtebehov aktiverer `syfo-motebehov` før appen og manifestet finnes.
-- Mellom steg 2 og backfill kan en bruker som allerede har `syfo-dialog` for møtebehov, og som får en ny møtebehov-hendelse, få begge id-ene aktivert. Da viser begge appene møtebehov-panelet. Backfill deaktiverer `syfo-dialog` for disse brukerne.
-- Steg 3 før backfill gir ingen panel for brukere som bare har `syfo-dialog` aktivert for møtebehov.
-
 `syfomotebehov` ferdigstiller møtebehov-varselet når et dialogmøte blir innkalt, og da deaktiveres `syfo-motebehov`. En bruker ser derfor normalt ikke dialogmøte og møtebehov samtidig.
 
 ## Det `esyfovarsel` gjør i dag

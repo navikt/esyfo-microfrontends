@@ -49,16 +49,6 @@ export default defineConfig({
         access: "secret",
         default: "local:teamsykefravr:isdialogmote",
       }),
-      SYFOMOTEBEHOV_BACKEND_HOST: envField.string({
-        context: "server",
-        access: "secret",
-        default: "http://localhost:3000",
-      }),
-      SYFOMOTEBEHOV_CLIENT_ID: envField.string({
-        context: "server",
-        access: "secret",
-        default: "dev-gcp:team-esyfo:syfomotebehov",
-      }),
       DIALOGMOTE_URL: envField.string({
         context: "server",
         access: "secret",

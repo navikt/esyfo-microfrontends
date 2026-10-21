@@ -39,7 +39,7 @@ flowchart LR
 | Mikrofrontend                                      | Backend                         | Appnavn                      |
 | -------------------------------------------------- | ------------------------------- | ---------------------------- |
 | [aktivitetskrav](docs/aktivitetskravarkitektur.md) | `aktivitetskrav-backend`        | aktivitetskrav-microfrontend |
-| [dialogmøte](docs/dialogmotearkitektur.md)         | `isdialogmote`, `syfomotebehov` | dialogmote-microfrontend     |
+| [dialogmøte](docs/dialogmotearkitektur.md)         | `isdialogmote`                  | dialogmote-microfrontend     |
 | [møtebehov](docs/dialogmotearkitektur.md#møtebehov) | `syfomotebehov`                 | motebehov-microfrontend      |
 | [meroppfølging](docs/meroppfolgingsarkitektur.md)  | `meroppfolging-backend`         | meroppfolging-microfrontend  |
 
