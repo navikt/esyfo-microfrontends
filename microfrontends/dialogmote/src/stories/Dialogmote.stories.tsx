@@ -88,3 +88,19 @@ export const NyttTidStedOnskerEndre: Story = {
     href,
   ),
 };
+
+export const EndretIkkeSvart: Story = {
+  name: "Endret — ikke svart",
+  args: resolvePanel(
+    createBrev({ brevType: "ENDRET", svar: null, lestDato: null }),
+    href,
+  ),
+};
+
+export const EndretTakketJa: Story = {
+  name: "Endret — takket ja",
+  args: resolvePanel(
+    createBrev({ brevType: "ENDRET", svar: createSvar("KOMMER") }),
+    href,
+  ),
+};

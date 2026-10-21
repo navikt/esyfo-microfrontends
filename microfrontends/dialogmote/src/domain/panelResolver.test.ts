@@ -106,6 +106,41 @@ describe("resolvePanel", () => {
     });
   });
 
+  it("shows warning when dialogmøte is endret but user has not responded", () => {
+    const panel = resolvePanel(
+      createBrev({
+        brevType: "ENDRET",
+      }),
+      expectedHref,
+    );
+
+    expectCommonPanelFields(panel);
+    expect(panel.bodyText).toBe("Møtet med Nav er endret");
+    expect(panel.tag).toEqual({
+      text: "Du har ikke svart",
+      variant: "warning-moderate",
+    });
+  });
+
+  it("shows meeting date when dialogmøte is endret and user has accepted", () => {
+    const tid = "2024-02-01T10:00:00.000Z";
+    const panel = resolvePanel(
+      createBrev({
+        brevType: "ENDRET",
+        tid,
+        svar: createSvar("KOMMER"),
+      }),
+      expectedHref,
+    );
+
+    expectCommonPanelFields(panel, "success");
+    expect(panel.bodyText).toBe(getLongDateFormat(tid));
+    expect(panel.tag).toEqual({
+      text: "Du har takket ja",
+      variant: "success-moderate",
+    });
+  });
+
   it("formats dialogmøte time from the invitation letter", () => {
     const tid = "2024-06-10T12:00:00.000Z";
     const panel = resolvePanel(

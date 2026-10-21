@@ -24,7 +24,7 @@ flowchart LR
 2. Shared middleware validerer TokenX-tokenet.
 3. `fetchBrev` henter brevdata fra `isdialogmote`, og `fetchMotebehov` henter møtebehovstatus fra `syfomotebehov`.
 4. Appen finner siste relevante brev og vurderer møtebehovstatus i samme request.
-5. `resolveCombinedPanel` prioriterer dialogmøtepanelet når siste relevante brev har typen `INNKALT` eller `NYTT_TID_STED`.
+5. `resolveCombinedPanel` prioriterer dialogmøtepanelet når siste relevante brev har typen `INNKALT`, `NYTT_TID_STED` eller `ENDRET`.
 6. Hvis dialogmøtepanelet ikke skal vises, men brukeren skal svare på møtebehov, vises møtebehov-panelet i stedet.
 
 ## Backend og lenker

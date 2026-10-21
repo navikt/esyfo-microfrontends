@@ -32,6 +32,23 @@ const validBrev = {
   },
 } as const;
 
+describe("brevSchema brevType", () => {
+  it("accepts brevType ENDRET", () => {
+    const result = brevSchema.safeParse({ ...validBrev, brevType: "ENDRET" });
+
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects unknown brevType", () => {
+    const result = brevSchema.safeParse({
+      ...validBrev,
+      brevType: "TOTALLY_NEW_TYPE",
+    });
+
+    expect(result.success).toBe(false);
+  });
+});
+
 describe("brevSchema preprocessors", () => {
   beforeEach(() => {
     vi.clearAllMocks();

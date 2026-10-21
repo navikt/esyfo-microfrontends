@@ -34,6 +34,7 @@ const brevType = union([
   literal("INNKALT"),
   literal("AVLYST"),
   literal("NYTT_TID_STED"),
+  literal("ENDRET"),
   literal("REFERAT"),
   literal("REFERAT_ENDRET"),
 ]);
