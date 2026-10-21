@@ -30,15 +30,21 @@ const getTag = (
   }
 };
 
+const getBodyText = (brev: BrevDto, attending: SvarTypeDto | null): string => {
+  if (attending !== "KOMMER") {
+    if (brev.brevType === "NYTT_TID_STED") return BodyContent.motetFlyttet;
+    if (brev.brevType === "ENDRET") return BodyContent.motetEndret;
+  }
+
+  return getLongDateFormat(brev.tid);
+};
+
 export const resolvePanel = (brev: BrevDto, href: string): MainPanelProps => {
   const attending = brev.svar?.svarType ?? null;
 
   return {
     headingText: HeadingContent.dialogmote,
-    bodyText:
-      brev.brevType === "NYTT_TID_STED" && attending !== "KOMMER"
-        ? BodyContent.motetFlyttet
-        : getLongDateFormat(brev.tid),
+    bodyText: getBodyText(brev, attending),
     href: `${href}/moteinnkalling`,
     alertStyle: attending ? "success" : "warning",
     panelId: "dialogmote-panel",

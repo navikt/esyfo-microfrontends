@@ -61,6 +61,21 @@ describe("getLatestBrev", () => {
 
     expect(getLatestBrev(brev)).toBeNull();
   });
+
+  it("returns ENDRET when it is the newest brev", () => {
+    const innkalt = createBrev({
+      uuid: "innkalt",
+      createdAt: "2024-01-01T10:00:00.000Z",
+      brevType: "INNKALT",
+    });
+    const endret = createBrev({
+      uuid: "endret",
+      createdAt: "2024-02-01T10:00:00.000Z",
+      brevType: "ENDRET",
+    });
+
+    expect(getLatestBrev([innkalt, endret])).toEqual(endret);
+  });
 });
 
 describe("shouldShowDialogmotePanel", () => {
@@ -71,6 +86,7 @@ describe("shouldShowDialogmotePanel", () => {
   const shouldShowCases = [
     { brevType: "INNKALT", expected: true },
     { brevType: "NYTT_TID_STED", expected: true },
+    { brevType: "ENDRET", expected: true },
     { brevType: "AVLYST", expected: false },
     { brevType: "REFERAT", expected: false },
   ] as const;

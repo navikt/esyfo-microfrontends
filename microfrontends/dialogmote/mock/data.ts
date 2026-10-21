@@ -42,6 +42,13 @@ const createEndringsBrev = (props?: Partial<BrevDto>): BrevDto => {
   };
 };
 
+const createEndretBrev = (props?: Partial<BrevDto>): BrevDto => {
+  return {
+    ...createInnkallingsBrev({ brevType: "ENDRET" }),
+    ...props,
+  };
+};
+
 const createAvlysningsBrev = (props?: Partial<BrevDto>): BrevDto => {
   return {
     ...createInnkallingsBrev({ brevType: "AVLYST" }),
@@ -92,6 +99,7 @@ export const mockData = {
 
 export {
   createAvlysningsBrev,
+  createEndretBrev,
   createEndringsBrev,
   createInnkallingsBrev,
   createReferatBrev,
