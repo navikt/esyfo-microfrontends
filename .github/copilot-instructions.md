@@ -13,9 +13,11 @@ pnpm install                                    # Install all dependencies
 pnpm run dev:dialogmote-microfrontend           # Dev server for dialogmote (Astro + Hono mock)
 pnpm run dev:aktivitetskrav-microfrontend       # Dev server for aktivitetskrav
 pnpm run dev:meroppfolging-microfrontend        # Dev server for meroppfolging
+pnpm run dev:motebehov-microfrontend            # Dev server for motebehov
 pnpm run build:dialogmote-microfrontend         # Build dialogmote workspace
 pnpm run build:aktivitetskrav-microfrontend     # Build aktivitetskrav workspace
 pnpm run build:meroppfolging-microfrontend      # Build meroppfolging workspace
+pnpm run build:motebehov-microfrontend          # Build motebehov workspace
 ```
 
 Each workspace also has local scripts:
@@ -49,6 +51,7 @@ esyfo-microfrontends/
 ├── package.json                  # Root: shared dependencies + workspace scripts
 ├── microfrontends/
 │   ├── dialogmote/               # Dialogmøte microfrontend (active)
+│   ├── motebehov/                # Møtebehov microfrontend (syfo-motebehov)
 │   ├── aktivitetskrav/               # Aktivitetskrav microfrontend (domain logic implemented)
 │   └── meroppfolging/            # Meroppfølging microfrontend (not started)
 ```
@@ -121,6 +124,7 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 | dialogmote | ✅ Active development | Domain logic migrated, components working. assetsPrefix still points to template repo. |
 | aktivitetskrav | ✅ Active development | Domain logic, Zod schemas, components and mock server implemented. |
 | meroppfolging | ⏳ Not started | Referenced in scripts and has deploy workflow, but directory doesn't exist yet. |
+| motebehov | ✅ Active development | Split out of dialogmote with its own manifest id `syfo-motebehov`. |
 
 ## Boundaries
 
