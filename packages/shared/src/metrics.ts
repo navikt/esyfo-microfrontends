@@ -1,7 +1,11 @@
 import { Counter, collectDefaultMetrics, Registry } from "prom-client";
 
 type RenderType = "success" | "fallback";
-type MicrofrontendName = "dialogmote" | "aktivitetskrav" | "meroppfolging";
+type MicrofrontendName =
+  | "dialogmote"
+  | "motebehov"
+  | "aktivitetskrav"
+  | "meroppfolging";
 
 const registry = new Registry();
 

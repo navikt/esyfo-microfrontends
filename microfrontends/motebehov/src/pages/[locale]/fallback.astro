@@ -1,0 +1,10 @@
+---
+import { isLocal } from "@esyfo/shared/environment";
+import { incrementRender } from "@esyfo/shared/metrics";
+import { logger } from "@navikt/pino-logger";
+
+incrementRender("motebehov", "fallback");
+logger.warn({ microfrontend: "motebehov" }, "fallback-rendered");
+---
+
+{isLocal && <meta charset="UTF-8" />}

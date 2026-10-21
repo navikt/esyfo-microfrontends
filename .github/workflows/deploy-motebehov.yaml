@@ -1,0 +1,27 @@
+name: Deploy motebehov
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "microfrontends/motebehov/**"
+      - "packages/shared/**"
+      - ".github/workflows/deploy-motebehov.yaml"
+      - ".github/workflows/deploy-microfrontend-reusable.yml"
+      - "pnpm-lock.yaml"
+      - "package.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-microfrontend-reusable.yml
+    with:
+      microfrontend_name: "motebehov"
+      manifest_id: "syfo-motebehov"
+    secrets: inherit

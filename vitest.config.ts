@@ -7,6 +7,7 @@ export default defineConfig({
       "microfrontends/dialogmote",
       "microfrontends/aktivitetskrav",
       "microfrontends/meroppfolging",
+      "microfrontends/motebehov",
     ],
   },
 });
