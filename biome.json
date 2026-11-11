@@ -1,13 +1,21 @@
 {
-  "$schema": "https://biomejs.dev/schemas/latest/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": ["**"]
+    "includes": ["**", "!**/nais", "!**/.github/instructions"]
   },
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "formatter": {
     "indentStyle": "space"
   },
-  "html": { "formatter": { "selfCloseVoidElements": "always" } },
+  "html": {
+    "formatter": {
+      "selfCloseVoidElements": "always"
+    }
+  },
   "overrides": [
     {
       "includes": ["**/*.astro"],
@@ -26,6 +34,10 @@
     }
   ],
   "assist": {
-    "actions": { "source": { "organizeImports": "on" } }
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   }
 }

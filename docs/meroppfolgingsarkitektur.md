@@ -27,10 +27,10 @@ flowchart LR
 
 ## Backend og lenker
 
-| Del                      | Verdi                     |
-| ------------------------ | ------------------------- |
+| Del                      | Verdi                        |
+| ------------------------ | ---------------------------- |
 | Backend                  | `MEROPPFOLGING_BACKEND_HOST` |
-| Client ID for OBO        | `MEROPPFOLGING_CLIENT_ID` |
-| Lenke ved sen oppfølging | `SSPS_URL`                |
-| Lenke ved kartlegging    | `KARTLEGGING_URL`         |
-| Manifest-id              | `syfo-meroppfolging`      |
+| Client ID for OBO        | `MEROPPFOLGING_CLIENT_ID`    |
+| Lenke ved sen oppfølging | `SSPS_URL`                   |
+| Lenke ved kartlegging    | `KARTLEGGING_URL`            |
+| Manifest-id              | `syfo-meroppfolging`         |

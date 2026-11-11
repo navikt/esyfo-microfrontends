@@ -3,6 +3,7 @@
 Astro 5 SSR monorepo that consolidates three separate microfrontends and a shared proxy backend into one application. Replaces `aktivitetskrav-mikrofrontend`, `dialogmote-mikrofrontend`, `meroppfolging-mikrofrontend`.
 
 ## Team
+
 - **Team**: team-esyfo, NAV IT
 - **Org**: navikt
 
@@ -19,6 +20,7 @@ pnpm run build:meroppfolging-microfrontend      # Build meroppfolging workspace
 ```
 
 Each workspace also has local scripts:
+
 ```bash
 cd microfrontends/dialogmote
 pnpm run dev          # Astro dev + mock server (concurrently)
@@ -29,12 +31,14 @@ pnpm run mock         # Hono mock server only (port 3000)
 > **Note**: This repo uses pnpm workspaces. Workspace config is in `pnpm-workspace.yaml`. Dependencies are in root `package.json`.
 
 ## NAV Principles
+
 - **Team First**: Autonomous teams with circles of autonomy
 - **Product Development**: Continuous development over ad hoc approaches
 - **Essential Complexity**: Focus on essential, avoid accidental complexity
 - **DORA Metrics**: Measure and improve team performance
 
 ## Platform & Auth
+
 - **Platform**: NAIS (Kubernetes on GCP)
 - **Auth**: TokenX (on-behalf-of token exchange for backend calls), ID-porten (citizen login)
 - **Observability**: OpenTelemetry auto-instrumentation via NAIS (`@opentelemetry/sdk-node`), structured logging via `pino`
@@ -42,6 +46,7 @@ pnpm run mock         # Hono mock server only (port 3000)
 ## Architecture
 
 ### Monorepo Structure
+
 pnpm workspaces with independent Astro apps under `microfrontends/`:
 
 ```
@@ -56,6 +61,7 @@ esyfo-microfrontends/
 Each workspace is a self-contained Astro SSR app with its own `Dockerfile`, `nais/` manifests, deploy workflow, and `astro.config.mjs`. Shared dependencies live in root `package.json`; workspace `package.json` files contain only scripts and metadata.
 
 ### Astro SSR
+
 - **Output**: `server` mode with `@astrojs/node` adapter (standalone)
 - **Pages**: `src/pages/[locale]/index.astro` — i18n routing with `nb`, `nn`, `en`
 - **Middleware**: `src/middleware/index.ts` — validates TokenX tokens via `@navikt/oasis`
@@ -64,11 +70,13 @@ Each workspace is a self-contained Astro SSR app with its own `Dockerfile`, `nai
 - **Build output**: `dist/server/entry.mjs` (SSR server) + `dist/client/_astro/` (CDN assets)
 
 ### Islands Architecture
+
 - Server-rendered `.astro` components handle layout and data fetching
 - React components used as client islands via `client:only="react"` when interactivity is needed
 - React 18 shared via import maps from NAV CDN (`importmap.json`) — not bundled
 
 ### Token Exchange
+
 Each Astro workspace handles its own token exchange server-side:
 
 1. Middleware validates incoming TokenX token → stores in `Astro.locals.token`
@@ -77,13 +85,16 @@ Each Astro workspace handles its own token exchange server-side:
 4. Backend URLs and client IDs configured via `astro:env/server` schema
 
 ### CSS Strategy
+
 - `postcss-prefix-selector` scopes all CSS with a unique class per microfrontend (e.g., `.dialogmote-microfrontend`)
 - CSS Modules (`.module.css`) for component-level scoping — excluded from prefix selector
 - Aksel CSS imported as `@src/styles/aksel.css`
 - `inlineStylesheets: "always"` in Astro build config
 
 ### Deploy
+
 Per-workspace GitHub Actions workflow with path-based triggers:
+
 1. `pnpm install --frozen-lockfile` + `pnpm run build:<workspace>`
 2. CDN upload: `dist/client/_astro/` → `cdn.nav.no/min-side/<app-name>`
 3. Docker build from workspace Dockerfile (distroless Node image)
@@ -91,6 +102,7 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 5. NAIS deploy to `dev-gcp` / `prod-gcp`
 
 ## Tech Stack
+
 - **Framework**: Astro 5 (`astro`, `@astrojs/node`, `@astrojs/react`)
 - **UI**: React 18, `@navikt/ds-react` (Aksel 6), `@navikt/aksel-icons`
 - **Auth**: `@navikt/oasis` (TokenX validation + OBO token exchange)
@@ -104,6 +116,7 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 - **Container**: `gcr.io/distroless/nodejs22-debian12` / `nodejs24-debian12`
 
 ## Conventions
+
 - English code and comments — Norwegian for user-facing text and domain terms (e.g. dialogmøte, sykmelding, aktivitetskrav, motebehov)
 - **Documentation lookup strategy** (prioritert rekkefølge):
   1. **Repo first**: Check existing code and this repository guidance
@@ -116,15 +129,16 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 
 ## Migration Status
 
-| Workspace | Status | Notes |
-|-----------|--------|-------|
-| dialogmote | ✅ Active development | Domain logic migrated, components working. assetsPrefix still points to template repo. |
-| aktivitetskrav | ✅ Active development | Domain logic, Zod schemas, components and mock server implemented. |
-| meroppfolging | ⏳ Not started | Referenced in scripts and has deploy workflow, but directory doesn't exist yet. |
+| Workspace      | Status                | Notes                                                                                  |
+| -------------- | --------------------- | -------------------------------------------------------------------------------------- |
+| dialogmote     | ✅ Active development | Domain logic migrated, components working. assetsPrefix still points to template repo. |
+| aktivitetskrav | ✅ Active development | Domain logic, Zod schemas, components and mock server implemented.                     |
+| meroppfolging  | ⏳ Not started        | Referenced in scripts and has deploy workflow, but directory doesn't exist yet.        |
 
 ## Boundaries
 
 ### ✅ Always
+
 - Fetch data server-side in Astro frontmatter — never client-side against NAV backends
 - Validate tokens in middleware via `@navikt/oasis`
 - Use Aksel components from `@navikt/ds-react`
@@ -137,6 +151,7 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 - Use `astro:env/server` for server secrets — never expose to client
 
 ### ⚠️ Ask First
+
 - Adding new dependencies (affects all workspaces via root `package.json`)
 - Changing token exchange or auth flow
 - Changing deploy workflow or NAIS manifest
@@ -144,6 +159,7 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 - Changing the import map configuration
 
 ### 🚫 Never
+
 - Client-side data fetching against NAV backends (all data is fetched server-side)
 - Skip TokenX validation in middleware
 - Log tokens, PII, or fødselsnummer
@@ -155,10 +171,10 @@ Per-workspace GitHub Actions workflow with path-based triggers:
 
 ## Documentation and Working Notes
 
-| Tier | Location | Purpose | Persists | Checked in |
-|------|----------|---------|----------|------------|
-| **Session** | `~/.copilot/session-state/` | Scratch work for one task | No | No |
-| **Local notes** | `.local-notes/` | Plans, architecture drafts, research, AI reviews | Yes | No |
-| **Permanent docs** | `docs/` | Finalized documentation (ADRs, API docs) | Yes | Yes |
+| Tier               | Location                    | Purpose                                          | Persists | Checked in |
+| ------------------ | --------------------------- | ------------------------------------------------ | -------- | ---------- |
+| **Session**        | `~/.copilot/session-state/` | Scratch work for one task                        | No       | No         |
+| **Local notes**    | `.local-notes/`             | Plans, architecture drafts, research, AI reviews | Yes      | No         |
+| **Permanent docs** | `docs/`                     | Finalized documentation (ADRs, API docs)         | Yes      | Yes        |
 
 **Defaults**: Planning/research/drafts → `.local-notes/`. Finalized docs → `docs/`. Task tracking → session state.
