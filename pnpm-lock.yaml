@@ -35,8 +35,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       '@navikt/pino-logger':
-        specifier: 5.0.1
-        version: 5.0.1(pino@10.4.0)
+        specifier: 5.0.2
+        version: 5.0.2(pino@10.4.0)
       astro:
         specifier: 7.4.4
         version: 7.4.4(@types/node@24.19.2)(esbuild@0.28.1)(yaml@2.8.3)
@@ -120,8 +120,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       '@navikt/pino-logger':
-        specifier: 5.0.1
-        version: 5.0.1(pino@10.4.0)
+        specifier: 5.0.2
+        version: 5.0.2(pino@10.4.0)
       pino:
         specifier: 10.4.0
         version: 10.4.0
@@ -160,8 +160,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       '@navikt/pino-logger':
-        specifier: 5.0.1
-        version: 5.0.1(pino@10.4.0)
+        specifier: 5.0.2
+        version: 5.0.2(pino@10.4.0)
       pino:
         specifier: 10.4.0
         version: 10.4.0
@@ -200,8 +200,8 @@ importers:
         specifier: 4.2.2
         version: 4.2.2
       '@navikt/pino-logger':
-        specifier: 5.0.1
-        version: 5.0.1(pino@10.4.0)
+        specifier: 5.0.2
+        version: 5.0.2(pino@10.4.0)
       pino:
         specifier: 10.4.0
         version: 10.4.0
@@ -1016,8 +1016,8 @@ packages:
     resolution: {integrity: sha512-EVMsF8uKbLPNRWuPfH1IKVJhqtibFzSTSyNkzj5mTCVMZV2QPS5W3uYMD4r0rXsmLx7nv0HnLovDphb3AFEjvw==, tarball: https://npm.pkg.github.com/download/@navikt/oasis/4.2.2/3c43e1e89bb2d46646a9a2aaf27972a024377a6f}
     engines: {node: ^20.19.0 || >= 22.12.0 || 24.x || 25.x}
 
-  '@navikt/pino-logger@5.0.1':
-    resolution: {integrity: sha512-E69LgUqIjM/zSv1HxToYHTZA85jZC3L/eD/+InirLEJDwbd58K4lj8hzSFe+4uunNzyraTQNwZfZONN+vd3r2A==, tarball: https://npm.pkg.github.com/download/@navikt/pino-logger/5.0.1/819f7f398e4378c014dd39f704c26f691a0915a1}
+  '@navikt/pino-logger@5.0.2':
+    resolution: {integrity: sha512-wF8tWdLueNZ6KMhzJoe9Cyl2ScPvL380SJtdtJBuTZ8vG6uI9ufo/CY3R8zjW/pwFsiQDUni8vweWxLaHwdkWw==, tarball: https://npm.pkg.github.com/download/@navikt/pino-logger/5.0.2/7cb892a73d8c4b0480edf989cf46dfdb123b8361}
     engines: {node: ^20.19.0 || >= 22.12.0 || 24.x}
     peerDependencies:
       pino: 8 || 9 || 10
@@ -4118,7 +4118,7 @@ snapshots:
       '@prometheus-io/client': 0.16.1
       jose: 6.2.12
 
-  '@navikt/pino-logger@5.0.1(pino@10.4.0)':
+  '@navikt/pino-logger@5.0.2(pino@10.4.0)':
     dependencies:
       '@opentelemetry/api': 1.10.0
       pino: 10.4.0
