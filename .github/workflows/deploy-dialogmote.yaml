@@ -11,6 +11,10 @@ on:
       - ".github/workflows/deploy-microfrontend-reusable.yml"
       - "pnpm-lock.yaml"
       - "package.json"
+  schedule:
+    # Daily rebuild picks up the latest patched Chainguard base image.
+    - cron: "10 5 * * *"
+      timezone: "Europe/Oslo"
   workflow_dispatch:
 
 permissions:
