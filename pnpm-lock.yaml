@@ -1067,8 +1067,8 @@ packages:
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
 
-  '@navikt/ds-tokens@8.22.1':
-    resolution: {integrity: sha512-cDmfPn5Q0HmE8eTie5jkj76zKMrS/AeZcAKscxtZFTL6sFdIFKON8AwWcS0pdRuC3yxYNGRmO176xGjn2POLCQ==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/8.22.1/43f354b993b9a56b9b4329ab54a9e17c5decf92b}
+  '@navikt/ds-tokens@8.23.0':
+    resolution: {integrity: sha512-+GXKDpfZixeCblvKJEnSG1/vlZp27xjqX6NNhzs0442Y1jGuEadGUJ+nxndYpmgZ4QcZCE2VEsKvluXctfHVYA==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/8.23.0/569a10706977258093e2ecf396f29884b03562f9}
 
   '@navikt/oasis@4.2.3':
     resolution: {integrity: sha512-y9jzWKAxhZZvbj6xPKSOTJMfd4Vu4raQtPheeynSFokdxFwuoo3nH7khuB/F4HKjyYeR9UYZomfnjwIjuo81OQ==, tarball: https://npm.pkg.github.com/download/@navikt/oasis/4.2.3/2b6f6ff6ac6c82e6ea93f5ec4e041cf5a93b4302}
@@ -2994,8 +2994,8 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  tabbable@6.5.1:
-    resolution: {integrity: sha512-dMCuwDUY6Noz3zVKLefBC4wq+aJV20yc7vWmM7uTNGwtQSFF5kX7OUIUsxuVajz/bdt5Xqdah3/0NLjth+cM5A==}
+  tabbable@6.5.2:
+    resolution: {integrity: sha512-XgdnB1nGU6KU4VgMnZPaZCx7M1hBrLyEiZYau2G2gq9UT0d7d4FUBlNX7vvPlm/B1vk1PjrzJBx9Lbv4fsqS9g==}
 
   tdigest@0.1.2:
     resolution: {integrity: sha512-+G0LLgjjo9BZX2MfdvPfH+MKLCrxlXSYec5DaPYP1fe6Iyhf0/fSmJ0bFiZ1F8BT6cGXl2LpltQptzjXKWEkKA==}
@@ -4054,7 +4054,7 @@ snapshots:
       '@floating-ui/utils': 0.2.12
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
-      tabbable: 6.5.1
+      tabbable: 6.5.2
 
   '@floating-ui/utils@0.2.12': {}
 
@@ -4241,14 +4241,14 @@ snapshots:
       '@floating-ui/react': 0.27.19(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@floating-ui/react-dom': 2.1.9(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@navikt/aksel-icons': 8.10.6
-      '@navikt/ds-tokens': 8.22.1
+      '@navikt/ds-tokens': 8.23.0
       '@types/react': 19.3.0
       date-fns: 4.4.0
       react: 19.3.1
       react-day-picker: 9.14.0(react@19.3.1)
       react-dom: 19.3.1(react@19.3.1)
 
-  '@navikt/ds-tokens@8.22.1': {}
+  '@navikt/ds-tokens@8.23.0': {}
 
   '@navikt/oasis@4.2.3':
     dependencies:
@@ -6097,7 +6097,7 @@ snapshots:
       picocolors: 1.1.1
       sax: 1.6.1
 
-  tabbable@6.5.1: {}
+  tabbable@6.5.2: {}
 
   tdigest@0.1.2:
     dependencies:
