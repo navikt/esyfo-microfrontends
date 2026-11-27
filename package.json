@@ -29,9 +29,9 @@
   "dependencies": {
     "@astrojs/node": "11.1.14",
     "@astrojs/react": "7.1.9",
-    "@navikt/aksel-icons": "8.22.1",
-    "@navikt/ds-css": "8.22.1",
-    "@navikt/ds-react": "8.22.1",
+    "@navikt/aksel-icons": "8.23.0",
+    "@navikt/ds-css": "8.23.0",
+    "@navikt/ds-react": "8.23.0",
     "@navikt/oasis": "4.2.3",
     "@navikt/pino-logger": "5.0.2",
     "astro": "7.4.13",
